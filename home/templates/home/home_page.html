@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_css %}
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+/>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<style>
+    .swiper-button-next:after, .swiper-button-prev:after { display: none !important;}
+    .autoplay-progress {
+        position: absolute;
+        right: 16px;
+        bottom: 16px;
+        z-index: 10;
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        color: #005c90;
+      }
+  
+      .autoplay-progress svg {
+        --progress: 0;
+        position: absolute;
+        left: 0;
+        top: 0px;
+        z-index: 10;
+        width: 100%;
+        height: 100%;
+        stroke-width: 4px;
+        stroke: #005c90;
+        fill: none;
+        stroke-dashoffset: calc(125.6px * (1 - var(--progress)));
+        stroke-dasharray: 125.6;
+        transform: rotate(-90deg);
+      }
+</style>
+{% endblock extra_css %}
+{% block body_class %}home{% endblock %}
+{% block content %}
+{% comment %} {% include 'home/carousel.html' %} {% endcomment %}
+{% include 'home/swiper.html' %}
+{% include 'home/student_agent_links.html' %}
+{% include 'home/search_courses.html' %}
+{% include 'home/why_ozford.html' %}
+{% include 'home/testimonials.html' %}
+{% include 'home/ready_study_at_ozford.html' %}
+{% include 'home/news_events.html' %}
+{% include 'home/need_help.html' %}
+{% endblock content %}
+{% block extra_js %}
+<script>
+    const progressCircle = document.querySelector(".autoplay-progress svg");
+    const progressContent = document.querySelector(".autoplay-progress span");
+    const swiper = new Swiper('.swiper', {
+        // Optional parameters
+
+        direction: 'horizontal',
+        loop: true,
+
+        autoplay: {
+            delay: 4500,
+            disableOnInteraction: false,
+          },
+      
+        // If we need pagination
+        pagination: {
+          el: '.swiper-pagination',
+        },
+      
+        // Navigation arrows
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+      
+        // And if we need scrollbar
+        scrollbar: {
+          el: '.swiper-scrollbar',
+        },
+        on: {
+            autoplayTimeLeft(s, time, progress) {
+              progressCircle.style.setProperty("--progress", 1 - progress);
+              progressContent.textContent = `${Math.ceil(time / 1000)}s`;
+            }
+          },
+      });
+</script>
+{% endblock extra_js %}
