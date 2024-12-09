@@ -17,7 +17,7 @@ from django.core.wsgi import get_wsgi_application
 if env_mode == 'production':
     settings_module = 'core.settings.production'
 else:
-    print('Wsgi Env', env_mode)
+    # print('Wsgi Env', env_mode)
     settings_module = 'core.settings.dev'
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", settings_module)
