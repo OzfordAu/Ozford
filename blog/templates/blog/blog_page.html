@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+{% block extra_css %}
+{% endblock extra_css %}
+{% block body_class %}blog{% endblock %}
+{% block content %}
+{% include 'breadcrumb.html' %}
+<div class="container mx-auto mb-10 max-w-4xl">
+    <div>
+        <h1 class="text-xl lg:text-2xl xl:text-5xl font-medium text-primary">{{ page.title }}</h1>
+        <p class="text-sm">{{ page.published_date|date:'F d, Y' }}</p>
+    </div>
+    <div>
+        {% image page.featured_image original class="inline-block h-full w-full max-h-[400px] object-cover" %}
+    </div>
+    <div class="mt-4 lg:mt-6 xl:mt-10 cms-page">
+        {{ page.body|richtext }}
+      </div>
+</div>
+{% endblock content %}
+{% block extra_js %}
+
+{% endblock extra_js %}

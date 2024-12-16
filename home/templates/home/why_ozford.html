@@ -1,7 +1,8 @@
-<div class="container mx-auto bg-gray-100 text-black px-4 py-6 lg:py-8 xl:py-14 xl:px-20">
+{% load static wagtailcore_tags wagtailimages_tags %}
+<div class="container mx-auto bg-gray-100 text-black px-4 py-6 lg:py-8 xl:py-14 xl:px-20 cms-page">
     <div class="flex flex-col xl:flex-row xl:justify-center xl:gap-10">
       <div class="w-full xl:1/2">
-        <h2 class="text-3xl xl:text-5xl font-bold mb-4 lg:mb-8 xl:mb-10">Why Study at OZFORD</h2>
+        <h2 class="text-3xl xl:text-5xl font-bold mb-4 lg:mb-8 xl:mb-10">{{ page.about_title }}</h2>
         <div class="flex gap-4 mb-4 xl:mb-8 text-xl font-extrabold text-gray-700 text-center">
           <div class="flex flex-col justify-center items-center space-y-1 ">
             <span>
@@ -32,8 +33,7 @@
           </div>
         </div>
         <div>
-          <p class="mb-2">We are an innovative Australian educational institution committed to connect today’s learning with tomorrow’s jobs based in the heart of Melbourne, Australia.</p>
-          <p>We offer a range of courses to suit your needs. Whether you are completing high school, looking to improve your English communication skills or interested in starting a bachelor program, we provide high-quality and engaging teaching to inspire a love of learning.</p>
+          {{ page.about_content|richtext }}
         </div>
         <div class="pt-4 xl:pt-6">
             <button class="flex items-center gap-2 px-4 py-2 rounded-none leading-loose tracking-wider text-lg text-white bg-link-primary hover:bg-link-primary-hover transition-all">
@@ -49,6 +49,8 @@
         
         
       </div>
-      <div class="w-full xl:1/2"><img src="/img/why-us.webp" class="w-full h-auto" alt=""></div>
+      <div class="w-full xl:1/2">
+        {% image page.about_image original class="w-full h-auto" %}
+      </div>
     </div>
   </div>

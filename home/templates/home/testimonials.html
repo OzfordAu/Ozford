@@ -1,18 +1,16 @@
-<section class="container mx-auto max-w-6xl px-4 py-6 lg:py-8 xl:py-20 xl:px-20">
+{% load static wagtailcore_tags wagtailimages_tags %}
+<section class="container mx-auto max-w-6xl px-4 py-6 lg:py-8 xl:py-20 xl:px-20 cms-page">
     <div class="grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
     <!-- Image -->
-    <img src="/img/testimonial.webp" alt="" class="inline-block h-full w-full max-w-sm object-cover" />
+    {% image page.testimonial_image original class="inline-block h-full w-full max-w-sm object-cover" %}
     <!-- Content -->
     <div class="sm:max-w-sm md:max-w-md lg:max-w-lg">
       <h2 class="text-3xl lg:text-5xl font-bold mb-3 lg:mb-6 xl:mb-8">
-          Success Stories
-    </h2>
-      <p class="mb-3 max-w-md">"Hello, I am Yuki and I come from Hong Kong. I have been in Australia for more than 2 years. I like the Australia’s lifestyle.</p>
-        <p class="mb-3 max-w-md">I have been studying at Ozford for 6 months and I am very happy and enjoying study atmosphere and facilities, such as free Wifi, Library and computers at Ozford.  ” <a class="text-primary hover:border-b hover:border-b-primary" href="#">Read more..</a>
-      </p>
-      <p class="font-bold">Yuk Yin Chan</p>
-      <p class="text-sm text-gray-500">Hong Kong</p>
-      <p class="text-sm text-gray-500 mb-4 lg:mb-8">Bachelor of Business (Accounting)</p>
+          {{ page.testimonial_title }}
+      </h2>
+      <div>
+        {{ page.testimonial_content|richtext }}
+      </div>
       <div>
         <button class="flex items-center gap-2 px-4 py-2 rounded-none leading-loose tracking-wider text-lg text-white bg-link-primary hover:bg-link-primary-hover transition-all">
             <span>Read more success stories</span>

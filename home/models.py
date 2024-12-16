@@ -33,9 +33,15 @@ class BannerCarouselBlock(blocks.StructBlock):
         icon = 'circle-plus'
         verbose_name = 'Banner Coursel'
 
+class ImportantUrlBlock(blocks.StructBlock):
+    title = blocks.CharBlock()
+    url = blocks.URLBlock()
+    open_in_new_tab = blocks.BooleanBlock(required=False, default=False)
+
 
 class HomePage(Page):
     parent_page_types = ['wagtailcore.Page']
+    max_count = 1
     banner_carousel = StreamField(
         [
             ('banner_carousel', BannerCarouselBlock()),
@@ -44,10 +50,44 @@ class HomePage(Page):
         blank=True,
         use_json_field=True,
     )
-    body = RichTextField(blank=True)
+    about_title = models.CharField(max_length=255, null=True, blank=True)
+    about_content = RichTextField(null=True, blank=True)
+    about_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name='About us Image'
+    )
+    testimonial_title = models.CharField(max_length=255, null=True, blank=True)
+    testimonial_content = RichTextField(null=True, blank=True)
+    testimonial_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name='Testimonial Image'
+    )
+    important_urls = StreamField(
+        [
+            ('important_urls', ImportantUrlBlock()),
+        ],
+        null=True,
+        blank=True,
+        use_json_field=True,
+    )
+    # body = RichTextField(blank=True)
 
     content_panels = Page.content_panels + [
         FieldPanel('banner_carousel'),
-        FieldPanel('body'),
+        FieldPanel('about_title'),
+        FieldPanel('about_content'),
+        FieldPanel('about_image'),
+        FieldPanel('testimonial_title'),
+        FieldPanel('testimonial_content'),
+        FieldPanel('testimonial_image'),
+        FieldPanel('important_urls'),
     ]
 

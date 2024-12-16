@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+{% block extra_css %}
+
+{% endblock %}
+{% block body_class %}
+  blog
+{% endblock %}
+{% block content %}
+  {% include 'breadcrumb.html' %}
+  <section class="container mx-auto text-black pb-6 lg:pb-8 xl:pb-20">
+    <h2 class="text-3xl xl:text-5xl font-medium mb-4 lg:mb-8 xl:mb-10 text-cente text-primary">News &amp; Events</h2>
+    <div class="grid grid-cols-1 gap-8 sm:gap-20 lg:grid-cols-3">
+        {% for item in blog_posts  %}
+            <a href="{{ item.url }}" class="flex flex-col group">
+                <div class="bg-white border border-primary rounded-lg shadow-md overflow-hidden p-4 lg:p-6 xl:p-8 group-hover:shadow-2xl transition-all duration-300 lg:min-h-[22rem]">
+                <div class="w-full h-48 mb-4 rounded-xl overflow-hidden">
+                    {% image item.featured_image original class="w-full h-auto object-cover overflow-hidden transition-transform duration-300 transform group-hover:scale-110" %}
+                </div>
+                <p class="group-hover:text-primary mb-2 font-semibold">{{ item.title }}</p>
+                <p class="text-sm text-gray-500">{{ item.published_date|date:'F d, Y' }}</p>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+  </section>
+{% endblock %}
+{% block extra_js %}
+
+{% endblock %}
