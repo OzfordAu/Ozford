@@ -4,6 +4,7 @@ from wagtail.images.blocks import ImageChooserBlock
 from wagtail.models import Page
 from wagtail.fields import RichTextField, StreamField
 from wagtail.admin.panels import FieldPanel
+from blog.models import BlogPage
 
 
 class BannerCarouselBlock(blocks.StructBlock):
@@ -90,4 +91,9 @@ class HomePage(Page):
         FieldPanel('testimonial_image'),
         FieldPanel('important_urls'),
     ]
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        context['blog_posts'] = BlogPage.objects.live().order_by('-published_date')[:3]
+        return context
 

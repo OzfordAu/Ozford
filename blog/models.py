@@ -9,9 +9,9 @@ class BlogIndex(Page):
     parent_page_types = ['home.HomePage']
     max_count = 1
 
-    def get_context(self, request):
-        context = super().get_context(request)
-        context['blog_posts'] = BlogPage.objects.all()
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        context['blog_posts'] = BlogPage.objects.child_of(self).live().order_by('-published_date')
         return context
 
 

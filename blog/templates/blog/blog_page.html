@@ -8,7 +8,7 @@
 <div class="container mx-auto mb-10 max-w-4xl">
     <div>
         <h1 class="text-xl lg:text-2xl xl:text-5xl font-medium text-primary">{{ page.title }}</h1>
-        <p class="text-sm">{{ page.published_date|date:'F d, Y' }}</p>
+        <p class="text-sm mt-2 mb-4 text-gray-500 italic">{{ page.published_date|date:'F d, Y' }}</p>
     </div>
     <div>
         {% image page.featured_image original class="inline-block h-full w-full max-h-[400px] object-cover" %}
