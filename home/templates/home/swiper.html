@@ -1,29 +1,50 @@
 <!-- Slider main container -->
 {% load  wagtailimages_tags %}
+{% block script_top %}
+<link rel="preload" as="image" href="{{ page.banner_carousel.0.value.background_image.full_url }}" />
+{% endblock script_top %}
   {{carousel.value.heading}}
 
 <div class="swiper w-full h-[600px]">
     <!-- Additional required wrapper -->
     <div class="swiper-wrapper">
-      {% for carousel in page.banner_carousel  %}
-      {% image carousel.value.background_image original as tmp_photo %}
-        <div class="swiper-slide bg-gray-400 h-full" style="background-image: url('{{ tmp_photo.full_url }}'); background-size: cover; background-position: center;">
-          
-          <div class="container mx-auto z-20">
-              <div class="mt-32 text-left max-w-2xl bg-black/50 backdrop-blur-sm p-8">
-                  <h1 class="text-4xl md:text-5xl lg:text-7xl font-medium mb-4 leading-tight" style="color:{{ carousel.value.heading_text_color }}">{{ carousel.value.heading }}</h1>
-                  <p class="text-white text-lg">{{ carousel.value.description }}</p>
-                  <button class="px-3 py-2 bg-primary hover:bg-primary-dark text-white mt-4 text-lg">Learn more</button>
-              </div>
-          </div>
-          {% comment %} <img class="absolute top-0 z-10" src="https://pushpan.com.np/ozford/img/banner-1.webp" alt=""> {% endcomment %}
+      {% for carousel in page.banner_carousel %}
+    {% image carousel.value.background_image fill-800x600 format-webp as mobile_img %}
+    {% image carousel.value.background_image fill-1600x900 format-webp as tablet_img %}
+    {% image carousel.value.background_image fill-1920x1080 format-webp as desktop_img %}
+    
+    <div class="swiper-slide bg-gray-400 h-full">
+      <picture>
+        <source media="(min-width: 1024px)" srcset="{{ desktop_img.url }}">
+        <source media="(min-width: 768px)" srcset="{{ tablet_img.url }}">
+        <img 
+          src="{{ mobile_img.url }}"
+          alt="{{ carousel.value.heading }}"
+          class="absolute inset-0 w-full h-full object-cover"
+          loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+          decoding="async"
+        >
+      </picture>
+      
+      <div class="container mx-auto z-20 relative">
+        <div class="mt-32 text-left max-w-2xl bg-black/50 backdrop-blur-sm p-8">
+          <h1 class="text-4xl md:text-5xl lg:text-7xl font-medium mb-4 leading-tight" style="color:{{ carousel.value.heading_text_color }}">
+            {{ carousel.value.heading }}
+          </h1>
+          <p class="text-white text-lg">{{ carousel.value.description }}</p>
+          <button class="px-3 py-2 bg-primary hover:bg-primary-dark text-white mt-4 text-lg">
+            Learn more
+          </button>
         </div>
-      {% endfor %}
+      </div>
+    </div>
+  {% endfor %}
       <!-- Slides -->
       
     </div>
   
     <!-- If we need navigation buttons -->
+     <div class="hidden lg:block">
     <button id="slider-button-left" class="swiper-button-prev group ml-10 !p-2 flex justify-center items-center bg-primary !w-12 !h-12 transition-all duration-500 rounded-full !top-2/4 !-translate-y-8 !left-5 hover:bg-primary-dark " data-carousel-prev>
         <svg class="h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
           <path d="M10.0002 11.9999L6 7.99971L10.0025 3.99719" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
@@ -34,6 +55,7 @@
           <path d="M5.99984 4.00012L10 8.00029L5.99748 12.0028" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
       </button>
+    </div>
       <div class="autoplay-progress mr-10">
         <svg viewBox="0 0 48 48">
           <circle cx="24" cy="24" r="20"></circle>
