@@ -31,9 +31,17 @@
             </div>
         </div>
         
+        
     </div>
   </div>
   {% include "courses/higher_education/key_facts.html" %}
+  <div class="container bg-white py-4">
+    {% if page.accreditation_logo %}
+      <div class="flex">
+          {% picture page.accreditation_logo format-{avif,webp,jpeg} width-1504 height-80 class="inline-block w-full h-[60px] object-contain" %}
+        </div>
+    {% endif %}
+  </div>
   <div class="bg-primary-dark hidden lg:block sticky top-0 z-50">
     <div class="container py-4">
         <div class="flex gap-4 lg:gap-6 items-center text-center">
@@ -64,17 +72,17 @@
             {{page.course_requirement|richtext}}
             <h2 class="text-primary-dark font-medium text-xl mb-2 pt-4">Academic Entry Requirements</h2>
             <template x-if="domestic">
-                {{page.academic_requirement_domestic|richtext}}
+                <div>{{page.academic_requirement_domestic|richtext}}</div>
             </template>
             <template x-if="!domestic">
-                {{page.academic_requirement_international|richtext}}
+                <div>{{page.academic_requirement_international|richtext}}</div>
             </template>
             <h2 class="text-primary-dark font-medium text-xl mb-2 pt-4">English Language Requirements</h2>
             <template x-if="domestic">
-                {{page.english_requirement_domestic|richtext}}
+                <div>{{page.english_requirement_domestic|richtext}}</div>
             </template>
             <template x-if="!domestic">
-                {{page.english_requirement_international|richtext}}
+                <div>{{page.english_requirement_international|richtext}}</div>
             </template>
             <h2 class="text-primary-dark font-medium text-xl mb-2 pt-4">Age Requirement</h2>
             {{page.age_requirement|richtext}}

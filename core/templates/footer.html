@@ -1,11 +1,11 @@
 {% load static wagtailcore_tags wagtailimages_tags %}
 <footer class="bg-[#011724]">
-<section class="bg-gray-100">
+{% comment %} <section class="bg-gray-100">
   <div class="container mx-auto px-4 py-6 lg:py-8">
     <img src="{% static 'images/affiliation-logo.png' %}" loading="lazy"  alt="affiliation" width="1504" height="80" class="w-full max-h-[80px] object-contain" />
   </div>
 
-</section>
+</section> {% endcomment %}
 <section class="bg-[#011724] text-gray-200">
   <div class="container mx-auto px-4 py-6 lg:py-8 xl:py-20">
   <div class="flex flex-col lg:flex-row lg:items-center">
@@ -85,7 +85,7 @@
             {% image site_settings.footer_logo original class="w-48 h-auto" %}
           </div>
           <div class="mt-3 lg:mt-6">
-            <p>Level 9-10, 123-129 Lonsdale Street</p>
+            <p>333, Queens Street</p>
             <p class="mb-2">Melbourne, VIC 3000</p>
             <p class="mb-2">Australia 8:30 AM – 5:00 PM (AEST)</p>
             <div class="flex items-center gap-4 mb-1">
