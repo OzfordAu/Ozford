@@ -3,7 +3,7 @@
 {% block script_top %}
 <link rel="preload" as="image" href="{{ page.banner_carousel.0.value.background_image.full_url }}" />
 {% endblock script_top %}
-  {{carousel.value.heading}}
+  {% comment %} {{carousel.value.heading}} {% endcomment %}
 
 <div class="swiper w-full h-[600px]">
     <!-- Additional required wrapper -->

@@ -1,21 +1,15 @@
 {% load static wagtailcore_tags wagtailimages_tags %}
+
 {% block script_top %}
-<link rel="preload" 
-      as="image" 
-      href="{{ mobile_avif.url }}" 
-      type="image/avif" 
-      media="(max-width: 1024px)">
-<link rel="preload" 
-      as="image" 
-      href="{{ desktop_avif.url }}" 
-      type="image/avif" 
-      media="(min-width: 1024px)">
+{% image page.banner_image width-400 format-avif as mobile_avif %}
+{% image page.banner_image width-800 format-avif as desktop_avif %}
+<link rel="preload" as="image" href="{{ mobile_avif.url }}" type="image/avif" media="(max-width: 1024px)">
+<link rel="preload" as="image" href="{{ desktop_avif.url }}" type="image/avif" media="(min-width: 1024px)">
 {% endblock script_top %}
 
 <section class="bg-primary-darker w-full relative lg:h-[450px]" aria-label="Course Banner">
   <!-- Mobile Banner Image -->
   <picture>
-    {% image page.banner_image width-400 format-avif as mobile_avif %}
     {% image page.banner_image width-400 format-webp as mobile_webp %}
     {% image page.banner_image width-400 format-jpeg as mobile_jpeg %}
     
@@ -37,23 +31,18 @@
         <div class="relative">
           <div class="absolute inset-0 bg-black/80 backdrop-blur-sm xl:hidden"></div>
           <div class="relative z-10 p-4 lg:p-8 xl:p-0 xl:py-8">
-            <!-- CRICOS Code -->
             <div class="text-white mb-4 font-light tracking-wide" aria-label="CRICOS Code">
                 CRICOS Code: <span class="font-medium">{{page.cricos_code}}</span>
             </div>
             
-            <!-- Course Title -->
             <h1 class="text-3xl xl:text-5xl text-white font-medium">{{page.course_title}}</h1>
             
-            <!-- Course Type -->
             <p class="mt-4 text-white font-light tracking-wide">
                 {{page.get_course_type_display}} degree
             </p>
             
-            <!-- Course Description -->
             <div class="text-white font-light mt-4">{{page.course_header_description|richtext }}</div>
             
-            <!-- Action Buttons -->
             <div class="flex flex-col md:flex-row gap-4 text-white mt-4 lg:mt-6 xl:mt-8">
                 <a href="/" class="group bg-primary hover:bg-primary-dark text-white px-4 py-2.5 tracking-wide inline-flex items-center gap-2 transition-colors">
                 <span>Apply</span>
@@ -92,7 +81,6 @@
       <div class="hidden lg:block lg:w-6/12">
         <div class="absolute top-0 right-0 z-10">
           <picture>
-            {% image page.banner_image width-800 format-avif as desktop_avif %}
             {% image page.banner_image width-800 format-webp as desktop_webp %}
             {% image page.banner_image width-800 format-jpeg as desktop_jpeg %}
             
