@@ -1,4 +1,16 @@
 {% load static wagtailcore_tags wagtailimages_tags %}
+{% block script_top %}
+<link rel="preload" 
+      as="image" 
+      href="{{ mobile_avif.url }}" 
+      type="image/avif" 
+      media="(max-width: 1024px)">
+<link rel="preload" 
+      as="image" 
+      href="{{ desktop_avif.url }}" 
+      type="image/avif" 
+      media="(min-width: 1024px)">
+{% endblock script_top %}
 
 <section class="bg-primary-darker w-full relative lg:h-[450px]" aria-label="Course Banner">
   <!-- Mobile Banner Image -->
