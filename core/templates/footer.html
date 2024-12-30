@@ -1,7 +1,85 @@
 {% load static wagtailcore_tags wagtailimages_tags %}
-<footer class="bg-[#001f30] text-gray-200 text-sm font-light">
-    <div class="container mx-auto px-4 py-6 lg:py-8 xl:py-20">
-      <div class="grid grid-cols-1 lg:grid-cols-4 gap-4 lg:gap-6 xl:gap-10">
+<footer class="bg-[#011724]">
+<section class="bg-gray-100">
+  <div class="container mx-auto px-4 py-6 lg:py-8">
+    <img src="{% static 'images/affiliation-logo.png' %}" alt="" class="w-full max-h-[80px] object-contain" />
+  </div>
+
+</section>
+<section class="bg-[#011724] text-gray-200">
+  <div class="container mx-auto px-4 py-6 lg:py-8 xl:py-20">
+  <div class="flex flex-col lg:flex-row lg:items-center">
+    <div class="w-full lg:w-3/12">
+      <h2 class="text-3xl xl:text-5xl font-bold mb-4 lg:mb-0 text-[#9bbccf]">Need Help?</h2>
+    </div>
+    <div class="w-full lg:w-9/12 text-[#9bbccf]">
+      <div class="flex flex-col lg:flex-row gap-4 lg:gap-10 xl:space-x-20">
+        <div class="block">
+          <h3 class="text-xl font-medium mb-2">International Students</h3>
+          <div class="flex items-center gap-4 mb-1">
+            <span>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
+              </svg>
+            </span>
+          <span>+61 3 86637188</span>
+        </div>
+          <div class="flex items-center gap-4">
+            <span>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+              </svg>
+            </span>
+            <span>info@ozford.edu.au</span>
+          </div>
+        </div>
+        <div class="block">
+          <h3 class="text-xl font-medium mb-2">Domestic Students</h3>
+          <div class="flex items-center gap-4 mb-1">
+            <span>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
+              </svg>
+            </span>
+            <span>+61 3 86637188</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <span>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+              </svg>
+            </span>
+            <span>info@ozford.edu.au</span>
+          </div>
+        </div>
+        <div class="block">
+          <h3 class="text-xl font-medium mb-2">Agents</h3>
+          <div class="flex items-center gap-4mb-1">
+            <span>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
+              </svg>
+            </span>
+            <span>+61 3 86637188</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <span>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+              </svg>
+            </span>
+            <span>info@ozford.edu.au</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+<section class="bg-[#011724] text-gray-200 text-sm font-light">
+    <div class="container mx-auto pb-6 lg:pb-8 xl:pb-20">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 xl:gap-10">
         <div class="flex flex-col">
           <div>
             {% image site_settings.footer_logo original class="w-48 h-auto" %}
@@ -89,7 +167,7 @@
       </div>
       <div class="w-full bg-blue-50 h-[0.5px] my-4 lg:my-6 xl:my-8"></div>
       <div class="w-full flex flex-col lg:flex-row lg:gap-10 items-center">
-        <div class="w-full lg:w-6/12">
+        <div class="w-full lg:w-7/12">
           <ul class="flex flex-col lg:flex-row lg:space-x-4 space-y-2 lg:space-y-0">
             <li><a href="#" class="hover:border-b hover:text-white hover:border-white transition-all">Terms & Conditions</a></li>
             <li><a href="#" class="hover:border-b hover:text-white hover:border-white transition-all">ESOS Act</a></li>
@@ -98,9 +176,9 @@
             <li><a href="#" class="hover:border-b hover:text-white hover:border-white transition-all">Policies & Procedures</a></li>
           </ul>
         </div>
-        <div class="w-full lg:w-6/12">
+        <div class="w-full lg:w-5/12">
           <h3 class="font-medium mb-2 text-lg">Acknowledgement of country</h3>
-          <p class="text-base">We acknowledge and pay respects to the Elders both past and present and the Traditional Owners of the land on which our campus stands.</p>
+          <p class="">We acknowledge and pay respects to the Elders both past and present and the Traditional Owners of the land on which our campus stands.</p>
         </div>
       </div>
       <div class="w-full bg-blue-50 h-[0.5px] mt-4 lg:mt-6 xl:mt-8"></div>
@@ -108,4 +186,5 @@
         <p>Copyright All Right Reserved 2022, OZFORD Ozford Institute of Higher Education Pty Ltd ACN 165 694 351 trading as Ozford Institute of Higher Education (CRICOS Provider No: 03429B, ABN 33 165 694 351); Ozford College Pty. Ltd is trading as Ozford College (CRICOS No. 02427A, Registered School No. 2016, ABN 41 102 265 225); Ozford English Language Centre Pty. Ltd. is trading as Ozford English Language Centre (CRICOS No. 02501G, ABN 35 100 454 475). © Ozford Education Group 2022. All content on the Ozford Website is the copyright property of Ozford Education Group. This includes information, graphics, forms, policies and procedures, manuals and handbooks. Ozford material is available for personal or non-commercial use only. Redistribution or commercial use without the expressed, written permission of Ozford Education Group is prohibited. We acknowledge and pay respects to the Elders both past and present and the Traditional Owners of the land on which our campus stands.</p>
       </div>
     </div>
-  </footer>
+  </section>
+</footer>

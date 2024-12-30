@@ -1,11 +1,11 @@
 {% load static wagtailcore_tags wagtailimages_tags %}
-<section class="container mx-auto text-black px-4 py-6 lg:py-8 xl:py-20 xl:px-20">
+<section class="container mx-auto text-black px-4 py-6 lg:py-8 xl:py-20">
     <h2 class="text-3xl xl:text-5xl font-bold mb-4 lg:mb-8 xl:mb-10 text-center">Latest News &amp; Events</h2>
-    <div class="grid grid-cols-1 gap-8 sm:gap-20 lg:grid-cols-3">
+    <div class="grid grid-cols-1 gap-8 sm:gap-14 lg:grid-cols-3">
       {% for item in blog_posts  %}
             <a href="{% pageurl item %}" class="flex flex-col group">
-                <div class="bg-white border border-primary rounded-lg shadow-md overflow-hidden p-4 lg:p-6 xl:p-8 group-hover:shadow-2xl transition-all duration-300 lg:min-h-[22rem]">
-                <div class="w-full h-48 mb-4 rounded-xl overflow-hidden">
+                <div class="bg-white border border-primary rounded-lg shadow-md overflow-hidden p-4 lg:p-6 xl:p-8 group-hover:shadow-2xl transition-all duration-300 lg:min-h-[20rem]">
+                <div class="w-full mb-4 rounded-xl overflow-hidden h-36">
                     {% image item.featured_image original class="w-full h-auto object-cover overflow-hidden transition-transform duration-300 transform group-hover:scale-110" %}
                 </div>
                 <p class="group-hover:text-primary mb-2 font-semibold">{{ item.title }}</p>

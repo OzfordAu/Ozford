@@ -1,0 +1,22 @@
+
+<section class="py-8 lg:py-14 xl:py-20">
+  <div class="container mx-auto">
+    <h2 class="text-2xl lg:text-4xl font-semibold text-gray-700 mb-4 lg:mb-6 xl:mb-8">{{ page.page_title }} Courses</h2>
+
+        <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-8 text-xl">
+            {% for item in higher_education_courses  %}
+            <li>
+              <a class="text-primary hover:text-link-hover tracking-wide text-xl inline-flex gap-2 items-center group" href="{{item.url}}">
+                <span class="border-b-2 border-transparent group-hover:border-link-hover transition-all">{{ item.title }}</span>
+                <span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 transition-all group-hover:ml-2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
+                  </svg>
+                </span>
+              </a>
+            </li>
+            {% endfor %}
+        </ul>  
+
+</div>
+</section>

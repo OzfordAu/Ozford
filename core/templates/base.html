@@ -1,7 +1,7 @@
 {% load static wagtailcore_tags wagtailuserbar %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
     <head>
         <meta charset="utf-8" />
         <title>
@@ -24,6 +24,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="{% static 'css/prod/app.css' %}">
+        {% block script_top %}{% endblock script_top %}
         <script defer src="{% static 'js/htmx.js' %}"></script>
         <script defer src="{% static 'js/intersect.js' %}"></script>
         <script defer src="{% static 'js/alpine.js' %}"></script>

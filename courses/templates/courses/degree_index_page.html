@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+{% block extra_css %}
+
+{% endblock %}
+{% block body_class %}
+  blog
+{% endblock %}
+{% block content %}
+
+  {% include 'breadcrumb.html' %}
+  <section class="bg-primary-darker w-full relative lg:h-[450px]">
+    <div class="container mx-auto py-10 lg:py-14 xl:py-20 ">
+      <div class="w-full flex items-center lg:gap-10">
+        <div class='w-full lg:w-6/12 lg:mt-10 z-20'>
+          <h2 class="text-3xl xl:text-5xl text-white font-medium">{{page.page_title}}</h2>
+          <div class="text-white mt-4 font-light">{{ page.page_description|richtext }}</div>
+          <div class="max-w-xl mt-4 lg:mt-8">
+            {% comment %} <h3 class="text-2xl xl:text-3xl font-semibold text-white mb-4">Find Courses</h3> {% endcomment %}
+            <div class="relative z-0 flex">
+              <input type="url" id="example8" class="block p-4 w-full rounded-full rounded-r-none border border-link-primary" placeholder="Search Courses" />
+              <button for="example8" class="rounded-full rounded-l-none -ml-2 border border-l-0 border-link-primary px-6 bg-link-primary text-white hover:bg-link-primary-hover hover:border-link-primary-hover transition-all">
+                Search
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="hidden lg:block lg:w-6/12">
+          <div class="absolute top-0 right-0 z-10">
+            {% picture page.banner_image format-{avif,webp,jpeg} height-450 class="inline-block w-full h-[450px] object-contain" %}
+        </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  {% include "courses/filtered_courses.html" %}
+
+   {% include "courses/study_at_ozford.html" %} 
+   {% include "courses/why_melbourne.html" %} 
+
+  {% comment %} <section class="container mx-auto max-w-7xl text-black pb-6 lg:pb-8 xl:pb-20 mt-4 lg:mt-8 xl:mt-12">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-10 xl:gap-16">
+      {% for item in degrees  %}
+        <div class="block space-y-4 bg-gray-100 p-4 lg:p-6 xl:p-10">
+          <h6>{{item.title}}</h6>
+          <p>{{item.page_description|richtext}}</p>
+        </div>
+      {% endfor %}
+    </div>
+
+  </section> {% endcomment %}
+{% endblock %}
+{% block extra_js %}
+
+{% endblock %}

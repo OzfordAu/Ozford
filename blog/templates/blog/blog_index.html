@@ -9,8 +9,8 @@
 {% block content %}
   {% include 'breadcrumb.html' %}
   <section class="container mx-auto text-black pb-6 lg:pb-8 xl:pb-20">
-    <h2 class="text-3xl xl:text-5xl font-medium mb-4 lg:mb-8 xl:mb-10 text-cente text-primary">News &amp; Events</h2>
-    <div class="grid grid-cols-1 gap-8 sm:gap-20 lg:grid-cols-3">
+    <h2 class="text-3xl xl:text-5xl font-medium mb-4 lg:mb-8 xl:mb-10 text-cente text-primary mt-4 lg:mt-6 xl:mt-8">News &amp; Events</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
         {% for item in blog_posts  %}
             <a href="{% pageurl item %}" class="flex flex-col group">
                 <div class="bg-white border border-primary rounded-lg shadow-md overflow-hidden p-4 lg:p-6 xl:p-8 group-hover:shadow-2xl transition-all duration-300 lg:min-h-[22rem]">
