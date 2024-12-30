@@ -1,19 +1,30 @@
 {% load static wagtailcore_tags wagtailimages_tags %}
-{% image page.banner_image width-400 as temp_banner_image %}
 
 <section class="bg-primary-darker w-full relative lg:h-[450px]" aria-label="Course Banner">
-  <img src="{{temp_banner_image.full_url}}" 
-       class="lg:hidden absolute inset-0 w-full h-full object-cover object-center" 
-       alt="{{page.course_title}} banner image"
-       loading="eager">
+  <!-- Mobile Banner Image -->
+  <picture>
+    {% image page.banner_image width-400 format-avif as mobile_avif %}
+    {% image page.banner_image width-400 format-webp as mobile_webp %}
+    {% image page.banner_image width-400 format-jpeg as mobile_jpeg %}
+    
+    <source type="image/avif" srcset="{{ mobile_avif.url }}">
+    <source type="image/webp" srcset="{{ mobile_webp.url }}">
+    <img 
+      src="{{ mobile_jpeg.url }}"
+      class="lg:hidden absolute inset-0 w-full h-full object-cover object-center"
+      alt="{{page.course_title}} banner image"
+      width="{{ mobile_jpeg.width }}"
+      height="{{ mobile_jpeg.height }}"
+      fetchpriority="high"
+      decoding="async">
+  </picture>
   
   <div class="container mx-auto py-4 lg:py-6 xl:py-8">
     <div class="w-full flex items-center lg:gap-10">
-      <!-- Course Info Section -->
       <div class="w-full lg:w-6/12 z-20">
         <div class="relative">
-            <div class="absolute inset-0 bg-black/80 backdrop-blur-sm xl:hidden"></div>
-            <div class="relative z-10 p-4 lg:p-8 xl:p-0 xl:py-8">
+          <div class="absolute inset-0 bg-black/80 backdrop-blur-sm xl:hidden"></div>
+          <div class="relative z-10 p-4 lg:p-8 xl:p-0 xl:py-8">
             <!-- CRICOS Code -->
             <div class="text-white mb-4 font-light tracking-wide" aria-label="CRICOS Code">
                 CRICOS Code: <span class="font-medium">{{page.cricos_code}}</span>
@@ -61,14 +72,29 @@
                 </a>
                 {% endif %}
             </div>
-            </div>
+          </div>
         </div>
       </div>
       
       <!-- Desktop Banner Image -->
       <div class="hidden lg:block lg:w-6/12">
         <div class="absolute top-0 right-0 z-10">
-          {% picture page.banner_image format-{avif,webp,jpeg} height-450 class="inline-block w-full h-[450px] object-contain" %}
+          <picture>
+            {% image page.banner_image width-800 format-avif as desktop_avif %}
+            {% image page.banner_image width-800 format-webp as desktop_webp %}
+            {% image page.banner_image width-800 format-jpeg as desktop_jpeg %}
+            
+            <source type="image/avif" srcset="{{ desktop_avif.url }}">
+            <source type="image/webp" srcset="{{ desktop_webp.url }}">
+            <img 
+              src="{{ desktop_jpeg.url }}"
+              class="inline-block w-full h-[450px] object-contain"
+              alt="{{page.course_title}} banner image"
+              width="{{ desktop_jpeg.width }}"
+              height="{{ desktop_jpeg.height }}"
+              fetchpriority="high"
+              decoding="async">
+          </picture>
         </div>
       </div>
     </div>
