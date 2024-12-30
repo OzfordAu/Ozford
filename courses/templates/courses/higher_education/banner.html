@@ -1,17 +1,17 @@
 {% load static wagtailcore_tags wagtailimages_tags %}
 
 {% block script_top %}
-{% image page.banner_image width-400 format-avif as mobile_avif %}
+{% image page.banner_image width-320 format-avif as mobile_avif %}
 {% image page.banner_image width-800 format-avif as desktop_avif %}
-<link rel="preload" as="image" href="{{ mobile_avif.url }}" type="image/avif" media="(max-width: 1024px)">
-<link rel="preload" as="image" href="{{ desktop_avif.url }}" type="image/avif" media="(min-width: 1024px)">
+<link rel="preload" as="image" href="{{ mobile_avif.url }}" type="image/avif" fetchpriority="high" media="(max-width: 1024px)">
+<link rel="preload" as="image" href="{{ desktop_avif.url }}" type="image/avif" fetchpriority="high" media="(min-width: 1024px)">
 {% endblock script_top %}
 
 <section class="bg-primary-darker w-full relative lg:h-[450px]" aria-label="Course Banner">
   <!-- Mobile Banner Image -->
   <picture>
-    {% image page.banner_image width-400 format-webp as mobile_webp %}
-    {% image page.banner_image width-400 format-jpeg as mobile_jpeg %}
+    {% image page.banner_image width-320 format-webp as mobile_webp %}
+    {% image page.banner_image width-320 format-jpeg as mobile_jpeg %}
     
     <source type="image/avif" srcset="{{ mobile_avif.url }}">
     <source type="image/webp" srcset="{{ mobile_webp.url }}">
@@ -22,7 +22,8 @@
       width="{{ mobile_jpeg.width }}"
       height="{{ mobile_jpeg.height }}"
       fetchpriority="high"
-      decoding="async">
+      priority
+      loading="eager">
   </picture>
   
   <div class="container mx-auto py-4 lg:py-6 xl:py-8">
@@ -93,7 +94,7 @@
               width="{{ desktop_jpeg.width }}"
               height="{{ desktop_jpeg.height }}"
               fetchpriority="high"
-              decoding="async">
+              loading="eager">
           </picture>
         </div>
       </div>
