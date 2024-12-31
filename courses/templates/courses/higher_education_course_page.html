@@ -89,11 +89,11 @@
             
         </div>
         <div class="p-6 lg:p-8 xl:p-12 bg-white mt-4 lg:mt-8 xl:mt-12 scroll-m-8" id="career_outcomes">
-            <h2 class="text-primary-dark font-semibold text-2xl mb-2">Career Outcomes</h2>
+            <h2 class="text-primary-dark font-semibold text-base lg:text-xl mb-2">Career Outcomes</h2>
             {{page.career_outcomes|richtext}}
         </div>
         <div class="p-6 lg:p-8 xl:p-12 bg-white mt-4 lg:mt-8 xl:mt-12 scroll-m-8" id="course_units">
-            <h2 class="text-primary-dark font-semibold text-2xl mb-2">Course Units</h2>
+            <h2 class="text-primary-dark font-semibold text-base lg:text-xl mb-2">Course Units</h2>
             {% if page.ellective_units %}
             <div x-data="{ selectedTab: 'core_units' }" class="w-full">
                 <div @keydown.right.prevent="$focus.wrap().next()" @keydown.left.prevent="$focus.wrap().previous()" class="flex gap-2 overflow-x-auto" role="tablist" aria-label="tab options">
