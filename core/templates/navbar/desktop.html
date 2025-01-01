@@ -1,5 +1,5 @@
 {% load static wagtailcore_tags wagtailimages_tags %}
-<div class="w-full hidden lg:block shadow-sm">
+<div class="w-full hidden lg:block shadow-lg">
     <div class="w-full bg-primary-dark py-3 text-sm text-white font-light">
       <div class="container">
         <ul class="w-full justify-end flex gap-4 items-center">
@@ -18,85 +18,37 @@
         </ul>
       </div>
     </div>
-    <div class="container">
-      <div class="w-full flex justify-between items-center py-1">
-        <a href="/" class="flex items-center" aria-label="homepage">
-            {% image site_settings.header_logo original loading="lazy" class="w-48 h-auto"  %}
-        </a>
-        <nav class="py-2 shadow-sm">
-          <ul class="flex gap-8 justify-end items-center font-medium">
-            <li><a href="/">Home</a></li>
-            <li class="group">
-              <button class="flex items-center py-6" aria-haspopup="true" aria-expanded="false">
-                <span>Study with us</span>
-                <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                      </svg>
-                      
-                </span>
-              </button>
-              <div class="absolute text-sm left-0 right-0 bg-gray-100 shadow-lg rounded-b-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-                <div class="container mx-auto p-8 grid grid-cols-4 gap-8">
+    
+    <nav>
+          <div class="container">
+
+              <div class="flex justify-between items-center h-20">
+                  <!-- Logo -->
                   <div>
-                    <h3 class="text-base font-medium mb-2">Postgraduate</h3>
-                    <ul class="space-y-2">
-                      <li><a href="/study/postgraduate/master-of-information-technology/" class="hover:text-primary hover:border-b hover:border-primary transition-all">Master of Information Technology (MIT)</a></li>
-                      <li><a href="/study/postgraduate/master-of-business-administration/" class="hover:text-primary hover:border-b hover:border-primary transition-all">Master of Business Admistration (MBA)</a></li>
-                      <li><a href="/study/postgraduate/master-of-professional-accounting/" class="hover:text-primary hover:border-b hover:border-primary transition-all">Master of Professional Accounting (MPA)</a></li>
-                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">Graduate Diploma in Information Technolgy</a></li>
-                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">Graduate Diploma in Management</a></li>
-                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">Graduate Certificate in Information Technolgy</a></li>
-                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">Graduate Certificate in Management</a></li>
-                    </ul>
+                    <a href="/" aria-label="homepage">
+                      {% image site_settings.header_logo original loading="lazy" class="w-48 h-auto"  %}
+                    </a>
                   </div>
-                  <div>
-                    <h3 class="text-base font-medium mb-2">Undergraduate</h3>
-                    <ul class="space-y-2">
-                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">Bachelor of Cyber Security</a></li>
-                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">Bachelor of Information System</a></li>
-                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">Bachelor of Business (Accounting)</a></li>
-                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">Bachelor of Business</a></li>
-                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">Diploma of Business</a></li>
-                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">Block Delivery Model</a></li>
-                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">Accelaration</a></li>
-                    </ul>
+  
+                  <!-- Desktop Menu -->
+                  <div class="flex">
+                      <div class="flex items-center">
+                          <!-- Simple Link -->
+                            {% comment %} <a href="/" class="text-gray-700 flex h-20 items-center hover:text-primary hover:bg-gray-200 px-3">Home</a> {% endcomment %}
+
+  
+                          {% comment %} {% include "navbar/desktop_partial/study.html" %}
+                          {% include "navbar/desktop_partial/student_services.html" %} {% endcomment %}
+                          {% include "navbar/desktop_partials/menu.html" %}
+  
+                          <!-- About Link -->
+                          {% comment %} <a href="#" class="text-gray-700 flex h-20 items-center hover:text-primary hover:bg-gray-200 px-3">About</a>
+  
+                          <!-- Contact Link -->
+                          <a href="#" class="text-gray-700 flex h-20 items-center hover:text-primary hover:bg-gray-200 px-3">Contact</a> {% endcomment %}
+                      </div>
                   </div>
-                  <div>
-                    <h3 class="text-base font-medium mb-2">High School (Year 10-12)</h3>
-                    <ul class="space-y-2">
-                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">Year 10 High School Program</a></li>
-                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">Victorian Certificate of Education (VCE)</a></li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h3 class="text-base font-medium mb-2">English Language Center</h3>
-                    <ul class="space-y-2">
-                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">General English</a></li>
-                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">English for Academic Purposes (EAP)</a></li>
-                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">English for Secondary School Preparation(ESSP)</a></li>
-                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">Industry Inspire</a></li>
-                    </ul>
-                  </div>
-                 
-                </div>
               </div>
-            </li>
-           
-            <li>
-              Student Life &amp; Services
-            </li>
-            <li>
-              Admission
-            </li>
-            <li>
-              About OZFORD
-            </li>
-            <li>
-              <button class="px-3 py-2 bg-primary hover:bg-primary-dark text-white text-lg">Apply Now</button>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </div>
+            </div>
+      </nav>
   </div>

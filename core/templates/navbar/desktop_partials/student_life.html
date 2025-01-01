@@ -1,0 +1,273 @@
+<div @mouseleave="activeDropdown = null">
+    <button @mouseover="setActiveDropdown('studentLife')" 
+            class="text-gray-800 font-medium h-20 px-4 border-b-4"
+            :class="activeDropdown === 'studentLife' ? 'border-primary text-primary bg-gray-100' : 'border-transparent'">
+            Study
+        <svg class="-mr-0.5 h-4 w-4 inline-block transition-transform duration-200" 
+             :class="{'rotate-180 text-primary': activeDropdown === 'studentLife'}"
+             xmlns="http://www.w3.org/2000/svg" 
+             fill="none" 
+             viewBox="0 0 24 24" 
+             stroke="currentColor">
+            <path stroke-linecap="round" 
+                  stroke-linejoin="round" 
+                  stroke-width="3" 
+                  d="M19 9l-7 7-7-7" />
+        </svg>
+    </button>
+
+    <!-- Services Mega Menu Panel -->
+    <div x-cloak 
+         x-show="activeDropdown === 'studentLife'"
+         x-transition:enter="transition ease-out duration-150"
+         x-transition:enter-start="opacity-100 scale-100"
+         x-transition:enter-end="opacity-100 scale-100"
+         x-transition:leave="transition ease-in duration-90"
+         x-transition:leave-start="opacity-100 scale-100"
+         x-transition:leave-end="opacity-0 scale-100"
+         class="absolute left-0 right-0 container z-50 min-h-96"
+         @mouseover="activeDropdown = 'studentLife'"
+         style="display: none;">
+        <div class="w-full min-h-96 bg-gray-100">
+            <div class="p-8 max-w-5xl mx-auto grid grid-cols-4 gap-8 text-sm">
+              <div>
+                <h3 class="text-base font-medium mb-2">Current Student</h3>
+                <ul class="space-y-3">
+                    <li>
+                        <a
+                          href="/study/postgraduate/master-of-information-technology/"
+                          class="text-primary border-b border-transparent hover:border-primary transition-all"
+                          >Student Support</a
+                        >
+                      </li>
+                    <li>
+                    <li>
+                        <a
+                          href="/study/postgraduate/master-of-information-technology/"
+                          class="text-primary border-b border-transparent hover:border-primary transition-all"
+                          >OIHE (Mooodle)</a
+                        >
+                      </li>
+                    <li>
+                        <a
+                          href="/study/postgraduate/master-of-information-technology/"
+                          class="text-primary border-b border-transparent hover:border-primary transition-all"
+                          >HS | ELICOS (Compass)</a
+                        >
+                      </li>
+                  <li>
+                    <a
+                      href="/study/postgraduate/master-of-information-technology/"
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >Library</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="/study/postgraduate/master-of-business-administration/"
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >Staff</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="/study/postgraduate/master-of-professional-accounting/"
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >Alumni</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="/study/postgraduate/master-of-professional-accounting/"
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >Events</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="/study/postgraduate/master-of-professional-accounting/"
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >Key Dates</a
+                    >
+                  </li>
+                  
+                  
+                </ul>
+              </div>
+              <div>
+                <h3 class="text-base font-medium mb-2">Future Students</h3>
+                <ul class="space-y-3">
+                    <li>
+                        <a
+                          href="/study/postgraduate/master-of-professional-accounting/"
+                          class="text-primary border-b border-transparent hover:border-primary transition-all"
+                          >Why choose Ozford</a
+                        >
+                      </li>
+                    <li>
+                        <a
+                          href=""
+                          class="text-primary border-b border-transparent hover:border-primary transition-all"
+                          >Why study in Australia</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href=""
+                          class="text-primary border-b border-transparent hover:border-primary transition-all"
+                          >Life in Melbourne</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href=""
+                          class="text-primary border-b border-transparent hover:border-primary transition-all"
+                          >Student Stories</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href=""
+                          class="text-primary border-b border-transparent hover:border-primary transition-all"
+                          >Campus Facilities</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href=""
+                          class="text-primary border-b border-transparent hover:border-primary transition-all"
+                          >Visas</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href=""
+                          class="text-primary border-b border-transparent hover:border-primary transition-all"
+                          >Accommodation</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href=""
+                          class="text-primary border-b border-transparent hover:border-primary transition-all"
+                          >Airport Pickup</a
+                        >
+                      </li>
+                      
+                      
+                </ul>
+              </div>
+              <div>
+                <h3 class="text-base font-medium mb-2">Admission &amp; Entry</h3>
+                <ul class="space-y-3">
+                 
+                  <li>
+                    <a
+                      href=""
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >How to Apply</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href=""
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >Intakes</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href=""
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >Entry requirements</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href=""
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >Accepting an offer</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href=""
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >Entry Pathways</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href=""
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >Fees</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href=""
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >Scholarships</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href=""
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >Find an agent</a
+                    >
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h3 class="text-base font-medium mb-2">Information For</h3>
+                <ul class="space-y-2">
+                    <li>
+                        <a
+                          href=""
+                          class="text-primary border-b border-transparent hover:border-primary transition-all"
+                          >Domestic Students</a
+                        >
+                      </li>
+                  <li>
+                    <a
+                      href=""
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >International Students</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href=""
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >High School Students</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href=""
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >Events &amp; Activities</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href=""
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >Parents</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href=""
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >Agents</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- Admissions dropdown content -->
+        </div>
+    </div>
+</div>

@@ -1,0 +1,205 @@
+<div @mouseleave="activeDropdown = null">
+  <button
+    @mouseover="setActiveDropdown('courses')"
+     class="text-gray-800 font-medium h-20 px-4 border-b-4"
+    :class="activeDropdown === 'courses' ? 'border-primary text-primary bg-gray-100' : 'border-transparent'"
+  >
+    Courses
+    <svg
+      class="-mr-0.5 h-4 w-4 inline-block transition-transform duration-200"
+      :class="{'rotate-180 text-primary': activeDropdown === 'courses'}"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="3"
+        d="M19 9l-7 7-7-7"
+      />
+    </svg>
+  </button>
+
+  <!-- Student Mega Menu Panel -->
+  <div
+    x-cloak
+    x-show="activeDropdown === 'courses'"
+    x-transition:enter="transition ease-out duration-150"
+    x-transition:enter-start="opacity-100 scale-100"
+    x-transition:enter-end="opacity-100 scale-100"
+    x-transition:leave="transition ease-in duration-90"
+    x-transition:leave-start="opacity-100 scale-100"
+    x-transition:leave-end="opacity-0 scale-100"
+    class="absolute left-0 right-0 container z-50 min-h-96"
+    @mouseover="activeDropdown = 'courses'"
+    style="display: none"
+  >
+    <div class="w-full min-h-96 bg-gray-100">
+      <div class="p-8 grid grid-cols-4 gap-8 text-sm">
+        <div>
+          <h3 class="text-base font-medium mb-2">Postgraduate</h3>
+          <ul class="space-y-3">
+            <li>
+              <a
+                href="/study/postgraduate/master-of-information-technology/"
+                class="text-primary border-b border-transparent hover:border-primary transition-all"
+                >Master of Information Technology (MIT)</a
+              >
+            </li>
+            <li>
+              <a
+                href="/study/postgraduate/master-of-business-administration/"
+                class="text-primary border-b border-transparent hover:border-primary transition-all"
+                >Master of Business Admistration (MBA)</a
+              >
+            </li>
+            <li>
+              <a
+                href="/study/postgraduate/master-of-professional-accounting/"
+                class="text-primary border-b border-transparent hover:border-primary transition-all"
+                >Master of Professional Accounting (MPA)</a
+              >
+            </li>
+            <li>
+              <a
+                href=""
+                class="text-primary border-b border-transparent hover:border-primary transition-all"
+                >Graduate Diploma in Information Technolgy</a
+              >
+            </li>
+            <li>
+              <a
+                href=""
+                class="text-primary border-b border-transparent hover:border-primary transition-all"
+                >Graduate Diploma in Management</a
+              >
+            </li>
+            <li>
+              <a
+                href=""
+                class="text-primary border-b border-transparent hover:border-primary transition-all"
+                >Graduate Certificate in Information Technolgy</a
+              >
+            </li>
+            <li>
+              <a
+                href=""
+                class="text-primary border-b border-transparent hover:border-primary transition-all"
+                >Graduate Certificate in Management</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-base font-medium mb-2">Undergraduate</h3>
+          <ul class="space-y-3">
+            <li>
+              <a
+                href=""
+                class="text-primary border-b border-transparent hover:border-primary transition-all"
+                >Bachelor of Cyber Security</a
+              >
+            </li>
+            <li>
+              <a
+                href=""
+                class="text-primary border-b border-transparent hover:border-primary transition-all"
+                >Bachelor of Information System</a
+              >
+            </li>
+            <li>
+              <a
+                href=""
+                class="text-primary border-b border-transparent hover:border-primary transition-all"
+                >Bachelor of Business (Accounting)</a
+              >
+            </li>
+            <li>
+              <a
+                href=""
+                class="text-primary border-b border-transparent hover:border-primary transition-all"
+                >Bachelor of Business</a
+              >
+            </li>
+            <li>
+              <a
+                href=""
+                class="text-primary border-b border-transparent hover:border-primary transition-all"
+                >Diploma of Business</a
+              >
+            </li>
+            <li>
+              <a
+                href=""
+                class="text-primary border-b border-transparent hover:border-primary transition-all"
+                >Block Delivery Model</a
+              >
+            </li>
+            <li>
+              <a
+                href=""
+                class="text-primary border-b border-transparent hover:border-primary transition-all"
+                >Accelaration</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-base font-medium mb-2">High School (Year 10-12)</h3>
+          <ul class="space-y-3">
+            <li>
+              <a
+                href=""
+                class="text-primary border-b border-transparent hover:border-primary transition-all"
+                >Year 10 High School Program</a
+              >
+            </li>
+            <li>
+              <a
+                href=""
+                class="text-primary border-b border-transparent hover:border-primary transition-all"
+                >Victorian Certificate of Education (VCE)</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-base font-medium mb-2">English Language Center</h3>
+          <ul class="space-y-2">
+            <li>
+              <a
+                href=""
+                class="text-primary border-b border-transparent hover:border-primary transition-all"
+                >General English</a
+              >
+            </li>
+            <li>
+              <a
+                href=""
+                class="text-primary border-b border-transparent hover:border-primary transition-all"
+                >English for Academic Purposes (EAP)</a
+              >
+            </li>
+            <li>
+              <a
+                href=""
+                class="text-primary border-b border-transparent hover:border-primary transition-all"
+                >English for Secondary School Preparation(ESSP)</a
+              >
+            </li>
+            <li>
+              <a
+                href=""
+                class="text-primary border-b border-transparent hover:border-primary transition-all"
+                >Industry Inspire</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- Admissions dropdown content -->
+    </div>
+  </div>
+</div>
