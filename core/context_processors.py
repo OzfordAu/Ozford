@@ -16,7 +16,7 @@ def site_settings(request):
         "title": course.course_title,
         "url": course.get_url()  # Automatically generates the correct relative URL
     }
-    for course in courses if course.course_type == 'UG'
+    for course in courses if course.course_type == 'UG' or course.course_type == 'DIP'
 ]
 
     if site_settings:

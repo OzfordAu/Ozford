@@ -1924,6 +1924,10 @@ body {
   padding: 0;
 }
 
+.hover\:rounded-lg:hover {
+  border-radius: 0.5rem;
+}
+
 .hover\:border-b:hover {
   border-bottom-width: 1px;
 }
@@ -1983,6 +1987,11 @@ body {
 
 .hover\:bg-white\/60:hover {
   background-color: rgb(255 255 255 / 0.6);
+}
+
+.hover\:bg-gray-100:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity, 1));
 }
 
 .hover\:text-blue-500:hover {
