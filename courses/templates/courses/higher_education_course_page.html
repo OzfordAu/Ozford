@@ -94,24 +94,30 @@
         </div>
         <div class="p-6 lg:p-8 xl:p-12 bg-white mt-4 lg:mt-8 xl:mt-12 scroll-m-8" id="course_units">
             <h2 class="text-primary-dark font-semibold text-base lg:text-xl mb-2">Course Units</h2>
-            {% if page.ellective_units %}
-            <div x-data="{ selectedTab: 'core_units' }" class="w-full">
-                <div @keydown.right.prevent="$focus.wrap().next()" @keydown.left.prevent="$focus.wrap().previous()" class="flex gap-2 overflow-x-auto" role="tablist" aria-label="tab options">
-                    <button @click="selectedTab = 'core_units'" :aria-selected="selectedTab === 'core_units'" :tabindex="selectedTab === 'core_units' ? '0' : '-1'" :class="selectedTab === 'core_units' ? 'font-medium text-xl text-primary border-b-2 border-primary' : 'text-primary-dark font-medium hover:border-b-2 hover:border-b-primary hover:text-primary'" class="h-min px-4 py-2 text-xl" type="button" role="tab" aria-controls="tabpanelCoreUnits" >Core Units</button>
-                    <button @click="selectedTab = 'ellective_units'" :aria-selected="selectedTab === 'ellective_units'" :tabindex="selectedTab === 'ellective_units' ? '0' : '-1'" :class="selectedTab === 'ellective_units' ? 'font-medium text-xl text-primary border-b-2 border-primary' : 'text-primary-dark font-medium hover:border-b-2 hover:border-b-primary hover:text-primary'" class="h-min px-4 py-2 text-xl" type="button" role="tab" aria-controls="tabpanelEllectiveUnits" >Elective Units</button>
-                </div>
-                <div class="px-2 py-4">
-                    <div x-show="selectedTab === 'core_units'" id="tabpanelCoreUnits" role="tabpanel" aria-label="core_units">
-                        {% include "courses/course_units.html" with course_units=page.core_units %}
+            {% if page.core_units %}
+                {% if page.ellective_units %}
+                    <div x-data="{ selectedTab: 'core_units' }" class="w-full">
+                        <div @keydown.right.prevent="$focus.wrap().next()" @keydown.left.prevent="$focus.wrap().previous()" class="flex gap-2 overflow-x-auto" role="tablist" aria-label="tab options">
+                            <button @click="selectedTab = 'core_units'" :aria-selected="selectedTab === 'core_units'" :tabindex="selectedTab === 'core_units' ? '0' : '-1'" :class="selectedTab === 'core_units' ? 'font-medium text-xl text-primary border-b-2 border-primary' : 'text-primary-dark font-medium hover:border-b-2 hover:border-b-primary hover:text-primary'" class="h-min px-4 py-2 text-xl" type="button" role="tab" aria-controls="tabpanelCoreUnits" >Core Units</button>
+                            <button @click="selectedTab = 'ellective_units'" :aria-selected="selectedTab === 'ellective_units'" :tabindex="selectedTab === 'ellective_units' ? '0' : '-1'" :class="selectedTab === 'ellective_units' ? 'font-medium text-xl text-primary border-b-2 border-primary' : 'text-primary-dark font-medium hover:border-b-2 hover:border-b-primary hover:text-primary'" class="h-min px-4 py-2 text-xl" type="button" role="tab" aria-controls="tabpanelEllectiveUnits" >Elective Units</button>
+                        </div>
+                        <div class="px-2 py-4">
+                            <div x-show="selectedTab === 'core_units'" id="tabpanelCoreUnits" role="tabpanel" aria-label="core_units">
+                                {% include "courses/course_units.html" with course_units=page.core_units %}
+                            </div>
+                            <div x-show="selectedTab === 'ellective_units'" id="tabpaneEllectiveUnits" role="tabpanel" aria-label="ellective_units">
+                                {% include "courses/course_units.html" with course_units=page.ellective_units %}
+                            </div>
+                        </div>
                     </div>
-                    <div x-show="selectedTab === 'ellective_units'" id="tabpaneEllectiveUnits" role="tabpanel" aria-label="ellective_units">
-                        {% include "courses/course_units.html" with course_units=page.ellective_units %}
-                    </div>
-                </div>
-            </div>
+                {% else %}
+                    {% include "courses/course_units.html" with course_units=page.core_units %}
+                {% endif %}
             {% else %}
-            {% include "courses/course_units.html" with course_units=page.core_units %}
-            {% endif %}
+                
+                    {{page.core_units_block|richtext}}
+
+            {% endif %} 
             
         
         </div>

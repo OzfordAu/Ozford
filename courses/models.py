@@ -75,7 +75,7 @@ HE_DEGREE_TYPE_CHOICES = (
 
 class UnitBlock(blocks.StructBlock):
     unit_title = blocks.CharBlock(max_length=255, blank=False, null=True)
-    unit_description = blocks.RichTextBlock(blank=False, null=True)
+    unit_description = blocks.RichTextBlock(blank=True, null=True)
     class Meta:
         icon = 'circle-plus'
         verbose_name = 'Unit'
@@ -134,6 +134,7 @@ class HigherEducationCoursePage(Page):
         blank=True,
         use_json_field=True,
     )
+    core_units_block = RichTextField(null=True, blank=True, help_text='Use this block when you only want to add title of units. This is helpful when you don\'t want to display accordions for unit title and description.')
     ellective_units = StreamField(
         [
             ('ellective_units', UnitBlock()),
@@ -171,6 +172,7 @@ class HigherEducationCoursePage(Page):
         FieldPanel('course_overview'),
         FieldPanel('core_units'),
         FieldPanel('ellective_units'),
+        FieldPanel('core_units_block'),
         FieldPanel('assessment_methods'),
     ]
 
