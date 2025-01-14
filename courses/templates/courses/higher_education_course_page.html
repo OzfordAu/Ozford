@@ -51,7 +51,9 @@
             {% comment %} <button class="text-white">Fees &amp; Scholarships</button> {% endcomment %}
             <a href="#career_outcomes" class="text-white">Career Outcomes</a>
             <a href="#course_units" class="text-white">Course Units</a>
-            <a href="#assessment_methods" class="text-white">Assessment Methods</a>
+            {% if page.student_workload %}<a href="#student_workload" class="text-white">Student Workload</a>{% endif %}
+            {% if page.pathways %}<a href="#pathways" class="text-white">Pathways</a>{% endif %}
+            {% if page.assessment_methods %}<a href="#assessment_methods" class="text-white">Assessment Methods</a>{% endif %}
             <a href="#student_information" class="text-white">Student Information</a>
         </div>
     </div>
@@ -145,6 +147,18 @@
             
         
         </div>
+        {% if page.student_workload %}
+            <div class="p-6 lg:p-8 xl:p-12 bg-white mt-4 lg:mt-8 xl:mt-12 scroll-m-8 cms-page" id="student_workload">
+                <h2 class="text-primary-dark font-semibold text-2xl mb-2">Student Workload</h2>
+                {{page.student_workload|richtext}}
+            </div>
+        {% endif %}
+        {% if page.pathways %}
+            <div class="p-6 lg:p-8 xl:p-12 bg-white mt-4 lg:mt-8 xl:mt-12 scroll-m-8 cms-page" id="pathways">
+                <h2 class="text-primary-dark font-semibold text-2xl mb-2">Pathways</h2>
+                {{page.pathways|richtext}}
+            </div>
+        {% endif %}
         <div class="p-6 lg:p-8 xl:p-12 bg-white mt-4 lg:mt-8 xl:mt-12 scroll-m-8 cms-page" id="assessment_methods">
             <h2 class="text-primary-dark font-semibold text-2xl mb-2">Assessment Methods</h2>
             {{page.assessment_methods|richtext}}

@@ -4,6 +4,7 @@ from wagtail.admin.panels import FieldPanel
 from wagtail.documents import get_document_model
 from wagtail.models import Page
 from wagtail import blocks
+from tinymce.models import HTMLField
 
 class CoursesIndexPage(Page):
     max_count = 1
@@ -171,6 +172,8 @@ class HigherEducationCoursePage(Page):
         blank=True,
         use_json_field=True,
     )
+    student_workload = HTMLField(null=True, blank=True)
+    pathways = HTMLField(null=True, blank=True)
     assessment_methods = RichTextField(null=True, blank=True)
 
     content_panels = Page.content_panels + [
@@ -208,6 +211,8 @@ class HigherEducationCoursePage(Page):
         FieldPanel('accounting_specialisation_units'),
         FieldPanel('ellective_units'),
         FieldPanel('core_units_block'),
+        FieldPanel('student_workload'),
+        FieldPanel('pathways'),
         FieldPanel('assessment_methods'),
     ]
 
