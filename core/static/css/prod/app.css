@@ -1610,10 +1610,6 @@ body {
   padding-top: 2rem;
 }
 
-.pr-2 {
-  padding-right: 0.5rem;
-}
-
 .text-left {
   text-align: left;
 }
@@ -1914,7 +1910,7 @@ body {
   color: #005c90 !important;
 }
 
-.cms-page ul {
+.cms-page ul, ul.list-disc {
   list-style-type: disc;
   list-style-position: inside;
   margin: 0;
@@ -1934,10 +1930,6 @@ body {
 
 .hover\:border-b:hover {
   border-bottom-width: 1px;
-}
-
-.hover\:border-b-2:hover {
-  border-bottom-width: 2px;
 }
 
 .hover\:border-link-hover:hover {
@@ -1960,9 +1952,9 @@ body {
   border-color: rgb(255 255 255 / var(--tw-border-opacity, 1));
 }
 
-.hover\:border-b-primary:hover {
-  --tw-border-opacity: 1;
-  border-bottom-color: rgb(0 92 144 / var(--tw-border-opacity, 1));
+.hover\:bg-gray-100:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity, 1));
 }
 
 .hover\:bg-gray-200:hover {
@@ -1991,11 +1983,6 @@ body {
 
 .hover\:bg-white\/60:hover {
   background-color: rgb(255 255 255 / 0.6);
-}
-
-.hover\:bg-gray-100:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(243 244 246 / var(--tw-bg-opacity, 1));
 }
 
 .hover\:text-blue-500:hover {

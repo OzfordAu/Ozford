@@ -19,7 +19,7 @@
   .cms-page a {
     color: #005c90 !important;
   }
-  .cms-page ul {
+  .cms-page ul, ul.list-disc {
     list-style-type: disc;
     list-style-position: inside;
     margin: 0;
