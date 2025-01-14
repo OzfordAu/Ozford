@@ -1,0 +1,98 @@
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block script_top %}
+{% image page.banner_image width-320 format-avif as mobile_avif %}
+{% image page.banner_image width-800 format-avif as desktop_avif %}
+<link rel="preload" as="image" href="{{ mobile_avif.url }}" type="image/avif" fetchpriority="high" media="(max-width: 1024px)">
+<link rel="preload" as="image" href="{{ desktop_avif.url }}" type="image/avif" fetchpriority="high" media="(min-width: 1024px)">
+{% endblock script_top %}
+
+<section class="bg-primary-darker w-full relative lg:h-[450px]" aria-label="Course Banner">
+  <!-- Mobile Banner Image -->
+  <picture>
+    {% image page.banner_image width-320 format-webp as mobile_webp %}
+    {% image page.banner_image width-320 format-jpeg as mobile_jpeg %}
+    
+    <source type="image/avif" srcset="{{ mobile_avif.url }}">
+    <source type="image/webp" srcset="{{ mobile_webp.url }}">
+    <img 
+      src="{{ mobile_jpeg.url }}"
+      class="lg:hidden absolute inset-0 w-full h-full object-cover object-center"
+      alt="{{page.course_title}} banner image"
+      width="{{ mobile_jpeg.width }}"
+      height="{{ mobile_jpeg.height }}"
+      fetchpriority="high"
+      priority
+      loading="eager">
+  </picture>
+  
+  <div class="container mx-auto py-4 lg:py-6 xl:py-8">
+    <div class="w-full flex items-center lg:gap-10">
+      <div class="w-full lg:w-6/12 z-20">
+        <div class="relative">
+          <div class="absolute inset-0 bg-black/80 backdrop-blur-sm xl:hidden"></div>
+          <div class="relative z-10 p-4 lg:p-8 xl:p-0 xl:py-8">
+            <div class="text-white mb-4 font-light tracking-wide" aria-label="CRICOS Code">
+                CRICOS Code: <span class="font-medium">{{page.cricos_code}}</span>
+            </div>
+            
+            <h1 class="text-3xl xl:text-5xl text-white font-medium">{{page.course_title}}</h1> 
+            <div class="text-white font-light mt-4">{{page.course_header_description|richtext }}</div>
+            
+            <div class="flex flex-col md:flex-row gap-4 text-white mt-4 lg:mt-6 xl:mt-8">
+                <a href="/" class="group bg-primary hover:bg-primary-dark text-white px-4 py-2.5 tracking-wide inline-flex items-center gap-2 transition-colors">
+                <span>Apply</span>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" 
+                    class="size-5 transition-transform group-hover:translate-x-1">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
+                </svg>
+                </a>
+                
+                <a href="/" class="group bg-primary hover:bg-primary-dark text-white px-4 py-2.5 tracking-wide inline-flex items-center gap-2 transition-colors">
+                <span>Enquire</span>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" 
+                    class="size-5 transition-transform group-hover:translate-x-1">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
+                </svg>
+                </a>
+                
+                {% if page.course_brochure %}
+                <a href="{{page.course_brochure.url}}" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="group bg-primary hover:bg-primary-dark text-white px-4 py-2.5 tracking-wide inline-flex items-center gap-2 transition-colors">
+                <span>Course Brochure</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 512 512" 
+                    class="transition-transform group-hover:translate-x-1">
+                    <path fill="currentColor" d="M64 464h48v48H64c-35.3 0-64-28.7-64-64V64C0 28.7 28.7 0 64 0h165.5c17 0 33.3 6.7 45.3 18.7l90.5 90.5c12 12 18.7 28.3 18.7 45.3V304h-48V160h-80c-17.7 0-32-14.3-32-32V48H64c-8.8 0-16 7.2-16 16v384c0 8.8 7.2 16 16 16m112-112h32c30.9 0 56 25.1 56 56s-25.1 56-56 56h-16v32c0 8.8-7.2 16-16 16s-16-7.2-16-16V368c0-8.8 7.2-16 16-16m32 80c13.3 0 24-10.7 24-24s-10.7-24-24-24h-16v48zm96-80h32c26.5 0 48 21.5 48 48v64c0 26.5-21.5 48-48 48h-32c-8.8 0-16-7.2-16-16V368c0-8.8 7.2-16 16-16m32 128c8.8 0 16-7.2 16-16v-64c0-8.8-7.2-16-16-16h-16v96zm80-112c0-8.8 7.2-16 16-16h48c8.8 0 16 7.2 16 16s-7.2 16-16 16h-32v32h32c8.8 0 16 7.2 16 16s-7.2 16-16 16h-32v48c0 8.8-7.2 16-16 16s-16-7.2-16-16z"/>
+                </svg>
+                </a>
+                {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Desktop Banner Image -->
+      <div class="hidden lg:block lg:w-6/12">
+        <div class="absolute top-0 right-0 z-10">
+          <picture>
+            {% image page.banner_image width-800 format-webp as desktop_webp %}
+            {% image page.banner_image width-800 format-jpeg as desktop_jpeg %}
+            
+            <source type="image/avif" srcset="{{ desktop_avif.url }}">
+            <source type="image/webp" srcset="{{ desktop_webp.url }}">
+            <img 
+              src="{{ desktop_jpeg.url }}"
+              class="inline-block w-full h-[450px] object-contain"
+              alt="{{page.course_title}} banner image"
+              width="{{ desktop_jpeg.width }}"
+              height="{{ desktop_jpeg.height }}"
+              fetchpriority="high"
+              loading="eager">
+          </picture>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

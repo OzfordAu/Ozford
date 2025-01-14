@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+
+  {% include 'breadcrumb.html' %}
+  <div>
+    {% include "courses/high_school/banner.html" %}
+
+<div class="bg-gray-100">
+    <div class="container py-2 lg:py-8">
+        <div class="p-6 lg:p-8 xl:p-12 bg-white mt-4 text-justify">{{page.body|richtext}}</div>
+       
+        {% include "courses/course_page_footer.html" %} 
+    </div>
+</div>
+   {% comment %} {% include "courses/study_at_ozford.html" %}  {% endcomment %}
+   {% include "courses/why_melbourne.html" %} 
+
+  {% comment %} <section class="container mx-auto max-w-7xl text-black pb-6 lg:pb-8 xl:pb-20 mt-4 lg:mt-8 xl:mt-12">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-10 xl:gap-16">
+      {% for item in degrees  %}
+        <div class="block space-y-4 bg-gray-100 p-4 lg:p-6 xl:p-10">
+          <h6>{{item.title}}</h6>
+          <p>{{item.page_description|richtext}}</p>
+        </div>
+      {% endfor %}
+    </div>
+
+  </section> {% endcomment %}
+</div>
+{% endblock %}
+{% block extra_js %}
+
+{% endblock %}

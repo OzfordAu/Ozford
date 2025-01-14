@@ -41,7 +41,7 @@ class CoursesIndexPage(Page):
 class DegreeIndexPage(Page):
     # max_count = 1
     parent_page_types = ['courses.CoursesIndexPage']
-    subpage_types = ['courses.HigherEducationCoursePage']
+    subpage_types = ['courses.HigherEducationCoursePage', 'courses.HighSchoolCoursePage', 'courses.ElicosCoursePage']
     page_title = models.CharField(max_length=255, null=True, blank=True)
     page_description = RichTextField(null=True, blank=True)
     banner_image = models.ForeignKey(
@@ -225,18 +225,96 @@ class HighSchoolCoursePage(Page):
     subpage_types = []
     is_popular = models.BooleanField(default=False)
     course_title = models.CharField(max_length=255, null=True, blank=True)
-
     cricos_code = models.CharField(max_length=10, null=True, blank=True)
-    course_detail = RichTextField(null=True, blank=True)
+    course_header_description = RichTextField(null=True, blank=True)
+    course_brochure = models.ForeignKey(
+        get_document_model(),
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+    )
+
+    banner_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name='Banner Image'
+    )
+    body = HTMLField(null=True, blank=True)
     
 
     content_panels = Page.content_panels + [
         FieldPanel('is_popular'),
         FieldPanel('course_title'),
         FieldPanel('cricos_code'),
-        FieldPanel('course_detail'), 
+        FieldPanel('course_header_description'),
+        FieldPanel('course_brochure'),
+        FieldPanel('banner_image'),
+        FieldPanel('body'), 
        
     ]
 
     class Meta:
         verbose_name = "High School Course Page"
+
+
+class ElicosCoursePage(Page):
+    parent_page_types = ['courses.DegreeIndexPage']
+    subpage_types = []
+    is_popular = models.BooleanField(default=False)
+    course_title = models.CharField(max_length=255, null=True, blank=True)
+    cricos_code = models.CharField(max_length=10, null=True, blank=True)
+    course_header_description = RichTextField(null=True, blank=True)
+    course_duration = RichTextField(null=True, blank=True)
+    class_hours = RichTextField(null=True, blank=True)
+    location = RichTextField(null=True, blank=True)
+    average_class_size = RichTextField(null=True, blank=True)
+    level_available = RichTextField(null=True, blank=True)
+    entry_requirements = RichTextField(null=True, blank=True)
+    intakes = RichTextField(null=True, blank=True)
+    fees = RichTextField(null=True, blank=True)
+    course_brochure = models.ForeignKey(
+        get_document_model(),
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+    )
+
+    banner_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name='Banner Image'
+    )
+    course_overview = RichTextField(null=True, blank=True)
+    learning_outcome = HTMLField(null=True, blank=True)
+    assessment = RichTextField(null=True, blank=True)
+    
+
+    content_panels = Page.content_panels + [
+        FieldPanel('is_popular'),
+        FieldPanel('course_title'),
+        FieldPanel('cricos_code'),
+        FieldPanel('course_header_description'),
+        FieldPanel('course_duration'),
+        FieldPanel('class_hours'),
+        FieldPanel('location'),
+        FieldPanel('average_class_size'),
+        FieldPanel('level_available'),
+        FieldPanel('entry_requirements'),
+        FieldPanel('intakes'),
+        FieldPanel('fees'),
+        FieldPanel('course_brochure'),
+        FieldPanel('banner_image'),
+        FieldPanel('course_overview'), 
+        FieldPanel('learning_outcome'), 
+        FieldPanel('assessment'), 
+       
+    ]
+
+    class Meta:
+        verbose_name = "Elicos Course Page"
