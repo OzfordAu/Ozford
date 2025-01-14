@@ -41,55 +41,16 @@
         <div>
           <h3 class="text-base font-medium mb-2">Postgraduate</h3>
           <ul class="space-y-3">
-            <li>
-              <a
-                href="/study/postgraduate/master-of-information-technology/"
+            {% for item in global_pg_courses  %}
+              <li>
+                <a 
+                href="{{ item.url }}"
                 class="text-primary border-b border-transparent hover:border-primary transition-all"
-                >Master of Information Technology (MIT)</a
-              >
-            </li>
-            <li>
-              <a
-                href="/study/postgraduate/master-of-business-administration/"
-                class="text-primary border-b border-transparent hover:border-primary transition-all"
-                >Master of Business Admistration (MBA)</a
-              >
-            </li>
-            <li>
-              <a
-                href="/study/postgraduate/master-of-professional-accounting/"
-                class="text-primary border-b border-transparent hover:border-primary transition-all"
-                >Master of Professional Accounting (MPA)</a
-              >
-            </li>
-            <li>
-              <a
-                href=""
-                class="text-primary border-b border-transparent hover:border-primary transition-all"
-                >Graduate Diploma in Information Technolgy</a
-              >
-            </li>
-            <li>
-              <a
-                href=""
-                class="text-primary border-b border-transparent hover:border-primary transition-all"
-                >Graduate Diploma in Management</a
-              >
-            </li>
-            <li>
-              <a
-                href=""
-                class="text-primary border-b border-transparent hover:border-primary transition-all"
-                >Graduate Certificate in Information Technolgy</a
-              >
-            </li>
-            <li>
-              <a
-                href=""
-                class="text-primary border-b border-transparent hover:border-primary transition-all"
-                >Graduate Certificate in Management</a
-              >
-            </li>
+                >
+                {{ item.title }}
+                </a>
+              </li>
+            {% endfor %}
           </ul>
         </div>
         <div>

@@ -69,8 +69,6 @@ class DegreeIndexPage(Page):
 HE_DEGREE_TYPE_CHOICES = (
     ('PG', 'Postgraduate'),
     ('UG', 'Undergraduate'),
-    ('DIP', 'Diploma'),
-    ('VET', 'VET'),
 )
 
 class UnitBlock(blocks.StructBlock):
