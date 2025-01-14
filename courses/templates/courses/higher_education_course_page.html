@@ -35,13 +35,13 @@
     </div>
   </div>
   {% include "courses/higher_education/key_facts.html" %}
+  {% if page.accreditation_logo %}
   <div class="container bg-white py-4">
-    {% if page.accreditation_logo %}
       <div class="flex">
           {% picture page.accreditation_logo format-{avif,webp,jpeg} width-1504 height-80 class="inline-block w-full h-[60px] object-contain" %}
         </div>
+    </div>
     {% endif %}
-  </div>
   <div class="bg-primary-dark hidden lg:block sticky top-0 z-50">
     <div class="container py-4">
         <div class="flex gap-4 lg:gap-6 items-center text-center">
@@ -58,7 +58,7 @@
 </div>
 <div class="bg-gray-100">
     <div class="container py-2 lg:py-8">
-        <div class="p-6 lg:p-8 xl:p-12 bg-white scroll-m-8" id="course_overview">
+        <div class="p-6 lg:p-8 xl:p-12 bg-white scroll-m-8 cms-page" id="course_overview">
             <h2 class="text-primary-dark font-semibold text-2xl mb-2">Course Overview</h2>
             {{page.course_overview|richtext}}
         </div>
@@ -66,7 +66,7 @@
             <h2 class="text-primary-dark font-semibold text-2xl mb-2">Course Requirements</h2>
             {{page.course_requirement|richtext}}
         </div> {% endcomment %}
-        <div class="p-6 lg:p-8 xl:p-12 bg-white mt-4 lg:mt-8 xl:mt-12 scroll-m-8" id="entry_requirements">
+        <div class="p-6 lg:p-8 xl:p-12 bg-white mt-4 lg:mt-8 xl:mt-12 scroll-m-8 cms-page" id="entry_requirements">
             <h2 class="text-primary-dark font-semibold text-2xl mb-2">Entry Requirements</h2>
             <h2 class="text-primary-dark font-medium text-xl mb-2">Course Requirement</h2>
             {{page.course_requirement|richtext}}
@@ -88,11 +88,11 @@
             {{page.age_requirement|richtext}}
             
         </div>
-        <div class="p-6 lg:p-8 xl:p-12 bg-white mt-4 lg:mt-8 xl:mt-12 scroll-m-8" id="career_outcomes">
+        <div class="p-6 lg:p-8 xl:p-12 bg-white mt-4 lg:mt-8 xl:mt-12 scroll-m-8 cms-page" id="career_outcomes">
             <h2 class="text-primary-dark font-semibold text-base lg:text-xl mb-2">Career Outcomes</h2>
             {{page.career_outcomes|richtext}}
         </div>
-        <div class="p-6 lg:p-8 xl:p-12 bg-white mt-4 lg:mt-8 xl:mt-12 scroll-m-8" id="course_units">
+        <div class="p-6 lg:p-8 xl:p-12 bg-white mt-4 lg:mt-8 xl:mt-12 scroll-m-8 cms-page" id="course_units">
             <h2 class="text-primary-dark font-semibold text-base lg:text-xl mb-2">Course Units</h2>
             {% if page.core_units %}
                 {% if page.ellective_units %}
@@ -121,7 +121,7 @@
             
         
         </div>
-        <div class="p-6 lg:p-8 xl:p-12 bg-white mt-4 lg:mt-8 xl:mt-12 scroll-m-8" id="assessment_methods">
+        <div class="p-6 lg:p-8 xl:p-12 bg-white mt-4 lg:mt-8 xl:mt-12 scroll-m-8 cms-page" id="assessment_methods">
             <h2 class="text-primary-dark font-semibold text-2xl mb-2">Assessment Methods</h2>
             {{page.assessment_methods|richtext}}
         </div>
