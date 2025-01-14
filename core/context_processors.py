@@ -3,24 +3,22 @@ from courses.models import HigherEducationCoursePage
 
 def site_settings(request):
     site_settings = SiteSettings.objects.live().public().first()
-    pg_courses = HigherEducationCoursePage.objects.live().public().filter(course_type='PG')
+    courses = HigherEducationCoursePage.objects.live().public()
     pg_courses_data = [
     {
         "title": course.course_title,
         "url": course.get_url()  # Automatically generates the correct relative URL
     }
-    for course in pg_courses
+    for course in courses if course.course_type == 'PG'
 ]
-    ug_courses = HigherEducationCoursePage.objects.live().public().filter(course_type='UG')
     ug_courses_data = [
     {
         "title": course.course_title,
         "url": course.get_url()  # Automatically generates the correct relative URL
     }
-    for course in ug_courses
+    for course in courses if course.course_type == 'UG'
 ]
-    print('pg_courses', pg_courses)
-    # print('site', site_settings.header_logo)
+
     if site_settings:
         return {
             'site_settings': site_settings,

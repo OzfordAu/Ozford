@@ -56,55 +56,16 @@
         <div>
           <h3 class="text-base font-medium mb-2">Undergraduate</h3>
           <ul class="space-y-3">
-            <li>
-              <a
-                href=""
+            {% for item in global_ug_courses  %}
+              <li>
+                <a 
+                href="{{ item.url }}"
                 class="text-primary border-b border-transparent hover:border-primary transition-all"
-                >Bachelor of Cyber Security</a
-              >
-            </li>
-            <li>
-              <a
-                href=""
-                class="text-primary border-b border-transparent hover:border-primary transition-all"
-                >Bachelor of Information System</a
-              >
-            </li>
-            <li>
-              <a
-                href=""
-                class="text-primary border-b border-transparent hover:border-primary transition-all"
-                >Bachelor of Business (Accounting)</a
-              >
-            </li>
-            <li>
-              <a
-                href=""
-                class="text-primary border-b border-transparent hover:border-primary transition-all"
-                >Bachelor of Business</a
-              >
-            </li>
-            <li>
-              <a
-                href=""
-                class="text-primary border-b border-transparent hover:border-primary transition-all"
-                >Diploma of Business</a
-              >
-            </li>
-            <li>
-              <a
-                href=""
-                class="text-primary border-b border-transparent hover:border-primary transition-all"
-                >Block Delivery Model</a
-              >
-            </li>
-            <li>
-              <a
-                href=""
-                class="text-primary border-b border-transparent hover:border-primary transition-all"
-                >Accelaration</a
-              >
-            </li>
+                >
+                {{ item.title }}
+                </a>
+              </li>
+            {% endfor %}
           </ul>
         </div>
         <div>
