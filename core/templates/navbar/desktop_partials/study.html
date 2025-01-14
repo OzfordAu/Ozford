@@ -71,53 +71,31 @@
         <div>
           <h3 class="text-base font-medium mb-2">High School (Year 10-12)</h3>
           <ul class="space-y-3">
-            <li>
-              <a
-                href=""
+            {% for item in global_high_school_courses  %}
+              <li>
+                <a 
+                href="{{ item.url }}"
                 class="text-primary border-b border-transparent hover:border-primary transition-all"
-                >Year 10 High School Program</a
-              >
-            </li>
-            <li>
-              <a
-                href=""
-                class="text-primary border-b border-transparent hover:border-primary transition-all"
-                >Victorian Certificate of Education (VCE)</a
-              >
-            </li>
+                >
+                {{ item.title }}
+                </a>
+              </li>
+            {% endfor %}
           </ul>
         </div>
         <div>
           <h3 class="text-base font-medium mb-2">English Language Center</h3>
-          <ul class="space-y-2">
-            <li>
-              <a
-                href=""
+          <ul class="space-y-3">
+            {% for item in global_elicos_school_courses  %}
+              <li>
+                <a 
+                href="{{ item.url }}"
                 class="text-primary border-b border-transparent hover:border-primary transition-all"
-                >General English</a
-              >
-            </li>
-            <li>
-              <a
-                href=""
-                class="text-primary border-b border-transparent hover:border-primary transition-all"
-                >English for Academic Purposes (EAP)</a
-              >
-            </li>
-            <li>
-              <a
-                href=""
-                class="text-primary border-b border-transparent hover:border-primary transition-all"
-                >English for Secondary School Preparation(ESSP)</a
-              >
-            </li>
-            <li>
-              <a
-                href=""
-                class="text-primary border-b border-transparent hover:border-primary transition-all"
-                >Industry Inspire</a
-              >
-            </li>
+                >
+                {{ item.title }}
+                </a>
+              </li>
+            {% endfor %}
           </ul>
         </div>
       </div>
