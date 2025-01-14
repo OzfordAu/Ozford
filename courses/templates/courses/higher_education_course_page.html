@@ -114,18 +114,23 @@
                         </div>
                         <div class="px-2 py-4">
                             <div x-show="selectedTab === 'core_units'" id="tabpanelCoreUnits" role="tabpanel" aria-label="core_units">
+                                {% if page.core_units_title %}<p class="font-medium text-primary py-2">{{page.core_units_title}}</p>{% endif %}
                                 {% include "courses/course_units.html" with course_units=page.core_units %}
                             </div>
                             <div x-show="selectedTab === 'ellective_units'" id="tabpaneEllectiveUnits" role="tabpanel" aria-label="ellective_units">
+                                {% if page.ellective_units_title %}<p class="font-medium text-primary py-2">{{page.ellective_units_title}}</p>{% endif %}
                                 {% include "courses/course_units.html" with course_units=page.ellective_units %}
                             </div>
                             <div x-show="selectedTab === 'management_specialisation_units'" id="tabpanelManagementUnits" role="tabpanel" aria-label="management_specialisation_units">
+                                {% if page.management_specialisation_units_title %}<p class="font-medium text-primary py-2">{{page.management_specialisation_units_title}}</p>{% endif %}
                                 {% include "courses/course_units.html" with course_units=page.management_specialisation_units %}
                             </div>
                             <div x-show="selectedTab === 'marketing_specialisation_units'" id="tabpanelMarketingUnits" role="tabpanel" aria-label="marketing_specialisation_units">
+                                {% if page.marketing_specialisation_units_title %}<p class="font-medium text-primary py-2">{{page.marketing_specialisation_units_title}}</p>{% endif %}
                                 {% include "courses/course_units.html" with course_units=page.marketing_specialisation_units %}
                             </div>
                             <div x-show="selectedTab === 'accounting_specialisation_units'" id="tabpanelAccountingUnits" role="tabpanel" aria-label="accounting_specialisation_units">
+                                {% if page.accounting_specialisation_units_title %}<p class="font-medium text-primary py-2">{{page.accounting_specialisation_units_title}}</p>{% endif %}
                                 {% include "courses/course_units.html" with course_units=page.accounting_specialisation_units %}
                             </div>
                         </div>

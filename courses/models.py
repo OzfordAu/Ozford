@@ -124,6 +124,7 @@ class HigherEducationCoursePage(Page):
     age_requirement = RichTextField(null=True, blank=True)
     career_outcomes = RichTextField(null=True, blank=True)
     course_overview = RichTextField(null=True, blank=True)
+    core_units_title = models.CharField(max_length=255, null=True, blank=True)
     core_units = StreamField(
         [
             ('core_units', UnitBlock()),
@@ -133,6 +134,7 @@ class HigherEducationCoursePage(Page):
         use_json_field=True,
     )
     core_units_block = RichTextField(null=True, blank=True, help_text='Use this block when you only want to add title of units. This is helpful when you don\'t want to display accordions for unit title and description.')
+    management_specialisation_units_title = models.CharField(max_length=255, null=True, blank=True)
     management_specialisation_units = StreamField(
         [
             ('management_specialisation_units', UnitBlock()),
@@ -141,6 +143,7 @@ class HigherEducationCoursePage(Page):
         blank=True,
         use_json_field=True,
     )
+    marketing_specialisation_units_title = models.CharField(max_length=255, null=True, blank=True)
     marketing_specialisation_units = StreamField(
         [
             ('marketing_specialisation_units', UnitBlock()),
@@ -149,6 +152,7 @@ class HigherEducationCoursePage(Page):
         blank=True,
         use_json_field=True,
     )
+    accounting_specialisation_units_title = models.CharField(max_length=255, null=True, blank=True)
     accounting_specialisation_units = StreamField(
         [
             ('accounting_specialisation_units', UnitBlock()),
@@ -157,6 +161,7 @@ class HigherEducationCoursePage(Page):
         blank=True,
         use_json_field=True,
     )
+    ellective_units_title = models.CharField(max_length=255, null=True, blank=True)
     ellective_units = StreamField(
         [
             ('ellective_units', UnitBlock()),
@@ -192,9 +197,13 @@ class HigherEducationCoursePage(Page):
         FieldPanel('age_requirement'),
         FieldPanel('career_outcomes'),
         FieldPanel('course_overview'),
+        FieldPanel('core_units_title'),
         FieldPanel('core_units'),
+        FieldPanel('management_specialisation_units_title'),
         FieldPanel('management_specialisation_units'),
+        FieldPanel('marketing_specialisation_units_title'),
         FieldPanel('marketing_specialisation_units'),
+        FieldPanel('accounting_specialisation_units_title'),
         FieldPanel('accounting_specialisation_units'),
         FieldPanel('ellective_units'),
         FieldPanel('core_units_block'),
