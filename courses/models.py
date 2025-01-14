@@ -133,6 +133,30 @@ class HigherEducationCoursePage(Page):
         use_json_field=True,
     )
     core_units_block = RichTextField(null=True, blank=True, help_text='Use this block when you only want to add title of units. This is helpful when you don\'t want to display accordions for unit title and description.')
+    management_specialisation_units = StreamField(
+        [
+            ('management_specialisation_units', UnitBlock()),
+        ],
+        null=True,
+        blank=True,
+        use_json_field=True,
+    )
+    marketing_specialisation_units = StreamField(
+        [
+            ('marketing_specialisation_units', UnitBlock()),
+        ],
+        null=True,
+        blank=True,
+        use_json_field=True,
+    )
+    accounting_specialisation_units = StreamField(
+        [
+            ('accounting_specialisation_units', UnitBlock()),
+        ],
+        null=True,
+        blank=True,
+        use_json_field=True,
+    )
     ellective_units = StreamField(
         [
             ('ellective_units', UnitBlock()),
@@ -169,6 +193,9 @@ class HigherEducationCoursePage(Page):
         FieldPanel('career_outcomes'),
         FieldPanel('course_overview'),
         FieldPanel('core_units'),
+        FieldPanel('management_specialisation_units'),
+        FieldPanel('marketing_specialisation_units'),
+        FieldPanel('accounting_specialisation_units'),
         FieldPanel('ellective_units'),
         FieldPanel('core_units_block'),
         FieldPanel('assessment_methods'),
