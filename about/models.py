@@ -1,6 +1,8 @@
 from django.db import models
 from wagtail.models import Page
 from wagtail.fields import RichTextField, StreamField
+from wagtail.blocks import StructBlock, CharBlock, ListBlock, RichTextBlock
+from wagtail.images.blocks import ImageChooserBlock
 from wagtail.admin.panels import FieldPanel
 from wagtail import blocks
 
@@ -46,5 +48,44 @@ class ContactPage(Page):
 
     class Meta:
         verbose_name = "Contact Page"
+
+
+
+class TeamMemberBlock(blocks.StructBlock):
+    name = blocks.CharBlock(max_length=255)
+    position = blocks.CharBlock(max_length=255)
+    profile_image = ImageChooserBlock()
+    description = blocks.RichTextBlock()
+
+    class Meta:
+        icon = 'user'
+        template = 'blocks/team_member_block.html'
+
+class DepartmentBlock(blocks.StructBlock):
+    department_title = blocks.CharBlock(max_length=255)
+    team_members = blocks.ListBlock(TeamMemberBlock())
+
+    class Meta:
+        icon = 'circle-plus'
+        template = 'blocks/department_block.html'
+        verbose_name = 'Department'
+
+class TeamPage(Page):
+    parent_page_types = ['about.AboutIndex']
+    subpage_types = []
+    max_count = 1
+    
+    departments = StreamField(
+        [
+            ('department', DepartmentBlock()),
+        ],
+        null=True,
+        blank=True,
+        use_json_field=True,
+    )
+
+    content_panels = Page.content_panels + [
+        FieldPanel('departments'),
+    ]
 
     

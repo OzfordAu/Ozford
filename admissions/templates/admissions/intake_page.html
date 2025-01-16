@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+{% block extra_css %}
+{% endblock extra_css %}
+{% block body_class %}blog{% endblock %}
+{% block content %}
+{% include 'breadcrumb.html' %}
+<div class="container mx-auto mb-10 w-full">
+    <div class="mt-4 lg:mt-6 xl:mt-8">
+        <h1 class="text-xl lg:text-2xl xl:text-4xl font-medium text-primary">{{ page.page_title }}</h1>
+    </div>
+    <div class="mt-4 lg:mt-6 xl:mt-10 w-full">
+        
+<div x-data="{ activeTab:  0 }">
+    <ul class="flex items-center gap-2 text-sm font-medium">
+      <li>
+        <a @click="activeTab = 0" :class="{ 'bg-blue-100 text-primary-700 hover:!bg-primary-100': activeTab === 0 }" class="lg:min-w-56 relative inline-flex justify-center  cursor-pointer items-center gap-2 rounded-lg  px-3 py-2 bg-gray-100  hover:bg-gray-100  hover:text-primary"> Higher Education Intakes </a>
+      </li>
+      <li>
+        <a @click="activeTab = 1" :class="{ 'bg-blue-100 text-primary-700 hover:!bg-primary-100': activeTab === 1 }" class="lg:min-w-56 relative inline-flex justify-center  cursor-pointer items-center gap-2 rounded-lg  px-3 py-2 bg-gray-100 hover:bg-gray-100 hover:text-primary"> High School Intakes </a>
+      </li>
+      
+      </li>
+      <li>
+        <a @click="activeTab = 2" :class="{ 'bg-blue-100 text-primary-700 hover:!bg-primary-100': activeTab === 2 }" class="lg:min-w-56 relative inline-flex justify-center  cursor-pointer items-center gap-2 rounded-lg  px-3 py-2 bg-gray-100 hover:bg-gray-100 hover:text-primary"> ELICOS Intakes </a>
+      </li> 
+    </ul>
+    <div class="py-3">
+      <div :class="{ '!block': activeTab === 0 }" x-show.transition.in.opacity.duration.600="activeTab === 0" class="hidden">
+        <div class="">
+            <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
+            <thead class="bg-gray-50">
+                <tr>
+                <th scope="col" class="px-6 py-4 font-semibold text-gray-900">HIGHER EDUCATION</th>
+                <th scope="col" class="px-6 py-4 font-semibold text-gray-900">2025 INTAKES</th>
+                <th scope="col" class="px-6 py-4 font-semibold text-gray-900">2026 INTAKES</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100 border-t border-gray-100">
+                {% for item in page.higher_education_intake_block %}
+                    <tr>
+                        <th class="px-6 py-4 font-medium text-gray-900">{{item.value.program}}</th>
+                        <td class="px-6 py-4">{{item.value.current_intake}}</td>
+                        <td class="px-6 py-4">{{item.value.next_intake}}</td>
+                    </tr>
+                {% endfor %}
+            
+            </tbody>
+            </table>
+        </div>
+  
+      </div>
+      <div :class="{ '!block': activeTab === 1 }" x-show.transition.in.opacity.duration.600="activeTab === 1" class="hidden">
+        <div class="">
+            <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th scope="col" class="px-6 py-4 font-semibold text-gray-900">HIGH SCHOOL</th>
+                  <th scope="col" class="px-6 py-4 font-semibold text-gray-900">2025 INTAKES</th>
+                  <th scope="col" class="px-6 py-4 font-semibold text-gray-900">2026 INTAKES</th>
+                  <th scope="col" class="px-6 py-4 font-semibold text-gray-900">YEAR 10</th>
+                  <th scope="col" class="px-6 py-4 font-semibold text-gray-900">VCE YEAR 11</th>
+                  <th scope="col" class="px-6 py-4 font-semibold text-gray-900">VCE YEAR 12</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-100 border-t border-gray-100">
+                {% for item in page.high_school_intake_block %}
+                    <tr>
+                        <th class="px-6 py-4 font-medium text-gray-900">{{item.value.program}}</th>
+                        <td class="px-6 py-4">{{item.value.current_intake}}</td>
+                        <td class="px-6 py-4">{{item.value.next_intake}}</td>
+                        <td class="px-6 py-4">{% if item.value.year_10 %}
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-3">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                              </svg>
+                              
+                            {% endif %}</td>
+                            <td class="px-6 py-4">{% if item.value.vce_year_11 %}
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-3">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                                  </svg>
+                                  
+                                {% endif %}</td>
+                                <td class="px-6 py-4">{% if item.value.vce_year_12 %}
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-3">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                                      </svg>
+                                      
+                                    {% endif %}</td>
+                    </tr>
+                {% endfor %}
+               
+              </tbody>
+            </table>
+          </div>
+      </div>
+        <div :class="{ '!block': activeTab === 2 }" x-show.transition.in.opacity.duration.600="activeTab === 2" class="hidden">
+            <div class="">
+                <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
+                <thead class="bg-gray-50">
+                    <tr>
+                    <th scope="col" class="px-6 py-4 font-semibold text-gray-900">ELICOS</th>
+                    <th scope="col" class="px-6 py-4 font-semibold text-gray-900">2025 INTAKES</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100 border-t border-gray-100">
+                    {% for item in page.elicos_intake_block %}
+                        <tr>
+                            <th class="px-6 py-4 font-medium text-gray-900">{{item.value.program}}</th>
+                            <td class="px-6 py-4">{{item.value.intake}}</td>
+                        </tr>
+                    {% endfor %}
+                
+                </tbody>
+                </table>
+            </div>
+        </div>
+        
+    </div>
+  </div>
+  
+      </div>
+</div>
+{% endblock content %}
+{% block extra_js %}
+
+{% endblock extra_js %}

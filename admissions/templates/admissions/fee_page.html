@@ -1,0 +1,288 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+{% block extra_css %}
+{% endblock extra_css %}
+{% block body_class %}blog{% endblock %}
+{% block content %}
+{% include 'breadcrumb.html' %}
+<div class="container mx-auto mb-10 w-full">
+    <div class="mt-4 lg:mt-6 xl:mt-8">
+        <h1 class="text-xl lg:text-2xl xl:text-4xl font-medium text-primary">{{ page.page_title }}</h1>
+    </div>
+    <div class="mt-4 lg:mt-6 xl:mt-10 w-full">
+        
+<div x-data="{ activeTab:  0 }">
+    <ul class="flex items-center gap-2 text-sm font-medium">
+      <li>
+        <a @click="activeTab = 0" :class="{ 'bg-blue-100 text-primary-700 hover:!bg-primary-100': activeTab === 0 }" class="lg:min-w-56 relative inline-flex justify-center  cursor-pointer items-center gap-2 rounded-lg  px-3 py-2 bg-gray-100  hover:bg-gray-100  hover:text-primary"> Higher Education Fee </a>
+      </li>
+      <li>
+        <a @click="activeTab = 1" :class="{ 'bg-blue-100 text-primary-700 hover:!bg-primary-100': activeTab === 1 }" class="lg:min-w-56 relative inline-flex justify-center  cursor-pointer items-center gap-2 rounded-lg  px-3 py-2 bg-gray-100 hover:bg-gray-100 hover:text-primary"> High School Fee </a>
+      </li>
+      
+      </li>
+      <li>
+        <a @click="activeTab = 2" :class="{ 'bg-blue-100 text-primary-700 hover:!bg-primary-100': activeTab === 2 }" class="lg:min-w-56 relative inline-flex justify-center  cursor-pointer items-center gap-2 rounded-lg  px-3 py-2 bg-gray-100 hover:bg-gray-100 hover:text-primary"> ELICOS Fee </a>
+      </li>
+      <li>
+        <a @click="activeTab = 3" :class="{ 'bg-blue-100 text-primary-700 hover:!bg-primary-100': activeTab === 3 }" class="lg:min-w-56 relative inline-flex justify-center  cursor-pointer items-center gap-2 rounded-lg  px-3 py-2 bg-gray-100 hover:bg-gray-100 hover:text-primary"> OTHER Fees </a>
+      </li>
+      
+    </ul>
+    <div class="py-3">
+      <div :class="{ '!block': activeTab === 0 }" x-show.transition.in.opacity.duration.600="activeTab === 0" class="hidden">
+
+<div class="">
+    <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
+      <thead class="bg-gray-50">
+        <tr>
+          <th scope="col" class="px-6 py-4 font-semibold text-gray-900">PROGRAM</th>
+          <th scope="col" class="px-6 py-4 font-semibold text-gray-900">CRICOS</th>
+          <th scope="col" class="px-6 py-4 font-semibold text-gray-900">COURSE DURATION</th>
+          <th scope="col" class="px-6 py-4 font-semibold text-gray-900">INTERNATIONAL FEE</th>
+          <th scope="col" class="px-6 py-4 font-semibold text-gray-900">DOMESTIC FEE</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-100 border-t border-gray-100">
+        {% for item in page.higher_education_fee_block %}
+            <tr>
+                <th class="px-6 py-4 font-medium text-gray-900">{{item.value.program}}</th>
+                <td class="px-6 py-4">{{item.value.cricos}}</td>
+                <td class="px-6 py-4">{{item.value.course_duration}}</td>
+                <td class="px-6 py-4">{{item.value.offshore_tution_fee}}</td>
+                <td class="px-6 py-4">{{item.value.onshore_tuition_fee}}</td>
+            </tr>
+        {% endfor %}
+       
+      </tbody>
+    </table>
+  </div>
+  
+      </div>
+      <div :class="{ '!block': activeTab === 1 }" x-show.transition.in.opacity.duration.600="activeTab === 1" class="hidden">
+        <div class="">
+            <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th scope="col" class="px-6 py-4 font-semibold text-gray-900">PROGRAM</th>
+                  <th scope="col" class="px-6 py-4 font-semibold text-gray-900">CRICOS</th>
+                  <th scope="col" class="px-6 py-4 font-semibold text-gray-900">TUITION FEE</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-100 border-t border-gray-100">
+                {% for item in page.high_school_fee_block %}
+                    <tr>
+                        <th class="px-6 py-4 font-medium text-gray-900">{{item.value.program}}</th>
+                        <td class="px-6 py-4">{{item.value.cricos}}</td>
+                        <td class="px-6 py-4">{{item.value.tution_fee}}</td>
+                    </tr>
+                {% endfor %}
+               
+              </tbody>
+            </table>
+          </div>
+      </div>
+        <div :class="{ '!block': activeTab === 2 }" x-show.transition.in.opacity.duration.600="activeTab === 2" class="hidden">
+            <div class="">
+                <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
+                <thead class="bg-gray-50">
+                    <tr>
+                    <th scope="col" class="px-6 py-4 font-semibold text-gray-900">PROGRAM</th>
+                    <th scope="col" class="px-6 py-4 font-semibold text-gray-900">CRICOS</th>
+                    <th scope="col" class="px-6 py-4 font-semibold text-gray-900">TUITION FEE</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100 border-t border-gray-100">
+                    {% for item in page.elicos_fee_block %}
+                        <tr>
+                            <th class="px-6 py-4 font-medium text-gray-900">{{item.value.program}}</th>
+                            <td class="px-6 py-4">{{item.value.cricos}}</td>
+                            <td class="px-6 py-4">{{item.value.tution_fee}}</td>
+                        </tr>
+                    {% endfor %}
+                
+                </tbody>
+                </table>
+            </div>
+        </div>
+        <div :class="{ '!block': activeTab === 3 }" x-show.transition.in.opacity.duration.600="activeTab === 2" class="hidden">
+            <div class="overflow-x-auto mb-6">
+                <table class="table-auto border-collapse border border-gray-300 w-full text-sm">
+                  <thead>
+                    <tr class="bg-gray-100">
+                      <th class="border border-gray-300 px-4 py-2">English Courses</th>
+                      <th class="border border-gray-300 px-4 py-2">Student Visa</th>
+                      <th class="border border-gray-300 px-4 py-2">No COE</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="border border-gray-300 px-4 py-2">Application Fee</td>
+                      <td class="border border-gray-300 px-4 py-2">$250</td>
+                      <td class="border border-gray-300 px-4 py-2">$200</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 px-4 py-2">Tuition Fee</td>
+                      <td class="border border-gray-300 px-4 py-2">$500 p/w or check current promotion</td>
+                      <td class="border border-gray-300 px-4 py-2">$500 p/w or check current promotion</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 px-4 py-2">ELICOS Material Fees</td>
+                      <td class="border border-gray-300 px-4 py-2" colspan="2">
+                        <table class="table-auto border-collapse border bg-gray-50 border-gray-300 w-full ">
+                            <thead>
+                                <th class="text-left border border-gray-300 px-4 py-2">No. of weeks enrolment</th>
+                                <th class="text-left border border-gray-300 px-4 py-2">GE</th>
+                                <th class="text-left border border-gray-300 px-4 py-2">ESSP</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="border border-gray-300 px-4 py-2">Less than 5</td>
+                                    <td class="border border-gray-300 px-4 py-2">$75</td>
+                                    <td class="border border-gray-300 px-4 py-2">$75</td>
+                                </tr>
+                                <tr>
+                                    <td class="border border-gray-300 px-4 py-2">Up to 12 weeks </td>
+                                    <td class="border border-gray-300 px-4 py-2">$150</td>
+                                    <td class="border border-gray-300 px-4 py-2">$150</td>
+                                </tr>
+                                <tr>
+                                    <td class="border border-gray-300 px-4 py-2">Up to 24 weeks </td>
+                                    <td class="border border-gray-300 px-4 py-2">$300</td>
+                                    <td class="border border-gray-300 px-4 py-2">$300</td>
+                                </tr>
+                                <tr>
+                                    <td class="border border-gray-300 px-4 py-2">Up to 30 weeks </td>
+                                    <td class="border border-gray-300 px-4 py-2">$450</td>
+                                    <td class="border border-gray-300 px-4 py-2">$450</td>
+                                </tr>
+                                <tr>
+                                    <td class="border border-gray-300 px-4 py-2">Up to 40 weeks </td>
+                                    <td class="border border-gray-300 px-4 py-2">$600</td>
+                                    <td class="border border-gray-300 px-4 py-2">$600</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                      </td>
+                     
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 px-4 py-2">CAAW Administration Fee</td>
+                      <td class="border border-gray-300 px-4 py-2">$500</td>
+                      <td class="border border-gray-300 px-4 py-2">N/A</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 px-4 py-2">Homestay</td>
+                      <td class="border border-gray-300 px-4 py-2">$400-$600 per week</td>
+                      <td class="border border-gray-300 px-4 py-2">N/A</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 px-4 py-2">ISA Welfare Support Service</td>
+                      <td class="border border-gray-300 px-4 py-2">Parents need to arrange</td>
+                      <td class="border border-gray-300 px-4 py-2">N/A</td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+            <div class="overflow-x-auto mb-6">
+                <table class="table-auto border-collapse border border-gray-300 w-full text-sm">
+                  <thead>
+                    <tr class="bg-gray-100">
+                      <th class="border border-gray-300 px-4 py-2">VCE Courses</th>
+                      <th class="border border-gray-300 px-4 py-2">Student Visa</th>
+                      <th class="border border-gray-300 px-4 py-2">No COE</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="border border-gray-300 px-4 py-2">Application Fee</td>
+                      <td class="border border-gray-300 px-4 py-2">$250</td>
+                      <td class="border border-gray-300 px-4 py-2">$250</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 px-4 py-2">Textbook</td>
+                      <td class="border border-gray-300 px-4 py-2">Year 10, 11 & 12: $1,100</td>
+                      <td class="border border-gray-300 px-4 py-2">Year 10, 11 & 12: $1,100</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 px-4 py-2">Excursions</td>
+                      <td class="border border-gray-300 px-4 py-2">$450 p/a</td>
+                      <td class="border border-gray-300 px-4 py-2">$450 p/a</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 px-4 py-2">CAAW Administration Fee</td>
+                      <td class="border border-gray-300 px-4 py-2">$500</td>
+                      <td class="border border-gray-300 px-4 py-2">N/A</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 px-4 py-2">Homestay</td>
+                      <td class="border border-gray-300 px-4 py-2">$400-$600 per week</td>
+                      <td class="border border-gray-300 px-4 py-2">N/A</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 px-4 py-2">ISA Welfare Support Service</td>
+                      <td class="border border-gray-300 px-4 py-2">Parents need to arrange</td>
+                      <td class="border border-gray-300 px-4 py-2">N/A</td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+            <div class="overflow-x-auto mb-6">
+                <table class="table-auto border-collapse border border-gray-300 w-full text-sm">
+                  <thead>
+                    <tr class="bg-gray-100">
+                      <th class="border border-gray-300 px-4 py-2">Higher Education</th>
+                      <th class="border border-gray-300 px-4 py-2">Student Visa</th>
+                      <th class="border border-gray-300 px-4 py-2">No COE</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="border border-gray-300 px-4 py-2">Application Fee</td>
+                      <td class="border border-gray-300 px-4 py-2">$250</td>
+                      <td class="border border-gray-300 px-4 py-2">$50</td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-300 px-4 py-2">Resource / Textbook</td>
+                      <td class="border border-gray-300 px-4 py-2">$350 per semester</td>
+                      <td class="border border-gray-300 px-4 py-2">$350 per semester</td>
+                    </tr>
+                    
+                  </tbody>
+                </table>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="table-auto border-collapse border border-gray-300 w-full text-sm">
+                  <thead>
+                    <tr class="bg-gray-100">
+                      <th class="border border-gray-300 px-4 py-2 col-span-3">Amenities</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="border border-gray-300 px-4 py-2">Accommodation Placement (over 18) </td>
+                      <td class="border border-gray-300 px-4 py-2">$500 per student (if requested) </td>
+                      <td class="border border-gray-300 px-4 py-2">$500 per student (if requested) </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-gray-300 px-4 py-2">Airport Pick Up </td>
+                        <td class="border border-gray-300 px-4 py-2">One way $400 per trip  </td>
+                        <td class="border border-gray-300 px-4 py-2">One way $400 per trip</td>
+                      </tr>
+                  </tbody>
+                </table>
+            </div>
+              
+              
+              
+              
+        </div>
+    </div>
+  </div>
+  
+      </div>
+</div>
+{% endblock content %}
+{% block extra_js %}
+
+{% endblock extra_js %}

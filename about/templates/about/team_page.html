@@ -1,0 +1,204 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+{% block extra_css %}
+{% endblock extra_css %}
+{% block body_class %}blog{% endblock %}
+{% block content %}
+{% include 'breadcrumb.html' %}
+<div class="container mx-auto mb-10 w-full">
+    {% comment %} <div class="mt-4 lg:mt-6 xl:mt-8">
+        <h1 class="text-xl lg:text-2xl xl:text-4xl font-medium text-primary">{{ page.title }}</h1>
+    </div> {% endcomment %}
+    <div class="mt-4 lg:mt-6">
+        
+    <!-- Container -->
+    <div class="mx-auto w-full max-w-7xl py-10">
+      <!-- Title -->
+      <h2 class="text-center text-3xl font-bold md:text-5xl mb-4 md:mb-8 lg:mb-10"> Our Team Members </h2>
+      {% comment %} <p class="mx-auto mb-8 mt-4 text-center text-sm text-gray-500 sm:text-base md:mb-12 lg:mb-16"> Lorem ipsum dolor sit amet elit ut aliquam </p> {% endcomment %}
+      <!-- Content -->
+      <div 
+      x-data="{ 
+          showModal: false,
+          selectedMember: {
+              name: '',
+              position: '',
+              image: '',
+              description: ''
+          }
+      }"
+  >
+      <div class="flex flex-col gap-4 md:gap-8 lg:gap-10">
+          {% for block in page.departments %}
+              {% if block.block_type == 'department' %}
+              <div class="flex flex-col">
+                  <h2 class="text-xl md:text-2xl font-semibold text-center my-4">{{ block.value.department_title }}</h2>
+                  <div class="grid grid-cols-1 justify-items-center gap-5 sm:grid-cols-2 sm:justify-items-stretch md:grid-cols-3 md:gap-4 lg:gap-6">
+                      {% for member in block.value.team_members %}
+                          {% image member.profile_image fill-300x300 as img %}
+                          <div 
+                              class="mx-auto flex w-full flex-col items-center gap-4 p-8 border shadow-sm cursor-pointer hover:shadow-md transition-shadow"
+                              @click="selectedMember = {
+                                  name: '{{ member.name|escapejs }}',
+                                  position: '{{ member.position|escapejs }}',
+                                  image: '{{ img.url }}',
+                                  description: '{{ member.description|safe|escapejs }}'
+                              }; showModal = true"
+                          >
+                              {% if member.profile_image %}
+                                  <img src="{{ img.url }}" class="mb-4 inline-block h-40 w-40 rounded-full object-cover" alt="{{ member.name }}">
+                                  <p class="font-bold">{{ member.name }}</p>
+                                  <p class="text-center text-sm text-gray-500">{{ member.position }}</p>
+                              {% endif %}
+                          </div>
+                      {% endfor %}
+                  </div>
+              </div>
+              {% endif %}
+          {% endfor %}
+      </div>
+  
+      <!-- Modal -->
+      <div 
+          x-show="showModal" 
+          x-transition 
+          class="fixed inset-0 z-50 overflow-y-auto"
+          style="display: none;"
+      >
+          <!-- Modal backdrop -->
+          <div 
+              class="fixed inset-0 bg-black bg-opacity-50 transition-opacity"
+              @click="showModal = false"
+          ></div>
+  
+          <!-- Modal content -->
+          <div class="relative min-h-screen flex items-center justify-center p-4">
+              <div 
+                  class="relative bg-white rounded-lg shadow-xl max-w-6xl w-full mx-auto"
+                  @click.away="showModal = false"
+              >
+                  <!-- Close button -->
+                  <button 
+                      @click="showModal = false"
+                      class="absolute right-4 top-4 text-gray-500 hover:text-gray-700"
+                  >
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                  </button>
+  
+                  <!-- Modal body -->
+                  <div class="flex flex-col md:flex-row p-6 lg:p-10">
+                      <!-- Left side - Image and details -->
+                      <div class="w-full md:w-3/12 flex flex-col items-center justify-center">
+                          <img 
+                              :src="selectedMember.image" 
+                              class="w-40 h-40 rounded-full object-cover mb-4"
+                              :alt="selectedMember.name"
+                          >
+                          <h3 class="text-xl font-bold text-center" x-text="selectedMember.name"></h3>
+                          <p class="text-gray-500 text-center" x-text="selectedMember.position"></p>
+                      </div>
+  
+                      <!-- Right side - Description -->
+                      <div class="w-full md:w-9/12 mt-6 md:mt-0 md:pl-6">
+                          <div x-html="selectedMember.description"></div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+      {% comment %} <div class="grid grid-cols-1 justify-items-center gap-5 sm:grid-cols-2 sm:justify-items-stretch md:grid-cols-3 md:gap-4 lg:gap-6">
+        <!-- Item -->
+        <div class="mx-auto flex w-full flex-col items-center gap-4 py-8 text-center md:px-8 md:py-4 lg:px-12">
+          <img src="https://firebasestorage.googleapis.com/v0/b/flowspark-1f3e0.appspot.com/o/Tailspark%20Images%2FPlaceholder%20Image.svg?alt=media&token=375a1ea3-a8b6-4d63-b975-aac8d0174074" alt="" class="mb-4 inline-block h-40 w-40 rounded-full object-cover" />
+          <p class="font-bold">John Robert</p>
+          <p class="text-center text-sm text-gray-500"> Webflow Developer </p>
+          <div class="mt-4 flex">
+            <a href="#" class="mr-2 inline-block h-8 w-8 max-w-full text-black">
+              <img src="https://assets.website-files.com/6458c625291a94a195e6cf3a/6458c625291a947193e6cf6a_FacebookLogo%20(4).svg" alt="" class="inline-block" />
+            </a>
+            <a href="#" class="inline-block h-8 w-8 max-w-full text-black">
+              <img src="https://assets.website-files.com/6458c625291a94a195e6cf3a/6458c625291a94e916e6cf66_InstagramLogo%20(4).svg" alt="" class="inline-block" />
+            </a>
+          </div>
+        </div>
+        <!-- Item -->
+        <div class="mx-auto flex w-full flex-col items-center gap-4 py-8 text-center md:px-8 md:py-4 lg:px-12">
+          <img src="https://firebasestorage.googleapis.com/v0/b/flowspark-1f3e0.appspot.com/o/Tailspark%20Images%2FPlaceholder%20Image.svg?alt=media&token=375a1ea3-a8b6-4d63-b975-aac8d0174074" alt="" class="mb-4 inline-block h-40 w-40 rounded-full object-cover " />
+          <p class="font-bold">Annisyah Matah</p>
+          <p class="text-center text-sm text-gray-500"> Webflow Developer </p>
+          <div class="mt-4 flex">
+            <a href="#" class="mr-2 inline-block h-8 w-8 max-w-full text-black">
+              <img src="https://assets.website-files.com/6458c625291a94a195e6cf3a/6458c625291a947193e6cf6a_FacebookLogo%20(4).svg" alt="" class="inline-block" />
+            </a>
+            <a href="#" class="inline-block h-8 w-8 max-w-full text-black">
+              <img src="https://assets.website-files.com/6458c625291a94a195e6cf3a/6458c625291a94e916e6cf66_InstagramLogo%20(4).svg" alt="" class="inline-block" />
+            </a>
+          </div>
+        </div>
+        <!-- Item -->
+        <div class="mx-auto flex w-full flex-col items-center gap-4 py-8 text-center md:px-8 md:py-4 lg:px-12">
+          <img src="https://firebasestorage.googleapis.com/v0/b/flowspark-1f3e0.appspot.com/o/Tailspark%20Images%2FPlaceholder%20Image.svg?alt=media&token=375a1ea3-a8b6-4d63-b975-aac8d0174074" alt="" class="mb-4 inline-block h-40 w-40 rounded-full object-cover" />
+          <p class="font-bold">Tamara Lind</p>
+          <p class="text-center text-sm text-gray-500"> UI//UX&nbsp;Designer </p>
+          <div class="mt-4 flex">
+            <a href="#" class="mr-2 inline-block h-8 w-8 max-w-full text-black">
+              <img src="https://assets.website-files.com/6458c625291a94a195e6cf3a/6458c625291a947193e6cf6a_FacebookLogo%20(4).svg" alt="" class="inline-block" />
+            </a>
+            <a href="#" class="inline-block h-8 w-8 max-w-full text-black">
+              <img src="https://assets.website-files.com/6458c625291a94a195e6cf3a/6458c625291a94e916e6cf66_InstagramLogo%20(4).svg" alt="" class="inline-block" />
+            </a>
+          </div>
+        </div>
+        <!-- Item -->
+        <div class="mx-auto flex w-full flex-col items-center gap-4 py-8 text-center md:px-8 md:py-4 lg:px-12">
+          <img src="https://firebasestorage.googleapis.com/v0/b/flowspark-1f3e0.appspot.com/o/Tailspark%20Images%2FPlaceholder%20Image.svg?alt=media&token=375a1ea3-a8b6-4d63-b975-aac8d0174074" alt="" class="mb-4 inline-block h-40 w-40 rounded-full object-cover" />
+          <p class="font-bold">Kevin Mason</p>
+          <p class="text-center text-sm text-gray-500">Product Manager</p>
+          <div class="mt-4 flex">
+            <a href="#" class="mr-2 inline-block h-8 w-8 max-w-full text-black">
+              <img src="https://assets.website-files.com/6458c625291a94a195e6cf3a/6458c625291a947193e6cf6a_FacebookLogo%20(4).svg" alt="" class="inline-block" />
+            </a>
+            <a href="#" class="inline-block h-8 w-8 max-w-full text-black">
+              <img src="https://assets.website-files.com/6458c625291a94a195e6cf3a/6458c625291a94e916e6cf66_InstagramLogo%20(4).svg" alt="" class="inline-block" />
+            </a>
+          </div>
+        </div>
+        <!-- Item -->
+        <div class="mx-auto flex w-full flex-col items-center gap-4 py-8 text-center md:px-8 md:py-4 lg:px-12">
+          <img src="https://firebasestorage.googleapis.com/v0/b/flowspark-1f3e0.appspot.com/o/Tailspark%20Images%2FPlaceholder%20Image.svg?alt=media&token=375a1ea3-a8b6-4d63-b975-aac8d0174074" alt="" class="mb-4 inline-block h-40 w-40 rounded-full object-cover" />
+          <p class="font-bold">Amy Parker</p>
+          <p class="text-center text-sm text-gray-500"> Webflow Developer </p>
+          <div class="mt-4 flex">
+            <a href="#" class="mr-2 inline-block h-8 w-8 max-w-full text-black">
+              <img src="https://assets.website-files.com/6458c625291a94a195e6cf3a/6458c625291a947193e6cf6a_FacebookLogo%20(4).svg" alt="" class="inline-block" />
+            </a>
+            <a href="#" class="inline-block h-8 w-8 max-w-full text-black">
+              <img src="https://assets.website-files.com/6458c625291a94a195e6cf3a/6458c625291a94e916e6cf66_InstagramLogo%20(4).svg" alt="" class="inline-block" />
+            </a>
+          </div>
+        </div>
+        <!-- Item -->
+        <div class="mx-auto flex w-full flex-col items-center gap-4 py-8 text-center md:px-8 md:py-4 lg:px-12">
+          <img src="https://firebasestorage.googleapis.com/v0/b/flowspark-1f3e0.appspot.com/o/Tailspark%20Images%2FPlaceholder%20Image.svg?alt=media&token=375a1ea3-a8b6-4d63-b975-aac8d0174074" alt="" class="mb-4 inline-block h-40 w-40 rounded-full object-cover" />
+          <p class="font-bold">Ben Watson</p>
+          <p class="text-center text-sm text-gray-500">CEO</p>
+          <div class="mt-4 flex">
+            <a href="#" class="mr-2 inline-block h-8 w-8 max-w-full text-black">
+              <img src="https://assets.website-files.com/6458c625291a94a195e6cf3a/6458c625291a947193e6cf6a_FacebookLogo%20(4).svg" alt="" class="inline-block" />
+            </a>
+            <a href="#" class="inline-block h-8 w-8 max-w-full text-black">
+              <img src="https://assets.website-files.com/6458c625291a94a195e6cf3a/6458c625291a94e916e6cf66_InstagramLogo%20(4).svg" alt="" class="inline-block" />
+            </a>
+          </div>
+        </div>
+      </div> {% endcomment %}
+    </div>
+      </div>
+</div>
+{% endblock content %}
+{% block extra_js %}
+
+{% endblock extra_js %}
