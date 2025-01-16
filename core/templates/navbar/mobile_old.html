@@ -1,0 +1,152 @@
+{% load static wagtailcore_tags wagtailimages_tags %}
+<div x-data="{ 
+    slideOverOpen: false,
+    studyOpen: false,
+}"
+class="lg:hidden relative z-50 w-auto h-[90px]">
+<div class="w-full bg-primary-dark text-white text-xs py-2">
+    <div class="container">
+        <ul class="flex justify-end items-center space-x-3">
+            <li><a href="">News &amp; Events</a></li>
+            <li><a href="">Contact</a></li>
+            <li>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                  </svg>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="flex justify-between items-center container pt-4">
+    <div>
+        <a href="/" class="flex items-center">
+            {% image site_settings.header_logo original loading="lazy" class="w-32 h-auto" %}
+        </a>
+    </div>
+    <div>
+        <button @click="slideOverOpen=true" aria-label="Main Menu">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+              </svg>
+              
+        </button>
+        <template x-teleport="body">
+            <div 
+                x-show="slideOverOpen"
+                @keydown.window.escape="slideOverOpen=false"
+                class="relative z-[99]">
+                {% comment %} <div x-show="slideOverOpen" x-transition.opacity.duration.600ms @click="slideOverOpen = false" class="fixed inset-0 bg-black bg-opacity-10"></div> {% endcomment %}
+                <div class="fixed inset-0 overflow-hidden">
+                    <div class="absolute inset-0 overflow-hidden">
+                        <div class="fixed inset-y-0 right-0 flex max-w-full top-[90px]">
+                            <div 
+                                x-show="slideOverOpen" 
+                                @click.away="slideOverOpen = false"
+                                x-transition:enter="transform transition ease-in-out duration-500 sm:duration-700" 
+                                x-transition:enter-start="translate-x-full" 
+                                x-transition:enter-end="translate-x-0" 
+                                x-transition:leave="transform transition ease-in-out duration-500 sm:duration-700" 
+                                x-transition:leave-start="translate-x-0" 
+                                x-transition:leave-end="translate-x-full" 
+                                class="w-screen max-w-full">
+                                <div class="flex flex-col h-full py-5 overflow-y-scroll bg-white border-l shadow-lg border-neutral-100/70">
+                                    <div class="px-4 sm:px-5">
+                                        <div class="flex items-start justify-end pb-1">
+                                            <div class="flex items-center h-auto ml-3">
+                                                <button @click="slideOverOpen=false" class="">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="relative flex-1 px-4 sm:px-5">
+                                        <div class="absolute inset-0">
+                                            <div class="relative mt-4 h-full overflow-hidden">
+                                                <ul class="flex flex-col">
+                                                    <li class="p-4 border-y border-gray-200">
+                                                        <a href="/" class="w-full justify-between">Home</a>
+                                                    </li>
+                                                    <li class="p-4 border-b border-gray-200">
+                                                        <button @click="studyOpen=true; slideOverOpen=false" class="w-full flex justify-between items-center">
+                                                            <span>Study</span>
+                                                            <span>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                                                                  </svg>
+                                                                   
+                                                            </span>
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+        <template x-teleport="body">
+            <div 
+                x-show="studyOpen"
+                @keydown.window.escape="studyOpen=false"
+                class="relative z-[99]">
+                <div x-show="studyOpen" x-transition.opacity.duration.600ms @click="studyOpen = false; slideOverOpen=true" class="fixed inset-0 bg-black bg-opacity-10"></div>
+                <div class="fixed inset-0 overflow-hidden">
+                    <div class="absolute inset-0 overflow-hidden">
+                        <div class="fixed inset-y-0 right-0 flex max-w-full pl-10">
+                            <div 
+                                x-show="studyOpen" 
+                                @click.away="studyOpen = false"
+                                x-transition:enter="transform transition ease-in-out duration-500 sm:duration-700" 
+                                x-transition:enter-start="translate-x-full" 
+                                x-transition:enter-end="translate-x-0" 
+                                x-transition:leave="transform transition ease-in-out duration-500 sm:duration-700" 
+                                x-transition:leave-start="translate-x-0" 
+                                x-transition:leave-end="translate-x-full" 
+                                class="w-screen max-w-full">
+                                <div class="flex flex-col h-full py-5 overflow-y-scroll bg-white border-l shadow-lg border-neutral-100/70">
+                                    <div class="px-4 sm:px-5">
+                                        <div class="flex items-start justify-start pb-1">
+                                            <button @click="studyOpen=false; slideOverOpen=true" class="flex justify-start space-x-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" />
+                                                  </svg>
+                                                  <span>Study</span>
+                                            </button>    
+                                        </div>
+                                    </div>
+                                    <div class="relative flex-1 px-4 sm:px-5">
+                                        <div class="absolute inset-0 px-4 sm:px-5">
+                                            <div class="relative mt-4 h-full overflow-hidden">
+                                                <ul class="flex flex-col space-y-3">
+                                                    <li>
+                                                        <a href="/">Postgraduate</a>
+                                                    </li>
+                                                    <li>
+                                                        <button>Undergraudate</study>
+                                                    </li>
+                                                    <li>
+                                                        <button>High School (Yearl 10-12)</study>
+                                                    </li>
+                                                    <li>
+                                                        <button>English Language Center</study>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </div>
+</div>
+
+</div>
+

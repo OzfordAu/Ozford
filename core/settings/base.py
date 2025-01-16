@@ -16,6 +16,7 @@ INSTALLED_APPS = [
     "home",
     "blog",
     "courses",
+    "about",
     "site_settings",
     "tinymce",
     "search",

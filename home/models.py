@@ -5,6 +5,8 @@ from wagtail.models import Page
 from wagtail.fields import RichTextField, StreamField
 from wagtail.admin.panels import FieldPanel
 from blog.models import BlogPage
+from courses.models import HigherEducationCoursePage
+from tinymce.models import HTMLField
 
 
 class BannerCarouselBlock(blocks.StructBlock):
@@ -95,5 +97,36 @@ class HomePage(Page):
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
         context['blog_posts'] = BlogPage.objects.live().order_by('-published_date')[:3]
+        context['pg_popular_courses'] = HigherEducationCoursePage.objects.live().filter(is_popular=True, course_type='PG')
+        context['ug_popular_courses'] = HigherEducationCoursePage.objects.live().filter(is_popular=True, course_type='UG')
         return context
+    
+class HtmlPage(Page):
+    body = HTMLField()
+    content_panels = Page.content_panels + [
+        FieldPanel('body'),
+    ]
 
+class LinkBlock(blocks.StructBlock):
+    link_title = blocks.CharBlock(max_length=255, blank=False, null=True)
+    url = blocks.CharBlock(max_length=255, blank=False, null=True)
+    open_in_new_tab = blocks.BooleanBlock(required=False, default=False)
+    class Meta:
+        icon = 'circle-plus'
+        verbose_name = 'Link Block'
+
+class LinkPage(Page):
+    page_description = RichTextField(blank=True, null=True)
+    link_block = StreamField(
+        [
+            ('link_blocks', LinkBlock()),
+        ],
+        null=True,
+        blank=True,
+        use_json_field=True,
+    )
+
+    content_panels = Page.content_panels + [
+        FieldPanel('page_description'),
+        FieldPanel('link_block'),
+    ]

@@ -1,3 +1,4 @@
+{% load static wagtailcore_tags %}
 <div class="w-full">
   <div class="container mx-auto px-4 py-10 xl:py-20">
     <div class="flex flex-col lg:flex-row justify-between gap-4 lg:gap-20">
@@ -8,9 +9,9 @@
         <p class="font-light text-xl text-gray-800">Explore your potential with ozford with a full range of courses from High School to the Higher Education sector.</p>
         <ul class="mt-2 xl:mt-3 space-y-2">
           <li><a href="/study/postgraduate/" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">Postgraduate</a></li>
-          <li><a href="" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">Undergraduate</a></li>
-          <li><a href="" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">High School (Year 10-12)</a></li>
-          <li><a href="" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">English Language Center</a></li>
+          <li><a href="/study/undergraduate/" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">Undergraduate</a></li>
+          <li><a href="/study/high-school/" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">High School (Year 10-12)</a></li>
+          <li><a href="/study/english-language-center/" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">English Language Center</a></li>
         </ul>
       </div>
       <div class="w-full lg:w-7/12">
@@ -26,16 +27,26 @@
             <h3 class="font-medium text-2xl">Popular Courses</h3>
             <div class="grid grid-cols-1 xl:grid-cols-2 mt-2 xl:space-x-4">
               <ul class="space-y-1">
-                <li><a href="/study/postgraduate/master-of-information-technology/" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">Master of Information Technology (MIT)</a></li>
+                {% for course in pg_popular_courses  %}
+                  <li>
+                    <a href="{% pageurl course %}" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">{{course.course_title}}</a>
+                  </li>
+                {% endfor %}
+                {% comment %} <li><a href="/study/postgraduate/master-of-information-technology/" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">Master of Information Technology (MIT)</a></li>
                 <li><a href="/study/postgraduate/master-of-business-administration/" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">Master of Business Admistration (MBA)</a></li>
                 <li><a href="/study/postgraduate/master-of-professional-accounting/" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">Master of Professional Accounting (MPA)</a></li>
                 <li><a href="" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">Graduate Diploma in Information Technolgy</a></li>
                 <li><a href="" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">Graduate Diploma in Management</a></li>
                 <li><a href="" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">Graduate Certificate in Information Technolgy</a></li>
-                <li><a href="" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">Graduate Certificate in Management</a></li>
+                <li><a href="" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">Graduate Certificate in Management</a></li> {% endcomment %}
               </ul>
               <ul class="space-y-1">
-                <li><a href="" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">Bachelor of Cyber Security</a></li>
+                {% for course in ug_popular_courses  %}
+                  <li>
+                    <a href="{% pageurl course %}" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">{{course.course_title}}</a>
+                  </li>
+                {% endfor %}
+                {% comment %} <li><a href="" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">Bachelor of Cyber Security</a></li>
                 <li><a href="" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">Bachelor of Information System</a></li>
                 <li><a href="" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">Bachelor of Business (Accounting)</a></li>
                 <li><a href="" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">Bachelor of Business</a></li>
@@ -43,7 +54,7 @@
                 <li><a href="" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">Year 10 High School Program</a></li>
                 <li><a href="" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">Victorian Certificate of Education (VCE)</a></li>
                 <li><a href="" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">General English</a></li>
-                <li><a href="" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">English for Academic Purposes (EAP)</a></li>
+                <li><a href="" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">English for Academic Purposes (EAP)</a></li> {% endcomment %}
               </ul>
             </div>
           </div>
