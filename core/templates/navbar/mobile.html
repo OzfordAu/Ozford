@@ -145,7 +145,7 @@ class="lg:hidden relative z-50">
         <!-- Sliding Menus Container -->
         <div class="fixed inset-0 overflow-hidden">
             <div class="absolute inset-0 overflow-hidden">
-                <div class="fixed inset-y-0 right-0 flex max-w-full top-[90px]">
+                <div class="fixed inset-y-0 right-0 flex w-full top-[90px]">
                     <div x-show="menuStack.length" 
                         @click.away="menuStack = []"
                         x-transition:enter="transform transition ease-in-out duration-500" 
@@ -154,7 +154,7 @@ class="lg:hidden relative z-50">
                         x-transition:leave="transform transition ease-in-out duration-500" 
                         x-transition:leave-start="translate-x-0" 
                         x-transition:leave-end="translate-x-full" 
-                        class="w-screen">
+                        class="w-full">
             
             <!-- Menu Header -->
             
