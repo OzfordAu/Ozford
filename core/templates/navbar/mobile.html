@@ -9,7 +9,7 @@
                 { label: 'Home', type: 'link', href: '/' },
                 { label: 'Study', type: 'submenu', target: 'study' },
                 { label: 'Admission', type: 'submenu', target: 'admission' },
-                { label: 'About', type: 'submenu', target: 'about' }
+                {% comment %} { label: 'About', type: 'submenu', target: 'about' } {% endcomment %}
             ]
         },
         study: {
@@ -61,7 +61,8 @@
         admission: {
             title: 'Admission',
             items: [
-                { label: 'International Students', type: 'link', href: '/international-students' },
+                { label: 'Fees', type: 'link', href: '/admissions/fees/' },
+                { label: 'Intakes', type: 'link', href: '/admissions/intakes/' },
             ]
         }
     }
