@@ -40,7 +40,7 @@
           <th scope="col" class="px-6 py-4 font-semibold text-gray-900">CRICOS</th>
           <th scope="col" class="px-6 py-4 font-semibold text-gray-900">COURSE DURATION</th>
           <th scope="col" class="px-6 py-4 font-semibold text-gray-900">INTERNATIONAL FEE</th>
-          <th scope="col" class="px-6 py-4 font-semibold text-gray-900">DOMESTIC FEE</th>
+          {% comment %} <th scope="col" class="px-6 py-4 font-semibold text-gray-900">DOMESTIC FEE</th> {% endcomment %}
         </tr>
       </thead>
       <tbody class="divide-y divide-gray-100 border-t border-gray-100">
@@ -50,7 +50,7 @@
                 <td class="px-6 py-4">{{item.value.cricos}}</td>
                 <td class="px-6 py-4">{{item.value.course_duration}}</td>
                 <td class="px-6 py-4">{{item.value.offshore_tution_fee}}</td>
-                <td class="px-6 py-4">{{item.value.onshore_tuition_fee}}</td>
+                {% comment %} <td class="px-6 py-4">{{item.value.onshore_tuition_fee}}</td> {% endcomment %}
             </tr>
         {% endfor %}
        
