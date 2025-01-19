@@ -7,8 +7,8 @@ from wagtail import blocks
 
 # Create your models here.
 class AdmissionIndex(Page):
-    parent_page_types = ['home.HomePage']
-    max_count = 1
+    parent_page_types = ['home.HomePage', 'home.InternationalPage', 'home.DomesticPage']
+    max_count = 3
 
     # def get_context(self, request, *args, **kwargs):
     #     context = super().get_context(request, *args, **kwargs)
@@ -37,7 +37,7 @@ class HigherEductionFeeBlock(blocks.StructBlock):
 class FeePage(Page):
     parent_page_types = ['admissions.AdmissionIndex']
     subpage_types = []
-    max_count = 1
+    max_count = 3
     page_title = models.CharField(max_length=255, blank=False, null=True)
     elicos_fee_block = StreamField(
         [

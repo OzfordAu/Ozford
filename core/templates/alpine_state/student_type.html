@@ -1,0 +1,32 @@
+{% load static %}
+<div class="flex items-center p-4 bg-blue-100 text-gray-800 font-medium">
+    <p>I'm a</p>&nbsp;
+    <template x-if="studentType==='domestic'">
+        <button class="flex items-center justify-center gap-x-1 font-medium text-primary bg-white px-2 py-1 mx-1.5"  @click="showGlobalStudentTypeModal=true">
+            <span>
+                <img src="{% static 'images/icons/map-australia.svg' %}" height="24" width="24" alt="map" class="w-5 h-5">
+            </span>
+            <span>domestic student</span>
+            <span>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-4 lg:size-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                </svg>
+            </span>
+        </button>
+    </template>
+    <template x-if="studentType==='international'">
+        <button class="flex items-center justify-center gap-x-1 font-medium text-primary bg-white px-2 py-1 mx-1.5"  @click="showGlobalStudentTypeModal=true">
+            <span>
+                <img src="{% static 'images/icons/globe.svg' %}" height="24" width="24" alt="globe" class="w-5 h-5">
+            </span>
+            <span>international student</span>
+            <span>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-4 lg:size-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                </svg>
+                
+            </span>
+        </button>
+    </template>
+    &nbsp;<p>looking to start my course in 2025</p>
+</div>

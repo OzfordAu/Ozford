@@ -1,19 +1,19 @@
-<div class="bg-primary text-white py-5">
+<div class="bg-blue-50 text-gray-700 py-3">
   <div class="container">
     {% if self.get_ancestors|length > 1 %}
-      <ul class="flex gap-1 lg:gap-2 items-center text-xs lg:text-base">
+      <ul class="flex gap-1 lg:gap-2 items-center text-xs lg:text-sm">
         {% for p in self.get_ancestors %}
           {% if p.is_root == False %}
             <li class="flex items-center gap-1 lg:gap-x-2">
               <a class="group" href="{{ p.url }}" aria-label="{{ p.title }}">
                 {% if p.title == 'Home' %}
                 <span>
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 lg:size-5 hover:text-yellow-500">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 text-primary">
                     <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
                   </svg>
                 </span> 
                 {% else %}
-                <span class="border-b-2 border-yellow-500 hover:text-yellow-500 transition-all ">
+                <span class="border-b-2 border-transparent text-primary hover:border-primary transition-all ">
                   {{ p.title }}
                 </span>
                 {% endif %}

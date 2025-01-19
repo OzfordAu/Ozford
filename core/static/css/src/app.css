@@ -5,28 +5,37 @@
 @layer base {
   body {
     /* font-family: "Poppins", sans-serif; */
-    font-family: "Noto Serif", serif;
+    /* font-family: "Noto Serif", serif; */
+    font-family: "Open Sans", serif;
   }
+/* h1, h2, h3, h4, h5, h6, .text-heading {   
+     font-family: "Merriweather", serif;
+  } */
 }
 @layer utilities {
-  .cms-page p {
+  .cms-page p, .cms-page-bg p  {
     margin-bottom: 0.5rem !important;
   }
 
-  .cms-page.no-margin-p p {
+  .cms-page.no-margin-p p, .cms-page-bg.no-margin-p p {
     margin-bottom: 0 !important;
   }
   .cms-page a {
     color: #005c90 !important;
   }
-  .cms-page ul, ul.list-disc {
+
+  .cms-page-bg a {
+    color: #a8dbf8 !important;
+    text-decoration: underline;
+  }
+  .cms-page ul, .cms-page-bg ul, ul.list-disc {
     list-style-type: disc;
     list-style-position: inside;
     margin: 0;
     padding: 0;
   }
 
-  .cms-page ol {
+  .cms-page ol, .cms-page-bg ol {
     list-style-type: decimal;
     list-style-position: inside;
     margin: 0;

@@ -9,177 +9,175 @@
 {% block content %}
 
   {% include 'breadcrumb.html' %}
-  <div x-data="{domestic: false }">
+<div x-data="{domestic: false, studentTypeModalOpen: false }">
     {% include "courses/higher_education/banner.html" %}
-  <div class="bg-white py-4">
-    <div class="container">
-        <div class="flex gap-4 items-center font-semibold">
-            <div class="flex gap-2 items-center">
-                <div>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-primary">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12.75 3.03v.568c0 .334.148.65.405.864l1.068.89c.442.369.535 1.01.216 1.49l-.51.766a2.25 2.25 0 0 1-1.161.886l-.143.048a1.107 1.107 0 0 0-.57 1.664c.369.555.169 1.307-.427 1.605L9 13.125l.423 1.059a.956.956 0 0 1-1.652.928l-.679-.906a1.125 1.125 0 0 0-1.906.172L4.5 15.75l-.612.153M12.75 3.031a9 9 0 0 0-8.862 12.872M12.75 3.031a9 9 0 0 1 6.69 14.036m0 0-.177-.529A2.25 2.25 0 0 0 17.128 15H16.5l-.324-.324a1.453 1.453 0 0 0-2.328.377l-.036.073a1.586 1.586 0 0 1-.982.816l-.99.282c-.55.157-.894.702-.8 1.267l.073.438c.08.474.49.821.97.821.846 0 1.598.542 1.865 1.345l.215.643m5.276-3.67a9.012 9.012 0 0 1-5.276 3.67m0 0a9 9 0 0 1-10.275-4.835M15.75 9c0 .896-.393 1.7-1.016 2.25" />
-                      </svg>
-                      
+    <div class="flex flex-col lg:flex-row lg:justify-between lg:gap-8 container">
+        <div class="hidden lg:flex flex-col lg:w-2/12 h-full bg-white space-y-3 font-medium text-sm border-x border-gray-200 mt-4 lg:mt-8">
+            <hr>
+            <a href="#course_overview" class="text-primary px-4 hover:underline transition-all">Key Facts</a>
+            <hr>
+            <a href="#course_overview" class="text-primary px-4">Course Overview</a>
+            <hr>
+                {% comment %} <a href="#course_requirements" class="text-white">Course Requirements</a> {% endcomment %}
+                <a href="#entry_requirements" class="text-primary px-4 hover:underline transition-all">Course Requirements</a>
+                <hr>
+                <a href="#entry_requirements" class="text-primary px-4 hover:underline transition-all">Academic Requirements</a>
+                <hr>
+                <a href="#entry_requirements" class="text-primary px-4 hover:underline transition-all">Language Requirements</a>
+                <hr>
+                <a href="#entry_requirements" class="text-primary px-4 hover:underline transition-all">Age Requirements</a>
+                <hr>
+                {% comment %} <button class="text-white">Fees &amp; Scholarships</button> {% endcomment %}
+                <a href="#career_outcomes" class="text-primary px-4 hover:underline transition-all">Career Outcomes</a>
+                <hr>
+                <a href="#course_units" class="text-primary px-4 hover:underline transition-all">Course Units</a>
+                <hr>
+                {% if page.student_workload %}<a href="#student_workload" class="text-primary px-4 hover:underline transition-all">Student Workload</a><hr>{% endif %}
+                
+                {% if page.pathways %}<a href="#pathways" class="text-primary px-4 hover:underline transition-all">Pathways</a> <hr>{% endif %}
+                {% if page.assessment_methods %}<a href="#assessment_methods" class="text-primary px-4 hover:underline transition-all">Assessment Methods</a> <hr>{% endif %}
+                <a href="#student_information" class="text-primary px-4 hover:underline transition-all">Student Information</a> <hr>
+        </div>
+        <div class="w-full lg:w-10/12 flex flex-col">
+            <div class="my-2 lg:my-4 lg:mt-8">
+               {% include "alpine_state/student_type.html" %}
+            </div>
+            <hr class="my-4">
+            {% include "courses/higher_education/key_facts.html" %}
+            {% if page.accreditation_logo %}
+            <div class="container mt-4 md:mt-6 lg:mt-8 xl:mt-10">
+                <div class="flex">
+                {% picture page.accreditation_logo format-{avif,webp,jpeg} width-1504 height-80 class="inline-block w-full h-[60px] object-contain" %}
                 </div>
-                <template x-if="domestic">
-                    <div class="text-gray-700">Domestic Student</div>
-                </template>
-                <template x-if="!domestic">
-                    <div class="text-gray-700">International Student</div>
-                </template>
-                <button class="text-primary" x-on:click="domestic=!domestic">change</button>
             </div>
-        </div>
-        
-        
-    </div>
-  </div>
-  {% include "courses/higher_education/key_facts.html" %}
-  {% if page.accreditation_logo %}
-  <div class="container bg-white py-4">
-      <div class="flex">
-          {% picture page.accreditation_logo format-{avif,webp,jpeg} width-1504 height-80 class="inline-block w-full h-[60px] object-contain" %}
-        </div>
-    </div>
-    {% endif %}
-  <div class="bg-primary-dark hidden lg:block sticky top-0 z-50">
-    <div class="container py-4">
-        <div class="flex gap-4 lg:gap-6 items-center text-center">
-            <a href="#course_overview" class="text-white">Course Overview</a>
-            {% comment %} <a href="#course_requirements" class="text-white">Course Requirements</a> {% endcomment %}
-            <a href="#entry_requirements" class="text-white">Entry Requirements</a>
-            {% comment %} <button class="text-white">Fees &amp; Scholarships</button> {% endcomment %}
-            <a href="#career_outcomes" class="text-white">Career Outcomes</a>
-            <a href="#course_units" class="text-white">Course Units</a>
-            {% if page.student_workload %}<a href="#student_workload" class="text-white">Student Workload</a>{% endif %}
-            {% if page.pathways %}<a href="#pathways" class="text-white">Pathways</a>{% endif %}
-            {% if page.assessment_methods %}<a href="#assessment_methods" class="text-white">Assessment Methods</a>{% endif %}
-            <a href="#student_information" class="text-white">Student Information</a>
-        </div>
-    </div>
-</div>
-<div class="bg-gray-100">
-    <div class="container py-2 lg:py-8">
-        <div class="p-6 lg:p-8 xl:p-12 bg-white scroll-m-8 cms-page" id="course_overview">
-            <h2 class="text-primary-dark font-semibold text-2xl mb-2">Course Overview</h2>
-            {{page.course_overview|richtext}}
-        </div>
-        {% comment %} <div class="p-6 lg:p-8 xl:p-12 bg-gray-100 mt-4 lg:mt-8 xl:mt-12" id="course_requirements">
-            <h2 class="text-primary-dark font-semibold text-2xl mb-2">Course Requirements</h2>
-            {{page.course_requirement|richtext}}
-        </div> {% endcomment %}
-        <div class="p-6 lg:p-8 xl:p-12 bg-white mt-4 lg:mt-8 xl:mt-12 scroll-m-8 cms-page" id="entry_requirements">
-            <h2 class="text-primary-dark font-semibold text-2xl mb-2">Entry Requirements</h2>
-            <h2 class="text-primary-dark font-medium text-xl mb-2">Course Requirement</h2>
-            {{page.course_requirement|richtext}}
-            <h2 class="text-primary-dark font-medium text-xl mb-2 pt-4">Academic Entry Requirements</h2>
-            <template x-if="domestic">
-                <div>{{page.academic_requirement_domestic|richtext}}</div>
-            </template>
-            <template x-if="!domestic">
-                <div>{{page.academic_requirement_international|richtext}}</div>
-            </template>
-            <h2 class="text-primary-dark font-medium text-xl mb-2 pt-4">English Language Requirements</h2>
-            <template x-if="domestic">
-                <div>{{page.english_requirement_domestic|richtext}}</div>
-            </template>
-            <template x-if="!domestic">
-                <div>{{page.english_requirement_international|richtext}}</div>
-            </template>
-            <h2 class="text-primary-dark font-medium text-xl mb-2 pt-4">Age Requirement</h2>
-            {{page.age_requirement|richtext}}
+        {% endif %}
+        <hr class="my-4 md:my-6 lg:my-8">
+        <div>
             
-        </div>
-        <div class="p-6 lg:p-8 xl:p-12 bg-white mt-4 lg:mt-8 xl:mt-12 scroll-m-8 cms-page" id="career_outcomes">
-            <h2 class="text-primary-dark font-semibold text-base lg:text-xl mb-2">Career Outcomes</h2>
-            {{page.career_outcomes|richtext}}
-        </div>
-        <div class="p-6 lg:p-8 xl:p-12 bg-white mt-4 lg:mt-8 xl:mt-12 scroll-m-8 cms-page" id="course_units">
-            <h2 class="text-primary-dark font-semibold text-base lg:text-xl mb-2">Course Units</h2>
-            {% if page.core_units %}
-                {% if page.ellective_units or page.management_specialisation_units or page.marketing_specialisation_units or accounting_specialisation_units %}
-                    <div x-data="{ selectedTab: 'core_units' }" class="w-full">
-                        <div @keydown.right.prevent="$focus.wrap().next()" @keydown.left.prevent="$focus.wrap().previous()" class="flex gap-2 overflow-x-auto" role="tablist" aria-label="tab options">
-                            <button @click="selectedTab = 'core_units'" :aria-selected="selectedTab === 'core_units'" :tabindex="selectedTab === 'core_units' ? '0' : '-1'" :class="selectedTab === 'core_units' ? 'font-medium text-primary bg-gray-100 rounded-lg' : 'text-primary-dark font-medium hover:bg-gray-100 hover:rounded-lg hover:text-primary'" class="h-min px-4 py-2" type="button" role="tab" aria-controls="tabpanelCoreUnits" >Core Units</button>
-                            {% if page.management_specialisation_units %}
-                                <button @click="selectedTab = 'management_specialisation_units'" :aria-selected="selectedTab === 'management_specialisation_units'" :tabindex="selectedTab === 'management_specialisation_units' ? '0' : '-1'" :class="selectedTab === 'management_specialisation_units' ? 'font-medium text-primary bg-gray-100 rounded-lg' : 'text-primary-dark font-medium hover:bg-gray-100 hover:rounded-lg hover:text-primary'" class="h-min px-4 py-2" type="button" role="tab" aria-controls="tabpanelManagementUnits" >Management Specialisation Units</button>
-                            {% endif %}
-                            {% if page.marketing_specialisation_units %}
-                                <button @click="selectedTab = 'marketing_specialisation_units'" :aria-selected="selectedTab === 'marketing_specialisation_units'" :tabindex="selectedTab === 'marketing_specialisation_units' ? '0' : '-1'" :class="selectedTab === 'marketing_specialisation_units' ? 'font-medium text-primary bg-gray-100 rounded-lg' : 'text-primary-dark font-medium hover:bg-gray-100 hover:rounded-lg hover:text-primary'" class="h-min px-4 py-2" type="button" role="tab" aria-controls="tabpanelMarketingUnits" >Marketing Specialisation Units</button>
-                            {% endif %}
-                            {% if page.accounting_specialisation_units %}
-                                <button @click="selectedTab = 'accounting_specialisation_units'" :aria-selected="selectedTab === 'accounting_specialisation_units'" :tabindex="selectedTab === 'accounting_specialisation_units' ? '0' : '-1'" :class="selectedTab === 'accounting_specialisation_units' ? 'font-medium text-primary bg-gray-100 rounded-lg' : 'text-primary-dark font-medium hover:bg-gray-100 hover:rounded-lg hover:text-primary'" class="h-min px-4 py-2" type="button" role="tab" aria-controls="tabpanelAccountingUnits" >Accounting Specialisation Units</button>
-                            {% endif %}
-                            {% if page.ellective_units %}
-                                <button @click="selectedTab = 'ellective_units'" :aria-selected="selectedTab === 'ellective_units'" :tabindex="selectedTab === 'ellective_units' ? '0' : '-1'" :class="selectedTab === 'ellective_units' ? 'font-medium text-primary bg-gray-100 rounded-lg' : 'text-primary-dark font-medium hover:bg-gray-100 hover:rounded-lg hover:text-primary'" class="h-min px-4 py-2" type="button" role="tab" aria-controls="tabpanelEllectiveUnits" >Elective Units</button>
-                            {% endif %}
-                        </div>
-                        <div class="px-2 py-4">
-                            <div x-show="selectedTab === 'core_units'" id="tabpanelCoreUnits" role="tabpanel" aria-label="core_units">
-                                {% if page.core_units_title %}<p class="font-medium text-primary py-2">{{page.core_units_title}}</p>{% endif %}
-                                {% include "courses/course_units.html" with course_units=page.core_units %}
+            <div class="container text-gray-800">
+                <div class="scroll-m-8 cms-page" id="course_overview">
+                    <h2 class="text-xl lg:text-2xl xl:text-3xl mb-2 lg:mb-3 xl:mb-4 font-medium text-primary">Course Overview</h2>
+                    {{page.course_overview|richtext}}
+                </div>
+                <hr class="my-4 md:my-6 lg:my-8">
+                {% comment %} <div class="p-6 lg:p-8 xl:p-12 bg-gray-100 mt-4 lg:mt-8 xl:mt-12" id="course_requirements">
+                    <h2 class="text-primary-dark font-semibold text-2xl mb-2">Course Requirements</h2>
+                    {{page.course_requirement|richtext}}
+                </div> {% endcomment %}
+                <div class="scroll-m-8 cms-page" id="entry_requirements">
+                    <h2 class="text-xl lg:text-2xl xl:text-3xl mb-2 lg:mb-3 xl:mb-4 font-medium text-primary">Entry Requirements</h2>
+                    <h2 class="text-primary-dark font-medium text-xl mb-2">Course Requirement</h2>
+                    {{page.course_requirement|richtext}}
+                    <h2 class="text-primary-dark font-medium text-xl mb-2 pt-4">Academic Entry Requirements</h2>
+                    <template x-if="domestic">
+                        <div>{{page.academic_requirement_domestic|richtext}}</div>
+                    </template>
+                    <template x-if="!domestic">
+                        <div>{{page.academic_requirement_international|richtext}}</div>
+                    </template>
+                    <h2 class="text-primary-dark font-medium text-xl mb-2 pt-4">English Language Requirements</h2>
+                    <template x-if="domestic">
+                        <div>{{page.english_requirement_domestic|richtext}}</div>
+                    </template>
+                    <template x-if="!domestic">
+                        <div>{{page.english_requirement_international|richtext}}</div>
+                    </template>
+                    <h2 class="text-primary-dark font-medium text-xl mb-2 pt-4">Age Requirement</h2>
+                    {{page.age_requirement|richtext}}
+                    
+                </div>
+                <hr class="my-4 md:my-6 lg:my-8">
+                <div class="scroll-m-8 cms-page" id="career_outcomes">
+                    <h2 class="text-xl lg:text-2xl xl:text-3xl mb-2 lg:mb-3 xl:mb-4 font-medium text-primary">Career Outcomes</h2>
+                    {{page.career_outcomes|richtext}}
+                </div>
+                <hr class="my-4 md:my-6 lg:my-8">
+                <div class="scroll-m-8 cms-page" id="course_units">
+                    <h2 class="text-xl lg:text-2xl xl:text-3xl mb-2 lg:mb-3 xl:mb-4 font-medium text-primary">Course Units</h2>
+                    {% if page.core_units %}
+                        {% if page.ellective_units or page.management_specialisation_units or page.marketing_specialisation_units or accounting_specialisation_units %}
+                            <div x-data="{ selectedTab: 'core_units' }" class="w-full text-sm 2xl:text-base">
+                                <div @keydown.right.prevent="$focus.wrap().next()" @keydown.left.prevent="$focus.wrap().previous()" class="flex gap-2 overflow-x-auto" role="tablist" aria-label="tab options">
+                                    <button @click="selectedTab = 'core_units'" :aria-selected="selectedTab === 'core_units'" :tabindex="selectedTab === 'core_units' ? '0' : '-1'" :class="selectedTab === 'core_units' ? 'font-medium text-primary bg-gray-100 rounded-lg' : 'text-primary-dark font-medium hover:bg-gray-100 hover:rounded-lg hover:text-primary'" class="h-min px-4 py-2" type="button" role="tab" aria-controls="tabpanelCoreUnits" >Core Units </button>
+                                    {% if page.management_specialisation_units %}
+                                        <button @click="selectedTab = 'management_specialisation_units'" :aria-selected="selectedTab === 'management_specialisation_units'" :tabindex="selectedTab === 'management_specialisation_units' ? '0' : '-1'" :class="selectedTab === 'management_specialisation_units' ? 'font-medium text-primary bg-gray-100 rounded-lg' : 'text-primary-dark font-medium hover:bg-gray-100 hover:rounded-lg hover:text-primary'" class="h-min px-4 py-2" type="button" role="tab" aria-controls="tabpanelManagementUnits" >Management Specialisation Units</button>
+                                    {% endif %}
+                                    {% if page.marketing_specialisation_units %}
+                                        <button @click="selectedTab = 'marketing_specialisation_units'" :aria-selected="selectedTab === 'marketing_specialisation_units'" :tabindex="selectedTab === 'marketing_specialisation_units' ? '0' : '-1'" :class="selectedTab === 'marketing_specialisation_units' ? 'font-medium text-primary bg-gray-100 rounded-lg' : 'text-primary-dark font-medium hover:bg-gray-100 hover:rounded-lg hover:text-primary'" class="h-min px-4 py-2" type="button" role="tab" aria-controls="tabpanelMarketingUnits" >Marketing Specialisation Units</button>
+                                    {% endif %}
+                                    {% if page.accounting_specialisation_units %}
+                                        <button @click="selectedTab = 'accounting_specialisation_units'" :aria-selected="selectedTab === 'accounting_specialisation_units'" :tabindex="selectedTab === 'accounting_specialisation_units' ? '0' : '-1'" :class="selectedTab === 'accounting_specialisation_units' ? 'font-medium text-primary bg-gray-100 rounded-lg' : 'text-primary-dark font-medium hover:bg-gray-100 hover:rounded-lg hover:text-primary'" class="h-min px-4 py-2" type="button" role="tab" aria-controls="tabpanelAccountingUnits" >Accounting Specialisation Units</button>
+                                    {% endif %}
+                                    {% if page.ellective_units %}
+                                        <button @click="selectedTab = 'ellective_units'" :aria-selected="selectedTab === 'ellective_units'" :tabindex="selectedTab === 'ellective_units' ? '0' : '-1'" :class="selectedTab === 'ellective_units' ? 'font-medium text-primary bg-gray-100 rounded-lg' : 'text-primary-dark font-medium hover:bg-gray-100 hover:rounded-lg hover:text-primary'" class="h-min px-4 py-2" type="button" role="tab" aria-controls="tabpanelEllectiveUnits" >Elective Units</button>
+                                    {% endif %}
+                                </div>
+                                <div class="px-2 py-4 text-base">
+                                    <div x-show="selectedTab === 'core_units'" id="tabpanelCoreUnits" role="tabpanel" aria-label="core_units">
+                                        {% if page.core_units_title %}<p class="font-medium text-primary py-2">{{page.core_units_title}}</p>{% endif %}
+                                        {% include "courses/course_units.html" with course_units=page.core_units %}
+                                    </div>
+                                    <div x-show="selectedTab === 'ellective_units'" id="tabpaneEllectiveUnits" role="tabpanel" aria-label="ellective_units">
+                                        {% if page.ellective_units_title %}<p class="font-medium text-primary py-2">{{page.ellective_units_title}}</p>{% endif %}
+                                        {% include "courses/course_units.html" with course_units=page.ellective_units %}
+                                    </div>
+                                    <div x-show="selectedTab === 'management_specialisation_units'" id="tabpanelManagementUnits" role="tabpanel" aria-label="management_specialisation_units">
+                                        {% if page.management_specialisation_units_title %}<p class="font-medium text-primary py-2">{{page.management_specialisation_units_title}}</p>{% endif %}
+                                        {% include "courses/course_units.html" with course_units=page.management_specialisation_units %}
+                                    </div>
+                                    <div x-show="selectedTab === 'marketing_specialisation_units'" id="tabpanelMarketingUnits" role="tabpanel" aria-label="marketing_specialisation_units">
+                                        {% if page.marketing_specialisation_units_title %}<p class="font-medium text-primary py-2">{{page.marketing_specialisation_units_title}}</p>{% endif %}
+                                        {% include "courses/course_units.html" with course_units=page.marketing_specialisation_units %}
+                                    </div>
+                                    <div x-show="selectedTab === 'accounting_specialisation_units'" id="tabpanelAccountingUnits" role="tabpanel" aria-label="accounting_specialisation_units">
+                                        {% if page.accounting_specialisation_units_title %}<p class="font-medium text-primary py-2">{{page.accounting_specialisation_units_title}}</p>{% endif %}
+                                        {% include "courses/course_units.html" with course_units=page.accounting_specialisation_units %}
+                                    </div>
+                                </div>
                             </div>
-                            <div x-show="selectedTab === 'ellective_units'" id="tabpaneEllectiveUnits" role="tabpanel" aria-label="ellective_units">
-                                {% if page.ellective_units_title %}<p class="font-medium text-primary py-2">{{page.ellective_units_title}}</p>{% endif %}
-                                {% include "courses/course_units.html" with course_units=page.ellective_units %}
-                            </div>
-                            <div x-show="selectedTab === 'management_specialisation_units'" id="tabpanelManagementUnits" role="tabpanel" aria-label="management_specialisation_units">
-                                {% if page.management_specialisation_units_title %}<p class="font-medium text-primary py-2">{{page.management_specialisation_units_title}}</p>{% endif %}
-                                {% include "courses/course_units.html" with course_units=page.management_specialisation_units %}
-                            </div>
-                            <div x-show="selectedTab === 'marketing_specialisation_units'" id="tabpanelMarketingUnits" role="tabpanel" aria-label="marketing_specialisation_units">
-                                {% if page.marketing_specialisation_units_title %}<p class="font-medium text-primary py-2">{{page.marketing_specialisation_units_title}}</p>{% endif %}
-                                {% include "courses/course_units.html" with course_units=page.marketing_specialisation_units %}
-                            </div>
-                            <div x-show="selectedTab === 'accounting_specialisation_units'" id="tabpanelAccountingUnits" role="tabpanel" aria-label="accounting_specialisation_units">
-                                {% if page.accounting_specialisation_units_title %}<p class="font-medium text-primary py-2">{{page.accounting_specialisation_units_title}}</p>{% endif %}
-                                {% include "courses/course_units.html" with course_units=page.accounting_specialisation_units %}
-                            </div>
-                        </div>
+                        {% else %}
+                            {% include "courses/course_units.html" with course_units=page.core_units %}
+                        {% endif %}
+                    {% endif %}
+                    {% if page.core_units_block %}
+                        {{page.core_units_block|richtext}}
+                    {% endif %} 
+                </div>
+                <hr class="my-4 md:my-6 lg:my-8">
+    
+                {% if page.student_workload %}
+                    <div class="scroll-m-8 cms-page" id="student_workload">
+                        <h2 class="text-xl lg:text-2xl xl:text-3xl mb-2 lg:mb-3 xl:mb-4 font-medium text-primary">Student Workload</h2>
+                        {{page.student_workload|richtext}}
                     </div>
-                {% else %}
-                    {% include "courses/course_units.html" with course_units=page.core_units %}
+                    <hr class="my-4 md:my-6 lg:my-8">
+
                 {% endif %}
-            {% endif %}
-            {% if page.core_units_block %}
-                {{page.core_units_block|richtext}}
-            {% endif %} 
-            
-        
-        </div>
-        {% if page.student_workload %}
-            <div class="p-6 lg:p-8 xl:p-12 bg-white mt-4 lg:mt-8 xl:mt-12 scroll-m-8 cms-page" id="student_workload">
-                <h2 class="text-primary-dark font-semibold text-2xl mb-2">Student Workload</h2>
-                {{page.student_workload|richtext}}
-            </div>
-        {% endif %}
-        {% if page.pathways %}
-            <div class="p-6 lg:p-8 xl:p-12 bg-white mt-4 lg:mt-8 xl:mt-12 scroll-m-8 cms-page" id="pathways">
-                <h2 class="text-primary-dark font-semibold text-2xl mb-2">Pathways</h2>
-                {{page.pathways|richtext}}
-            </div>
-        {% endif %}
-        <div class="p-6 lg:p-8 xl:p-12 bg-white mt-4 lg:mt-8 xl:mt-12 scroll-m-8 cms-page" id="assessment_methods">
-            <h2 class="text-primary-dark font-semibold text-2xl mb-2">Assessment Methods</h2>
-            {{page.assessment_methods|richtext}}
-        </div>
-        {% include "courses/course_page_footer.html" %} 
-    </div>
-</div>
-   {% comment %} {% include "courses/study_at_ozford.html" %}  {% endcomment %}
-   {% include "courses/why_melbourne.html" %} 
+                {% if page.pathways %}
+                    <div class="scroll-m-8 cms-page" id="pathways">
+                        <h2 class="text-xl lg:text-2xl xl:text-3xl mb-2 lg:mb-3 xl:mb-4 font-medium text-primary">Pathways</h2>
+                        {{page.pathways|richtext}}
+                    </div>
+                    <hr class="my-4 md:my-6 lg:my-8">
 
-  {% comment %} <section class="container mx-auto max-w-7xl text-black pb-6 lg:pb-8 xl:pb-20 mt-4 lg:mt-8 xl:mt-12">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-10 xl:gap-16">
-      {% for item in degrees  %}
-        <div class="block space-y-4 bg-gray-100 p-4 lg:p-6 xl:p-10">
-          <h6>{{item.title}}</h6>
-          <p>{{item.page_description|richtext}}</p>
-        </div>
-      {% endfor %}
-    </div>
+                {% endif %}
+                <div class="scroll-m-8 cms-page" id="assessment_methods">
+                    <h2 class="text-xl lg:text-2xl xl:text-3xl mb-2 lg:mb-3 xl:mb-4 font-medium text-primary">Assessment Methods</h2>
+                    {{page.assessment_methods|richtext}}
+                </div>
+                <hr class="my-4 md:my-6 lg:my-8">
 
-  </section> {% endcomment %}
+                {% include "courses/course_page_footer.html" %} 
+            </div>
+        </div>
+       {% comment %} {% include "courses/why_melbourne.html" %}  {% endcomment %}
+        </div>
+
+    </div> <!--endof main-->
+    
+   
+    
+    
 </div>
 {% endblock %}
 {% block extra_js %}

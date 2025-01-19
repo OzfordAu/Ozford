@@ -1,7 +1,7 @@
 {% load static wagtailcore_tags wagtailuserbar %}
 
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth" x-data="studentTypeManager">
     <head>
         <meta charset="utf-8" />
         <title>
@@ -23,11 +23,17 @@
         {% comment %} <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet"> {% endcomment %}
-        <link rel="preconnect" href="https://fonts.googleapis.com">
+        {% comment %} <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/prod/app.css' %}">
-        {% block script_top %}{% endblock script_top %}
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"> {% endcomment %}
+        {% comment %} <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">{% endcomment %}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/prod/app.css' %}">         
+{% block script_top %}{% endblock script_top %}
         {% comment %} <script defer src="{% static 'js/htmx.js' %}"></script> {% endcomment %}
         {% comment %} <script defer src="{% static 'js/intersect.js' %}"></script> {% endcomment %}
         <script defer src="{% static 'js/alpine.js' %}"></script>
@@ -49,6 +55,7 @@
     </head>
 
     <body class="{% block body_class %}{% endblock %}">
+        {% include "global_student_type.html" %}
         {% include "navbar/desktop.html" %}
         {% include "navbar/mobile.html" %}
 
@@ -57,9 +64,65 @@
         {% include "footer.html" %}
         {# Global javascript #}
         <script type="text/javascript" src="{% static 'js/core.js' %}"></script>
+        <script>
+            document.addEventListener('alpine:init', () => {
+                Alpine.store('studentType', {
+                    type: null,
+                    setType(value) {
+                        this.type = value;
+                    }
+                });
+    
+                Alpine.data('studentTypeManager', () => ({
+                    showGlobalStudentTypeModal: false,
+                    studentType: null,
+    
+                    init() {
+                        // Check if student type is set in cookies
+                        console.log('Checking for student type in cookies...');
+                        const studentType = this.getCookie('student_type');
+                        const isStudentTypeSet = this.getCookie('is_student_type_set');
+    
+                        if (!isStudentTypeSet || !studentType) {
+                            this.showGlobalStudentTypeModal = true;
+                        } else {
+                            this.studentType = studentType;
+                            Alpine.store('studentType').setType(studentType);
+                        }
+                    },
+    
+                    setStudentType(type) {
+                        // Set cookies (expire in 30 days)
+                        console.log('Setting student type:', type);
+                        const expiryDate = new Date();
+                        expiryDate.setDate(expiryDate.getDate() + 30);
+                        
+                        document.cookie = `student_type=${type};expires=${expiryDate.toUTCString()};path=/`;
+                        document.cookie = `is_student_type_set=true;expires=${expiryDate.toUTCString()};path=/`;
+                        
+                        // Update local state and global store
+                        this.studentType = type;
+                        Alpine.store('studentType').setType(type);
+                        
+                        // Close modal
+                        this.showGlobalStudentTypeModal = false;
+                    },
+    
+                    getCookie(name) {
+                        const value = `; ${document.cookie}`;
+                        const parts = value.split(`; ${name}=`);
+                        if (parts.length === 2) {
+                            return parts.pop().split(';').shift();
+                        }
+                        return null;
+                    }
+                }));
+            });
+        </script>
 
         {% block extra_js %}
         {# Override this in templates to add extra javascript #}
         {% endblock %}
+
     </body>
 </html>

@@ -1,0 +1,103 @@
+{% load static %}
+<div class="container">
+    <div class="font-medium text-sm lg:text-lg text-gray-800">
+        <div
+        :class="{ 'z-40': studentTypeModalOpen }" class="relative w-auto h-auto">
+            <div class="flex items-center">
+                <p>I'm a</p>
+                <template x-if="domestic">
+                    <button class="flex items-center justify-center gap-x-1 font-medium text-primary bg-white px-2 py-1 mx-1.5"  @click="studentTypeModalOpen=true">
+                        <span>
+                            <img src="{% static 'images/icons/map-australia.svg' %}" height="24" width="24" alt="map" class="w-5 h-5">
+                        </span>
+                        <span>domestic student</span>
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-4 lg:size-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        </span>
+                    </button>
+                </template>
+                <template x-if="!domestic">
+                    <button class="flex items-center justify-center gap-x-1 font-medium text-primary bg-white px-2 py-1 mx-1.5"  @click="studentTypeModalOpen=true">
+                        <span>
+                            <img src="{% static 'images/icons/globe.svg' %}" height="24" width="24" alt="globe" class="w-5 h-5">
+                        </span>
+                        <span>international student</span>
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-4 lg:size-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                            </svg>
+                            
+                        </span>
+                    </button>
+                </template>
+                <p>looking to start my course in 2025</p>
+                <template x-teleport="body">
+                    <div x-show="studentTypeModalOpen" class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen" x-cloak>
+                        <div x-show="studentTypeModalOpen"
+                            x-transition:enter="ease-out duration-300"
+                            x-transition:enter-start="opacity-0"
+                            x-transition:enter-end="opacity-100"
+                            x-transition:leave="ease-in duration-300"
+                            x-transition:leave-start="opacity-100"
+                            x-transition:leave-end="opacity-0"
+                            @click="studentTypeModalOpen=false" class="absolute inset-0 w-full h-full bg-gray-900 bg-opacity-50 backdrop-blur-sm"></div>
+                        <div x-show="studentTypeModalOpen"
+                            x-trap.inert.noscroll="studentTypeModalOpen"
+                            x-transition:enter="ease-out duration-300"
+                            x-transition:enter-start="opacity-0 scale-90"
+                            x-transition:enter-end="opacity-100 scale-100"
+                            x-transition:leave="ease-in duration-200"
+                            x-transition:leave-start="opacity-100 scale-100"
+                            x-transition:leave-end="opacity-0 scale-90"
+                            class="relative w-full py-6 bg-white shadow-md px-7 lg:py-14 bg-opacity-90 drop-shadow-md backdrop-blur-sm sm:max-w-5xl sm:rounded-lg">
+                            <div class="flex items-center justify-between pb-3">
+                                <h3 class="flex flex-grow justify-center text-lg lg:text-xl font-semibold text-center">You are viewing information for&nbsp;<span class="font-semibold text-primary" x-text="domestic ? ' domestic students' : ' international students'"></span></h3>
+                                <button @click="studentTypeModalOpen=false" class="absolute top-0 right-0 flex items-center justify-center w-8 h-8 mt-5 mr-5 text-gray-600 rounded-full hover:text-gray-800 hover:bg-gray-50">
+                                    <svg class="w-5 h-5 lg:w-7 lg:h-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>  
+                                </button>
+                            </div>
+                            <div class="relative w-auto pb-8 flex flex-col items-center justify-center">
+                                <p class="mb-2"> Tailor your experience and see relevant information for entry requirements and fees.</p>
+                                <p>If you are unsure, please email <a class="text-primary underline" href="mailto:admissions@ozford.edu.au">admissions@ozford.edu.au</a></p>
+                            </div>
+                            <div class="flex flex-col lg:flex-row lg:justify-center gap-4 lg:gap-6">
+                                <!-- if x-data domestic is true, set border color to border-primary else set to border-gray-400 -->
+                                <div class="flex flex-col space-y-2 p-6 lg:p-10 bg-gray-100 shadow rounded-sm lg:rounded-md hover:cursor-pointer hover:bg-indigo-50" 
+                                    :class="domestic ? 'border-primary border-2' : 'border-gray-400 border'"
+                                    @click="domestic=true; studentTypeModalOpen=false">
+                                    <div class="flex items-center justify-center">
+                                        <img src="{% static 'images/icons/map-australia.svg' %}" height="32" width="32" alt="map" class="w-14 h-14">
+                                    </div>
+                                    <p class="font-semibold text-center text-lg md:text-xl lg:text-2xl mb-2 lg:mb-3 text-primary">Domestic Student</p>
+                                    <p>You qualify as an Australian domestic student if you:</p>
+                                    <ul class="list-disc list-inside">
+                                        <li>are a citizen of Australian or New Zealand, or</li>
+                                        <li>are a permanent resident of Australia, or</li>
+                                        <li>hold an Australian permanent humanitarian visa.</li>
+                                    </ul>
+                                </div>
+                               <!-- if x-data domestic is false, set border color to border-primary else set to border-gray-400 -->
+                                <div class="flex flex-col space-y-2 p-6 lg:p-10 bg-gray-100 shadow rounded-sm lg:rounded-md hover:cursor-pointer hover:bg-indigo-50" 
+                                        :class="!domestic ? 'border-primary border-2' : 'border-gray-400 border'"
+                                        @click="domestic=false; studentTypeModalOpen=false">
+                                    <div class="flex items-center justify-center">
+                                        <img src="{% static 'images/icons/globe.svg' %}" height="32" width="32" alt="map" class="w-14 h-14">
+                                    </div>
+                                    <p class="font-semibold text-center text-lg md:text-xl lg:text-2xl mb-2 lg:mb-3 text-primary">International Student</p>
+                                    <p>You are an international student if you are:</p>
+                                    <ul class="list-disc list-inside">
+                                        <li>intending to study on a student visa, or</li>
+                                        <li>not an Australian permanent resident, or</li>
+                                        <li>a temporary resident (visa status) of Australia.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+</div>

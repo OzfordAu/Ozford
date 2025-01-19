@@ -1,6 +1,16 @@
 {% load static wagtailcore_tags wagtailimages_tags %}
 <div class="w-full hidden lg:block shadow-lg">
-    <div class="w-full bg-primary-dark py-3 text-sm text-white font-light">
+  <div x-show="studentType" class="fixed z-[99] top-0 w-full flex items-center bg-yellow-300 h-[30px] text-sm font-semibold" x-cloak >
+    <div class="container flex justify-center items-center">
+        <p>You are viewing information for</p>&nbsp;
+        <button 
+            @click="showGlobalStudentTypeModal = true" 
+            class="underline"
+            x-text="studentType === 'domestic' ? 'Domestic Students' : 'International Students'">
+        </button>
+    </div>
+</div>
+    <div class="w-full bg-primary-dark py-3 text-sm text-white font-light mt-[30px]">
       <div class="container">
         <ul class="w-full justify-end flex gap-4 items-center">
           <li><a href="" class="border-b border-transparent hover:border-white transition-all">Agent Resources</a></li>

@@ -1,7 +1,7 @@
 {% load static wagtailcore_tags wagtailimages_tags %}
-<div class="py-8 lg:pb-14 bg-gray-100">
+<div class="py-8 lg:py-12 lg:mt-4 bg-primary-dark text-white rounded-md">
   <div class="container mx-auto">
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 text-sm cms-page no-margin-p">
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 text-sm cms-page-bg no-margin-p">
         <div>
             <div class="flex gap-1 items-start">
               <div>
@@ -11,7 +11,7 @@
                   viewBox="0 0 24 24"
                   stroke-width="1.5"
                   stroke="currentColor"
-                  class="size-6 text-primary-dark"
+                  class="size-6 text-blue-200"
                 >
                   <path
                     stroke-linecap="round"
@@ -20,9 +20,9 @@
                   />
                 </svg>
               </div>
-              <div class="block">
-                <p class="text-primary-dark font-medium text-base">Duration</p>
-                <div>{{ page.course_duration|richtext }}</div>
+              <div class="block space-y-1">
+                <p class="text-base text-blue-200 tracking-wide">Duration</p>
+                <div class="font-light">{{ page.course_duration|richtext }}</div>
               </div>
             </div>
           </div>
@@ -35,7 +35,7 @@
                   viewBox="0 0 24 24"
                   stroke-width="1.5"
                   stroke="currentColor"
-                  class="size-6 text-primary"
+                  class="size-6 text-blue-200"
                 >
                   <path
                     stroke-linecap="round"
@@ -44,9 +44,9 @@
                   />
                 </svg>
               </div>
-              <div class="block">
-                <p class="text-primary-dark font-medium text-base">Study Mode</p>
-                <div>{{ page.study_mode|richtext }}</div>
+              <div class="block space-y-1">
+                <p class="text-base text-blue-200 tracking-wide">Study Mode</p>
+                <div class="font-light tracking-wide">{{ page.study_mode|richtext }}</div>
               </div>
             </div>
           </div>
@@ -59,7 +59,7 @@
                   viewBox="0 0 24 24"
                   stroke-width="1.5"
                   stroke="currentColor"
-                  class="size-6 text-primary"
+                  class="size-6 text-blue-200"
                 >
                   <path
                     stroke-linecap="round"
@@ -73,9 +73,9 @@
                   />
                 </svg>
               </div>
-              <div class="block">
-                <p class="text-primary-dark font-medium text-base">Location</p>
-                <div>{{ page.course_location|richtext }}</div>
+              <div class="block space-y-1">
+                <p class="text-base text-blue-200 tracking-wide">Location</p>
+                <div class="font-light tracking-wide">{{ page.course_location|richtext }}</div>
               </div>
             </div>
           </div>
@@ -88,7 +88,7 @@
                   viewBox="0 0 24 24"
                   stroke-width="1.5"
                   stroke="currentColor"
-                  class="size-6 text-primary"
+                  class="size-6 text-blue-200"
                 >
                   <path
                     stroke-linecap="round"
@@ -97,9 +97,9 @@
                   />
                 </svg>
               </div>
-              <div class="block">
-                <p class="text-primary-dark font-medium text-base">Intakes</p>
-                <div>{{ page.intakes|richtext }}</div>
+              <div class="block space-y-1">
+                <p class="text-base text-blue-200 tracking-wide">Intakes</p>
+                <div class="font-light tracking-wide">{{ page.intakes|richtext }}</div>
               </div>
             </div>
           </div>
@@ -112,7 +112,7 @@
                   viewBox="0 0 24 24"
                   stroke-width="1.5"
                   stroke="currentColor"
-                  class="size-6 text-primary"
+                  class="size-6 text-blue-200"
                 >
                   <path
                     stroke-linecap="round"
@@ -121,13 +121,13 @@
                   />
                 </svg>
               </div>
-              <div class="block">
-                <p class="text-primary-dark font-medium text-base">Fees</p>
-                <div>
-                  <template x-if="domestic">
+              <div class="block space-y-1">
+                <p class="text-base text-blue-200 tracking-wide">Fees</p>
+                <div class="font-light tracking-wide">
+                  <template x-if="studentType==='domestic'">
                     <div>{{ page.fee_domestic|richtext }}</div>
                   </template>
-                  <template x-if="!domestic">
+                  <template x-if="studentType==='international'">
                     <div>{{ page.fee_international|richtext }}</div>
                   </template>
                 </div>
@@ -143,7 +143,7 @@
                   viewBox="0 0 24 24"
                   stroke-width="1.5"
                   stroke="currentColor"
-                  class="size-6 text-primary"
+                  class="size-6 text-blue-200"
                 >
                   <path
                     stroke-linecap="round"
@@ -152,11 +152,13 @@
                   />
                 </svg>
               </div>
-              <div class="block">
-                <p class="text-primary-dark font-medium text-base">
+              <div class="block space-y-1">
+                <p class="text-base text-blue-200 tracking-wide">
                   English Language Requirements
                 </p>
-                {{ page.ielts|richtext }}
+                <div class="font-light tracking-wide">
+                  {{ page.ielts|richtext }}
+                </div>
               </div>
             </div>
           </div>
@@ -169,7 +171,7 @@
                   viewBox="0 0 24 24"
                   stroke-width="1.5"
                   stroke="currentColor"
-                  class="size-6 text-primary"
+                  class="size-6 text-blue-200"
                 >
                   <path
                     stroke-linecap="round"
@@ -178,9 +180,11 @@
                   />
                 </svg>
               </div>
-              <div class="block">
-                <p class="text-primary-dark font-medium text-base">Course Requirement</p>
-                {{ page.course_requirement|richtext }}
+              <div class="block space-y-1">
+                <p class="text-base text-blue-200 tracking-wide">Course Requirement</p>
+                <div class="font-light tracking-wide">
+                  {{ page.course_requirement|richtext }}
+                </div>
               </div>
             </div>
           </div>

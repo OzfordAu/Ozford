@@ -130,3 +130,11 @@ class LinkPage(Page):
         FieldPanel('page_description'),
         FieldPanel('link_block'),
     ]
+
+class InternationalPage(Page):
+    parent_page_types = ['home.HomePage']
+    max_count = 1
+
+class DomesticPage(Page):
+    parent_page_types = ['home.HomePage']
+    max_count = 1
