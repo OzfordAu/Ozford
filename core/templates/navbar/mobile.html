@@ -70,8 +70,18 @@
 class="lg:hidden relative z-50">
     <!-- Fixed Header - 90px height -->
     <div class="fixed top-0 left-0 right-0 z-50 bg-white">
+        <div x-show="studentType" class="w-full flex items-center bg-yellow-300 h-[30px] text-xs font-medium" x-cloak >
+            <div class="container flex justify-center items-center">
+                <p>You are viewing information for</p>&nbsp;
+                <button 
+                    @click="showGlobalStudentTypeModal = true" 
+                    class="underline"
+                    x-text="studentType === 'domestic' ? 'Domestic Students' : 'International Students'">
+                </button>
+            </div>
+        </div>
         <!-- Top bar -->
-        <div class="w-full bg-primary-dark text-white text-xs py-2">
+        {% comment %} <div class="w-full bg-primary-dark text-white text-xs py-2">
             <div class="container">
                 <ul class="flex justify-end items-center space-x-3">
                     <li><a href="https://selfservice.ozford.edu.au:9251/">Staffs</a></li>
@@ -84,7 +94,7 @@ class="lg:hidden relative z-50">
                     </li>
                 </ul>
             </div>
-        </div>
+        </div> {% endcomment %}
 
         <!-- Header with logo and menu button -->
         <div class="flex justify-between items-center container py-4 border-b border-gray-200">

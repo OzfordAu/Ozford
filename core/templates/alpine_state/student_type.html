@@ -1,5 +1,5 @@
 {% load static %}
-<div class="flex items-center p-4 bg-blue-100 text-gray-800 font-medium">
+<div class="hidden lg:flex items-center p-4 bg-blue-100 text-gray-800 font-medium">
     <p>I'm a</p>&nbsp;
     <template x-if="studentType==='domestic'">
         <button class="flex items-center justify-center gap-x-1 font-medium text-primary bg-white px-2 py-1 mx-1.5"  @click="showGlobalStudentTypeModal=true">
@@ -29,4 +29,19 @@
         </button>
     </template>
     &nbsp;<p>looking to start my course in 2025</p>
+</div>
+
+<div class="lg:hidden flex items-center p-4 bg-blue-100 text-gray-800 font-medium">
+    <p>I'm a 
+    <template x-if="studentType==='domestic'">
+        <button class="underline"  @click="showGlobalStudentTypeModal=true">
+            <x-text>domestic student</span>
+        </button>
+    </template>
+    <template x-if="studentType==='international'">
+        <button class="underline" @click="showGlobalStudentTypeModal=true">
+            <span>international student</span>
+        </button>
+    </template>
+    looking to start my course in 2025</p>
 </div>

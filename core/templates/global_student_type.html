@@ -1,16 +1,18 @@
 {% load static %}
 <div x-show="showGlobalStudentTypeModal" 
-         class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-[99]"
+         class="fixed inset-0 overflow-y-auto bg-black bg-opacity-80 flex items-center justify-center z-[99]"
          x-transition x-cloak>
-        <div class="relative w-full py-6 bg-white shadow-md px-7 lg:py-14 drop-shadow-md backdrop-blur-sm sm:max-w-5xl sm:rounded-lg">
+        <div class="relative w-full mt-[30px] py-6 bg-white shadow-md px-4 lg:px-7 lg:py-14 drop-shadow-md backdrop-blur-sm sm:max-w-5xl sm:rounded-lg">
             <template x-if="studentType">
                 <div class="flex items-center justify-between mb-3">
-                    <p class="flex flex-grow justify-center text-lg lg:text-xl font-semibold text-center">You are viewing information for&nbsp;
-                        <span 
-                            class="font-bold text-primary"
-                            x-text="studentType === 'domestic' ? 'Domestic Students' : 'International Students'">
-                        </span>
-                    </p>  
+                    <div class="flex flex-grow justify-center">
+                        <p class="lg:text-xl font-semibold text-center mt-5 sm:mt-0">You are viewing information for&nbsp;
+                            <span 
+                                class="font-bold text-primary"
+                                x-text="studentType === 'domestic' ? 'Domestic Students' : 'International Students'">
+                            </span>
+                        </p>  
+                    </div>
                     <button 
                         @click="showGlobalStudentTypeModal = false" 
                         class="absolute top-0 right-0 flex items-center justify-center w-8 h-8 mt-5 mr-5 text-gray-600 rounded-full hover:text-gray-800 hover:bg-gray-50">
@@ -26,11 +28,11 @@
                     <h3 class="flex flex-grow justify-center text-lg lg:text-xl font-semibold text-center">Select Student Type</h3>
                 </div>
             </template>
-            <div class="relative w-auto pb-8 flex flex-col items-center justify-center">
-                <p class="mb-2"> Tailor your experience and see relevant information for entry requirements and fees.</p>
-                <p>If you are unsure, please email <a class="text-primary underline" href="mailto:admissions@ozford.edu.au">admissions@ozford.edu.au</a></p>
+            <div class="relative w-auto pb-8 flex flex-col items-center justify-center text-sm lg:text-base">
+                <p class="mb-2 text-center"> Tailor your experience and see relevant information for entry requirements and fees.</p>
+                <p class="text-center">If you are unsure, please email <a class="text-primary underline" href="mailto:admissions@ozford.edu.au">admissions@ozford.edu.au</a></p>
             </div>
-            <div class="flex flex-col lg:flex-row lg:justify-center gap-4 lg:gap-6">
+            <div class="flex flex-col lg:flex-row lg:justify-center gap-4 lg:gap-6 text-sm lg:text-base">
                 <!-- if x-data domestic is true, set border color to border-primary else set to border-gray-400 -->
                 <div 
                     class="flex flex-col space-y-2 p-6 lg:p-10 bg-gray-100 shadow rounded-sm lg:rounded-md hover:cursor-pointer hover:bg-indigo-50"
