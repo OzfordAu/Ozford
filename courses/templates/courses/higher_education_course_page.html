@@ -55,7 +55,7 @@
         <div>
             
             <div class="container text-gray-800">
-                <div class="scroll-m-8 cms-page" id="course_overview">
+                <div class="scroll-m-8" id="course_overview">
                     <h2 class="text-xl lg:text-2xl xl:text-3xl mb-2 lg:mb-3 xl:mb-4 font-medium text-primary">Course Overview</h2>
                     {{page.course_overview|richtext}}
                 </div>
@@ -64,7 +64,7 @@
                     <h2 class="text-primary-dark font-semibold text-2xl mb-2">Course Requirements</h2>
                     {{page.course_requirement|richtext}}
                 </div> {% endcomment %}
-                <div class="scroll-m-8 cms-page" id="entry_requirements">
+                <div class="scroll-m-8" id="entry_requirements">
                     <h2 class="text-xl lg:text-2xl xl:text-3xl mb-2 lg:mb-3 xl:mb-4 font-medium text-primary">Entry Requirements</h2>
                     <h2 class="text-primary-dark font-medium text-xl mb-2">Course Requirement</h2>
                     {{page.course_requirement|richtext}}
@@ -87,12 +87,12 @@
                     
                 </div>
                 <hr class="my-4 md:my-6 lg:my-8">
-                <div class="scroll-m-8 cms-page" id="career_outcomes">
+                <div class="scroll-m-8" id="career_outcomes">
                     <h2 class="text-xl lg:text-2xl xl:text-3xl mb-2 lg:mb-3 xl:mb-4 font-medium text-primary">Career Outcomes</h2>
                     {{page.career_outcomes|richtext}}
                 </div>
                 <hr class="my-4 md:my-6 lg:my-8">
-                <div class="scroll-m-8 cms-page" id="course_units">
+                <div class="scroll-m-8" id="course_units">
                     <h2 class="text-xl lg:text-2xl xl:text-3xl mb-2 lg:mb-3 xl:mb-4 font-medium text-primary">Course Units</h2>
                     {% if page.core_units %}
                         {% if page.ellective_units or page.management_specialisation_units or page.marketing_specialisation_units or accounting_specialisation_units %}
@@ -146,7 +146,7 @@
                 <hr class="my-4 md:my-6 lg:my-8">
     
                 {% if page.student_workload %}
-                    <div class="scroll-m-8 cms-page" id="student_workload">
+                    <div class="scroll-m-8" id="student_workload">
                         <h2 class="text-xl lg:text-2xl xl:text-3xl mb-2 lg:mb-3 xl:mb-4 font-medium text-primary">Student Workload</h2>
                         {{page.student_workload|richtext}}
                     </div>
@@ -154,14 +154,14 @@
 
                 {% endif %}
                 {% if page.pathways %}
-                    <div class="scroll-m-8 cms-page" id="pathways">
+                    <div class="scroll-m-8" id="pathways">
                         <h2 class="text-xl lg:text-2xl xl:text-3xl mb-2 lg:mb-3 xl:mb-4 font-medium text-primary">Pathways</h2>
                         {{page.pathways|richtext}}
                     </div>
                     <hr class="my-4 md:my-6 lg:my-8">
 
                 {% endif %}
-                <div class="scroll-m-8 cms-page" id="assessment_methods">
+                <div class="scroll-m-8" id="assessment_methods">
                     <h2 class="text-xl lg:text-2xl xl:text-3xl mb-2 lg:mb-3 xl:mb-4 font-medium text-primary">Assessment Methods</h2>
                     {{page.assessment_methods|richtext}}
                 </div>

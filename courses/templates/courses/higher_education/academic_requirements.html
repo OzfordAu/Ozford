@@ -1,0 +1,21 @@
+<div class="scroll-m-8" id="academic_requirements">
+  <h2 class="text-xl lg:text-2xl xl:text-3xl mb-2 lg:mb-3 xl:mb-4 font-medium text-primary">Academic Requirements</h2>
+  <h2 class="text-primary-dark font-medium text-xl mb-2">Course Requirement</h2>
+  {{ page.course_requirement|richtext }}
+  <h2 class="text-primary-dark font-medium text-xl mb-2 pt-4">Academic Entry Requirements</h2>
+  <template x-if="domestic">
+    <div>{{ page.academic_requirement_domestic|richtext }}</div>
+  </template>
+  <template x-if="!domestic">
+    <div>{{ page.academic_requirement_international|richtext }}</div>
+  </template>
+  <h2 class="text-primary-dark font-medium text-xl mb-2 pt-4">English Language Requirements</h2>
+  <template x-if="domestic">
+    <div>{{ page.english_requirement_domestic|richtext }}</div>
+  </template>
+  <template x-if="!domestic">
+    <div>{{ page.english_requirement_international|richtext }}</div>
+  </template>
+  <h2 class="text-primary-dark font-medium text-xl mb-2 pt-4">Age Requirement</h2>
+  {{ page.age_requirement|richtext }}
+</div>

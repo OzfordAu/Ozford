@@ -118,14 +118,14 @@ class HigherEducationCoursePage(Page):
     fee_domestic = RichTextField(null=True, blank=True)
     fee_international = RichTextField(null=True, blank=True)
     course_location = RichTextField(null=True, blank=True)
-    course_requirement = RichTextField(null=True, blank=True)
-    academic_requirement_domestic = RichTextField(null=True, blank=True)
-    academic_requirement_international = RichTextField(null=True, blank=True)
-    english_requirement_domestic = RichTextField(null=True, blank=True)
-    english_requirement_international = RichTextField(null=True, blank=True)
-    age_requirement = RichTextField(null=True, blank=True)
-    career_outcomes = RichTextField(null=True, blank=True)
-    course_overview = RichTextField(null=True, blank=True)
+    course_requirement = HTMLField(null=True, blank=True)
+    academic_requirement_domestic = HTMLField(null=True, blank=True)
+    academic_requirement_international = HTMLField(null=True, blank=True)
+    english_requirement_domestic = HTMLField(null=True, blank=True)
+    english_requirement_international = HTMLField(null=True, blank=True)
+    age_requirement = HTMLField(null=True, blank=True)
+    career_outcomes = HTMLField(null=True, blank=True)
+    course_overview = HTMLField(null=True, blank=True)
     core_units_title = models.CharField(max_length=255, null=True, blank=True)
     core_units = StreamField(
         [
@@ -135,7 +135,7 @@ class HigherEducationCoursePage(Page):
         blank=True,
         use_json_field=True,
     )
-    core_units_block = RichTextField(null=True, blank=True, help_text='Use this block when you only want to add title of units. This is helpful when you don\'t want to display accordions for unit title and description.')
+    core_units_block = HTMLField(null=True, blank=True, help_text='Use this block when you only want to add title of units. This is helpful when you don\'t want to display accordions for unit title and description.')
     management_specialisation_units_title = models.CharField(max_length=255, null=True, blank=True)
     management_specialisation_units = StreamField(
         [
@@ -174,7 +174,7 @@ class HigherEducationCoursePage(Page):
     )
     student_workload = HTMLField(null=True, blank=True)
     pathways = HTMLField(null=True, blank=True)
-    assessment_methods = RichTextField(null=True, blank=True)
+    assessment_methods = HTMLField(null=True, blank=True)
 
     content_panels = Page.content_panels + [
         FieldPanel('is_popular'),
