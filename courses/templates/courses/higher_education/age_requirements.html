@@ -1,0 +1,11 @@
+
+{% load wagtailcore_tags %}
+<div class="scroll-m-8" id="age_requirements">
+  <h2 class="text-xl lg:text-2xl mb-2 lg:mb-3 xl:mb-4 font-medium text-primary">Age Requirements</h2>
+  <template x-if="studentType==='domestic'">
+    <div>{{ page.age_requirement_domestic|richtext }}</div>
+  </template>
+  <template x-if="studentType==='international'">
+    <div>{{ page.age_requirement_domestic|richtext }}</div>
+  </template>
+</div>

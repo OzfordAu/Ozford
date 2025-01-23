@@ -74,11 +74,21 @@ HE_DEGREE_TYPE_CHOICES = (
 )
 
 class UnitBlock(blocks.StructBlock):
-    unit_title = blocks.CharBlock(max_length=255, blank=False, null=True)
-    unit_description = blocks.RichTextBlock(blank=True, null=True)
+    unit_title = blocks.CharBlock(max_length=255, null=True)
+    unit_description = blocks.RichTextBlock(null=True, required=False)
     class Meta:
         icon = 'circle-plus'
         verbose_name = 'Unit'
+
+class CourseUnitBlock(blocks.StructBlock):
+    display_as_dropdown = blocks.BooleanBlock(default=True, help_text="If false, only course title will be displayed as lists")
+    title = blocks.CharBlock(max_length=255)
+    sub_title = blocks.CharBlock(max_length=255, null=True, required=False)
+    units = blocks.ListBlock(UnitBlock())
+
+    class Meta:
+        icon = 'circle-plus'
+        verbose_name = 'Course Unit'
 
 class HigherEducationCoursePage(Page):
     parent_page_types = ['courses.DegreeIndexPage']
@@ -118,12 +128,14 @@ class HigherEducationCoursePage(Page):
     fee_domestic = RichTextField(null=True, blank=True)
     fee_international = RichTextField(null=True, blank=True)
     course_location = RichTextField(null=True, blank=True)
-    course_requirement = HTMLField(null=True, blank=True)
+    course_requirement_domestic = HTMLField(null=True, blank=True)
+    course_requirement_international = HTMLField(null=True, blank=True)
     academic_requirement_domestic = HTMLField(null=True, blank=True)
     academic_requirement_international = HTMLField(null=True, blank=True)
     english_requirement_domestic = HTMLField(null=True, blank=True)
     english_requirement_international = HTMLField(null=True, blank=True)
-    age_requirement = HTMLField(null=True, blank=True)
+    age_requirement_domestic = HTMLField(null=True, blank=True)
+    age_requirement_international = HTMLField(null=True, blank=True)
     career_outcomes = HTMLField(null=True, blank=True)
     course_overview = HTMLField(null=True, blank=True)
     core_units_title = models.CharField(max_length=255, null=True, blank=True)
@@ -135,6 +147,15 @@ class HigherEducationCoursePage(Page):
         blank=True,
         use_json_field=True,
     )
+    course_units = StreamField(
+        [
+            ('course_units', CourseUnitBlock()),
+        ],
+        null=True,
+        blank=True,
+        use_json_field=True,
+    )
+
     core_units_block = HTMLField(null=True, blank=True, help_text='Use this block when you only want to add title of units. This is helpful when you don\'t want to display accordions for unit title and description.')
     management_specialisation_units_title = models.CharField(max_length=255, null=True, blank=True)
     management_specialisation_units = StreamField(
@@ -193,14 +214,17 @@ class HigherEducationCoursePage(Page):
         FieldPanel('study_mode'),
         FieldPanel('course_duration'),
         FieldPanel('course_location'),
-        FieldPanel('course_requirement'),
+        FieldPanel('course_requirement_domestic'),
+        FieldPanel('course_requirement_international'),
         FieldPanel('academic_requirement_domestic'),
         FieldPanel('academic_requirement_international'),
         FieldPanel('english_requirement_domestic'),
         FieldPanel('english_requirement_international'),
-        FieldPanel('age_requirement'),
+        FieldPanel('age_requirement_domestic'),
+        FieldPanel('age_requirement_international'),
         FieldPanel('career_outcomes'),
         FieldPanel('course_overview'),
+        FieldPanel('course_units'),
         FieldPanel('core_units_title'),
         FieldPanel('core_units'),
         FieldPanel('management_specialisation_units_title'),

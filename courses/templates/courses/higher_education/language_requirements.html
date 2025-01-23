@@ -22,12 +22,12 @@
 </div> {% endcomment %}
 
 {% load wagtailcore_tags %}
-<div class="scroll-m-8" id="academic_requirements">
-  <h2 class="text-xl lg:text-2xl mb-2 lg:mb-3 xl:mb-4 font-medium text-primary">Academic Requirements</h2>
+<div class="scroll-m-8" id="language_requirements">
+  <h2 class="text-xl lg:text-2xl mb-2 lg:mb-3 xl:mb-4 font-medium text-primary">English Language Requirements</h2>
   <template x-if="studentType==='domestic'">
-    <div>{{ page.academic_requirement_domestic|richtext }}</div>
+    <div>{{ page.english_requirement_domestic|richtext }}</div>
   </template>
   <template x-if="studentType==='international'">
-    <div>{{ page.academic_requirement_international|richtext }}</div>
+    <div>{{ page.english_requirement_international|richtext }}</div>
   </template>
 </div>

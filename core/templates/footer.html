@@ -1,21 +1,22 @@
 {% load static wagtailcore_tags wagtailimages_tags %}
-<footer class="bg-[#011724]">
+<footer class="bg-[#011724] text-gray-300">
 <section class="bg-gray-100">
   <div class="container mx-auto px-4 py-6 lg:py-8">
     <img src="{% static 'images/affiliation-logo.png' %}" loading="lazy"  alt="affiliation" width="1504" height="80" class="w-full max-h-[80px] object-contain" />
   </div>
 
 </section>
-<section class="bg-[#011724] text-gray-200">
+{% comment %} <section class="bg-[#011724] text-[#a7b8c2]"> {% endcomment %}
+{% comment %} <section class="bg-[#011724]">
   <div class="container mx-auto px-4 py-6 lg:py-8 xl:py-20">
   <div class="flex flex-col lg:flex-row lg:items-center">
     <div class="w-full lg:w-3/12">
-      <p class="text-3xl xl:text-5xl font-bold mb-4 lg:mb-0 text-[#9bbccf] text-heading">Need Help?</p>
+      <p class="text-3xl xl:text-5xl font-bold mb-4 lg:mb-0 text-heading text-gray-400">Need Help?</p>
     </div>
-    <div class="w-full lg:w-9/12 text-[#9bbccf]">
+    <div class="w-full lg:w-9/12">
       <div class="flex flex-col lg:flex-row gap-4 lg:gap-10 xl:space-x-20">
         <div class="block">
-          <p class="text-xl font-medium mb-2">International Students</p>
+          <p class="text-xl font-medium mb-2">Contact us</p>
           <div class="flex items-center gap-4 mb-1">
             <span>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
@@ -34,26 +35,20 @@
           </div>
         </div>
         <div class="block">
-          <h3 class="text-xl font-medium mb-2">Domestic Students</h3>
-          <div class="flex items-center gap-4 mb-1">
-            <span>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
-              </svg>
-            </span>
-            <span>+61 3 86637188</span>
+          <h3 class="text-xl font-medium mb-2">Connect with us</h3>
+          <div class="flex gap-3 mt-2">
+            {% for social_media_block in site_settings.footer_social_media  %}
+              {% for item in social_media_block.value.social_media  %}
+                <a href="{{item.url}}" {% if item.open_in_new_tab %}target="_blank"{% endif %}>
+                  {{item.icon_svg|safe}}
+                </a> 
+              {% endfor %}
+            {% endfor %}
           </div>
-          <div class="flex items-center gap-4">
-            <span>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
-              </svg>
-            </span>
-            <span>info@ozford.edu.au</span>
-          </div>
+          
         </div>
         <div class="block">
-          <p class="text-xl font-medium mb-2">Agents</p>
+          <p class="text-xl font-medium mb-2">Enquire</p>
           <div class="flex items-center gap-4mb-1">
             <span>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
@@ -76,38 +71,53 @@
     </div>
   </div>
 </div>
-</section>
-<section class="bg-[#011724] text-gray-200 text-sm font-light">
-    <div class="container mx-auto pb-6 lg:pb-8 xl:pb-20">
+</section> {% endcomment %}
+<section class="bg-[#011724] text-sm font-light py-6 lg:py-8 xl:py-20">
+    <div class="container mx-auto">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 xl:gap-10">
         <div class="flex flex-col">
           <div>
-            {% image site_settings.footer_logo original class="w-48 h-auto" %}
+            {% image site_settings.footer_logo original class="w-32 lg:w-48 xl:w-52 2xl:w-56 h-auto" %}
           </div>
           <div class="mt-3 lg:mt-6">
-            <p>333, Queens Street</p>
+            <div class="mb-2">{{ site_settings.address|richtext}}</div>
+            <div class="mb-2">{{ site_settings.office_hour}}</div>
+            {% comment %} <p>333, Queens Street</p>
             <p class="mb-2">Melbourne, VIC 3000</p>
-            <p class="mb-2">Australia 8:30 AM – 5:00 PM (AEST)</p>
-            <div class="flex items-center gap-4 mb-1">
+            <p class="mb-2">Australia 8:30 AM – 5:00 PM (AEST)</p> {% endcomment %}
+            <div class="flex items-center gap-2 mb-1">
               <span>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
                 </svg>
               </span>
-              <span>+61 3 86637188</span>
+              <span>{{ site_settings.phone|richtext}}</span>
             </div>
-            <div class="flex items-center gap-4">
+            <div class="flex items-center gap-2">
               <span>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
                 </svg>
               </span>
-              <span>info@ozford.edu.au</span>
+              <span>
+                <a class="hover:underline hover:underline-offset-4 hover:text-[#aed1e7] transition-all" href="mailto:{{ site_settings.email|safe}}">{{ site_settings.email|safe}}</a>
+                
+              </span>
             </div>
             
           </div>
         </div>
-        <div>
+        {% for links in site_settings.footer_primary_links  %}
+          <div>
+            <p class="text-lg mb-2 font-medium">{{links.value.title}}</p>
+            <ul class="space-y-2">
+              {% for item in links.value.links  %}
+                <li><a href="{{item.url}}" class="hover:underline hover:underline-offset-4 hover:text-[#aed1e7] transition-all">{{item.title}}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endfor %}
+        {% comment %} <div>
           <p class="text-lg mb-2">Study</p>
           <ul class="space-y-2">
             <li><a href="/study/postgraduate/" class="hover:border-b hover:text-white hover:border-white transition-all">Postgraduate</a></li>
@@ -119,15 +129,15 @@
         <div>
           <p class="text-lg mb-2">Information For</p>
           <ul class="space-y-2">
-            <li><a href="#" class="hover:border-b hover:text-white hover:border-white transition-all">How to Apply</a></li>
-            <li><a href="#" class="hover:border-b hover:text-white hover:border-white transition-all">Scholarships</a></li>
-            <li><a href="#" class="hover:border-b hover:text-white hover:border-white transition-all">Entry Requirements</a></li>
-            <li><a href="#" class="hover:border-b hover:text-white hover:border-white transition-all">Fees</a></li>
-            <li><a href="#" class="hover:border-b hover:text-white hover:border-white transition-all">Key Dates</a></li>
-            <li><a href="#" class="hover:border-b hover:text-white hover:border-white transition-all">Agents</a></li>
-            <li><a href="#" class="hover:border-b hover:text-white hover:border-white transition-all">Domestic Students</a></li>
-            <li><a href="#" class="hover:border-b hover:text-white hover:border-white transition-all">International Students</a></li>
-            <li><a href="#" class="hover:border-b hover:text-white hover:border-white transition-all">Current Students</a></li>
+            <li><a href="#" class="hover:underline hover:underline-offset-4 hover:text-[#aed1e7] transition-all">How to Apply</a></li>
+            <li><a href="#" class="hover:underline hover:underline-offset-4 hover:text-[#aed1e7] transition-all">Scholarships</a></li>
+            <li><a href="#" class="hover:underline hover:underline-offset-4 hover:text-[#aed1e7] transition-all">Entry Requirements</a></li>
+            <li><a href="#" class="hover:underline hover:underline-offset-4 hover:text-[#aed1e7] transition-all">Fees</a></li>
+            <li><a href="#" class="hover:underline hover:underline-offset-4 hover:text-[#aed1e7] transition-all">Key Dates</a></li>
+            <li><a href="#" class="hover:underline hover:underline-offset-4 hover:text-[#aed1e7] transition-all">Agents</a></li>
+            <li><a href="#" class="hover:underline hover:underline-offset-4 hover:text-[#aed1e7] transition-all">Domestic Students</a></li>
+            <li><a href="#" class="hover:underline hover:underline-offset-4 hover:text-[#aed1e7] transition-all">International Students</a></li>
+            <li><a href="#" class="hover:underline hover:underline-offset-4 hover:text-[#aed1e7] transition-all">Current Students</a></li>
           </ul>
         </div>
         <div>
@@ -137,52 +147,38 @@
             <li><a href="/news-and-events/" class="hover:border-b hover:text-white hover:border-white transition-all">News &amp; Events</a></li>
             <li><a href="#" class="hover:border-b hover:text-white hover:border-white transition-all">Locations</a></li>
           </ul>
-          <div class="pt-4">
-            <p class="text-lg mt-4 text-slate-400">Connect with us</p>
-            <div class="flex gap-3 mt-2">
-              <a href="https://www.facebook.com/OzfordAustralia/" aria-label="Facebook">
-                <span>
-                  <svg class="size-10 text-gray-400 hover:text-white transition-all" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path fill="currentColor" d="M10 .4C4.698.4.4 4.698.4 10s4.298 9.6 9.6 9.6s9.6-4.298 9.6-9.6S15.302.4 10 .4m2.274 6.634h-1.443c-.171 0-.361.225-.361.524V8.6h1.805l-.273 1.486H10.47v4.461H8.767v-4.461H7.222V8.6h1.545v-.874c0-1.254.87-2.273 2.064-2.273h1.443z"/></svg>
-              </a>
-              <a href="https://www.instagram.com/ozfordaustralia/" aria-label="Instagram">
-                <span>
-                  <svg class="size-10 text-gray-400 hover:text-white transition-all" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path fill="currentColor" d="M13 10a3 3 0 1 1-6 0q.001-.257.049-.5H6v3.997c0 .278.225.503.503.503h6.995a.503.503 0 0 0 .502-.503V9.5h-1.049q.048.243.049.5m-3 2a2 2 0 1 0-.001-4.001A2 2 0 0 0 10 12m2.4-4.1h1.199a.3.3 0 0 0 .301-.3V6.401a.3.3 0 0 0-.301-.301H12.4a.3.3 0 0 0-.301.301V7.6c.001.165.136.3.301.3M10 .4A9.6 9.6 0 0 0 .4 10a9.6 9.6 0 0 0 9.6 9.6a9.6 9.6 0 0 0 9.6-9.6A9.6 9.6 0 0 0 10 .4m5 13.489C15 14.5 14.5 15 13.889 15H6.111C5.5 15 5 14.5 5 13.889V6.111C5 5.5 5.5 5 6.111 5h7.778C14.5 5 15 5.5 15 6.111z"/></svg>
-                </span>
-              </a>
-              <a href="https://www.youtube.com/channel/UCUKflkEGXF1XgacH7M7GZpQ" aria-label="Youtube">
-                <span>
-                  <svg class="size-10 text-gray-400 hover:text-white transition-all" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path fill="currentColor" d="M11.603 9.833L9.357 8.785C9.161 8.694 9 8.796 9 9.013v1.974c0 .217.161.319.357.228l2.245-1.048c.197-.092.197-.242.001-.334M10 .4C4.698.4.4 4.698.4 10s4.298 9.6 9.6 9.6s9.6-4.298 9.6-9.6S15.302.4 10 .4m0 13.5c-4.914 0-5-.443-5-3.9s.086-3.9 5-3.9s5 .443 5 3.9s-.086 3.9-5 3.9"/></svg>
-                </span>
-              </a>
-              <a href="https://www.linkedin.com/company/ozford-australia/posts/?feedView=all" aria-label="LinkedIn">
-                <span>
-                  <svg class="size-10 text-gray-400 hover:text-white transition-all" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path fill="currentColor" d="M10 .4C4.698.4.4 4.698.4 10s4.298 9.6 9.6 9.6s9.6-4.298 9.6-9.6S15.302.4 10 .4M7.65 13.979H5.706V7.723H7.65zm-.984-7.024c-.614 0-1.011-.435-1.011-.973c0-.549.409-.971 1.036-.971s1.011.422 1.023.971c0 .538-.396.973-1.048.973m8.084 7.024h-1.944v-3.467c0-.807-.282-1.355-.985-1.355c-.537 0-.856.371-.997.728c-.052.127-.065.307-.065.486v3.607H8.814v-4.26c0-.781-.025-1.434-.051-1.996h1.689l.089.869h.039c.256-.408.883-1.01 1.932-1.01c1.279 0 2.238.857 2.238 2.699z"/></svg>
-                </span>
-              </a>
-             
-            </div>
+        </div> {% endcomment %}
+        <div class="block">
+          <h3 class="text-xl font-medium mb-2">Connect with us</h3>
+          <div class="flex gap-3 mt-2">
+            {% for social_media_block in site_settings.footer_social_media  %}
+              {% for item in social_media_block.value.social_media  %}
+                <a href="{{item.url}}" {% if item.open_in_new_tab %}target="_blank"{% endif %}>
+                  {{item.icon_svg|safe}}
+                </a> 
+              {% endfor %}
+            {% endfor %}
           </div>
+          
         </div>
       </div>
-      <div class="w-full bg-blue-50 h-[0.5px] my-4 lg:my-6 xl:my-8"></div>
+      <div class="w-full bg-[#3f505b] h-[1px] my-4 lg:my-6 xl:my-8"></div>
       <div class="w-full flex flex-col lg:flex-row lg:gap-10 items-center">
         <div class="w-full lg:w-7/12">
           <ul class="flex flex-col lg:flex-row lg:space-x-4 space-y-2 lg:space-y-0">
-            <li><a href="#" class="hover:border-b hover:text-white hover:border-white transition-all">Terms & Conditions</a></li>
-            <li><a href="#" class="hover:border-b hover:text-white hover:border-white transition-all">ESOS Act</a></li>
-            <li><a href="#" class="hover:border-b hover:text-white hover:border-white transition-all">Privacy Statement</a></li>
-            <li><a href="#" class="hover:border-b hover:text-white hover:border-white transition-all">Disclaimer</a></li>
-            <li><a href="#" class="hover:border-b hover:text-white hover:border-white transition-all">Policies & Procedures</a></li>
+            {% for item in site_settings.footer_secondary_links  %}
+              <li><a href="#" class="hover:underline hover:underline-offset-4 hover:text-[#aed1e7] transition-all">{{item.value.title}}</a></li>
+            {% endfor %}
           </ul>
         </div>
         <div class="w-full lg:w-5/12">
-          <p class="font-medium mb-2 text-lg">Acknowledgement of country</p>
-          <p class="">We acknowledge and pay respects to the Elders both past and present and the Traditional Owners of the land on which our campus stands.</p>
+          <p class="font-medium mb-2 text-lg">{{site_settings.acknowledgement_of_country_title|safe}}</p>
+          <p class="">{{site_settings.acknowledgement_of_country_content|safe}}</p>
         </div>
       </div>
-      <div class="w-full bg-blue-50 h-[0.5px] mt-4 lg:mt-6 xl:mt-8"></div>
-      <div class="w-full mt-4 lg:mt-6 xl:mt-8 text-xs">
-        <p>Copyright All Right Reserved 2022, OZFORD Ozford Institute of Higher Education Pty Ltd ACN 165 694 351 trading as Ozford Institute of Higher Education (CRICOS Provider No: 03429B, ABN 33 165 694 351); Ozford College Pty. Ltd is trading as Ozford College (CRICOS No. 02427A, Registered School No. 2016, ABN 41 102 265 225); Ozford English Language Centre Pty. Ltd. is trading as Ozford English Language Centre (CRICOS No. 02501G, ABN 35 100 454 475). © Ozford Education Group 2022. All content on the Ozford Website is the copyright property of Ozford Education Group. This includes information, graphics, forms, policies and procedures, manuals and handbooks. Ozford material is available for personal or non-commercial use only. Redistribution or commercial use without the expressed, written permission of Ozford Education Group is prohibited. We acknowledge and pay respects to the Elders both past and present and the Traditional Owners of the land on which our campus stands.</p>
+      <div class="w-full bg-[#3f505b] h-[1px] mt-4 lg:mt-6 xl:mt-8"></div>
+      <div class="w-full mt-4 lg:mt-6 xl:mt-8 text-xs/5">
+        <p>{{site_settings.copyright_content|safe}}</p>
       </div>
     </div>
   </section>

@@ -100,6 +100,19 @@ class HigherEducationIntakeBlock(blocks.StructBlock):
         icon = 'circle-plus'
         verbose_name = 'Elicos Intake Block'
 
+class IntakeTitleBlock(blocks.StructBlock):
+    description = blocks.CharBlock(max_length=255)
+    is_title = blocks.BooleanBlock(required=False, default=False)
+    class Meta:
+        icon = 'user'
+
+class IntakeBlock(blocks.StructBlock):
+    title = blocks.ListBlock(IntakeTitleBlock())
+
+    class Meta:
+        icon = 'circle-plus'
+        verbose_name = 'Intake Block'
+
 class IntakePage(Page):
     parent_page_types = ['admissions.AdmissionIndex']
     subpage_types = []
@@ -129,12 +142,40 @@ class IntakePage(Page):
         blank=True,
         use_json_field=True,
     )
+    higher_education_intakes = StreamField(
+        [
+            ('higher_education_intakes', IntakeBlock()),
+        ],
+        null=True,
+        blank=True,
+        use_json_field=True,
+    )
+
+    high_school_intakes = StreamField(
+        [
+            ('high_school_intakes', IntakeBlock()),
+        ],
+        null=True,
+        blank=True,
+        use_json_field=True,
+    )
+    elicos_intakes = StreamField(
+        [
+            ('elicos_intakes', IntakeBlock()),
+        ],
+        null=True,
+        blank=True,
+        use_json_field=True,
+    )
 
     content_panels = Page.content_panels + [
         FieldPanel('page_title'),
         FieldPanel('elicos_intake_block'),
         FieldPanel('high_school_intake_block'),
         FieldPanel('higher_education_intake_block'),
+        FieldPanel('higher_education_intakes'),
+        FieldPanel('high_school_intakes'),
+        FieldPanel('high_school_intakes'),
     ]
 
     class Meta:
