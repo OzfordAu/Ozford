@@ -1,14 +1,33 @@
 {% extends "base.html" %}
 {% load static wagtailcore_tags wagtailimages_tags %}
 {% block extra_css %}
+
 {% endblock extra_css %}
 {% block body_class %}blog{% endblock %}
 {% block content %}
 {% include 'breadcrumb.html' %}
-<div class="container mx-auto mb-10 w-full">
-    <div class="mt-4 lg:mt-6 xl:mt-8">
-        <h1 class="text-xl lg:text-2xl xl:text-4xl font-medium text-primary">{{ page.title }}</h1>
+<div class="relative h-[300px] w-full overflow-hidden">
+    {% image page.banner_image width-500 as tmp_photo %}
+    <!-- Background image -->
+    <div 
+        class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style="background-image: url('{{tmp_photo.full_url}}')"
+    ></div>
+    
+    <!-- Red overlay with diagonal clip -->
+    <div class="absolute inset-0 bg-primary clip-diagonal"></div>
+    
+    <!-- Text content -->
+    <div class="relative h-full flex items-center">
+        <div class="container mx-auto px-6">
+            <h1 class="text-white text-5xl font-bold max-w-md leading-tight">
+                
+                {{ page.page_title }}
+            </h1>
+        </div>
     </div>
+</div>
+<div class="container mx-auto mb-10 w-full">
     <div class="mt-4 lg:mt-6 xl:mt-10 cms-page">
         {{ page.body|richtext }}
       </div>

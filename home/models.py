@@ -102,8 +102,19 @@ class HomePage(Page):
         return context
     
 class HtmlPage(Page):
+    page_title = models.CharField(max_length=255, null=True, blank=False)
+    banner_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name='banner_image'
+    )
     body = HTMLField()
     content_panels = Page.content_panels + [
+        FieldPanel('page_title'),
+        FieldPanel('banner_image'),
         FieldPanel('body'),
     ]
 
