@@ -4,6 +4,7 @@ from wagtail.fields import RichTextField, StreamField
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.admin.panels import FieldPanel
 from wagtail import blocks
+from tinymce.models import HTMLField
 
 # Create your models here.
 class AdmissionIndex(Page):
@@ -39,6 +40,15 @@ class FeePage(Page):
     subpage_types = []
     max_count = 3
     page_title = models.CharField(max_length=255, blank=False, null=True)
+    banner_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name='banner_image'
+    )
+    page_intro = HTMLField(null=True, blank=True)
     elicos_fee_block = StreamField(
         [
             ('elicos_fee_block', HighSchoolFeeBlock()),
@@ -66,6 +76,8 @@ class FeePage(Page):
 
     content_panels = Page.content_panels + [
         FieldPanel('page_title'),
+        FieldPanel('banner_image'),
+        FieldPanel('page_intro'),
         FieldPanel('elicos_fee_block'),
         FieldPanel('high_school_fee_block'),
         FieldPanel('higher_education_fee_block'),
@@ -118,6 +130,15 @@ class IntakePage(Page):
     subpage_types = []
     max_count = 1
     page_title = models.CharField(max_length=255, blank=False, null=True)
+    page_intro = HTMLField(null=True, blank=True)
+    banner_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name='banner_image'
+    )
     elicos_intake_block = StreamField(
         [
             ('elicos_intake_block', ElicosIntakeBlock()),
@@ -170,6 +191,8 @@ class IntakePage(Page):
 
     content_panels = Page.content_panels + [
         FieldPanel('page_title'),
+        FieldPanel('banner_image'),
+        FieldPanel('page_intro'),
         FieldPanel('elicos_intake_block'),
         FieldPanel('high_school_intake_block'),
         FieldPanel('higher_education_intake_block'),
