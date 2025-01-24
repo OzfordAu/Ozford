@@ -30,7 +30,7 @@
                         @click="tabButtonClicked($el)" 
                         type="button" 
                         :class="{ 'bg-gray-100 text-gray-700' : selectedCourse == {{ forloop.counter }} }" 
-                        class="relative z-20 hidden xl:inline-flex items-center justify-center w-full px-1 py-2 h-full text-sm font-semibold text-primary transition-all rounded-md cursor-pointer 2xl:whitespace-nowrap"
+                        class="relative z-20 hidden xl:inline-flex items-center justify-center w-full px-1 py-2 h-full font-semibold text-primary transition-all rounded-md cursor-pointer 2xl:whitespace-nowrap"
                     >
                         {{ block.value.title }}
                     </button>
@@ -43,7 +43,7 @@
 
         {# Select for smaller screens #}
         <div class="block xl:hidden z-10">
-            <div class="relative flex w-full flex-col gap-1 text-neutral-600">
+            <div class="relative flex w-full flex-col gap-1">
                 <select 
                     x-model="selectedCourse"
                     @change="courseChanged($event)"
@@ -65,11 +65,11 @@
                         setActiveAccordion(id) { 
                             this.activeAccordion = (this.activeAccordion == id) ? '' : id 
                         } 
-                    }" class="relative w-full mx-auto text-sm space-y-2">
+                    }" class="relative w-full mx-auto space-y-2">
                     {% for unit in block.value.units %}
                         <div 
                             x-data="{ id: $id('accordion') }" 
-                            :class="{ 'border-primary text-neutral-800' : activeAccordion==id, 'text-neutral-600 hover:text-neutral-800' : activeAccordion!=id }" 
+                            :class="{ 'border-primary text-neutral-800' : activeAccordion==id, 'text-gray-700' : activeAccordion!=id }" 
                             class="duration-200 ease-out bg-white border rounded-md cursor-pointer group" 
                             x-cloak
                         >
@@ -84,7 +84,7 @@
                                 </div>
                             </button>
                             <div x-show="activeAccordion==id" x-collapse x-cloak>
-                                <div class="p-5 pt-0 opacity-70">
+                                <div class="p-5 pt-0">
                                     {{ unit.unit_description|richtext }}
                                 </div>
                             </div>

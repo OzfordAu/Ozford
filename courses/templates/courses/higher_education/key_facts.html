@@ -184,7 +184,12 @@
               <div class="block space-y-1">
                 <p class="text-base text-blue-200 tracking-wide">Course Requirement</p>
                 <div class="font-light tracking-wide">
-                  {{ page.course_requirement|richtext }}
+                  <template x-if="studentType==='domestic'">
+                    <div>{{ page.course_requirement_domestic|richtext }}</div>
+                  </template>
+                  <template x-if="studentType==='international'">
+                    <div>{{ page.course_requirement_international|richtext }}</div>
+                  </template>
                 </div>
               </div>
             </div>
