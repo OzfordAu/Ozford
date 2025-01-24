@@ -158,7 +158,12 @@
                   English Language Requirements
                 </p>
                 <div class="font-light tracking-wide">
-                  {{ page.ielts|richtext }}
+                  <template x-if="studentType==='domestic'">
+                    <div>{{ page.ielts_domestic|richtext }}</div>
+                  </template>
+                  <template x-if="studentType==='international'">
+                    <div>{{ page.ielts_international|richtext }}</div>
+                  </template>
                 </div>
               </div>
             </div>

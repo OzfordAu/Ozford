@@ -1,6 +1,6 @@
 from django.db import models
 from wagtail.fields import RichTextField, StreamField
-from wagtail.admin.panels import FieldPanel
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.documents import get_document_model
 from wagtail.models import Page
 from wagtail import blocks
@@ -123,7 +123,8 @@ class HigherEducationCoursePage(Page):
     study_mode = RichTextField(null=True, blank=True)
     course_duration = RichTextField(null=True, blank=True)
     intakes = RichTextField(null=True, blank=True)
-    ielts = RichTextField(null=True, blank=True)
+    ielts_domestic = RichTextField(null=True, blank=True)
+    ielts_international = RichTextField(null=True, blank=True)
     aqf_level = models.CharField(max_length=255, null=True, blank=True)
     fee_domestic = RichTextField(null=True, blank=True)
     fee_international = RichTextField(null=True, blank=True)
@@ -202,42 +203,67 @@ class HigherEducationCoursePage(Page):
         FieldPanel('course_type'),
         FieldPanel('course_title'),
         FieldPanel('course_header_description'),
+        FieldPanel('banner_image'),
         FieldPanel('course_brochure'),
         FieldPanel('cricos_code'),
-        FieldPanel('intakes'),
-        FieldPanel('ielts'),
-        FieldPanel('aqf_level'),
-        FieldPanel('fee_domestic'),
-        FieldPanel('fee_international'),
-        FieldPanel('banner_image'),
         FieldPanel('accreditation_logo'),
-        FieldPanel('study_mode'),
-        FieldPanel('course_duration'),
-        FieldPanel('course_location'),
-        FieldPanel('course_requirement_domestic'),
-        FieldPanel('course_requirement_international'),
-        FieldPanel('academic_requirement_domestic'),
-        FieldPanel('academic_requirement_international'),
-        FieldPanel('english_requirement_domestic'),
-        FieldPanel('english_requirement_international'),
-        FieldPanel('age_requirement_domestic'),
-        FieldPanel('age_requirement_international'),
-        FieldPanel('career_outcomes'),
-        FieldPanel('course_overview'),
-        FieldPanel('course_units'),
-        FieldPanel('core_units_title'),
-        FieldPanel('core_units'),
-        FieldPanel('management_specialisation_units_title'),
-        FieldPanel('management_specialisation_units'),
-        FieldPanel('marketing_specialisation_units_title'),
-        FieldPanel('marketing_specialisation_units'),
-        FieldPanel('accounting_specialisation_units_title'),
-        FieldPanel('accounting_specialisation_units'),
-        FieldPanel('ellective_units'),
-        FieldPanel('core_units_block'),
-        FieldPanel('student_workload'),
-        FieldPanel('pathways'),
-        FieldPanel('assessment_methods'),
+        MultiFieldPanel([
+            FieldPanel('intakes'),
+            FieldPanel('ielts_domestic'),
+            FieldPanel('ielts_international'),
+            FieldPanel('aqf_level'),
+            FieldPanel('fee_domestic'),
+            FieldPanel('fee_international'),
+            FieldPanel('study_mode'),
+            FieldPanel('course_duration'),
+            FieldPanel('course_location'),
+        ], heading='Key Facts'),
+
+         MultiFieldPanel([
+           FieldPanel('course_requirement_domestic'),
+            FieldPanel('course_requirement_international'),
+        ], heading='Course Requirements'),
+        MultiFieldPanel([
+           FieldPanel('academic_requirement_domestic'),
+            FieldPanel('academic_requirement_international'),
+        ], heading='Academic Requirements'),
+
+        MultiFieldPanel([
+            FieldPanel('english_requirement_domestic'),
+            FieldPanel('english_requirement_international'),
+        ], heading='English Language Requirements'),
+
+        MultiFieldPanel([
+            FieldPanel('age_requirement_domestic'),
+            FieldPanel('age_requirement_international'),
+        ], heading='Age Requirements'),
+
+        MultiFieldPanel([
+            FieldPanel('course_overview'),
+            FieldPanel('course_units'),
+            FieldPanel('career_outcomes'),
+            FieldPanel('student_workload'),
+            FieldPanel('pathways'),
+            FieldPanel('assessment_methods'),
+        ], heading='Course Details'),
+        
+        
+        
+        
+        # FieldPanel('course_units'),
+        # FieldPanel('core_units_title'),
+        # FieldPanel('core_units'),
+        # FieldPanel('management_specialisation_units_title'),
+        # FieldPanel('management_specialisation_units'),
+        # FieldPanel('marketing_specialisation_units_title'),
+        # FieldPanel('marketing_specialisation_units'),
+        # FieldPanel('accounting_specialisation_units_title'),
+        # FieldPanel('accounting_specialisation_units'),
+        # FieldPanel('ellective_units'),
+        # FieldPanel('core_units_block'),
+        # FieldPanel('student_workload'),
+        # FieldPanel('pathways'),
+        # FieldPanel('assessment_methods'),
     ]
 
     class Meta:
