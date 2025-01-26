@@ -34,8 +34,6 @@
   .cms-page ul, .cms-page-bg ul, ul.list-disc {
     list-style-type: disc;
     list-style-position: inside;
-    margin: 0;
-    padding: 0;
   }
 
   .cms-page ol, .cms-page-bg ol {
