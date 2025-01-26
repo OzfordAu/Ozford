@@ -2545,7 +2545,11 @@ body {
 
 .cms-page ul, .cms-page-bg ul, ul.list-disc {
   list-style-type: disc;
-  list-style-position: inside;
+  /* Equivalent to list-disc */
+  list-style-position: outside;
+  /* Equivalent to list-outside */
+  padding-left: 1.25rem;
+  /* Equivalent to pl-5 */
 }
 
 .cms-page ol, .cms-page-bg ol {

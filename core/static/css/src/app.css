@@ -8,6 +8,7 @@
     /* font-family: "Noto Serif", serif; */
     font-family: "Open Sans", serif;
   }
+ 
 /* h1, h2, h3, h4, h5, h6, .text-heading {   
      font-family: "Merriweather", serif;
   } */
@@ -31,10 +32,13 @@
     color: #a8dbf8 !important;
     text-decoration: underline;
   }
+
   .cms-page ul, .cms-page-bg ul, ul.list-disc {
-    list-style-type: disc;
-    list-style-position: inside;
+    list-style-type: disc; /* Equivalent to list-disc */
+    list-style-position: outside; /* Equivalent to list-outside */
+    padding-left: 1.25rem; /* Equivalent to pl-5 */
   }
+  
 
   .cms-page ol, .cms-page-bg ol {
     list-style-type: decimal;
