@@ -38,11 +38,18 @@ class CoursesIndexPage(Page):
     class Meta:
         verbose_name = 'Courses Index Page'
 
+DEGREE_INDEX_TYPE_CHOICES = (
+    ('HE', 'Higher Education'),
+    ('HS', 'High School'),
+    ('EL', 'Elicos'),
+)
+
 class DegreeIndexPage(Page):
     # max_count = 1
     parent_page_types = ['courses.CoursesIndexPage']
     subpage_types = ['courses.HigherEducationCoursePage', 'courses.HighSchoolCoursePage', 'courses.ElicosCoursePage']
     page_title = models.CharField(max_length=255, null=True, blank=True)
+    degree_type = models.CharField(max_length=3, choices=DEGREE_INDEX_TYPE_CHOICES, default='HE')
     page_description = RichTextField(null=True, blank=True)
     banner_image = models.ForeignKey(
         'wagtailimages.Image',
@@ -55,6 +62,7 @@ class DegreeIndexPage(Page):
 
     content_panels = Page.content_panels + [
         FieldPanel('page_title'),
+        FieldPanel('degree_type'),
         FieldPanel('page_description'),
         FieldPanel('banner_image'),
     ]
@@ -64,6 +72,8 @@ class DegreeIndexPage(Page):
         context = super().get_context(request, *args, **kwargs)
         # Filter courses that are direct children of this DegreeIndexPage
         context['higher_education_courses'] = HigherEducationCoursePage.objects.live().child_of(self)
+        context['high_school_courses'] = HighSchoolCoursePage.objects.live().child_of(self)
+        context['elicos_courses'] = ElicosCoursePage.objects.live().child_of(self)
         return context
     
 
