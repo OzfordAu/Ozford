@@ -11,19 +11,19 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AlterField(
-            model_name='feepage',
-            name='fee_help',
-            field=wagtail.fields.StreamField([('fee_help', 2)], blank=True, block_lookup={0: ('wagtail.blocks.CharBlock', (), {'blank': False, 'max_length': 255, 'null': True}), 1: ('utility.models.HTMLBlock', (), {'blank': True, 'null': True}), 2: ('wagtail.blocks.StructBlock', [[('title', 0), ('body', 1)]], {})}, null=True),
-        ),
-        migrations.AlterField(
-            model_name='feepage',
-            name='payment_due_dates',
-            field=wagtail.fields.StreamField([('payment_due_dates', 2)], blank=True, block_lookup={0: ('wagtail.blocks.CharBlock', (), {'blank': False, 'max_length': 255, 'null': True}), 1: ('utility.models.HTMLBlock', (), {'blank': True, 'null': True}), 2: ('wagtail.blocks.StructBlock', [[('title', 0), ('body', 1)]], {})}, null=True),
-        ),
-        migrations.AlterField(
-            model_name='feepage',
-            name='payment_methods',
-            field=wagtail.fields.StreamField([('payment_methods', 2)], blank=True, block_lookup={0: ('wagtail.blocks.CharBlock', (), {'blank': False, 'max_length': 255, 'null': True}), 1: ('utility.models.HTMLBlock', (), {'blank': True, 'null': True}), 2: ('wagtail.blocks.StructBlock', [[('title', 0), ('body', 1)]], {})}, null=True),
-        ),
+        # migrations.AlterField(
+        #     model_name='feepage',
+        #     name='fee_help',
+        #     field=wagtail.fields.StreamField([('fee_help', 2)], blank=True, block_lookup={0: ('wagtail.blocks.CharBlock', (), {'blank': False, 'max_length': 255, 'null': True}), 1: ('utility.models.HTMLBlock', (), {'blank': True, 'null': True}), 2: ('wagtail.blocks.StructBlock', [[('title', 0), ('body', 1)]], {})}, null=True),
+        # ),
+        # migrations.AlterField(
+        #     model_name='feepage',
+        #     name='payment_due_dates',
+        #     field=wagtail.fields.StreamField([('payment_due_dates', 2)], blank=True, block_lookup={0: ('wagtail.blocks.CharBlock', (), {'blank': False, 'max_length': 255, 'null': True}), 1: ('utility.models.HTMLBlock', (), {'blank': True, 'null': True}), 2: ('wagtail.blocks.StructBlock', [[('title', 0), ('body', 1)]], {})}, null=True),
+        # ),
+        # migrations.AlterField(
+        #     model_name='feepage',
+        #     name='payment_methods',
+        #     field=wagtail.fields.StreamField([('payment_methods', 2)], blank=True, block_lookup={0: ('wagtail.blocks.CharBlock', (), {'blank': False, 'max_length': 255, 'null': True}), 1: ('utility.models.HTMLBlock', (), {'blank': True, 'null': True}), 2: ('wagtail.blocks.StructBlock', [[('title', 0), ('body', 1)]], {})}, null=True),
+        # ),
     ]
