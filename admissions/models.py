@@ -198,7 +198,7 @@ class IntakePage(Page):
         FieldPanel('higher_education_intake_block'),
         FieldPanel('higher_education_intakes'),
         FieldPanel('high_school_intakes'),
-        FieldPanel('high_school_intakes'),
+        FieldPanel('elicos_intakes'),
     ]
 
     class Meta:
