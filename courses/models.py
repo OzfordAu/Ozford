@@ -81,7 +81,7 @@ class UnitBlock(blocks.StructBlock):
         verbose_name = 'Unit'
 
 class CourseUnitBlock(blocks.StructBlock):
-    display_as_dropdown = blocks.BooleanBlock(default=True, help_text="If false, only course title will be displayed as lists")
+    display_as_dropdown = blocks.BooleanBlock(default=True, required=False, help_text="If false, only course title will be displayed as lists")
     title = blocks.CharBlock(max_length=255)
     sub_title = blocks.CharBlock(max_length=255, null=True, required=False)
     units = blocks.ListBlock(UnitBlock())
