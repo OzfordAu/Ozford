@@ -5,7 +5,7 @@
 {% block body_class %}blog{% endblock %}
 {% block content %}
 {% include 'breadcrumb.html' %}
-{% include 'global_components/page_banner.html' %}
+{% comment %} {% include 'global_components/page_banner.html' %} {% endcomment %}
 <div class="container mx-auto mb-10 w-full">
   {% if page.page_intro %}
   <div class="mt-4 lg:mt-6 xl:mt-8">
