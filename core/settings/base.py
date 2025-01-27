@@ -19,6 +19,7 @@ INSTALLED_APPS = [
     "about",
     "admissions",
     "site_settings",
+    "utility",
     "tinymce",
     "search",
     "wagtail.contrib.forms",
@@ -197,4 +198,5 @@ TINYMCE_DEFAULT_CONFIG = {
     "a11ycheck ltr rtl | showcomments addcomment code",
     "custom_undo_redo_levels": 10,
     'paste_strip_class_attributes' : True,
+    "extended_valid_elements": "svg[*]",
 }
