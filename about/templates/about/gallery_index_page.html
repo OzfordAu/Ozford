@@ -1,0 +1,94 @@
+{% extends "page-fullwidth.html" %}
+{% block main_content %}
+<div class="container mx-auto px-4 py-8" x-data="{ open: false, selectedItem: null }">
+    <!-- Gallery Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        {% for item in gallery_items %}
+            {% if item.type == 'photo' %}
+                {% if item.data.image %}
+                    <div 
+                        class="relative overflow-hidden rounded-lg shadow-lg cursor-pointer" 
+                        @click="open = true; selectedItem = { type: 'photo', src: '{{ item.data.image.file.url }}', caption: '{{ item.data.caption }}' }"
+                    >
+                        <img 
+                            src="{{ item.data.image.file.url }}" 
+                            alt="{{ item.data.caption }}" 
+                            class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105" 
+                        />
+                        {% if item.data.caption %}
+                            <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 text-sm">
+                                {{ item.data.caption }}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            {% elif item.type == 'video' %}
+                {% if item.data.embed_url %}
+                    <div 
+                        class="relative overflow-hidden rounded-lg shadow-lg cursor-pointer" 
+                        @click="open = true; selectedItem = { type: 'video', src: 'https://www.youtube.com/embed/{{ item.data.embed_url }}', title: '{{ item.data.title }}' }"
+                    >
+                        <iframe 
+                            src="https://www.youtube.com/embed/{{ item.data.embed_url }}" 
+                            title="{{ item.data.title }}"
+                            class="w-full h-48 object-cover"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            referrerpolicy="strict-origin-when-cross-origin" 
+                            allowfullscreen>
+                        </iframe>
+                        {% if item.data.title %}
+                            <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 text-sm">
+                                {{ item.data.title }}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <!-- Modal -->
+    <div 
+        x-show="open" 
+        class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75" 
+        @click.away="open = false"
+    >
+        <div class="bg-white rounded-lg overflow-hidden max-w-4xl w-full mx-4">
+            <div class="relative">
+                <!-- Close Button -->
+                <button 
+                    class="absolute top-2 right-2 text-white bg-black bg-opacity-50 rounded-full p-2 hover:bg-opacity-75" 
+                    @click="open = false"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+
+                <!-- Content -->
+                <template x-if="selectedItem && selectedItem.type === 'photo'">
+                    <img 
+                        :src="selectedItem.src" 
+                        :alt="selectedItem.caption" 
+                        class="w-full h-auto max-h-[80vh] object-contain"
+                    />
+                </template>
+                <template x-if="selectedItem && selectedItem.type === 'video'">
+                    <iframe 
+                        :src="selectedItem.src" 
+                        :title="selectedItem.title" 
+                        class="w-full h-[60vh]"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen
+                    ></iframe>
+                </template>
+
+                <!-- Caption/Title -->
+                <div x-show="selectedItem && (selectedItem.caption || selectedItem.title)" class="p-4 bg-white">
+                    <p x-text="selectedItem.caption || selectedItem.title" class="text-center text-gray-700"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main_content %}

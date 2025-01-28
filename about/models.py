@@ -5,6 +5,9 @@ from wagtail.blocks import StructBlock, CharBlock, ListBlock, RichTextBlock
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.admin.panels import FieldPanel
 from wagtail import blocks
+from django.core.validators import URLValidator
+from django.core.exceptions import ValidationError
+from urllib.parse import urlparse, parse_qs
 
 # Create your models here.
 class AboutIndex(Page):
@@ -116,5 +119,85 @@ class TeamPage(Page):
         FieldPanel('higher_education_team'),
         FieldPanel('high_school_team'),
     ]
+
+# Define reusable blocks for Photo and Video
+class GalleryPhotoBlock(blocks.StructBlock):
+    image = ImageChooserBlock(required=True)
+    caption = blocks.CharBlock(required=False, max_length=255)
+    is_active = blocks.BooleanBlock(default=True)
+
+    class Meta:
+        icon = 'image'
+
+class GalleryVideoBlock(blocks.StructBlock):
+    video_url = blocks.URLBlock(required=True, help_text='Enter the URL of the YouTube video')
+    title = blocks.CharBlock(max_length=255, required=False)
+    is_active = blocks.BooleanBlock(default=True)
+
+    class Meta:
+        icon = 'media'
+
+# Unified Gallery Page
+def youtube_id(url):
+    """Extract YouTube video ID from URL"""
+    parsed = urlparse(url)
+    if parsed.hostname == 'youtu.be':
+        return parsed.path[1:]
+    if parsed.hostname in ('www.youtube.com', 'youtube.com'):
+        if parsed.path == '/watch':
+            return parse_qs(parsed.query)['v'][0]
+    return ''
+class GalleryIndexPage(Page):
+    parent_page_types = ['about.AboutIndex']
+    subpage_types = []
+    max_count = 1
+    page_title = models.CharField(max_length=255, blank=False, null=True)
+    banner_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name='Banner Image'
+    )
+    gallery_items = StreamField(
+        [
+            ('photo', GalleryPhotoBlock()),
+            ('video', GalleryVideoBlock()),
+        ],
+        null=True,
+        blank=True,
+        use_json_field=True,
+    )
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    content_panels = Page.content_panels + [
+        FieldPanel('page_title'),
+        FieldPanel('banner_image'),
+        FieldPanel('gallery_items'),
+    ]
+
+   
+
+    def get_context(self, request):
+        context = super().get_context(request)
+        gallery_items = [
+            {
+                "type": block.block_type,
+                "data": {
+                    **block.value,
+                    # Transform to embed URL
+                    "embed_url": youtube_id(block.value["video_url"])
+                } if block.block_type == "video" else block.value,
+                "created_on": block.value.get("created_on", None),
+            }
+            for block in self.gallery_items
+        ]
+
+        # Sort gallery items by created_on
+        gallery_items = sorted(gallery_items, key=lambda x: x['created_on'] or '', reverse=True)
+        context["gallery_items"] = gallery_items
+        return context
+
 
     
