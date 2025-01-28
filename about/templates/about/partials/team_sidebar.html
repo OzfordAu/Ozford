@@ -1,0 +1,23 @@
+<ul class="border border-gray-200">
+    <li class="border-b border-gray-200 last:border-b-0">
+        <span class="block px-4 py-2 text-gray-800 font-semibold text-base">OIHE</span>
+    </li>
+    {% for block in page.higher_education_team %}
+        <li class="border-b border-gray-200 last:border-b-0">
+            <a href="#he-{{forloop.counter0}}" class="block px-4 py-2 text-primary hover:underline transition-all">{{ block.value.department_title }}</a>
+        </li>
+    {% endfor %}
+</ul>
+<ul class="border border-gray-200 mt-4">
+    <li class="border-b border-gray-200 last:border-b-0">
+        <span class="block px-4 py-2 text-gray-800 font-semibold text-base">Ozford College</span>
+    </li>
+    {% for block in page.high_school_team %}
+        <li class="border-b border-gray-200 last:border-b-0">
+            <a href="#hs-{{forloop.counter0}}" class="block px-4 py-2 text-primary hover:underline transition-all">{{ block.value.department_title }}</a>
+        </li>
+    {% endfor %}
+</ul>
+
+
+

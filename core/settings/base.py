@@ -19,6 +19,7 @@ INSTALLED_APPS = [
     "about",
     "admissions",
     "site_settings",
+    "django_cotton",
     "tinymce",
     "search",
     "wagtail.contrib.forms",

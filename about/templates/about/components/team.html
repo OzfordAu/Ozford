@@ -1,0 +1,34 @@
+{% load static wagtailcore_tags wagtailimages_tags %}
+<!-- team_section.html -->
+<div class="flex flex-col border">
+    <h2 class="font-semibold text-2xl mb-4 w-full bg-primary p-4 lg:px-8 text-white">{{ team_title }}</h2>
+    {% for block in team %}
+    <div class="flex flex-col p-4 lg:px-8 lg:pb-8 scroll-m-8" id="{{ team_id }}-{{forloop.counter0}}">
+        <h2 class="text-xl lg:text-2xl mb-2 lg:mb-3 xl:mb-4 font-medium text-primary">{{ block.value.department_title }}</h2>
+        <div class="grid grid-cols-1 justify-items-center gap-5 sm:grid-cols-2 sm:justify-items-stretch md:grid-cols-3 md:gap-4 lg:gap-10">
+            {% for member in block.value.team_members %}
+                {% image member.profile_image fill-300x300 as img %}
+                <div 
+                    class="mx-auto flex w-full flex-col items-center justify-center text-center p-4 border shadow-sm cursor-pointer hover:shadow-md transition-shadow"
+                    @click="selectedMember = {
+                        name: '{{ member.name|escapejs }}',
+                        position: '{{ member.position|escapejs }}',
+                        qualification: '{{ member.qualification|escapejs }}',
+                        image: '{{ img.url }}',
+                        description: '{{ member.description|safe|escapejs }}'
+                    }; showModal = true"
+                >
+                    {% if member.profile_image %}
+                        <img src="{{ img.url }}" class="mb-3 inline-block h-40 w-40 rounded-full object-cover drop-shadow-md border" alt="{{ member.name }}">
+                        {% endif %}
+                        <div class="text-center font-semibold text-primary text-lg">{{ member.name|richtext }}</div>
+                        {% if member.position %}
+                            <div class="flex justify-center text-center text-sm text-gray-500">{{ member.position|richtext }}</div>
+                        {% endif %}
+                    
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+</div>

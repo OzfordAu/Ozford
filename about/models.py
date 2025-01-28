@@ -28,6 +28,14 @@ class ContactPage(Page):
     subpage_types = []
     max_count = 1
     page_title = models.CharField(max_length=255, blank=False, null=True)
+    banner_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name='banner_image'
+    )
     page_description = RichTextField(blank=True, null=True)
     google_map = models.CharField(max_length=255, blank=False, null=True)
     contact_block = StreamField(
@@ -41,6 +49,7 @@ class ContactPage(Page):
 
     content_panels = Page.content_panels + [
         FieldPanel('page_title'),
+        FieldPanel('banner_image'),
         FieldPanel('page_description'),
         FieldPanel('google_map'),
         FieldPanel('contact_block'),
@@ -53,13 +62,14 @@ class ContactPage(Page):
 
 class TeamMemberBlock(blocks.StructBlock):
     name = blocks.CharBlock(max_length=255)
-    position = blocks.CharBlock(max_length=255)
-    profile_image = ImageChooserBlock()
-    description = blocks.RichTextBlock()
+    position = blocks.RichTextBlock(required=False)
+    qualification = blocks.RichTextBlock(required=False)
+    profile_image = ImageChooserBlock(required=False)
+    description = blocks.RichTextBlock(required=False)
 
     class Meta:
         icon = 'user'
-        template = 'blocks/team_member_block.html'
+        # template = 'blocks/team_member_block.html'
 
 class DepartmentBlock(blocks.StructBlock):
     department_title = blocks.CharBlock(max_length=255)
@@ -67,17 +77,33 @@ class DepartmentBlock(blocks.StructBlock):
 
     class Meta:
         icon = 'circle-plus'
-        template = 'blocks/department_block.html'
+        # template = 'blocks/department_block.html'
         verbose_name = 'Department'
 
 class TeamPage(Page):
     parent_page_types = ['about.AboutIndex']
     subpage_types = []
     max_count = 1
-    
-    departments = StreamField(
+    page_title = models.CharField(max_length=255, blank=False, null=True)
+    banner_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name='banner_image'
+    )
+    higher_education_team = StreamField(
         [
-            ('department', DepartmentBlock()),
+            ('higher_education_team', DepartmentBlock()),
+        ],
+        null=True,
+        blank=True,
+        use_json_field=True,
+    )
+    high_school_team = StreamField(
+        [
+            ('high_school_team', DepartmentBlock()),
         ],
         null=True,
         blank=True,
@@ -85,7 +111,10 @@ class TeamPage(Page):
     )
 
     content_panels = Page.content_panels + [
-        FieldPanel('departments'),
+        FieldPanel('page_title'),
+        FieldPanel('banner_image'),
+        FieldPanel('higher_education_team'),
+        FieldPanel('high_school_team'),
     ]
 
     
