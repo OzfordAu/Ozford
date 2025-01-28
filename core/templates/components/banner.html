@@ -21,8 +21,12 @@
     <div class="relative h-full flex items-center">
         <div class="container mx-auto px-6">
             <h1 class="text-white text-5xl font-bold max-w-md leading-tight">
-                
+                {% if page.page_title %}
                 {{ page.page_title }}
+                {% else %}
+                {{ page.title }}
+                {% endif %}
+                
             </h1>
         </div>
     </div>
