@@ -1,15 +1,11 @@
-{% extends 'base.html' %}
+{% extends 'page-fullwidth.html' %}
 {% load static wagtailcore_tags wagtailimages_tags %}
-{% block extra_css %}
-
-{% endblock %}
 {% block body_class %}
   blog
 {% endblock %}
-{% block content %}
-  {% include 'breadcrumb.html' %}
+{% block main_content %}
   <section class="container mx-auto text-black pb-6 lg:pb-8 xl:pb-20">
-    <h2 class="text-3xl xl:text-5xl font-medium mb-4 lg:mb-8 xl:mb-10 text-cente text-primary mt-4 lg:mt-6 xl:mt-8">News &amp; Events</h2>
+    {% comment %} <h2 class="text-3xl xl:text-5xl font-medium mb-4 lg:mb-8 xl:mb-10 text-cente text-primary mt-4 lg:mt-6 xl:mt-8">News &amp; Events</h2> {% endcomment %}
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
         {% for item in blog_posts  %}
             <a href="{% pageurl item %}" class="flex flex-col group">

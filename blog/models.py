@@ -3,6 +3,7 @@ from wagtail.models import Page
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel
 from wagtail.images.blocks import ImageChooserBlock
+from tinymce.models import HTMLField
 
 
 class BlogIndex(Page):
@@ -26,7 +27,7 @@ class BlogPage(Page):
         related_name='+',
         verbose_name='Featured Image'
     )
-    body = RichTextField()
+    body = HTMLField()
 
     content_panels = Page.content_panels + [
         FieldPanel('published_date'),
