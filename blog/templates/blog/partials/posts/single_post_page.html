@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+{% block extra_css %}
+{% endblock extra_css %}
+{% block body_class %}blog{% endblock %}
+{% block content %}
+{% include 'breadcrumb.html' %}
+<div class="w-full container mx-auto mb-10 mt-4 lg:mt-8 xl:mt-12">
+    <div class="w-full flex flex-col lg:flex-row gap-6 lg:gap-12 xl:gap-20">
+        <div class="w-full lg:w-8/12 block">
+            <div>
+                <h1 class="text-xl lg:text-2xl xl:text-5xl font-medium text-primary">{{ page.title }}</h1>
+                <div class="flex gap-1 items-center mt-2 mb-4">
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
+                        </svg>
+                        </span>
+                    <p>{{ page.published_date|date:'F d, Y' }}</p>
+                </div>
+            </div>
+            <div>
+                {% image page.featured_image original class="inline-block h-full w-full max-h-[400px] object-cover" %}
+            </div>
+            <div class="mt-4 lg:mt-6 xl:mt-10 cms-page">
+                {{ page.body|richtext }}
+            </div>
+        </div>
+        <div class="w-full lg:w-4/12 block">
+            {% include 'blog/partials/posts/single_post_sidebar.html' %}
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
