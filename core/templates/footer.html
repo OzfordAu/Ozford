@@ -112,7 +112,7 @@
             <p class="text-lg mb-2 font-medium">{{links.value.title}}</p>
             <ul class="space-y-2">
               {% for item in links.value.links  %}
-                <li><a href="{{item.url}}" class="hover:underline hover:underline-offset-4 hover:text-[#aed1e7] transition-all">{{item.title}}</a></li>
+                <li><a href="{{item.url}}" {% if item.open_in_new_tab %}target="_blank"{% endif %} class="hover:underline hover:underline-offset-4 hover:text-[#aed1e7] transition-all">{{item.title}}</a></li>
               {% endfor %}
             </ul>
           </div>
@@ -167,7 +167,7 @@
         <div class="w-full lg:w-7/12">
           <ul class="flex flex-col lg:flex-row lg:space-x-4 space-y-2 lg:space-y-0">
             {% for item in site_settings.footer_secondary_links  %}
-              <li><a href="#" class="hover:underline hover:underline-offset-4 hover:text-[#aed1e7] transition-all">{{item.value.title}}</a></li>
+              <li><a href="{{item.value.url}}" {% if item.value.open_in_new_tab %}target="_blank"{% endif %} class="hover:underline hover:underline-offset-4 hover:text-[#aed1e7] transition-all">{{item.value.title}}</a></li>
             {% endfor %}
           </ul>
         </div>
