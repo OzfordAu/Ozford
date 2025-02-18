@@ -25,23 +25,26 @@
           </div>
         </div>
         <ul class="w-full justify-end flex gap-4 items-center">
-          <li>
+          {% comment %} <li>
             <a href="https://soeac.ozford.edu.au/agent/apply" target="_blank" class="border-b border-transparent hover:border-white transition-all">Agents</a>
           </li>
           <li>
             <a href="/about/student-services/" class="border-b border-transparent hover:border-white transition-all">Current Students</a>
-          </li>
+          </li> {% endcomment %}
           {% comment %} <li>
             <a href="" class="border-b border-transparent hover:border-white transition-all">Alumuni</a>
           </li> {% endcomment %}
-          <li>
+          {% comment %} <li>
             <a href="https://selfservice.ozford.edu.au:9251/authorization.do" target="_blank" class="border-b border-transparent hover:border-white transition-all">Staffs</a>
-          </li>
+          </li> {% endcomment %}
           <li>
             <a href="/news-and-events/" class="border-b border-transparent hover:border-white transition-all">News &amp; Events</a>
           </li>
           <li>
             <a href="/about/contact-us/" class="border-b border-transparent hover:border-white transition-all">Contact</a>
+          </li>
+          <li>
+            {% include "navbar/desktop_partials/login_topbar.html" %}
           </li>
           {% comment %} <li>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
