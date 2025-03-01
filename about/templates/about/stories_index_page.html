@@ -4,35 +4,13 @@
     <!-- Gallery Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {% for item in gallery_items %}
-            {% if item.type == 'photo' %}
-                {% if item.data.image %}
-                <div class="flex flex-col items-center justify-center">
-                    <div 
-                        class="relative overflow-hidden rounded-lg shadow-lg cursor-pointer" 
-                        @click="open = true; selectedItem = { type: 'photo', src: '{{ item.data.image.file.url }}', caption: '{{ item.data.caption }}' }"
-                    >
-                        <img 
-                            src="{{ item.data.image.file.url }}" 
-                            alt="{{ item.data.caption }}" 
-                            class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105" 
-                        />
-                        {% if item.data.caption %}
-                            <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 text-sm">
-                                {{ item.data.caption }}
-                            </div>
-                        {% endif %}
-                    </div>
-                    <div 
-                        class="w-full max-w-[300px] bg-gray-200 shadow-sm cursor-pointer flex mx-auto justify-center items-center p-2 rounded-lg mt-1 text-sm font-medium" 
-                        @click="open = true; selectedItem = { type: 'photo', src: '{{ item.data.image.file.url }}', caption: '{{ item.data.caption }}' }"
-                    >
-                    Full Screen Image
-                </div>
-                </div>
-                {% endif %}
-            {% elif item.type == 'video' %}
                 {% if item.data.embed_url %}
                 <div class="flex flex-col items-center justify-center">
+                    <div 
+                        class="w-full lg:max-w-[300px] text-xs font-medium py-2 px-1" 
+                    >
+                    {{ item.data.title }}
+                </div>
                     <div 
                         class="relative overflow-hidden rounded-lg shadow-lg cursor-pointer" 
                         @click="open = true; selectedItem = { type: 'video', src: 'https://www.youtube.com/embed/{{ item.data.embed_url }}', title: '{{ item.data.title }}' }"
@@ -46,20 +24,21 @@
                             allowfullscreen>
                         </iframe>
                         {% if item.data.title %}
-                            <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 text-sm">
+                            <div class="absolute left-0 right-0 bg-black bg-opacity-50 text-white p-2 text-sm">
                                 {{ item.data.title }}
                             </div>
                         {% endif %}
                     </div>
                     <div 
-                        class="w-full max-w-[300px] bg-gray-200 shadow-sm cursor-pointer flex mx-auto justify-center items-center p-2 rounded-lg mt-1 text-sm font-medium" 
+                        class="w-full lg:max-w-[300px] bg-gray-200 shadow-sm cursor-pointer flex mx-auto justify-center items-center p-2 rounded-lg mt-1 text-sm font-medium" 
                         @click="open = true; selectedItem = { type: 'video', src: 'https://www.youtube.com/embed/{{ item.data.embed_url }}', title: '{{ item.data.title }}' }"
                     >
-                    Full Screen Video
+                    Watch in Full Screen
                 </div>
             </div>
+                    
                 {% endif %}
-            {% endif %}
+
         {% endfor %}
     </div>
 
@@ -80,16 +59,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
-
-                <!-- Content -->
-                <template x-if="selectedItem && selectedItem.type === 'photo'">
-                    <img 
-                        :src="selectedItem.src" 
-                        :alt="selectedItem.caption" 
-                        class="w-full h-auto max-h-[80vh] object-contain"
-                    />
-                </template>
-                <template x-if="selectedItem && selectedItem.type === 'video'">
+                <div x-if="selectedItem">
                     <iframe 
                         :src="selectedItem.src" 
                         :title="selectedItem.title" 
@@ -97,7 +67,7 @@
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                         allowfullscreen
                     ></iframe>
-                </template>
+                </div>
 
                 <!-- Caption/Title -->
                 <div x-show="selectedItem && (selectedItem.caption || selectedItem.title)" class="p-4 bg-white">

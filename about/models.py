@@ -8,11 +8,55 @@ from wagtail import blocks
 from django.core.validators import URLValidator
 from django.core.exceptions import ValidationError
 from urllib.parse import urlparse, parse_qs
+from tinymce.models import HTMLField
 
 # Create your models here.
+class MileStonesTimeline(blocks.StructBlock):
+    year = blocks.CharBlock(max_length=255)
+    description = blocks.RichTextBlock()
+
+    class Meta:
+        icon = 'user'
+        # template = 'blocks/team_member_block.html'
 class AboutIndex(Page):
     parent_page_types = ['home.HomePage']
     max_count = 1
+    page_title = models.CharField(max_length=255, blank=False, null=True)
+    page_subtitle = RichTextField(blank=True, null=True)
+    banner_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name='banner_image'
+    )
+    intro = HTMLField(null=True, blank=True)
+    intro_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name='intro_image'
+    )
+    milestones_timeline = StreamField(
+        [
+            ('milestones_timeline', MileStonesTimeline()),
+        ],
+        null=True,
+        blank=True,
+        use_json_field=True,
+    )
+
+    content_panels = Page.content_panels + [
+        FieldPanel('page_title'),
+        FieldPanel('page_subtitle'),
+        FieldPanel('banner_image'),
+        FieldPanel('intro'),
+        FieldPanel('intro_image'),
+        FieldPanel('milestones_timeline'),
+    ]
 
     # def get_context(self, request, *args, **kwargs):
     #     context = super().get_context(request, *args, **kwargs)
@@ -200,4 +244,93 @@ class GalleryIndexPage(Page):
         return context
 
 
+class StoriesIndexPage(Page):
+    parent_page_types = ['about.AboutIndex']
+    subpage_types = []
+    max_count = 1
+    page_title = models.CharField(max_length=255, blank=False, null=True)
+    banner_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name='Banner Image'
+    )
+    gallery_items = StreamField(
+        [
+            ('video', GalleryVideoBlock()),
+        ],
+        null=True,
+        blank=True,
+        use_json_field=True,
+    )
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    content_panels = Page.content_panels + [
+        FieldPanel('page_title'),
+        FieldPanel('banner_image'),
+        FieldPanel('gallery_items'),
+    ]
+
+   
+
+    def get_context(self, request):
+        context = super().get_context(request)
+        gallery_items = [
+            {
+                "type": block.block_type,
+                "data": {
+                    **block.value,
+                    # Transform to embed URL
+                    "embed_url": youtube_id(block.value["video_url"])
+                } if block.block_type == "video" else block.value,
+                "created_on": block.value.get("created_on", None),
+            }
+            for block in self.gallery_items
+        ]
+
+        # Sort gallery items by created_on
+        gallery_items = sorted(gallery_items, key=lambda x: x['created_on'] or '', reverse=True)
+        context["gallery_items"] = gallery_items
+        return context
+
+class TestimonialBlock(blocks.StructBlock):
+    name = blocks.CharBlock(max_length=255)
+    country = blocks.CharBlock(max_length=255)
+    course = blocks.CharBlock(max_length=255)
+    profile_image = ImageChooserBlock(required=False)
+    description = blocks.RichTextBlock(required=False)
+
+    class Meta:
+        icon = 'user'
+        # template = 'blocks/team_member_block.html'
+
+class TestimonialPage(Page):
+    parent_page_types = ['about.AboutIndex']
+    subpage_types = []
+    max_count = 1
+    page_title = models.CharField(max_length=255, blank=False, null=True)
+    banner_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name='banner_image'
+    )
+    testimonial = StreamField(
+        [
+            ('testimonial', TestimonialBlock()),
+        ],
+        null=True,
+        blank=True,
+        use_json_field=True,
+    )
     
+    content_panels = Page.content_panels + [
+        FieldPanel('page_title'),
+        FieldPanel('banner_image'),
+        FieldPanel('testimonial'),
+    ]
+

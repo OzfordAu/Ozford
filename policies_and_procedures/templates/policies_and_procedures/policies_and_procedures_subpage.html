@@ -1,0 +1,55 @@
+{% extends 'page-sidebar-right.html' %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+{% block main_content %}
+  <div class="flex flex-col w-full">
+    {% for block in page.policies_and_procedures %}
+      <div>
+        <h2 class="font-semibold text-lg md:text-3xl text-primary mb-2">{{ block.value.title }}</h2>
+        <div>
+          {% for item in block.value.policy_and_procedure %}
+            <div class="mb-2">
+              <h3 class="md:text-xl">{{ item.title }}</h3>
+              <div class="flex justify-start items-center gap-4 md:text-lg">
+                {% if item.display_doc_type == 'doc' %}
+                    <a href="{{ item.policy.url }}" class="text-primary hover:underline transition-all" {% if item.open_in_new_tab %} target="_blank"{% endif %}>Policy</a>
+                    <span>|</span>
+                    <a href="{{ item.procedure.url }}" class="text-primary hover:underline transition-all" {% if item.open_in_new_tab %} target="_blank"{% endif %}>Procedure</a>
+                {% else %}
+                    <a href="{{ item.policy_link }}" class="text-primary hover:underline transition-all" {% if item.open_in_new_tab %} target="_blank"{% endif %}>Policy</a>
+                    <span>|</span>
+                    <a href="{{ item.procedure_link }}" class="text-primary hover:underline transition-all" {% if item.open_in_new_tab %} target="_blank"{% endif %}>Procedure</a>
+                {% endif %}
+                
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      <hr class="my-2 md:my-4 lg:my-6">
+    {% endfor %}
+  </div>
+{% endblock %}
+{% block sidebar %}
+<ul class="flex flex-col space-y-3 list-none">
+    {% for item in page.sidebar_links  %}
+        <li>
+            <a href="{{item.value.url}}" {% if item.value.open_in_new_tab %}target="_blank"{% endif %} class="text-primary hover:text-link-hover inline-flex justify-start items-center lg:text-lg gap-2">
+                <span>{{item.value.link_title}}</span>
+                <span>
+                    {% if item.value.open_in_new_tab %}
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                      </svg>
+                      
+                    {% else %}
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
+                      </svg>
+                    {% endif %}
+                      
+                </span>
+            </a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

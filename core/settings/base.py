@@ -19,6 +19,7 @@ INSTALLED_APPS = [
     "about",
     "admissions",
     "site_settings",
+    "policies_and_procedures",
     "django_cotton",
     "tinymce",
     "search",

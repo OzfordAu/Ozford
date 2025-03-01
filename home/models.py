@@ -118,6 +118,7 @@ class HtmlPage(Page):
         FieldPanel('body'),
     ]
 
+
 class LinkBlock(blocks.StructBlock):
     link_title = blocks.CharBlock(max_length=255, blank=False, null=True)
     url = blocks.CharBlock(max_length=255, blank=False, null=True)
@@ -149,3 +150,29 @@ class InternationalPage(Page):
 class DomesticPage(Page):
     parent_page_types = ['home.HomePage']
     max_count = 1
+
+class SidebarHtmlPage(Page):
+    page_title = models.CharField(max_length=255, null=True, blank=False)
+    banner_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name='banner_image'
+    )
+    body = HTMLField()
+    sidebar_links = StreamField(
+        [
+            ('link_blocks', LinkBlock()),
+        ],
+        null=True,
+        blank=True,
+        use_json_field=True,
+    )
+    content_panels = Page.content_panels + [
+        FieldPanel('page_title'),
+        FieldPanel('banner_image'),
+        FieldPanel('body'),
+        FieldPanel('sidebar_links'),
+    ]

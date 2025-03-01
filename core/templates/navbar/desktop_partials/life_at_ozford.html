@@ -1,10 +1,10 @@
 <div @mouseleave="activeDropdown = null">
-    <button @mouseover="setActiveDropdown('studentLife')" 
+    <button @mouseover="setActiveDropdown('lifeAtOzford')" 
             class="text-gray-800 font-medium h-20 px-4 border-b-4"
-            :class="activeDropdown === 'studentLife' ? 'border-primary text-primary bg-gray-100' : 'border-transparent'">
-            Student Life
+            :class="activeDropdown === 'lifeAtOzford' ? 'border-primary text-primary bg-gray-100' : 'border-transparent'">
+            Life at Ozford
         <svg class="-mr-0.5 h-4 w-4 inline-block transition-transform duration-200" 
-             :class="{'rotate-180 text-primary': activeDropdown === 'studentLife'}"
+             :class="{'rotate-180 text-primary': activeDropdown === 'lifeAtOzford'}"
              xmlns="http://www.w3.org/2000/svg" 
              fill="none" 
              viewBox="0 0 24 24" 
@@ -18,7 +18,7 @@
 
     <!-- Services Mega Menu Panel -->
     <div x-cloak 
-         x-show="activeDropdown === 'studentLife'"
+         x-show="activeDropdown === 'lifeAtOzford'"
          x-transition:enter="transition ease-out duration-150"
          x-transition:enter-start="opacity-100 scale-100"
          x-transition:enter-end="opacity-100 scale-100"
@@ -26,27 +26,18 @@
          x-transition:leave-start="opacity-100 scale-100"
          x-transition:leave-end="opacity-0 scale-100"
          class="absolute left-0 right-0 container z-50 min-h-96"
-         @mouseover="activeDropdown = 'studentLife'"
+         @mouseover="activeDropdown = 'lifeAtOzford'"
          style="display: none;">
         <div class="w-full min-h-96 bg-gray-100">
-            <div class="p-8 max-w-6xl mx-auto grid grid-cols-4 gap-8 text-sm">
+            <div class="p-8 max-w-5xl mx-auto grid grid-cols-4 gap-8 text-sm">
               <div>
                 <h3 class="text-base font-medium mb-2">Current Student</h3>
                 <ul class="space-y-3">
-                    {% comment %} <li>
+                    <li>
                         <a
                           href="/about/student-support/"
                           class="text-primary border-b border-transparent hover:border-primary transition-all"
                           >Student Support</a
-                        >
-                      </li>
-                    <li> {% endcomment %}
-                      <li>
-                        <a
-                          href="https://login.microsoftonline.com/"
-                          target="_blank"
-                          class="text-primary border-b border-transparent hover:border-primary transition-all"
-                          >Webmail</a
                         >
                       </li>
                     <li>
@@ -66,22 +57,28 @@
                           >HS | ELICOS (Compass)</a
                         >
                       </li>
-                      <li>
-                        <a
-                          href="/about/library/"
-                          class="text-primary border-b border-transparent hover:border-primary transition-all"
-                          >Policies &amp; Procedures</a
-                        >
-                      </li>
-                 
+                  <li>
+                    <a
+                      href="/about/library/"
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >Library</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="/about/our-people"
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >Staff</a
+                    >
+                  </li>
                   <li>
                     <a
                       href="/study/postgraduate/master-of-professional-accounting/"
                       class="text-primary border-b border-transparent hover:border-primary transition-all"
-                      >Staffs</a
+                      >Alumni</a
                     >
                   </li>
-                  {% comment %} <li>
+                  <li>
                     <a
                       href="/news-and-events/"
                       class="text-primary border-b border-transparent hover:border-primary transition-all"
@@ -94,38 +91,59 @@
                       class="text-primary border-b border-transparent hover:border-primary transition-all"
                       >Key Dates</a
                     >
-                  </li> {% endcomment %}
+                  </li>
                   
                   
                 </ul>
               </div>
               <div>
-                <h3 class="text-base font-medium mb-2">Life at Ozford</h3>
+                <h3 class="text-base font-medium mb-2">Future Students</h3>
                 <ul class="space-y-3">
-                  <li>
-                    <a
-                      href="/about/airport-pickup/"
-                      class="text-primary border-b border-transparent hover:border-primary transition-all"
-                      >Student Services &amp; Support</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      href="/about/airport-pickup/"
-                      class="text-primary border-b border-transparent hover:border-primary transition-all"
-                      >Career Hub</a
-                    >
-                  </li>
-                      <li>
+                    <li>
                         <a
-                          href="/about/airport-pickup/"
+                          href="/about/why-choose-ozford/"
                           class="text-primary border-b border-transparent hover:border-primary transition-all"
-                          >Endorsement</a
+                          >Why choose Ozford</a
                         >
                       </li>
-                      {% comment %} <li>
+                    <li>
                         <a
-                          href="/about/airport-pickup/"
+                          href="/about/why-study-in-australia/"
+                          class="text-primary border-b border-transparent hover:border-primary transition-all"
+                          >Why study in Australia</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="/about/life-in-melbourne/"
+                          class="text-primary border-b border-transparent hover:border-primary transition-all"
+                          >Life in Melbourne</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="/about/success-stories/"
+                          class="text-primary border-b border-transparent hover:border-primary transition-all"
+                          >Success Stories</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="/about/campus-facilities/"
+                          class="text-primary border-b border-transparent hover:border-primary transition-all"
+                          >Campus Facilities</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="/about/visas/"
+                          class="text-primary border-b border-transparent hover:border-primary transition-all"
+                          >Visas</a
+                        >
+                      </li>
+                      <li>
+                        <a
+                          href="/about/accommodation/"
                           class="text-primary border-b border-transparent hover:border-primary transition-all"
                           >Accommodation</a
                         >
@@ -134,42 +152,36 @@
                         <a
                           href="/about/airport-pickup/"
                           class="text-primary border-b border-transparent hover:border-primary transition-all"
-                          >Study in Australia - Melbourne</a
-                        >
-                      </li> {% endcomment %}
-                      <li>
-                        <a
-                          href="/about/airport-pickup/"
-                          class="text-primary border-b border-transparent hover:border-primary transition-all"
-                          >Campus Safety &amp; Sexual Misconduct
-                          </a
+                          >Airport Pickup</a
                         >
                       </li>
+                      
+                      
                 </ul>
               </div>
               <div>
-                <h3 class="text-base font-medium mb-2">Key Dates</h3>
+                <h3 class="text-base font-medium mb-2">Admission &amp; Entry</h3>
                 <ul class="space-y-3">
                  
                   <li>
                     <a
                       href="/admissions/how-to-apply/"
                       class="text-primary border-b border-transparent hover:border-primary transition-all"
-                      >Intakes</a
+                      >How to Apply</a
                     >
                   </li>
                   <li>
                     <a
                       href="/admissions/intakes/"
                       class="text-primary border-b border-transparent hover:border-primary transition-all"
-                      >Fee Due Dates</a
+                      >Intakes</a
                     >
                   </li>
                   <li>
                     <a
                       href="/admissions/entry-requirements/"
                       class="text-primary border-b border-transparent hover:border-primary transition-all"
-                      >Orientations</a
+                      >Entry requirements</a
                     >
                   </li>
                   {% comment %} <li>
@@ -183,50 +195,47 @@
                     <a
                       href="/admissions/pathways/"
                       class="text-primary border-b border-transparent hover:border-primary transition-all"
-                      >Events</a
+                      >Pathways</a
                     >
                   </li>
-                 
+                  <li>
+                    <a
+                      href="/admissions/fees/"
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >Fees</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="/admissions/fee-helps/"
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >Fee Helps</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="/about/agents/"
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >Find an agent</a
+                    >
+                  </li>
                 </ul>
               </div>
               <div>
-                <h3 class="text-base font-medium mb-2">International Students</h3>
+                <h3 class="text-base font-medium mb-2">Information For</h3>
                 <ul class="space-y-2">
                     <li>
                         <a
                           href="/admissions/domestic-students/"
                           class="text-primary border-b border-transparent hover:border-primary transition-all"
-                          >Apply</a
+                          >Domestic Students</a
                         >
                       </li>
-                  <li>
-                    <li>
-                        <a
-                          href="/admissions/domestic-students/"
-                          class="text-primary border-b border-transparent hover:border-primary transition-all"
-                          >Authorized Agents</a
-                        >
-                      </li>
-                    <li>
-                        <a
-                          href="/admissions/domestic-students/"
-                          class="text-primary border-b border-transparent hover:border-primary transition-all"
-                          >Accommodation</a
-                        >
-                      </li>
-
                   <li>
                     <a
                       href="/admissions/internatinal-students/"
                       class="text-primary border-b border-transparent hover:border-primary transition-all"
-                      >Study in Melbourne Australia</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      href="/admissions/domestic-students/"
-                      class="text-primary border-b border-transparent hover:border-primary transition-all"
-                      >Authorized Agents</a
+                      >International Students</a
                     >
                   </li>
                   {% comment %} <li>
@@ -243,7 +252,7 @@
                       >Events &amp; Activities</a
                     >
                   </li> {% endcomment %}
-                  {% comment %} <li>
+                  <li>
                     <a
                       href="/resources/parents/"
                       class="text-primary border-b border-transparent hover:border-primary transition-all"
@@ -256,7 +265,7 @@
                       class="text-primary border-b border-transparent hover:border-primary transition-all"
                       >Agents</a
                     >
-                  </li> {% endcomment %}
+                  </li>
                 </ul>
               </div>
             </div>

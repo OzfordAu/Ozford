@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+{% block extra_css %}
+
+{% endblock extra_css %}
+{% block body_class %}blog{% endblock %}
+{% block content %}
+{% include 'breadcrumb.html' %}
+{% include 'global_components/page_banner.html' %}
+<div class="container mx-auto mb-10 w-full pt-4 lg:pt-8 xl:pt-10">
+      <div class="flex flex-col lg:flex-row lg:justify-between lg:gap-8 container">
+        <div class="w-full lg:w-10/12">
+                {{ page.body|richtext }}
+        </div>
+        <div class="w-full lg:w-2/12 flex flex-col">
+            <ul class="flex flex-col space-y-3 list-none">
+                {% for item in page.sidebar_links  %}
+                    <li>
+                        <a href="{{item.value.url}}" {% if item.value.open_in_new_tab %}target="_blank"{% endif %} class="text-primary hover:text-link-hover inline-flex justify-start items-center lg:text-lg gap-2">
+                            <span>{{item.value.link_title}}</span>
+                            <span>
+                                {% if item.value.open_in_new_tab %}
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                                  </svg>
+                                  
+                                {% else %}
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
+                                  </svg>
+                                {% endif %}
+                                  
+                            </span>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+    </div> <!--endof main-->
+</div>
+{% endblock content %}
+{% block extra_js %}
+
+{% endblock extra_js %}

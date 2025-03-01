@@ -1,0 +1,145 @@
+<!-- team_page.html -->
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}testimonial{% endblock %}
+{% block content %}
+{% include 'breadcrumb.html' %}
+{% include 'global_components/page_banner.html' %}
+<div class="container mx-auto mb-10 w-full">
+    <div class="mt-4 lg:mt-6 xl:mt-10">
+        <div class="mx-auto w-full">
+            <div 
+                x-data="{ 
+                    showModal: false,
+                    selectedMember: {
+                        name: '',
+                        position: '',
+                        qualification: '',
+                        image: '',
+                        description: ''
+                    }
+                }"
+            >
+                <div>
+                   
+                    <!-- team_section.html -->
+
+
+                        <div class="flex flex-col p-4 lg:px-8 lg:pb-8 scroll-m-8">
+                            <div class="grid grid-cols-1 justify-items-center gap-5 sm:grid-cols-2 sm:justify-items-stretch md:grid-cols-3 md:gap-4 lg:gap-10">
+                                {% for member in page.testimonial %}
+                                    {% image member.value.profile_image fill-300x300 as img %}
+                                    <div 
+                                        class="mx-auto flex w-full flex-col items-center justify-center text-center p-4 border shadow-sm cursor-pointer hover:shadow-md transition-shadow"
+                                        @click="selectedMember = {
+                                            name: '{{ member.value.name|escapejs }}',
+                                            country: '{{ member.value.country|escapejs }}',
+                                            course: '{{ member.value.course|escapejs }}',
+                                            image: '{{ img.url }}',
+                                            description: '{{ member.value.description|safe|escapejs }}'
+                                        }; showModal = true"
+                                    >
+                                        {% if member.value.profile_image %}
+                                            <img src="{{ img.url }}" class="mb-3 inline-block h-40 w-40 rounded-full object-cover drop-shadow-md border" alt="{{ member.name }}">
+                                            {% endif %}
+                                            <div class="text-center font-semibold text-primary text-lg">{{ member.value.name|richtext }}</div>
+                                            {% if member.value.course %}
+                                                <div class="flex justify-center text-center text-sm text-gray-500">{{ member.value.course|richtext }}</div>
+                                            {% endif %}
+                                            {% if member.value.country %}
+                                                <div class="flex justify-center text-center text-sm text-gray-500">{{ member.value.country|richtext }}</div>
+                                            {% endif %}
+                                        
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                </div>
+              
+
+                <!-- Modal -->
+                <div 
+                    x-show="showModal" 
+                    x-transition 
+                    class="fixed inset-0 z-50 overflow-y-auto"
+                    style="display: none;"
+                >
+                    <!-- Modal backdrop -->
+                    <div 
+                        class="fixed inset-0 bg-black bg-opacity-50 transition-opacity"
+                        @click="showModal = false"
+                    ></div>
+
+                    <!-- Modal content -->
+                    <div class="relative min-h-screen flex items-center justify-center p-4">
+                        <div 
+                            class="relative bg-white rounded-lg shadow-xl max-w-6xl w-full mx-auto"
+                            @click.away="showModal = false"
+                        >
+                            <!-- Close button -->
+                            <button 
+                                @click="showModal = false"
+                                class="absolute right-4 top-4 text-gray-500 hover:text-gray-700"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+
+                            <!-- Modal body -->
+                            <div class="flex flex-col md:flex-row p-6 lg:p-10">
+                                <!-- Left side - Image and details -->
+                                {% comment %} <div class="w-full md:w-3/12 flex flex-col items-center justify-start">
+                                    <img 
+                                        :src="selectedMember.image" 
+                                        class="w-40 h-40 rounded-full object-cover mb-4"
+                                        :alt="selectedMember.name"
+                                    >
+                                    <h3 class="text-xl font-semibold text-center" x-text="selectedMember.name"></h3>
+                                    
+                                    
+                                </div> {% endcomment %}
+
+                                <!-- Right side - Description -->
+                                <div class="w-full mt-6 md:mt-0 md:pl-6 text-sm">
+                                    <div class="mb-4 bg-gray-100 p-4 border rounded-lg shadow-sm">
+                                        <div class="flex flex-col md:flex-row">
+                                            <div class="w-full md:w-4/12">
+                                                <div class="flex flex-col items-center jusitfy-center">
+                                                    <img 
+                                                        :src="selectedMember.image" 
+                                                        class="w-40 h-40 lg:h-52 lg:w-52 rounded-full object-cover mb-4 drop-shadow-lg border"
+                                                        :alt="selectedMember.name"
+                                                    >
+                                                    {% comment %} <h3 class="text-xl font-semibold text-center" x-text="selectedMember.name"></h3> {% endcomment %}
+                                                </div>
+                                            </div>
+                                            <div class="w-full md:w-8/12">
+                                                <div class="flex flex-col">
+                                                    <h3 class="text-xl lg:text-2xl font-semibold mb-2" x-text="selectedMember.name"></h3>
+                                                    <hr>
+                                                    <div class="flex flex-col md:flex-row mt-4 mb-2">
+                                                        <div class="w-full md:w-4/12 lg:w-3/12">Course</div>
+                                                        <div class="w-full md:w-8/12 lg:w-9/12" x-html="selectedMember.course"></div>
+                                                    </div>
+                                                    <div class="flex flex-col md:flex-row">
+                                                        <div class="w-full md:w-4/12 lg:w-3/12">Country</div>
+                                                        <div class="w-full md:w-8/12 lg:w-9/12" x-html="selectedMember.country"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div x-html="selectedMember.description"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

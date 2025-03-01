@@ -30,6 +30,8 @@
             </h1>
             {% if page.sub_title %}
                 <p class="text-white pt-2 font-light text-xl max-w-md">{{page.sub_title}}</p>
+                {% elif page.page_subtitle %}
+                <p class="text-white pt-2 font-light text-xl max-w-md">{{page.page_subtitle}}</p>
             {% endif %}
         </div>
     </div>
@@ -45,6 +47,8 @@
         </h1>
         {% if page.sub_title %}
                 <p class="text-white pt-2 font-light text-lg max-w-md">{{page.sub_title}}</p>
+                {% elif page.page_subtitle %}
+                <p class="text-white pt-2 font-light text-lg max-w-md">{{page.page_subtitle}}</p>
             {% endif %}
     </div>
 </div>
