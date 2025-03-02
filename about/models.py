@@ -9,6 +9,7 @@ from django.core.validators import URLValidator
 from django.core.exceptions import ValidationError
 from urllib.parse import urlparse, parse_qs
 from tinymce.models import HTMLField
+from home.models import LinkBlock
 
 # Create your models here.
 class MileStonesTimeline(blocks.StructBlock):
@@ -311,6 +312,7 @@ class TestimonialPage(Page):
     subpage_types = []
     max_count = 1
     page_title = models.CharField(max_length=255, blank=False, null=True)
+    page_subtitle = models.CharField(max_length=255, blank=True, null=True)
     banner_image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -330,7 +332,55 @@ class TestimonialPage(Page):
     
     content_panels = Page.content_panels + [
         FieldPanel('page_title'),
+        FieldPanel('page_subtitle'),
         FieldPanel('banner_image'),
         FieldPanel('testimonial'),
+    ]
+
+class PhotoBlock(blocks.StructBlock):
+    image = ImageChooserBlock(required=True)
+    is_active = blocks.BooleanBlock(default=True, required=False)
+    class Meta:
+        icon = 'image'
+
+class EdorsementPage(Page):
+    parent_page_types = ['about.AboutIndex']
+    subpage_types = []
+    max_count = 1
+    page_title = models.CharField(max_length=255, blank=False, null=True)
+    page_subtitle = models.CharField(max_length=255, blank=True, null=True)
+    banner_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name='banner_image'
+    )
+    logos = StreamField(
+        [
+            ('logos', PhotoBlock()),
+        ],
+        null=True,
+        blank=True,
+        use_json_field=True,
+    )
+    body = HTMLField(null=True, blank=True)
+    sidebar_links = StreamField(
+        [
+            ('sidebar_links', LinkBlock()),
+        ],
+        null=True,
+        blank=True,
+        use_json_field=True,
+    )
+    
+    content_panels = Page.content_panels + [
+        FieldPanel('page_title'),
+        FieldPanel('page_subtitle'),
+        FieldPanel('banner_image'),
+        FieldPanel('logos'),
+        FieldPanel('body'),
+        FieldPanel('sidebar_links'),
     ]
 

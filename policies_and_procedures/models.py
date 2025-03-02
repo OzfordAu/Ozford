@@ -12,7 +12,7 @@ class PoliciesAndProceduresIndexPage(Page):
     parent_page_types = ['home.HomePage']
     max_count = 1
     page_title = models.CharField(max_length=255, blank=False, null=True)
-    page_subtitle = RichTextField(blank=True, null=True)
+    page_subtitle = models.CharField(max_length=255, blank=True, null=True)
     banner_image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -80,7 +80,7 @@ class PoliciesAndProceduresBlock(blocks.StructBlock):
 class PoliciesAndProceduresSubpage(Page):
     parent_page_types = ['policies_and_procedures.PoliciesAndProceduresIndexPage']
     page_title = models.CharField(max_length=255, blank=False, null=True)
-    page_subtitle = models.CharField(max_length=255, blank=False, null=True)
+    page_subtitle = models.CharField(max_length=255, blank=True, null=True)
     banner_image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,

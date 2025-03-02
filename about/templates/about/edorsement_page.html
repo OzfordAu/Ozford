@@ -1,0 +1,17 @@
+{% extends "page-sidebar-right.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+{% block main_content %}
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-center items-center">
+    {% for item in page.logos  %}
+        {% if item.value.is_active %}
+            <div>
+                {% image item.value.image original class="w-full h-20 object-contain" %}
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+<div class="mt-4 lg:mt-6 xl:mt-10 cms-page">
+    {{ page.body|richtext }}
+
+</div>
+{% endblock main_content %}
