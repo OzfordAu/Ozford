@@ -29,7 +29,7 @@
                         <div class="flex flex-col p-4 lg:px-8 lg:pb-8 scroll-m-8">
                             <div class="grid grid-cols-1 justify-items-center gap-5 sm:grid-cols-2 sm:justify-items-stretch md:grid-cols-3 md:gap-4 lg:gap-10">
                                 {% for member in page.testimonial %}
-                                    {% image member.value.profile_image fill-300x300 as img %}
+                                    {% image member.value.profile_image fill-300x300 format-webp as img %}
                                     <div 
                                         class="mx-auto flex w-full flex-col items-center justify-center text-center p-4 border shadow-sm cursor-pointer hover:shadow-md transition-shadow"
                                         @click="selectedMember = {
@@ -41,15 +41,17 @@
                                         }; showModal = true"
                                     >
                                         {% if member.value.profile_image %}
+                                        
                                             <img src="{{ img.url }}" class="mb-3 inline-block h-40 w-40 rounded-full object-cover drop-shadow-md border" alt="{{ member.name }}">
                                             {% endif %}
                                             <div class="text-center font-semibold text-primary text-lg">{{ member.value.name|richtext }}</div>
-                                            {% if member.value.course %}
-                                                <div class="flex justify-center text-center text-sm text-gray-500">{{ member.value.course|richtext }}</div>
-                                            {% endif %}
                                             {% if member.value.country %}
-                                                <div class="flex justify-center text-center text-sm text-gray-500">{{ member.value.country|richtext }}</div>
+                                                <div class="flex justify-center text-center text-sm font-medium text-primary">{{ member.value.country|richtext }}</div>
                                             {% endif %}
+                                            {% if member.value.course %}
+                                                <div class="flex justify-center text-center text-sm font-medium text-gray-800">{{ member.value.course|richtext }}</div>
+                                            {% endif %}
+                                            
                                         
                                     </div>
                                 {% endfor %}
