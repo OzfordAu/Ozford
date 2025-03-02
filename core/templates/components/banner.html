@@ -29,9 +29,9 @@
                 
             </h1>
             {% if page.sub_title %}
-                <p class="text-white pt-2 font-light text-xl max-w-md">{{page.sub_title|richtext}}</p>
+                <div class="text-white pt-2 font-light text-xl max-w-md">{{page.sub_title|richtext}}</div>
                 {% elif page.page_subtitle %}
-                <p class="text-white pt-2 font-light text-xl max-w-md">{{page.page_subtitle|richtext}}</p>
+                <div class="text-white pt-2 font-light text-xl max-w-md">{{page.page_subtitle|richtext}}</div>
             {% endif %}
         </div>
     </div>
