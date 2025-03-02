@@ -18,7 +18,7 @@ class LinkBlock(blocks.StructBlock):
 
 class SocialMediaLinkBlock(blocks.StructBlock):
     title = blocks.CharBlock(max_length=255)
-    icon = ImageChooserBlock()
+    # icon = ImageChooserBlock()
     icon_svg = blocks.TextBlock(null=True, required=False)
     url = blocks.CharBlock(max_length=255, blank=False, null=True)
     open_in_new_tab = blocks.BooleanBlock(required=False, default=False)
