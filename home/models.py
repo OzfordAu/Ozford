@@ -42,6 +42,15 @@ class ImportantUrlBlock(blocks.StructBlock):
     open_in_new_tab = blocks.BooleanBlock(required=False, default=False)
 
 
+class AccordionBlock(blocks.StructBlock):
+    title = blocks.CharBlock(max_length=255, blank=False, null=True)
+    body = blocks.RichTextBlock(null=True, blank=True)
+
+    class Meta:
+        icon = 'circle-plus'
+        verbose_name = 'Accordion Block'
+
+
 class HomePage(Page):
     parent_page_types = ['wagtailcore.Page']
     max_count = 1
@@ -122,6 +131,7 @@ class HtmlPage(Page):
 class LinkBlock(blocks.StructBlock):
     link_title = blocks.CharBlock(max_length=255, blank=False, null=True)
     url = blocks.CharBlock(max_length=255, blank=False, null=True)
+    is_active_link = blocks.BooleanBlock(default=False, required=False)
     open_in_new_tab = blocks.BooleanBlock(required=False, default=False)
     class Meta:
         icon = 'circle-plus'
@@ -174,5 +184,43 @@ class SidebarHtmlPage(Page):
         FieldPanel('page_title'),
         FieldPanel('banner_image'),
         FieldPanel('body'),
+        FieldPanel('sidebar_links'),
+    ]
+
+
+class AccordionHtmlPage(Page):
+    page_title = models.CharField(max_length=255, null=True, blank=False)
+    banner_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name='banner_image'
+    )
+    top_content = HTMLField(null=True, blank=True)
+    accordion_blocks = StreamField(
+        [
+            ('accordion_block', AccordionBlock()),
+        ],
+        null=True,
+        blank=True,
+        use_json_field=True,
+    )
+    bottom_content = HTMLField(null=True, blank=True)
+    sidebar_links = StreamField(
+        [
+            ('link_blocks', LinkBlock()),
+        ],
+        null=True,
+        blank=True,
+        use_json_field=True,
+    )
+    content_panels = Page.content_panels + [
+        FieldPanel('page_title'),
+        FieldPanel('banner_image'),
+        FieldPanel('top_content'),
+        FieldPanel('accordion_blocks'),
+        FieldPanel('bottom_content'),
         FieldPanel('sidebar_links'),
     ]
