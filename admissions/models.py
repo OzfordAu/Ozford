@@ -11,6 +11,24 @@ from tinymce.models import HTMLField
 class AdmissionIndex(Page):
     parent_page_types = ['home.HomePage', 'home.InternationalPage', 'home.DomesticPage']
     max_count = 3
+    template = 'home/html_page.html'
+    page_title = models.CharField(max_length=255, null=True, blank=False)
+    page_subtitle = models.CharField(max_length=255, null=True, blank=True)
+    banner_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name='banner_image'
+    )
+    body = HTMLField(null=True, blank=True)
+    content_panels = Page.content_panels + [
+        FieldPanel('page_title'),
+        FieldPanel('page_subtitle'),
+        FieldPanel('banner_image'),
+        FieldPanel('body'),
+    ]
 
     # def get_context(self, request, *args, **kwargs):
     #     context = super().get_context(request, *args, **kwargs)
