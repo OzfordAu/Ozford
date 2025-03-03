@@ -1,11 +1,11 @@
 {% extends "page-fullwidth.html" %}
 {% load static wagtailcore_tags wagtailimages_tags %}
 {% block main_content %}
-<div class="mb-2">
-    {{page.intro|richtext}}
-</div>
 <div class="container mx-auto mb-10 w-full">
     <div class="mt-4 lg:mt-6 xl:mt-10">
+        <div class="mb-2">
+            {{page.intro|richtext}}
+        </div>
         <ul class="flex flex-col space-y-3 list-none">
             {% for item in posts  %}
                 <li>
