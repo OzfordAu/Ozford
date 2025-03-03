@@ -15,6 +15,7 @@ urlpatterns = [
     path("documents/", include(wagtaildocs_urls)),
     path("search/", search_views.search, name="search"),
     path('tinymce/', include('tinymce.urls')),
+    path('agents/', include('agents.urls')),
     # path('news-and-events/<int:page_id>/', blog_index, name='blog_index'),
     
 ]

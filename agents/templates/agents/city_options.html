@@ -1,0 +1,7 @@
+
+    <option value="">All Cities</option>
+    {% for city in cities %}
+    <option value="{{ city.id }}" :selected="selectedCity == '{{ city.id }}'">
+        {{ city.name }}
+    </option>
+    {% endfor %}
