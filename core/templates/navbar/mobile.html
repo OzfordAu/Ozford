@@ -11,6 +11,7 @@
                 { label: 'Student Life', type: 'submenu', target: 'studentLife' },
                 { label: 'Admission &amp; Entry', type: 'submenu', target: 'admission' },
                 { label: 'About', type: 'submenu', target: 'about' },
+                { label: 'Login', type: 'submenu', target: 'login' },
                 {% comment %} { label: 'About', type: 'submenu', target: 'about' } {% endcomment %}
             ]
         },
@@ -60,16 +61,62 @@
                 { label: 'English for Secondary School Preparation (ESSP)', type: 'link', href: '/study/english-language-center/english-for-secondary-school-preparation/' }
             ]
         },
+        studentLife: {
+            title: 'Student Life',
+            items: [
+                { label: 'Current Student', type: 'submenu', target: 'studentLifeCurrentStudent' },
+                { label: 'Life at Ozford', type: 'submenu', target: 'studentLifeLifeAtOzford' },
+                { label: 'Key Dates', type: 'submenu', target: 'studentLifeKeyDates' },
+                { label: 'International Students', type: 'submenu', target: 'studentLifeInternationalStudents' },
+            ]
+        },
+        studentLifeCurrentStudent: {
+            title: 'Current Student - Student Life',
+            items: [
+                { label: 'Webmail', type: 'link', href: 'https://login.microsoftonline.com/' },
+                { label: 'OIHE (Mooodle)', type: 'link', href: 'https://oihe.ozford.edu.au/login/index.php' },
+                { label: 'HS | ELICOS (Compass)', type: 'link', href: 'https://ozford-vic.compass.education/login.aspx?sessionstate=disabled' },
+                { label: 'Policies &amp; Procedures', type: 'link', href: '/policies-and-procedures/' },
+                { label: 'Staffs', type: 'link', href: '/about/our-people/' },
+            ]
+        },
+        studentLifeLifeAtOzford: {
+            title: 'Life at Ozford - Student Life',
+            items: [
+                { label: 'Student Services &amp; Support', type: 'link', href: '/about/student-services-and-support/' },
+                { label: 'Career Hub', type: 'link', href: '/about/career-hub/' },
+                { label: 'Endorsement', type: 'link', href: '/about/endorsement/' },
+                { label: 'Campus Safety &amp; Sexual Misconduct', type: 'link', href: '/about/campus-safety-and-sexual-misconduct/' },
+            ]
+        },
+        studentLifeKeyDates: {
+            title: 'Key Dates - Student Life',
+            items: [
+              { label: 'Intakes', type: 'link', href: '/admissions/intakes/' },  
+              { label: 'Fee Due Dates', type: 'link', href: '/admissions/fees/#payment_due_dates' },  
+              { label: 'Orientations', type: 'link', href: '/admissions/orientations/' },  
+              { label: 'Events', type: 'link', href: '/news-and-events/events/' },  
+            ]
+        },
+        studentLifeInternationalStudents: {
+            title: 'International Students - Student Life',
+            items: [
+              { label: 'Apply', type: 'link', href: '/admissions/how-to-apply/international-student/' }, 
+              { label: 'Authorized Agents', type: 'link', href: '/about/authorized-agents/' }, 
+              { label: 'Accommodation', type: 'link', href: '/admissions/accommodation/' }, 
+              { label: 'Study in Melbourne Australia', type: 'link', href: '/about/study-in-melbourne-australia/' }, 
+            ]
+        },
         admission: {
             title: 'Admission',
             items: [
-                { label: 'Higher Education', type: 'submenu', target: 'admissionHigherEducatioin' },
+                { label: 'Higher Education', type: 'submenu', target: 'admissionHigherEducation' },
                 { label: 'High School', type: 'submenu', target: 'admissionHighSchool' },
                 { label: 'English Language Center', type: 'submenu', target: 'admissionEnglish' },
                 { label: 'Information', type: 'submenu', target: 'admissionInformation' },
             ]
         },
-        admissionHigherEducatioin: {
+        admissionHigherEducation: {
             title: 'Admission &amp; Entry - Higher Education',
             items: [
                 { label: 'Why OIHE?', type: 'link', href: '/admissions/higher-education/why-ozford-institute-of-higher-education/' },
@@ -105,6 +152,94 @@
                 { label: '2023 High School Annual Report', type: 'link', href: '/admissions/high-school/annual-report/' },
             ]
         },
+        admissionEnglish: {
+            title: 'Admission &amp; Entry - English Language Center',
+            items: [
+                { label: 'Why Ozford English Language', type: 'link', href: '/admissions/english-language-center/why-ozford-english-language/'},
+                { label: 'Courses', type: 'link', href: '/admissions/english-language-center/courses/'},
+                { label: 'Fees', type: 'link', href: '/admissions/fees/#fees'},
+                { label: 'Policies &amp; Procedures', type: 'link', href: '/policies-and-procedures/english-language-center/'},
+                { label: 'Student Handbook', type: 'link', href: '/admissions/english-language-center/student-handbook/'},
+                { label: 'Pre-Enrolment Information', type: 'link', href: '/admissions/english-language-center/pre-enrolment/'},
+                { label: 'Terms &amp; Conditions', type: 'link', href: '/admissions/terms-and-conditions/english-language-center/'},
+                { label: 'Course Guide', type: 'link', href: '/admissions/english-language-center/course-guide/'},
+                { label: 'Intakes', type: 'link', href: '/admissions/intakes-and-term-dates/english-language-center/'},
+                { label: 'Orientation', type: 'link', href: '/admissions/orientations/english-language-center/'},
+                { label: 'English &amp; Cultural Study Tour', type: 'link', href: '/admissions/english-language-center/english-and-cultural-study-tour/'},
+            ]
+        },
+        admissionInformation: {
+            title: 'Admission &amp; Entry - Information',
+            items: [
+                { label: 'Apply Now', type: 'link', href: '/admissions/how-to-apply/'},
+                { label: 'Fees', type: 'link', href: '/admissions/fees/'},
+                { label: 'Payment Methods', type: 'link', href: '/admissions/fees/#payment_methods'},
+                { label: 'Pathyways', type: 'link', href: '/admissions/pathways/'},
+                { label: 'Orientations', type: 'link', href: '/admissions/orientations/'},
+                { label: 'Authorized Agents', type: 'link', href: '/about/authorized-agents/'},
+            ]
+        },
+        about: {
+            title: 'About us',
+            items: [
+                { label: 'About OZFORD', type: 'submenu', target: 'aboutOzford' },
+                { label: 'Life at OZFORD', type: 'submenu', target: 'aboutLifeAtOzford' },
+                { label: 'Terms &amp; Policies', type: 'submenu', target: 'aboutTermsAndPolicies' },
+                { label: 'Engage', type: 'submenu', target: 'aboutEngage' },
+            ]
+        },
+
+        aboutOzford: {
+            title: 'About OZFORD',
+            items: [
+                { label: 'About OZFORD', type: 'link', href: '/about/' },
+                { label: 'Our Philosophy', type: 'link', href: '/about/our-philosophy/' },
+                { label: 'Gallery', type: 'link', href: '/about/gallery/' },
+                { label: 'Testimonials', type: 'link', href: '/about/testimonials/' },
+                { label: 'Our Stories', type: 'link', href: '/about/our-stories/' },
+                { label: 'Policies &amp; Procedures', type: 'link', href: '/about/policies-and-procedures/' },
+            ]
+        },
+        
+        aboutLifeAtOzford: {
+            title: 'Life at OZFORD',
+            items: [
+                { label: 'Student Services &amp; Support', type: 'link', href: '/about/student-services-and-support/' },
+                { label: 'Career Hub', type: 'link', href: '/about/career-hub/' },
+                { label: 'Endorsement', type: 'link', href: '/about/endorsement/' },
+                { label: 'Campus Safety &amp; Sexual Misconduct', type: 'link', href: '/about/campus-safety-and-sexual-misconduct/' },
+            ]
+        },
+        
+        aboutTermsAndPolicies: {
+            title: 'Terms &amp; Policies',
+            items: [
+                { label: 'Terms &amp; Conditions', type: 'link', href: '/about/terms-and-conditions/' },
+                { label: 'ESOS Act', type: 'link', href: 'https://www.legislation.gov.au/F2017L01182/latest/text' },
+                { label: 'Privacy Statement', type: 'link', href: '/about/privacy-statements/' },
+                { label: 'Disclaimer', type: 'link', href: '/about/disclaimer/' },
+                { label: 'Policies &amp; Procedures', type: 'link', target: '/policies-and-procedures/' },
+            ]
+        },   
+        aboutEngage: {
+            title: 'Engage',
+            items: [
+                { label: 'News &amp; Events', type: 'link', href: '/news-and-events/' },
+                { label: 'Contact us', type: 'link', href: '/about/contact-us/' },
+                { label: 'Job Vacancy', type: 'link', href: '/about/careers/' },
+                { label: 'FAQ\'s', type: 'link', href: '/about/faq/' },
+            ]
+        },
+        login: {
+            title: 'Login',
+            items: [
+                { label: 'Webmail', type: 'link', href: '/webmail/' },
+                { label: 'OIHE (Moodle)', type: 'link', href: 'https://oihe.ozford.edu.au/login/index.php' },
+                { label: 'HS | ELICOS (Compass)', type: 'link', href: 'https://ozford-vic.compass.education/login.aspx' },
+                { label: 'Self Service (Staff Login)', type: 'link', href: 'https://selfservice.ozford.edu.au:9251/authorization.do' },
+                { label: 'Agent', type: 'link', href: '/agent-login/' },
+            ]
+        } 
     }
 }" 
 class="lg:hidden relative z-50">
@@ -114,14 +249,14 @@ class="lg:hidden relative z-50">
         <div class="w-full bg-primary-dark text-white text-xs py-2">
             <div class="container">
                 <ul class="flex justify-end items-center space-x-3">
-                    <li><a href="https://selfservice.ozford.edu.au:9251/">Staffs</a></li>
+                    {% comment %} <li><a href="https://selfservice.ozford.edu.au:9251/">Staffs</a></li> {% endcomment %}
                     <li><a href="/news-and-events/">News &amp; Events</a></li>
                     <li><a href="/about/contact-us/">Contact</a></li>
-                    <li>
+                    {% comment %} <li>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                         </svg>
-                    </li>
+                    </li> {% endcomment %}
                 </ul>
             </div>
         </div>
