@@ -8,7 +8,9 @@
             items: [
                 { label: 'Home', type: 'link', href: '/' },
                 { label: 'Study', type: 'submenu', target: 'study' },
-                { label: 'Admission', type: 'submenu', target: 'admission' },
+                { label: 'Student Life', type: 'submenu', target: 'studentLife' },
+                { label: 'Admission &amp; Entry', type: 'submenu', target: 'admission' },
+                { label: 'About', type: 'submenu', target: 'about' },
                 {% comment %} { label: 'About', type: 'submenu', target: 'about' } {% endcomment %}
             ]
         },
@@ -61,10 +63,48 @@
         admission: {
             title: 'Admission',
             items: [
-                { label: 'Fees', type: 'link', href: '/admissions/fees/' },
-                { label: 'Intakes', type: 'link', href: '/admissions/intakes/' },
+                { label: 'Higher Education', type: 'submenu', target: 'admissionHigherEducatioin' },
+                { label: 'High School', type: 'submenu', target: 'admissionHighSchool' },
+                { label: 'English Language Center', type: 'submenu', target: 'admissionEnglish' },
+                { label: 'Information', type: 'submenu', target: 'admissionInformation' },
             ]
-        }
+        },
+        admissionHigherEducatioin: {
+            title: 'Admission &amp; Entry - Higher Education',
+            items: [
+                { label: 'Why OIHE?', type: 'link', href: '/admissions/higher-education/why-ozford-institute-of-higher-education/' },
+                { label: 'Pathways', type: 'link', href: '/admissions/pathways/' },
+                { label: 'Course Guide', type: 'link', href: '/admissions/higher-education/course-guide/' },
+                { label: 'Intakes &amp; Timester Dates', type: 'link', href: '/admissions/intakes-and-term-dates/higher-education/' },
+                { label: 'Orientation', type: 'link', href: '/admissions/orientations/higher-education/' },
+                { label: 'Entry Requirements', type: 'link', href: '/admissions/entry-requirements/higher-education/' },
+                { label: 'Pre-Enrolment', type: 'link', href: '/admissions/higher-education/pre-enrolment/' },
+                { label: 'How to Apply', type: 'link', href: '/admissions/how-to-apply/higher-education/' },
+                { label: 'Terms &amp; Conditions', type: 'link', href: '/admissions/terms-and-conditions/higher-education/' },
+                { label: 'Student Handbook', type: 'link', href: '/admissions/higher-education/student-handbook/' },
+                { label: 'Policies &amp; Procedures', type: 'link', href: '/policies-and-procedures/higher-education/' },
+            ]
+        },
+        admissionHighSchool: {
+            title: 'Admission &amp; Entry - High School',
+            items: [
+                { label: 'Why Ozford College?', type: 'link', href: '/admissions/high-school/why-ozford-college/' },
+                { label: 'Year 10', type: 'link', href: '/study/high-school/year-10-high-school-program/' },
+                { label: 'Victorian Certificate of Education (VCE)', type: 'link', href: '/study/high-school/victorian-certificate-of-education-vce/' },
+                { label: 'High School Subjects', type: 'link', href: '/admissions/high-school/subjects/' },
+                { label: 'Pathways', type: 'link', href: '/admissions/pathways/' },
+                { label: 'Course Guide', type: 'link', href: '/admissions/high-school/course-guide/' },
+                { label: 'Entry Requirements', type: 'link', href: '/admissions/entry-requirments/high-school' },
+                { label: 'Fees', type: 'link', href: '/admissions/fees/#fees' },
+                { label: 'Policies &amp; Procedures', type: 'link', href: '/policies-and-procedures/high-school/' },
+                { label: 'HS Student Handbook', type: 'link', href: '/admissions/high-school/student-handbook/' },
+                { label: 'HS Pre-Enrolment Information', type: 'link', href: '/admissions/high-school/pre-enrolment/' },
+                { label: 'Terms &amp; Conditions', type: 'link', href: '/admissions/terms-and-conditions/high-school/' },
+                { label: 'Intakes &amp; Term Dates', type: 'link', href: '/admissions/intakes-and-term-dates/high-school/' },
+                { label: 'Orientation', type: 'link', href: '/admissions/orientations/high-school/' },
+                { label: '2023 High School Annual Report', type: 'link', href: '/admissions/high-school/annual-report/' },
+            ]
+        },
     }
 }" 
 class="lg:hidden relative z-50">
@@ -127,23 +167,9 @@ class="lg:hidden relative z-50">
             </div>
         </div>
     </div>
-
-    <!-- Menu Panel - Starts after header (90px) -->
     <div x-show="menuStack.length > 0" 
         class="fixed inset-0 z-40 mt-[90px] text-sm"
         @keydown.escape.window="menuStack = []">
-        
-        {% comment %} <!-- Backdrop -->
-        <div class="fixed inset-0 bg-black/20" 
-             @click="menuStack = []"
-             x-transition:enter="transition-opacity duration-300"
-             x-transition:enter-start="opacity-0"
-             x-transition:enter-end="opacity-100"
-             x-transition:leave="transition-opacity duration-300"
-             x-transition:leave-start="opacity-100"
-             x-transition:leave-end="opacity-0"></div> {% endcomment %}
-
-        <!-- Sliding Menus Container -->
         <div class="fixed inset-0 overflow-hidden">
             <div class="absolute inset-0 overflow-hidden">
                 <div class="fixed inset-y-0 right-0 flex w-full top-[90px]">
@@ -173,11 +199,6 @@ class="lg:hidden relative z-50">
                 </div>
             </div>
                 </template>
-                {% comment %} <template x-if="menuStack.length === 1">
-                    <span x-text="menus[currentMenu].title"></span>
-                </template> {% endcomment %}
-            
-
             <!-- Menu Items with Slide Transitions -->
             <div class="overflow-y-auto h-full bg-white">
                 <div class="relative"
@@ -216,7 +237,6 @@ class="lg:hidden relative z-50">
             </div>
         </div>
     </div>
-
     <!-- Spacer to push content below fixed header -->
     <div class="h-[90px]"></div>
 </div>
