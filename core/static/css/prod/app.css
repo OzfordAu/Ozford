@@ -1824,6 +1824,10 @@ body {
   text-wrap: pretty;
 }
 
+.break-all {
+  word-break: break-all;
+}
+
 .rounded-2xl {
   border-radius: 1rem;
 }

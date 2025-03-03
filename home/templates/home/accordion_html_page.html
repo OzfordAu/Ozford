@@ -3,7 +3,7 @@
 
 {% block main_content %}
 {% if page.top_content %}
-<div class="mb-4 lg:mb-6 xl:mb-10 cms-page">
+<div class="mb-4 lg:mb-6 xl:mb-10 cms-page break-all overflow-hidden">
     {{page.top_content|richtext}}
 </div>
 {% endif %}
@@ -37,7 +37,7 @@
     </div>
 {% endif %}
 {% if page.bottom_content %}
-    <div class="mb-4 lg:mb-6 xl:mb-10 cms-page">
+    <div class="mb-4 lg:mb-6 xl:mb-10 cms-page break-all overflow-hidden">
         {{page.bottom_content|richtext}}
     </div>
 {% endif %}
