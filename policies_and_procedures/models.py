@@ -11,6 +11,7 @@ from home.models import LinkBlock
 class PoliciesAndProceduresIndexPage(Page):
     parent_page_types = ['home.HomePage']
     max_count = 1
+    template = 'page-sidebar-right.html'
     page_title = models.CharField(max_length=255, blank=False, null=True)
     page_subtitle = models.CharField(max_length=255, blank=True, null=True)
     banner_image = models.ForeignKey(
@@ -21,7 +22,7 @@ class PoliciesAndProceduresIndexPage(Page):
         related_name='+',
         verbose_name='banner_image'
     )
-    intro = HTMLField(null=True, blank=True)
+    body = HTMLField(null=True, blank=True)
     sidebar_links = StreamField(
         [
             ('link_blocks', LinkBlock()),
@@ -35,7 +36,7 @@ class PoliciesAndProceduresIndexPage(Page):
         FieldPanel('page_title'),
         FieldPanel('page_subtitle'),
         FieldPanel('banner_image'),
-        FieldPanel('intro'),
+        FieldPanel('body'),
         FieldPanel('sidebar_links'),
     ]
 

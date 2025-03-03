@@ -112,6 +112,7 @@ class HomePage(Page):
     
 class HtmlPage(Page):
     page_title = models.CharField(max_length=255, null=True, blank=False)
+    page_subtitle = models.CharField(max_length=255, null=True, blank=True)
     banner_image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -123,6 +124,7 @@ class HtmlPage(Page):
     body = HTMLField()
     content_panels = Page.content_panels + [
         FieldPanel('page_title'),
+        FieldPanel('page_subtitle'),
         FieldPanel('banner_image'),
         FieldPanel('body'),
     ]
