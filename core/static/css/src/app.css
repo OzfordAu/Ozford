@@ -38,6 +38,11 @@
     list-style-position: outside; /* Equivalent to list-outside */
     padding-left: 1.25rem; /* Equivalent to pl-5 */
   }
+
+  .cms-page ul.list-none {
+    list-style-type: none !important;
+    padding-left: 0;
+  }
   
 
   .cms-page ol, .cms-page-bg ol {

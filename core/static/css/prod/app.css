@@ -988,14 +988,14 @@ body {
   margin-bottom: 1rem;
 }
 
-.my-8 {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-}
-
 .my-6 {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
+}
+
+.my-8 {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .-ml-2 {
@@ -1311,10 +1311,6 @@ body {
 
 .h-screen {
   height: 100vh;
-}
-
-.h-32 {
-  height: 8rem;
 }
 
 .max-h-\[400px\] {
@@ -2317,11 +2313,6 @@ body {
   padding-bottom: 2rem;
 }
 
-.py-16 {
-  padding-top: 4rem;
-  padding-bottom: 4rem;
-}
-
 .pb-1 {
   padding-bottom: 0.25rem;
 }
@@ -2779,6 +2770,11 @@ body {
   /* Equivalent to list-outside */
   padding-left: 1.25rem;
   /* Equivalent to pl-5 */
+}
+
+.cms-page ul.list-none {
+  list-style-type: none !important;
+  padding-left: 0;
 }
 
 .cms-page ol, .cms-page-bg ol {
@@ -3248,21 +3244,6 @@ body {
     grid-column: span 2 / span 2;
   }
 
-  .md\:my-6 {
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .md\:my-8 {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-  }
-
-  .md\:my-12 {
-    margin-top: 3rem;
-    margin-bottom: 3rem;
-  }
-
   .md\:my-10 {
     margin-top: 2.5rem;
     margin-bottom: 2.5rem;
@@ -3271,6 +3252,11 @@ body {
   .md\:my-4 {
     margin-top: 1rem;
     margin-bottom: 1rem;
+  }
+
+  .md\:my-6 {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
   }
 
   .md\:mb-8 {
@@ -3283,18 +3269,6 @@ body {
 
   .md\:mt-6 {
     margin-top: 1.5rem;
-  }
-
-  .md\:mb-4 {
-    margin-bottom: 1rem;
-  }
-
-  .md\:mb-6 {
-    margin-bottom: 1.5rem;
-  }
-
-  .md\:mb-12 {
-    margin-bottom: 3rem;
   }
 
   .md\:flex {
@@ -3332,14 +3306,6 @@ body {
 
   .md\:w-8\/12 {
     width: 66.666667%;
-  }
-
-  .md\:w-10\/12 {
-    width: 83.333333%;
-  }
-
-  .md\:w-2\/12 {
-    width: 16.666667%;
   }
 
   .md\:w-9\/12 {
@@ -3401,18 +3367,13 @@ body {
     padding-right: 0.5rem;
   }
 
-  .md\:px-10 {
-    padding-left: 2.5rem;
-    padding-right: 2.5rem;
-  }
-
-  .md\:py-20 {
-    padding-top: 5rem;
-    padding-bottom: 5rem;
-  }
-
   .md\:pl-6 {
     padding-left: 1.5rem;
+  }
+
+  .md\:text-3xl {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
   }
 
   .md\:text-4xl {
@@ -3425,6 +3386,11 @@ body {
     line-height: 1;
   }
 
+  .md\:text-lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+
   .md\:text-sm {
     font-size: 0.875rem;
     line-height: 1.25rem;
@@ -3432,16 +3398,6 @@ body {
 
   .md\:text-xl {
     font-size: 1.25rem;
-    line-height: 1.75rem;
-  }
-
-  .md\:text-3xl {
-    font-size: 1.875rem;
-    line-height: 2.25rem;
-  }
-
-  .md\:text-lg {
-    font-size: 1.125rem;
     line-height: 1.75rem;
   }
 }
@@ -3475,6 +3431,11 @@ body {
     order: 2;
   }
 
+  .lg\:my-14 {
+    margin-top: 3.5rem;
+    margin-bottom: 3.5rem;
+  }
+
   .lg\:my-20 {
     margin-top: 5rem;
     margin-bottom: 5rem;
@@ -3493,11 +3454,6 @@ body {
   .lg\:my-8 {
     margin-top: 2rem;
     margin-bottom: 2rem;
-  }
-
-  .lg\:my-14 {
-    margin-top: 3.5rem;
-    margin-bottom: 3.5rem;
   }
 
   .lg\:mb-0 {
@@ -3550,10 +3506,6 @@ body {
 
   .lg\:mt-8 {
     margin-top: 2rem;
-  }
-
-  .lg\:mb-16 {
-    margin-bottom: 4rem;
   }
 
   .lg\:block {
@@ -3841,10 +3793,6 @@ body {
     padding-top: 0px;
   }
 
-  .lg\:pt-8 {
-    padding-top: 2rem;
-  }
-
   .lg\:text-2xl {
     font-size: 1.5rem;
     line-height: 2rem;
@@ -4088,10 +4036,6 @@ body {
 
   .xl\:pt-6 {
     padding-top: 1.5rem;
-  }
-
-  .xl\:pt-10 {
-    padding-top: 2.5rem;
   }
 
   .xl\:text-3xl {
