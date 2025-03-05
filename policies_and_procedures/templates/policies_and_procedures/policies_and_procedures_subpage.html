@@ -4,7 +4,7 @@
   <div class="flex flex-col w-full">
     {% for block in page.policies_and_procedures %}
       <div>
-        <h2 class="font-semibold text-lg md:text-3xl text-primary mb-2">{{ block.value.title }}</h2>
+        {% if block.value.title %}<h2 class="font-semibold text-lg md:text-3xl text-primary mb-2">{{ block.value.title }}</h2>{% endif %}
         <div>
           {% for item in block.value.policy_and_procedure %}
             <div class="mb-2">

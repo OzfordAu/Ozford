@@ -52,7 +52,7 @@ class PoliciesAndProceduresIndexPage(Page):
 
 
 class PolicyAndProcedureItemBlock(blocks.StructBlock):
-    title = blocks.CharBlock(max_length=255)
+    title = blocks.CharBlock(max_length=255, null=True, blank=True)
     DISPLAY_DOC_TYPE = {
         ('doc', 'Document'),
         ('link', 'Link'),
