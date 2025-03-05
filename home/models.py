@@ -7,6 +7,7 @@ from wagtail.admin.panels import FieldPanel
 from blog.models import BlogPage
 from courses.models import HigherEducationCoursePage
 from tinymce.models import HTMLField
+from wagtail.documents.blocks import DocumentChooserBlock
 
 
 class BannerCarouselBlock(blocks.StructBlock):
@@ -263,3 +264,56 @@ class AccordionHtmlPage(Page):
         FieldPanel('bottom_content'),
         FieldPanel('sidebar_links'),
     ]
+
+class DocumentItemBlock(blocks.StructBlock):
+    DISPLAY_DOC_TYPE = {
+        ('doc', 'Document'),
+        ('link', 'Link'),
+    }
+    title = blocks.CharBlock(max_length=255)
+    document = DocumentChooserBlock(required=False)
+    link = blocks.CharBlock(max_length=255, required=False)
+    display_doc_type = blocks.ChoiceBlock(choices=DISPLAY_DOC_TYPE, required=False, default='doc')
+    open_in_new_tab = blocks.BooleanBlock(required=False, default=False)
+
+    class Meta:
+        icon = 'user'
+        # template = 'blocks/team_member_block.html'
+
+class DocumentPageSidebar(Page):
+    page_title = models.CharField(max_length=255, null=True, blank=False)
+    page_subtitle = models.CharField(max_length=255, null=True, blank=True)
+    banner_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name='banner_image'
+    )
+    page_intro =HTMLField(null=True, blank=True)
+    document_block = StreamField(
+        [
+            ('document_block', DocumentItemBlock()),
+        ],
+        null=True,
+        blank=True,
+        use_json_field=True,
+    )
+    sidebar_links = StreamField(
+        [
+            ('link_blocks', LinkBlock()),
+        ],
+        null=True,
+        blank=True,
+        use_json_field=True,
+    )
+    content_panels = Page.content_panels + [
+        FieldPanel('page_title'),
+        FieldPanel('page_subtitle'),
+        FieldPanel('page_intro'),
+        FieldPanel('document_block'),
+        FieldPanel('sidebar_links'),
+    ]
+
+    

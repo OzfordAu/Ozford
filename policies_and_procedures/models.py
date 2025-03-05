@@ -69,7 +69,7 @@ class PolicyAndProcedureItemBlock(blocks.StructBlock):
         # template = 'blocks/team_member_block.html'
 
 class PoliciesAndProceduresBlock(blocks.StructBlock):
-    title = blocks.CharBlock(max_length=255, required=False)
+    title = blocks.CharBlock(max_length=255)
     policy_and_procedure = blocks.ListBlock(PolicyAndProcedureItemBlock())
 
     class Meta:
