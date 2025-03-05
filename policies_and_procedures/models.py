@@ -52,7 +52,7 @@ class PoliciesAndProceduresIndexPage(Page):
 
 
 class PolicyAndProcedureItemBlock(blocks.StructBlock):
-    title = blocks.CharBlock(max_length=255, null=True, blank=True)
+    title = blocks.CharBlock(max_length=255)
     DISPLAY_DOC_TYPE = {
         ('doc', 'Document'),
         ('link', 'Link'),
@@ -69,7 +69,7 @@ class PolicyAndProcedureItemBlock(blocks.StructBlock):
         # template = 'blocks/team_member_block.html'
 
 class PoliciesAndProceduresBlock(blocks.StructBlock):
-    title = blocks.CharBlock(max_length=255)
+    title = blocks.CharBlock(max_length=255, required=False)
     policy_and_procedure = blocks.ListBlock(PolicyAndProcedureItemBlock())
 
     class Meta:
