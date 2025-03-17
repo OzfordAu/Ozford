@@ -54,7 +54,7 @@ class DocumentLinkBlock(blocks.StructBlock):
         ('doc', 'Document'),
         ('link', 'Link'),
     }
-    title = blocks.CharBlock(max_length=255, default='Policy')
+    title = blocks.CharBlock(max_length=255)
     document = DocumentChooserBlock(required=False, null=True)
     url = blocks.URLBlock(required=False, null=True)
     display_doc_type = blocks.ChoiceBlock(choices=DISPLAY_DOC_TYPE, required=False, default='doc')
