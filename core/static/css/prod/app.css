@@ -4132,6 +4132,10 @@ body {
     width: 14rem;
   }
 
+  .\32xl\:max-w-2xl {
+    max-width: 42rem;
+  }
+
   .\32xl\:whitespace-nowrap {
     white-space: nowrap;
   }
