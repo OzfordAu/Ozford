@@ -54,11 +54,11 @@ class DocumentLinkBlock(blocks.StructBlock):
         ('doc', 'Document'),
         ('link', 'Link'),
     }
-    title = blocks.CharBlock(max_length=255)
+    title = blocks.CharBlock(max_length=255, default='Policy')
     document = DocumentChooserBlock(required=False, null=True)
     url = blocks.URLBlock(required=False, null=True)
     display_doc_type = blocks.ChoiceBlock(choices=DISPLAY_DOC_TYPE, required=False, default='doc')
-    open_in_new_tab = blocks.BooleanBlock(required=False, default=False)
+    open_in_new_tab = blocks.BooleanBlock(required=False, default=True)
 
 class PolicyListBlock(blocks.StructBlock):
     title = blocks.CharBlock(max_length=255)
