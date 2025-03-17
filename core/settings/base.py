@@ -188,6 +188,8 @@ WAGTAILDOCS_EXTENSIONS = ['csv', 'docx', 'key', 'odt', 'pdf', 'pptx', 'rtf', 'tx
 
 WAGTAILIMAGES_EXTENSIONS = ["gif", "jpg", "jpeg", "png", "webp", "svg"]
 
+DATA_UPLOAD_MAX_NUMBER_FIELDS = None
+
 TINYMCE_DEFAULT_CONFIG = {
     "height": "320px",
     "width": "960px",
