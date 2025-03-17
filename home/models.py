@@ -271,7 +271,7 @@ class DocumentItemBlock(blocks.StructBlock):
         ('link', 'Link'),
     }
     title = blocks.CharBlock(max_length=255)
-    document = DocumentChooserBlock(required=False)
+    document = DocumentChooserBlock(required=False, max_length=255)
     link = blocks.CharBlock(max_length=255, required=False)
     display_doc_type = blocks.ChoiceBlock(choices=DISPLAY_DOC_TYPE, required=False, default='doc')
     open_in_new_tab = blocks.BooleanBlock(required=False, default=False)
