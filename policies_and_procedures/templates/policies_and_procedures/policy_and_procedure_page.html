@@ -6,12 +6,12 @@
 {% endif %}
   <div class="flex flex-col w-full">
     {% for block in page.policies_and_procedures %}
-      <div>
+      <div class="mb-4">
         {% if block.value.title %}<h2 class="font-semibold text-lg md:text-xl mb-1 text-primary">{{ block.value.title }}</h2>{% endif %}
         <div>
           {% for list in block.value.policy_block %}
-            <div class="mb-2">
-                <h3 class="md:text-lg font-medium">{{ list.title }}</h3>
+            <div class="mb-2 bg-gray-100 p-2 md:p-4">
+                <h3 class="md:text-lg font-medium leading-tight">{{ list.title }}</h3>
                 <ul class="flex flex-col md:flex-row justify-start items-center space-y-2 md:space-y-0 md:space-x-4 lg:space-x-6">
                     {% for item in list.policy_list  %}
                         {% if item.display_doc_type == 'doc' %}
@@ -45,7 +45,7 @@
           {% endfor %}
         </div>
       </div>
-      <hr class="my-2 md:my-4">
+     
     {% endfor %}
   </div>
 {% endblock %}
