@@ -4,11 +4,16 @@
 <div class="flex flex-col lg:flex-row gap-4 lg:space-x-20">
     <div class="w-full lg:w-1/2">{{page.intro|richtext}}</div>
     <div class="hidden lg:block w-full lg:w-1/2">
-            {% image page.intro_image original class="inline-block h-full w-full max-h-[400px] object-cover" %}
+            {% image page.intro_image original class="inline-block w-full h-ful max-h-[700px] object-cover" %}
     </div>
 </div>
-
-<div class="block w-full max-w-6xl mx-auto mt-4 lg:mt-6 xl:mt-10">
+<div class="flex flex-col lg:flex-row gap-4 lg:space-x-20 mt-6 md:mt-8 lg:mt-14">
+    <div class="hidden lg:block w-full lg:w-1/2">
+            {% image page.body_image original class="inline-block w-full h-ful max-h-[750px] object-cover" %}
+    </div>
+    <div class="w-full lg:w-1/2">{{page.body|richtext}}</div>
+</div>
+<div class="block w-full mx-auto mt-4 md:mt:8 lg:mt-14 bg-gray-100 p-4 md:p-6 lg:p-10">
     <h2 class="w-full text-center text-3xl font-semibold my-4">Milestones</h2>
     <!-- Timeline container -->
     <div class="relative">

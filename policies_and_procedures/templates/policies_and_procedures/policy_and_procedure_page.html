@@ -1,13 +1,33 @@
 {% extends 'page-sidebar-right.html' %}
 {% load static wagtailcore_tags wagtailimages_tags %}
 {% block main_content %}
+{% if page.intro %}
+<div class="mb-4">{{ page.intro|richtext }}</div>
+{% endif %}
   <div class="flex flex-col w-full">
     {% for block in page.policies_and_procedures %}
       <div>
         {% if block.value.title %}<h2 class="font-semibold text-lg md:text-xl mb-1 text-primary">{{ block.value.title }}</h2>{% endif %}
         <div>
-          {% for item in block.value.policy_and_procedure %}
+          {% for list in block.value.policy_block %}
             <div class="mb-2">
+                <h3 class="md:text-lg">{{ list.title }}</h3>
+                <ul class="flex flex-col md:flex-row justify-start items-center space-y-2 md:space-y-0 md:space-x-4 lg:space-x-6">
+                    {% for item in list.policy_list  %}
+                        {% if item.display_doc_type == 'doc' %}
+                            <li>
+                            <a href="{{ item.document.url }}" class="text-primary transition-all underline underline-offset-4 hover:text-gray-700 text-sm" {% if item.open_in_new_tab %} target="_blank"{% endif %}>{{item.title}}</a>
+                    
+                            </li>
+                        {% else %}
+                        <li>
+                            <a href="{{ item.url }}" class="text-primary hover:underline transition-all" {% if item.open_in_new_tab %} target="_blank"{% endif %}>{{item.title}}</a>
+                        </li>
+                            {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+            {% comment %} <div class="mb-2">
               <h3 class="md:text-lg">{{ item.title }}</h3>
               <div class="flex justify-start items-center gap-4">
                 {% if item.display_doc_type == 'doc' %}
@@ -21,7 +41,7 @@
                 {% endif %}
                 
               </div>
-            </div>
+            </div> {% endcomment %}
           {% endfor %}
         </div>
       </div>

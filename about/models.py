@@ -41,6 +41,15 @@ class AboutIndex(Page):
         related_name='+',
         verbose_name='intro_image'
     )
+    body = HTMLField(null=True, blank=True)
+    body_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name='body_image'
+    )
     milestones_timeline = StreamField(
         [
             ('milestones_timeline', MileStonesTimeline()),
@@ -54,8 +63,10 @@ class AboutIndex(Page):
         FieldPanel('page_title'),
         FieldPanel('page_subtitle'),
         FieldPanel('banner_image'),
-        FieldPanel('intro'),
         FieldPanel('intro_image'),
+        FieldPanel('intro'),
+        FieldPanel('body_image'),
+        FieldPanel('body'),
         FieldPanel('milestones_timeline'),
     ]
 
