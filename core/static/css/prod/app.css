@@ -1836,6 +1836,10 @@ body {
   text-wrap: pretty;
 }
 
+.break-words {
+  overflow-wrap: break-word;
+}
+
 .break-all {
   word-break: break-all;
 }
