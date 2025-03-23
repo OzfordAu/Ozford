@@ -1,8 +1,10 @@
 {% extends "page-sidebar-right.html" %}
 {% load static wagtailcore_tags wagtailimages_tags %}
 {% block main_content %}
-        <div class="mt-3">{{ page.page_intro|richtext }}</div>
-    <div class="mt-4 lg:mt-6 xl:mt-10">
+    <div>
+        {% if page.page_intro %}
+        <div class="mb-4">{{ page.page_intro|richtext }}</div>
+        {% endif %}
         <ul class="flex flex-col space-y-3 list-none">
             {% for item in page.link_block  %}
                 <li>
