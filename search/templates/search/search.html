@@ -1,38 +1,65 @@
 {% extends "base.html" %}
 {% load static wagtailcore_tags %}
 
-{% block body_class %}template-searchresults{% endblock %}
-
-{% block title %}Search{% endblock %}
-
 {% block content %}
-<h1>Search</h1>
+<div class="container mx-auto px-4 py-10">
+    <h1 class="text-3xl font-bold mb-6">Search Results</h1>
 
-<form action="{% url 'search' %}" method="get">
-    <input type="text" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
-    <input type="submit" value="Search" class="button">
-</form>
+    <form action="{% url 'search' %}" method="get" class="mb-8">
+        <div class="max-w-xl flex">
+            <input 
+                type="text" 
+                name="query" 
+                value="{{ search_query }}"
+                class="block p-4 w-full rounded-full rounded-r-none border border-link-primary" 
+                placeholder="Search Courses" 
+            />
+            <button 
+                type="submit"
+                class="rounded-full rounded-l-none -ml-2 border border-l-0 border-link-primary px-6 bg-link-primary text-white hover:bg-link-primary-hover hover:border-link-primary-hover transition-all"
+            >
+                Search
+            </button>
+        </div>
+    </form>
 
-{% if search_results %}
-<ul>
-    {% for result in search_results %}
-    <li>
-        <h4><a href="{% pageurl result %}">{{ result }}</a></h4>
-        {% if result.search_description %}
-        {{ result.search_description }}
+    {% if search_results %}
+        <div class="space-y-6">
+            {% for result in search_results %}
+                <div class="border-b pb-4">
+                    <h2 class="text-xl font-semibold">
+                        <a href="{% pageurl result %}" class="text-link-primary hover:text-link-primary-hover">
+                            {{ result.course_title }}
+                        </a>
+                    </h2>
+                    {% if result.course_header_description %}
+                        <div class="mt-2 text-gray-600">
+                            {{ result.course_header_description|richtext }}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+
+        {% if search_results.has_other_pages %}
+            <div class="mt-8 flex justify-center gap-4">
+                {% if search_results.has_previous %}
+                    <a href="{% url 'search' %}?query={{ search_query|urlencode }}&page={{ search_results.previous_page_number }}" 
+                       class="text-link-primary hover:text-link-primary-hover">
+                        Previous
+                    </a>
+                {% endif %}
+
+                {% if search_results.has_next %}
+                    <a href="{% url 'search' %}?query={{ search_query|urlencode }}&page={{ search_results.next_page_number }}"
+                       class="text-link-primary hover:text-link-primary-hover">
+                        Next
+                    </a>
+                {% endif %}
+            </div>
         {% endif %}
-    </li>
-    {% endfor %}
-</ul>
-
-{% if search_results.has_previous %}
-<a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.previous_page_number }}">Previous</a>
-{% endif %}
-
-{% if search_results.has_next %}
-<a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.next_page_number }}">Next</a>
-{% endif %}
-{% elif search_query %}
-No results found
-{% endif %}
+    {% elif search_query %}
+        <p class="text-gray-600">No results found for "{{ search_query }}"</p>
+    {% endif %}
+</div>
 {% endblock %}
