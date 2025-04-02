@@ -8,6 +8,7 @@ from blog.models import BlogPage
 from courses.models import HigherEducationCoursePage
 from tinymce.models import HTMLField
 from wagtail.documents.blocks import DocumentChooserBlock
+from sidebars.models import Sidebar
 
 
 class BannerCarouselBlock(blocks.StructBlock):
@@ -184,11 +185,20 @@ class LinkPageSidebar(Page):
         blank=True,
         use_json_field=True,
     )
+    sidebar = models.ForeignKey(
+        Sidebar,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name='sidebar'
+    )
 
     content_panels = Page.content_panels + [
         FieldPanel('page_title'),
         FieldPanel('page_subtitle'),
         FieldPanel('page_intro'),
+        FieldPanel('sidebar'),
         FieldPanel('link_block'),
         FieldPanel('sidebar_links'),
     ]
@@ -221,10 +231,19 @@ class SidebarHtmlPage(Page):
         blank=True,
         use_json_field=True,
     )
+    sidebar = models.ForeignKey(
+        Sidebar,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name='sidebar'
+    )
     content_panels = Page.content_panels + [
         FieldPanel('page_title'),
         FieldPanel('page_subtitle'),
         FieldPanel('banner_image'),
+        FieldPanel('sidebar'),
         FieldPanel('body'),
         FieldPanel('sidebar_links'),
     ]
