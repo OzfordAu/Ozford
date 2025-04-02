@@ -44,6 +44,12 @@ class FooterLinkBlock(blocks.StructBlock):
         icon = 'circle-plus'
         verbose_name = 'Footer Link'
 
+class AffiliationLogoBlock(blocks.StructBlock):
+    image = ImageChooserBlock(required=True)
+    is_active = blocks.BooleanBlock(default=True, required=False)
+    class Meta:
+        icon = 'image'
+
 
 class SiteSettings(Page):
     max_count = 1
@@ -71,6 +77,14 @@ class SiteSettings(Page):
     email = models.CharField(max_length=255, null=True, blank=True)
     office_hour = models.CharField(max_length=255, null=True, blank=True)
     google_map = models.CharField(max_length=255, null=True, blank=True)
+    affiliations = StreamField(
+        [
+            ('logos', AffiliationLogoBlock()),
+        ],
+        null=True,
+        blank=True,
+        use_json_field=True,
+    )
     footer_primary_links = StreamField(
         [
             ('footer_primary_links', FooterLinkBlock()),
@@ -122,6 +136,7 @@ class SiteSettings(Page):
         # Footer
         MultiFieldPanel([
             # Links
+                FieldPanel('affiliations'),
                 FieldPanel('footer_primary_links'),
                 FieldPanel('footer_secondary_links'),
                 FieldPanel('footer_social_media'),
