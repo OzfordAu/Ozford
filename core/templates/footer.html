@@ -1,20 +1,26 @@
 {% load static wagtailcore_tags wagtailimages_tags %}
 <footer class="bg-[#011724] text-gray-300">
 {% if page.content_type.model != 'edorsementpage'%}
-  <section class="bg-gray-100">
+  <section class="bg-gray-100 hidden lg:block">
     <div class="container mx-auto px-4 py-6 lg:py-8">
-      <div class="flex flex-wrap gap-4 lg:gap-10 justify-center items-center">
-        {% for item in site_settings.affiliations  %}
-            {% if item.value.is_active %}
-                <div>
-                    {% image item.value.image original class="w-full h-14 object-contain" %}
-                </div>
-            {% endif %}
-        {% endfor %}
-      </div>
+      {% include 'affiliations.html' %}
       {% comment %} <img src="{% static 'images/affiliation-logo.png' %}" loading="lazy"  alt="affiliation" width="1504" height="80" class="w-full max-h-[72px] object-contain" /> {% endcomment %}
     </div>
+  </section>
+  <section class="bg-gray-100 lg:hidden">
+    <div class="container mx-auto px-4 py-6 lg:py-8">
+      <div class="flex flex-wrap gap-4 justify-center items-center">
+        {% for item in site_settings.affiliations  %}
+              {% if item.value.is_active %}
+              <div>
+                      {% image item.value.image original class="w-full h-14 object-contain" %}
+                    </div>
+              {% endif %}
+              {% endfor %}
+          </div>
 
+      {% comment %} <img src="{% static 'images/affiliation-logo.png' %}" loading="lazy"  alt="affiliation" width="1504" height="80" class="w-full max-h-[72px] object-contain" /> {% endcomment %}
+    </div>
   </section>
 {% endif %}
 
