@@ -156,7 +156,10 @@ class LinkPage(Page):
         FieldPanel('page_description'),
         FieldPanel('link_block'),
     ]
-
+SIDEBAR_TYPE = {
+    ('sidebar', 'Sidebar'),
+    ('sidebar_links', 'Sidebar Links'),
+}
 class LinkPageSidebar(Page):
     page_title = models.CharField(max_length=255, null=True, blank=False)
     page_subtitle = models.CharField(max_length=255, null=True, blank=True)
@@ -177,6 +180,7 @@ class LinkPageSidebar(Page):
         blank=True,
         use_json_field=True,
     )
+    sidebar_type = models.CharField(max_length=255, choices=SIDEBAR_TYPE, default='sidebar_links', null=True, blank=True)
     sidebar_links = StreamField(
         [
             ('link_blocks', LinkBlock()),
@@ -198,6 +202,7 @@ class LinkPageSidebar(Page):
         FieldPanel('page_title'),
         FieldPanel('page_subtitle'),
         FieldPanel('page_intro'),
+        FieldPanel('sidebar_type'),
         FieldPanel('sidebar'),
         FieldPanel('link_block'),
         FieldPanel('sidebar_links'),
@@ -211,6 +216,7 @@ class DomesticPage(Page):
     parent_page_types = ['home.HomePage']
     max_count = 1
 
+
 class SidebarHtmlPage(Page):
     page_title = models.CharField(max_length=255, null=True, blank=False)
     page_subtitle = models.CharField(max_length=255, null=True, blank=True)
@@ -223,6 +229,7 @@ class SidebarHtmlPage(Page):
         verbose_name='banner_image'
     )
     body = HTMLField()
+    sidebar_type = models.CharField(max_length=255, choices=SIDEBAR_TYPE, default='sidebar_links', null=True, blank=True)
     sidebar_links = StreamField(
         [
             ('link_blocks', LinkBlock()),
@@ -243,6 +250,7 @@ class SidebarHtmlPage(Page):
         FieldPanel('page_title'),
         FieldPanel('page_subtitle'),
         FieldPanel('banner_image'),
+        FieldPanel('sidebar_type'),
         FieldPanel('sidebar'),
         FieldPanel('body'),
         FieldPanel('sidebar_links'),
@@ -269,6 +277,7 @@ class AccordionHtmlPage(Page):
         use_json_field=True,
     )
     bottom_content = HTMLField(null=True, blank=True)
+    sidebar_type = models.CharField(max_length=255, choices=SIDEBAR_TYPE, default='sidebar_links', null=True, blank=True)
     sidebar_links = StreamField(
         [
             ('link_blocks', LinkBlock()),
@@ -277,9 +286,19 @@ class AccordionHtmlPage(Page):
         blank=True,
         use_json_field=True,
     )
+    sidebar = models.ForeignKey(
+        Sidebar,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name='sidebar'
+    )
     content_panels = Page.content_panels + [
         FieldPanel('page_title'),
         FieldPanel('banner_image'),
+        FieldPanel('sidebar_type'),
+        FieldPanel('sidebar'),
         FieldPanel('top_content'),
         FieldPanel('accordion_blocks'),
         FieldPanel('bottom_content'),
@@ -321,6 +340,7 @@ class DocumentPageSidebar(Page):
         blank=True,
         use_json_field=True,
     )
+    sidebar_type = models.CharField(max_length=255, choices=SIDEBAR_TYPE, default='sidebar_links', null=True, blank=True)
     sidebar_links = StreamField(
         [
             ('link_blocks', LinkBlock()),
@@ -329,9 +349,19 @@ class DocumentPageSidebar(Page):
         blank=True,
         use_json_field=True,
     )
+    sidebar = models.ForeignKey(
+        Sidebar,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name='sidebar'
+    )
     content_panels = Page.content_panels + [
         FieldPanel('page_title'),
         FieldPanel('page_subtitle'),
+        FieldPanel('sidebar_type'),
+        FieldPanel('sidebar'),
         FieldPanel('page_intro'),
         FieldPanel('document_block'),
         FieldPanel('sidebar_links'),
