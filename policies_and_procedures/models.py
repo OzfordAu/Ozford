@@ -7,6 +7,12 @@ from wagtail.images.blocks import ImageChooserBlock
 from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.admin.panels import FieldPanel
 from home.models import LinkBlock
+from sidebars.models import Sidebar
+
+SIDEBAR_TYPE = {
+    ('sidebar', 'Sidebar'),
+    ('sidebar_links', 'Sidebar Links'),
+}
 
 class PoliciesAndProceduresIndexPage(Page):
     parent_page_types = ['home.HomePage']
@@ -149,6 +155,7 @@ class PoliciesAndProceduresSubpage(Page):
         ('policies_and_procedures', PoliciesAndProceduresBlock())
     ], null=True, blank=True)
 
+    sidebar_type = models.CharField(max_length=255, choices=SIDEBAR_TYPE, default='sidebar_links', null=True, blank=True)
     sidebar_links = StreamField(
         [
             ('link_blocks', LinkBlock()),
@@ -157,10 +164,20 @@ class PoliciesAndProceduresSubpage(Page):
         blank=True,
         use_json_field=True,
     )
+    sidebar = models.ForeignKey(
+        Sidebar,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name='sidebar'
+    )
 
     content_panels = Page.content_panels + [
         FieldPanel('page_title'),
         FieldPanel('page_subtitle'),
+        FieldPanel('sidebar_type'),
+        FieldPanel('sidebar'),
         FieldPanel('banner_image'),
         FieldPanel('intro'),
         FieldPanel('policies_and_procedures'),
@@ -208,6 +225,7 @@ class HighSchoolPoliciesAndProceduresPage(Page):
         ('policies_and_procedures', HighSchoolPoliciesAndProceduresBlock())
     ], null=True, blank=True)
 
+    sidebar_type = models.CharField(max_length=255, choices=SIDEBAR_TYPE, default='sidebar_links', null=True, blank=True)
     sidebar_links = StreamField(
         [
             ('link_blocks', LinkBlock()),
@@ -216,10 +234,20 @@ class HighSchoolPoliciesAndProceduresPage(Page):
         blank=True,
         use_json_field=True,
     )
+    sidebar = models.ForeignKey(
+        Sidebar,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name='sidebar'
+    )
 
     content_panels = Page.content_panels + [
         FieldPanel('page_title'),
         FieldPanel('page_subtitle'),
+        FieldPanel('sidebar_type'),
+        FieldPanel('sidebar'),
         FieldPanel('banner_image'),
         FieldPanel('intro'),
         FieldPanel('policies_and_procedures'),

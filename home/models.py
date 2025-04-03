@@ -156,6 +156,7 @@ class LinkPage(Page):
         FieldPanel('page_description'),
         FieldPanel('link_block'),
     ]
+    
 SIDEBAR_TYPE = {
     ('sidebar', 'Sidebar'),
     ('sidebar_links', 'Sidebar Links'),
