@@ -2881,7 +2881,7 @@ h1, h2, h3, h4, h5, h6, .text-heading {
 }
 
 .cms-page a {
-  color: #005c90 !important;
+  color: #1a305b !important;
 }
 
 .cms-page-bg a {
@@ -3005,13 +3005,13 @@ h1, h2, h3, h4, h5, h6, .text-heading {
   background-color: rgb(26 48 91 / 0.9);
 }
 
-.hover\:bg-white\/60:hover {
-  background-color: rgb(255 255 255 / 0.6);
-}
-
 .hover\:bg-secondary-dark:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(187 159 34 / var(--tw-bg-opacity, 1));
+}
+
+.hover\:bg-white\/60:hover {
+  background-color: rgb(255 255 255 / 0.6);
 }
 
 .hover\:bg-opacity-75:hover {
