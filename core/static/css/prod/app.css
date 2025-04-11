@@ -1,3 +1,51 @@
+@font-face {
+  font-family: 'Nohemi';
+
+  src: url('../fonts/nohemi/Nohemi-Regular.woff') format('woff'),
+         url('../fonts/nohemi/Nohemi-Regular.ttf') format('truetype'),
+         url('../fonts/nohemi/Nohemi-Regular.otf') format('opentype');
+
+  font-weight: 400;
+
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Nohemi';
+
+  src: url('../fonts/nohemi/Nohemi-Medium.woff') format('woff'),
+         url('../fonts/nohemi/Nohemi-Medium.ttf') format('truetype'),
+         url('../fonts/nohemi/Nohemi-Medium.otf') format('opentype');
+
+  font-weight: 500;
+
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Nohemi';
+
+  src: url('../fonts/nohemi/Nohemi-SemiBold.woff') format('woff'),
+         url('../fonts/nohemi/Nohemi-SemiBold.ttf') format('truetype'),
+         url('../fonts/nohemi/Nohemi-SemiBold.otf') format('opentype');
+
+  font-weight: 600;
+
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Nohemi';
+
+  src: url('../fonts/nohemi/Nohemi-Bold.woff') format('woff'),
+         url('../fonts/nohemi/Nohemi-Bold.ttf') format('truetype'),
+         url('../fonts/nohemi/Nohemi-Bold.otf') format('opentype');
+
+  font-weight: 700;
+
+  font-style: normal;
+}
+
 *, ::before, ::after {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
@@ -752,12 +800,12 @@ select {
 body {
   /* font-family: "Poppins", sans-serif; */
   /* font-family: "Noto Serif", serif; */
-  font-family: "Open Sans", serif;
+  font-family: "Manrope", serif;
 }
 
-/* h1, h2, h3, h4, h5, h6, .text-heading {   
-     font-family: "Merriweather", serif;
-  } */
+h1, h2, h3, h4, h5, h6, .text-heading {
+  font-family: "Nohemi", serif;
+}
 
 .container {
   width: 100%;
@@ -2147,7 +2195,12 @@ body {
 
 .bg-primary-darker {
   --tw-bg-opacity: 1;
-  background-color: rgb(14 28 54 / var(--tw-bg-opacity, 1));
+  background-color: rgb(26 48 91 / var(--tw-bg-opacity, 1));
+}
+
+.bg-secondary {
+  --tw-bg-opacity: 1;
+  background-color: rgb(232 197 42 / var(--tw-bg-opacity, 1));
 }
 
 .bg-transparent {
@@ -2444,6 +2497,10 @@ body {
 
 .text-justify {
   text-align: justify;
+}
+
+.font-primary {
+  font-family: Nohemi, sans-serif;
 }
 
 .text-2xl {
@@ -2950,6 +3007,11 @@ body {
 
 .hover\:bg-white\/60:hover {
   background-color: rgb(255 255 255 / 0.6);
+}
+
+.hover\:bg-secondary-dark:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(187 159 34 / var(--tw-bg-opacity, 1));
 }
 
 .hover\:bg-opacity-75:hover {
@@ -3926,8 +3988,8 @@ body {
     line-height: 1;
   }
 
-  .lg\:text-7xl {
-    font-size: 4.5rem;
+  .lg\:text-6xl {
+    font-size: 3.75rem;
     line-height: 1;
   }
 

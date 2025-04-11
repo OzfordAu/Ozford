@@ -15,7 +15,12 @@ module.exports = {
         "link-dark": "#aadeff",
         //"link-primary-hover": "#f1610d",
         "primary-dark": "#1a305b",
-        "primary-darker": "#0e1c36",
+        "primary-darker": "#1a305b",
+        "secondary": "#E8C52A",
+        "secondary-dark": "#bb9f22",
+      },
+      fontFamily: {
+        primary: ['Nohemi', 'sans-serif'],
       },
     },
   },
