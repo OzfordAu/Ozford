@@ -1328,10 +1328,6 @@ h1, h2, h3, h4, h5, h6, .text-heading {
   height: 450px;
 }
 
-.h-\[600px\] {
-  height: 600px;
-}
-
 .h-\[60px\] {
   height: 60px;
 }
@@ -3434,6 +3430,10 @@ h1, h2, h3, h4, h5, h6, .text-heading {
     height: 1.5rem;
   }
 
+  .md\:h-\[450px\] {
+    height: 450px;
+  }
+
   .md\:h-full {
     height: 100%;
   }
@@ -3708,6 +3708,10 @@ h1, h2, h3, h4, h5, h6, .text-heading {
 
   .lg\:h-\[450px\] {
     height: 450px;
+  }
+
+  .lg\:h-\[600px\] {
+    height: 600px;
   }
 
   .lg\:h-full {
