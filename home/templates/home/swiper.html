@@ -1,7 +1,7 @@
 <!-- Slider main container -->
 {% load  wagtailimages_tags %}
 {% block script_top %}
-<link rel="preload" as="image" href="{{ page.banner_carousel.0.value.background_image.full_url }}" />
+{% comment %} <link rel="preload" as="image" href="{{ page.banner_carousel.0.value.background_image.full_url }}" /> {% endcomment %}
 {% endblock script_top %}
   {% comment %} {{carousel.value.heading}} {% endcomment %}
 
@@ -9,7 +9,7 @@
     <!-- Additional required wrapper -->
     <div class="swiper-wrapper">
       {% for carousel in page.banner_carousel %}
-    {% image carousel.value.background_image fill-800x600 format-webp as mobile_img %}
+    {% image carousel.value.background_image fill-600x300 format-webp as mobile_img %}
     {% image carousel.value.background_image fill-1600x900 format-webp as tablet_img %}
     {% image carousel.value.background_image fill-1920x1080 format-webp as desktop_img %}
     
