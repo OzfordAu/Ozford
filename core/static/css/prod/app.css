@@ -2030,6 +2030,11 @@ h1, h2, h3, h4, h5, h6, .text-heading {
   border-color: rgb(26 48 91 / var(--tw-border-opacity, 1));
 }
 
+.border-link-primary-hover {
+  --tw-border-opacity: 1;
+  border-color: rgb(41 72 134 / var(--tw-border-opacity, 1));
+}
+
 .border-neutral-100\/70 {
   border-color: rgb(245 245 245 / 0.7);
 }
@@ -2055,11 +2060,6 @@ h1, h2, h3, h4, h5, h6, .text-heading {
 .border-white {
   --tw-border-opacity: 1;
   border-color: rgb(255 255 255 / var(--tw-border-opacity, 1));
-}
-
-.border-link-primary-hover {
-  --tw-border-opacity: 1;
-  border-color: rgb(41 72 134 / var(--tw-border-opacity, 1));
 }
 
 .border-b-primary-dark {
@@ -2155,6 +2155,11 @@ h1, h2, h3, h4, h5, h6, .text-heading {
   background-color: rgb(26 48 91 / var(--tw-bg-opacity, 1));
 }
 
+.bg-link-primary-hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(41 72 134 / var(--tw-bg-opacity, 1));
+}
+
 .bg-neutral-300 {
   --tw-bg-opacity: 1;
   background-color: rgb(212 212 212 / var(--tw-bg-opacity, 1));
@@ -2215,11 +2220,6 @@ h1, h2, h3, h4, h5, h6, .text-heading {
 
 .bg-white\/40 {
   background-color: rgb(255 255 255 / 0.4);
-}
-
-.bg-link-primary-hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(41 72 134 / var(--tw-bg-opacity, 1));
 }
 
 .bg-opacity-10 {

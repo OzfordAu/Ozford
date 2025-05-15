@@ -142,7 +142,8 @@ class LinkBlock(blocks.StructBlock):
         verbose_name = 'Link Block'
 
 class LinkPage(Page):
-    page_description = RichTextField(blank=True, null=True)
+    page_title = models.CharField(max_length=255, null=True, blank=False)
+    page_subtitle = models.CharField(max_length=255, null=True, blank=True)
     link_block = StreamField(
         [
             ('link_blocks', LinkBlock()),
@@ -153,7 +154,8 @@ class LinkPage(Page):
     )
 
     content_panels = Page.content_panels + [
-        FieldPanel('page_description'),
+        FieldPanel('page_title'),
+        FieldPanel('page_subtitle'),
         FieldPanel('link_block'),
     ]
     
