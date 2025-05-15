@@ -1,5 +1,5 @@
 {% load static wagtailcore_tags wagtailimages_tags %}
-<div class="container mx-auto bg-gray-100 text-black px-4 py-6 lg:py-8 xl:py-14 xl:px-20 cms-page">
+<div class="container mx-auto bg-gray-100 text-black px-4 py-6 lg:py-8 xl:py-14 xl:px-20">
     <div class="flex flex-col xl:flex-row xl:justify-center xl:gap-10">
       <div class="w-full xl:1/2">
         <h2 class="text-3xl xl:text-5xl font-bold mb-4 lg:mb-8 xl:mb-10">{{ page.about_title }}</h2>
@@ -32,11 +32,11 @@
             <p>Global Recognised Degree</p>
           </div>
         </div>
-        <div>
+        <div class="cms-page">
           {{ page.about_content|richtext }}
         </div>
         <div class="pt-4 xl:pt-6">
-            <button class="flex items-center gap-2 px-4 py-2 rounded-none leading-loose tracking-wider text-lg text-white bg-link-primary hover:bg-link-primary-hover transition-all">
+            <a href="/about/" class="inline-flex items-center gap-2 px-4 py-2 rounded-none leading-loose tracking-wider text-lg text-white bg-link-primary hover:bg-link-primary-hover transition-all">
                 <span>Learn more</span>
                 <span>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -44,7 +44,7 @@
                       </svg>
                       
                 </span>
-            </button>
+              </a>
         </div>  
         
         
