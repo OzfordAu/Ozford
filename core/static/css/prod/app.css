@@ -2222,6 +2222,10 @@ h1, h2, h3, h4, h5, h6, .text-heading {
   background-color: rgb(255 255 255 / 0.4);
 }
 
+.bg-primary\/80 {
+  background-color: rgb(26 48 91 / 0.8);
+}
+
 .bg-opacity-10 {
   --tw-bg-opacity: 0.1;
 }
@@ -3728,6 +3732,10 @@ h1, h2, h3, h4, h5, h6, .text-heading {
     height: 100%;
   }
 
+  .lg\:h-\[650px\] {
+    height: 650px;
+  }
+
   .lg\:min-h-\[20rem\] {
     min-height: 20rem;
   }
@@ -4085,6 +4093,10 @@ h1, h2, h3, h4, h5, h6, .text-heading {
 
   .xl\:hidden {
     display: none;
+  }
+
+  .xl\:h-\[700px\] {
+    height: 700px;
   }
 
   .xl\:w-1\/4 {

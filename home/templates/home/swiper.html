@@ -5,7 +5,7 @@
 {% endblock script_top %}
   {% comment %} {{carousel.value.heading}} {% endcomment %}
 
-<div class="swiper w-full h-[300px] md:h-[450px] lg:h-[600px]">
+<div class="swiper w-full h-[300px] md:h-[450px] lg:h-[650px] xl:h-[700px]">
     <!-- Additional required wrapper -->
     <div class="swiper-wrapper">
       {% for carousel in page.banner_carousel %}
@@ -27,7 +27,7 @@
       </picture>
       
       <div class="container mx-auto z-20 relative">
-        <div class="mt-32 text-left max-w-2xl bg-black/50 backdrop-blur-sm p-8">
+        <div class="mt-32 text-left max-w-2xl bg-primary/80 backdrop-blur-sm p-8">
           <h1 class="text-4xl md:text-5xl lg:text-6xl mb-4 leading-tight font-primary" style="color:{{ carousel.value.heading_text_color }}">
             {{ carousel.value.heading }}
           </h1>
