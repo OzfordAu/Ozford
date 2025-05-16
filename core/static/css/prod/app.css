@@ -1158,6 +1158,14 @@ h1, h2, h3, h4, h5, h6, .text-heading {
   margin-top: 90px;
 }
 
+.mt-40 {
+  margin-top: 10rem;
+}
+
+.mt-64 {
+  margin-top: 16rem;
+}
+
 .line-clamp-3 {
   overflow: hidden;
   display: -webkit-box;
