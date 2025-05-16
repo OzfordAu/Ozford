@@ -191,6 +191,8 @@ WAGTAILIMAGES_EXTENSIONS = ["gif", "jpg", "jpeg", "png", "webp", "svg"]
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = None
 
+WAGTAILIMAGES_MAX_UPLOAD_SIZE = 100 * 1024 * 1024 
+
 TINYMCE_DEFAULT_CONFIG = {
     "height": "320px",
     "width": "960px",
