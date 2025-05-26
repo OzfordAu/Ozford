@@ -313,6 +313,7 @@ class TestimonialBlock(blocks.StructBlock):
     course = blocks.CharBlock(max_length=255)
     profile_image = ImageChooserBlock(required=False)
     description = blocks.RichTextBlock(required=False)
+    display_in_home = blocks.BooleanBlock(default=False, required=False)
 
     class Meta:
         icon = 'user'

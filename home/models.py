@@ -38,6 +38,7 @@ class BannerCarouselBlock(blocks.StructBlock):
         icon = 'circle-plus'
         verbose_name = 'Banner Coursel'
 
+
 class ImportantUrlBlock(blocks.StructBlock):
     title = blocks.CharBlock()
     url = blocks.URLBlock()

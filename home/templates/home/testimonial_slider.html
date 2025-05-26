@@ -5,7 +5,7 @@
 {% endblock script_top %}
   {% comment %} {{carousel.value.heading}} {% endcomment %}
 
-<div class="banner-slide swiper w-full h-[300px] md:h-[450px] lg:h-[650px] xl:h-[700px]">
+<div class="testimonial-slide swiper container">
     <!-- Additional required wrapper -->
     <div class="swiper-wrapper">
       {% for carousel in page.banner_carousel %}
@@ -13,7 +13,7 @@
     {% image carousel.value.background_image fill-1600x900 format-webp as tablet_img %}
     {% image carousel.value.background_image fill-1920x1080 format-webp as desktop_img %}
     
-    <div class="swiper-slide bg-gray-400 h-full">
+    <div class="swiper-slide bg-gray-400 max-w-5xl mx-auto h-full">
       <picture>
         <source media="(min-width: 1024px)" srcset="{{ desktop_img.url }}">
         <source media="(min-width: 768px)" srcset="{{ tablet_img.url }}">
@@ -48,21 +48,15 @@
   
     <!-- If we need navigation buttons -->
      <div class="hidden lg:block">
-    <button id="slider-button-left" class="swiper-button-prev group ml-10 !p-2 flex justify-center items-center bg-primary !w-12 !h-12 transition-all duration-500 rounded-full !top-2/4 !-translate-y-8 !left-5 hover:bg-primary-dark " data-carousel-prev>
+    <button id="swiper-button-left" class="swiper-button-prev group ml-10 !p-2 flex justify-center items-center bg-primary !w-12 !h-12 transition-all duration-500 rounded-full !top-2/4 !-translate-y-8 !left-5 hover:bg-primary-dark " data-carousel-prev>
         <svg class="h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
           <path d="M10.0002 11.9999L6 7.99971L10.0025 3.99719" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
       </button>
-      <button id="slider-button-right" class="swiper-button-next group mr-10 !p-2 flex justify-center items-center bg-primary !w-12 !h-12 transition-all duration-500 rounded-full !top-2/4 !-translate-y-8 !right-5 hover:bg-primary-dark" data-carousel-next>
+      <button id="swiper-button-right" class="swiper-button-next group mr-10 !p-2 flex justify-center items-center bg-primary !w-12 !h-12 transition-all duration-500 rounded-full !top-2/4 !-translate-y-8 !right-5 hover:bg-primary-dark" data-carousel-next>
         <svg class="h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
           <path d="M5.99984 4.00012L10 8.00029L5.99748 12.0028" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
       </button>
     </div>
-      <div class="autoplay-progress mr-10">
-        <svg viewBox="0 0 48 48">
-          <circle cx="24" cy="24" r="20"></circle>
-        </svg>
-        <span></span>
-      </div>
   </div>
