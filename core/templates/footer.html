@@ -200,4 +200,36 @@
       </div>
     </div>
   </section>
+  {% if show_popup and site_settings.site_popup_image %}
+    <div 
+        x-data="{ show: true }" 
+        x-show="show" 
+        x-transition 
+        class="fixed bottom-0 left-0 z-40 bg-white p-4 {{ site_settings.popup_class|default:'' }}"
+        style="width: {{ site_settings.popup_width|default:'300px' }}; height: {{ site_settings.popup_height|default:'500px' }}"
+    >
+    <button 
+                @click="show = false" 
+                class="absolute -top-2 -right-2 bg-black/90 w-10 h-10 rounded-full text-gray-white hover:text-red-500 text-3xl z-50"
+                aria-label="Close popup"
+            >
+               &times;
+
+            </button>
+    
+        <div class="relative bg-white overflow-hidden">
+          
+            
+            {% image site_settings.site_popup_image width-400 as tmp_photo %}
+            <img 
+            src="{{ tmp_photo.url }}" 
+            width="{{site_settings.popup_width}}"
+            height="{{site_settings.popup_height}}"
+            alt="Popup Image" 
+            class="w-full h-full object-cover {{site_settings.popup_class|default:''}}"
+        />
+            {% comment %} {% image site_settings.site_popup_image loading='lazy' class='w-full h-full object-cover' %} {% endcomment %}
+        </div>
+    </div>
+    {% endif %}
 </footer>

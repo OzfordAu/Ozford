@@ -72,6 +72,21 @@ class SiteSettings(Page):
         verbose_name='Footer Logo'
     )
 
+    site_popup_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        verbose_name='Site Popup Image'
+    )
+    popup_width = models.CharField(max_length=255, null=True, blank=True, default='300px', verbose_name="Width")
+    popup_height = models.CharField(max_length=255, null=True, blank=True, default='500px', verbose_name = "Height")
+    popup_class = models.CharField(max_length=255, null=True, blank=True, default='', verbose_name="Custom Class")
+    popup_start_date = models.DateField(null=True, blank=True, verbose_name='Popup Start Date')
+    popup_end_date = models.DateField(null=True, blank=True, verbose_name='Popup End Date')
+    popup_is_active = models.BooleanField(default=True, verbose_name='Popup is Active')
+
     address = RichTextField(null=True, blank=True)
     phone = models.CharField(max_length=255, null=True, blank=True)
     email = models.CharField(max_length=255, null=True, blank=True)
@@ -124,6 +139,16 @@ class SiteSettings(Page):
             FieldPanel('footer_logo'),
         ], heading='Logos'),
 
+        MultiFieldPanel([
+            FieldPanel('site_popup_image'),
+            FieldPanel('popup_width'),
+            FieldPanel('popup_height'),
+            FieldPanel('popup_class'),
+            FieldPanel('popup_start_date'),
+            FieldPanel('popup_end_date'),
+            FieldPanel('popup_is_active'),
+        ], heading='Site Popup Message'),
+
         # Contact Details
         MultiFieldPanel([
             FieldPanel('address'),
@@ -151,3 +176,6 @@ class SiteSettings(Page):
     class Meta:
         verbose_name = "Global Site Settings"
         app_label = 'site_settings'
+
+
+
