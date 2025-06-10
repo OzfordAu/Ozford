@@ -128,8 +128,7 @@ class SiteSettings(Page):
     )
     acknowledgement_of_country_title = models.CharField(
         max_length=255, null=True, blank=True)
-    acknowledgement_of_country_content = models.TextField(
-        null=True, blank=True)
+    acknowledgement_of_country_content = RichTextField(null=True, blank=True)
     copyright_content = models.TextField(null=True, blank=True)
 
     content_panels = Page.content_panels + [
