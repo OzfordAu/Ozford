@@ -3849,6 +3849,10 @@ h1, h2, h3, h4, h5, h6, .text-heading {
     align-items: center;
   }
 
+  .lg\:justify-end {
+    justify-content: flex-end;
+  }
+
   .lg\:justify-center {
     justify-content: center;
   }
