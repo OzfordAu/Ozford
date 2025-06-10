@@ -166,10 +166,7 @@
             <li><a href="#" class="hover:border-b hover:text-white hover:border-white transition-all">Locations</a></li>
           </ul>
         </div> {% endcomment %}
-        
-      </div>
-      <div class="w-full flex flex-col lg:flex-row items-center mt-8 justify-between">
-        <div>
+        <div class="block">
           <h3 class="text-xl font-medium mb-2">Connect with us</h3>
           <div class="flex gap-3 mt-2">
             {% for social_media_block in site_settings.footer_social_media  %}
@@ -182,27 +179,20 @@
           </div>
           
         </div>
-        <div>
-        <ul class="flex flex-col lg:flex-row lg:space-x-4 space-y-2 lg:space-y-0 lg:justify-end">
-            {% for item in site_settings.footer_secondary_links  %}
-              <li><a href="{{item.value.url}}" {% if item.value.open_in_new_tab %}target="_blank"{% endif %} class="hover:underline hover:underline-offset-4 hover:text-[#aed1e7] transition-all">{{item.value.title}}</a></li>
-            {% endfor %}
-          </ul>
-        </div>
-      </div> 
+      </div>
       <div class="w-full bg-[#3f505b] h-[1px] my-4 lg:my-6 xl:my-8"></div>
-      <div class="w-full block">
-        {% comment %} <div class="w-full lg:w-7/12">
+      <div class="w-full flex flex-col lg:flex-row lg:gap-10 items-center">
+        <div class="w-full lg:w-7/12">
           <ul class="flex flex-col lg:flex-row lg:space-x-4 space-y-2 lg:space-y-0">
             {% for item in site_settings.footer_secondary_links  %}
               <li><a href="{{item.value.url}}" {% if item.value.open_in_new_tab %}target="_blank"{% endif %} class="hover:underline hover:underline-offset-4 hover:text-[#aed1e7] transition-all">{{item.value.title}}</a></li>
             {% endfor %}
           </ul>
-        </div> {% endcomment %}
-        {% comment %} <div class="w-full lg:w-5/12"> {% endcomment %}
+        </div>
+        <div class="w-full lg:w-5/12">
           <p class="font-medium mb-2 text-lg">{{site_settings.acknowledgement_of_country_title|safe}}</p>
           <p class="">{{site_settings.acknowledgement_of_country_content|richtext}}</p>
-        {% comment %} </div> {% endcomment %}
+        </div>
       </div>
       <div class="w-full bg-[#3f505b] h-[1px] mt-4 lg:mt-6 xl:mt-8"></div>
       <div class="w-full mt-4 lg:mt-6 xl:mt-8 text-xs/5">
