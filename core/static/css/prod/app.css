@@ -2906,6 +2906,16 @@ h1, h2, h3, h4, h5, h6, .text-heading {
   color: #1a305b !important;
 }
 
+.cms-page .faq a {
+  text-decoration: underline;
+}
+
+.cms-page .faq h3 {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+}
+
 .cms-page-bg a {
   color: #a8dbf8 !important;
   text-decoration: underline;
@@ -3847,10 +3857,6 @@ h1, h2, h3, h4, h5, h6, .text-heading {
 
   .lg\:items-center {
     align-items: center;
-  }
-
-  .lg\:justify-end {
-    justify-content: flex-end;
   }
 
   .lg\:justify-center {

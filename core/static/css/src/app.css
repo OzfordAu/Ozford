@@ -28,6 +28,13 @@ h1, h2, h3, h4, h5, h6, .text-heading {
   .cms-page a {
     color: #1a305b !important;
   }
+  .cms-page .faq a {
+    text-decoration: underline;
+  }
+
+  .cms-page .faq h3 {
+    @apply text-xl font-semibold;
+  }
 
   .cms-page-bg a {
     color: #a8dbf8 !important;

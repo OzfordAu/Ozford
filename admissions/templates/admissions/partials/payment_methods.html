@@ -4,7 +4,7 @@
     setActiveAccordion(id) { 
         this.activeAccordion = (this.activeAccordion == id) ? '' : id 
     } 
-}" class="relative w-full">
+}" class="relative w-full cms-page">
 
 {% for item in page.payment_methods  %}
 <div x-data="{ id: $id('accordion') }" :class="{ 'border-primary text-neutral-800' : activeAccordion==id, 'text-neutral-600 hover:text-neutral-800' : activeAccordion!=id }" class="duration-200 ease-out bg-white border rounded-md cursor-pointer group mb-4" x-cloak>
@@ -18,7 +18,7 @@
         </div>
     </button>
     <div x-show="activeAccordion==id" x-collapse x-cloak>
-        <div class="p-5 pt-0 text-sm">
+        <div class="p-5 pt-0 text-sm faq">
             {{item.value.body|richtext}}
         </div>
     </div>
