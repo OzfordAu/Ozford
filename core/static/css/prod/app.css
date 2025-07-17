@@ -3446,6 +3446,10 @@ h1, h2, h3, h4, h5, h6, .text-heading {
     margin-bottom: 2rem;
   }
 
+  .md\:ml-4 {
+    margin-left: 1rem;
+  }
+
   .md\:mt-0 {
     margin-top: 0px;
   }
@@ -3720,6 +3724,10 @@ h1, h2, h3, h4, h5, h6, .text-heading {
 
   .lg\:mt-8 {
     margin-top: 2rem;
+  }
+
+  .lg\:ml-8 {
+    margin-left: 2rem;
   }
 
   .lg\:block {
