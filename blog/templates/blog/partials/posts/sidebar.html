@@ -1,5 +1,5 @@
 <ul>
-    {% if page_type == 'news' %}
+    {% comment %} {% if page_type == 'news' %}
         <li class="border border-primary">
             <div class="flex items-center gap-1 px-4 py-2 bg-primary text-white font-medium">
                 <span>News</span>
@@ -14,7 +14,7 @@
         <li class="border border-gray-200">
             <a href="/news-and-events/news/" class="block px-4 py-2 hover:text-primary font-medium transition-all">News</a>  
         </li>
-    {% endif %}
+    {% endif %} {% endcomment %}
     {% if page_type == 'blogs' %}
         <li class="border border-primary">
             <div class="flex items-center gap-1 px-4 py-2 bg-primary text-white font-medium">
