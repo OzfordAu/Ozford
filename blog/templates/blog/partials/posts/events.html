@@ -57,9 +57,9 @@
                     <h2 class="text-xl sm:text-2xl font-bold text-gray-900 group-hover:text-primary transition-colors duration-200 mb-3">
                         {{ post.title }}
                     </h2>
-                    <p class="text-gray-600 line-clamp-3">
+                    {% comment %} <p class="text-gray-600 line-clamp-3">
                         {{ post.body|richtext|truncatewords:30 }}
-                    </p>
+                    </p> {% endcomment %}
                     </div>
                     <div class="mt-6">
                     <a href="{% pageurl post %}" 
