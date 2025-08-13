@@ -136,7 +136,7 @@ class EventsIndexPage(Page):
         blog_posts = EventPage.objects.child_of(self).live()
         
         # Paginate the blog posts
-        paginator = Paginator(blog_posts, 5)  # Show 6 posts per page
+        paginator = Paginator(blog_posts, 10)  # Show 6 posts per page
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
         
