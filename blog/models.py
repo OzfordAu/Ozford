@@ -133,7 +133,7 @@ class EventsIndexPage(Page):
         context = super().get_context(request, *args, **kwargs)
         
         # Get all blog posts
-        blog_posts = EventPage.objects.child_of(self).live().order_by('event_date')
+        blog_posts = EventPage.objects.child_of(self).live()
         
         # Paginate the blog posts
         paginator = Paginator(blog_posts, 5)  # Show 6 posts per page
