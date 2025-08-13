@@ -239,7 +239,7 @@ class EventPage(Page):
         context = super().get_context(request, *args, **kwargs)
         
         # Get the first 5 posts, ordered by published_date, excluding the current post
-        recent_posts = EventPage.objects.live().exclude(id=self.id).order_by('-event_date')[:5]
+        recent_posts = EventPage.objects.live().exclude(id=self.id).order_by('event_date')[:5]
         
         # Add the custom context variable
         context['recent_posts'] = recent_posts
