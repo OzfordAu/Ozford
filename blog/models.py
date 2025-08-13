@@ -212,7 +212,8 @@ class EventPage(Page):
     sub_title = models.CharField(max_length=255, blank=True, null=True)
     event_date = models.DateField(null=True, blank=True, verbose_name="Event Start Date")
     event_end_date = models.DateField(null=True, blank=True, verbose_name="Event End Date")
-    event_time = models.CharField(max_length=200, null=True, blank=True)
+    event_time = models.CharField(max_length=200, null=True, blank=True, verbose_name="Event Start Time")
+    event_end_time = models.CharField(max_length=200, null=True, blank=True, verbose_name="Event End Time")
     location = models.CharField(max_length=200, null=True, blank=True)
     featured_image = models.ForeignKey(
         'wagtailimages.Image',
@@ -228,6 +229,7 @@ class EventPage(Page):
         FieldPanel('event_date'),
         FieldPanel('event_end_date'),
         FieldPanel('event_time'),
+        FieldPanel('event_end_time'),
         FieldPanel('location'),
         FieldPanel('featured_image'),
         FieldPanel('body'),

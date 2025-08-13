@@ -30,7 +30,7 @@
                         </svg>
                     </span>
                     <p class="text-lg font-medium">
-                    {{ page.event_time}}
+                    {{ page.event_time}}{% if page.event_end_time %} - {{page.event_end_time}}{% endif %}
                     </p>
                 </div>
             {% endif %}
