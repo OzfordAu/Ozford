@@ -210,7 +210,8 @@ class EventPage(Page):
     template = 'blog/partials/posts/single_event_page.html'
     parent_page_types = ['blog.EventsIndexPage']
     sub_title = models.CharField(max_length=255, blank=True, null=True)
-    event_date = models.DateField(null=True, blank=True)
+    event_date = models.DateField(null=True, blank=True, verbose_name="Event Start Date")
+    event_end_date = models.DateField(null=True, blank=True, verbose_name="Event End Date")
     event_time = models.CharField(max_length=200, null=True, blank=True)
     location = models.CharField(max_length=200, null=True, blank=True)
     featured_image = models.ForeignKey(
@@ -220,11 +221,12 @@ class EventPage(Page):
         on_delete=models.SET_NULL,
         related_name='+'
     )
-    body = HTMLField()
+    body = HTMLField(null=True, blank=True)
 
     content_panels = Page.content_panels + [
         FieldPanel('sub_title'),
         FieldPanel('event_date'),
+        FieldPanel('event_end_date'),
         FieldPanel('event_time'),
         FieldPanel('location'),
         FieldPanel('featured_image'),

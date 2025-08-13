@@ -25,7 +25,7 @@
                             </svg>
                           </span>
                           <p class="text-sm font-medium text-primary">
-                            {{ post.event_date|date:"F d, Y" }}
+                            {{ post.event_date|date:"F d, Y" }}{% if post.event_end_date %} - {{ post.event_end_date|date:"F d, Y" }}{% endif %}
                           </p>
                         </div>
                         {% if post.event_time %}
