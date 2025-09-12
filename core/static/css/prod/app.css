@@ -898,14 +898,6 @@ h1, h2, h3, h4, h5, h6, .text-heading {
   top: 50% !important;
 }
 
-.-right-2 {
-  right: -0.5rem;
-}
-
-.-top-2 {
-  top: -0.5rem;
-}
-
 .bottom-0 {
   bottom: 0px;
 }
@@ -942,6 +934,10 @@ h1, h2, h3, h4, h5, h6, .text-heading {
   right: 0px;
 }
 
+.right-10 {
+  right: 2.5rem;
+}
+
 .right-2 {
   right: 0.5rem;
 }
@@ -956,6 +952,10 @@ h1, h2, h3, h4, h5, h6, .text-heading {
 
 .top-0 {
   top: 0px;
+}
+
+.top-1 {
+  top: 0.25rem;
 }
 
 .top-1\/2 {
@@ -976,18 +976,6 @@ h1, h2, h3, h4, h5, h6, .text-heading {
 
 .top-\[90px\] {
   top: 90px;
-}
-
-.right-1 {
-  right: 0.25rem;
-}
-
-.top-1 {
-  top: 0.25rem;
-}
-
-.right-10 {
-  right: 2.5rem;
 }
 
 .z-0 {
@@ -3431,16 +3419,16 @@ h1, h2, h3, h4, h5, h6, .text-heading {
 }
 
 @media (min-width: 768px) {
-  .md\:bottom-5 {
-    bottom: 1.25rem;
-  }
-
   .md\:-right-2 {
     right: -0.5rem;
   }
 
   .md\:-top-2 {
     top: -0.5rem;
+  }
+
+  .md\:bottom-5 {
+    bottom: 1.25rem;
   }
 
   .md\:col-span-2 {
