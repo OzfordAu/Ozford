@@ -179,6 +179,7 @@ class BlogPage(Page):
     parent_page_types = ['blog.BlogIndex']
     published_date = models.DateField(null=True, blank=True)
     sub_title = models.CharField(max_length=255, blank=True, null=True)
+    featured_text = models.CharField(max_length=255, blank=True, null=True)
     featured_image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -192,6 +193,7 @@ class BlogPage(Page):
     content_panels = Page.content_panels + [
         FieldPanel('sub_title'),
         FieldPanel('published_date'),
+        FieldPanel('featured_text'),
         FieldPanel('featured_image'),
         FieldPanel('body'),
     ]

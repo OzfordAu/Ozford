@@ -34,7 +34,11 @@
                         {{ post.title }}
                     </h2>
                     <p class="text-gray-600 line-clamp-3">
-                        {{ post.body|richtext|truncatewords:30 }}
+                        {% if post.featured_text %}
+                            {{ post.featured_text|truncatewords:30 }}
+                        {% else %}
+                            {{ post.body|richtext|truncatewords:30 }}
+                        {% endif %}
                     </p>
                     </div>
                     <div class="mt-6">
