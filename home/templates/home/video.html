@@ -1,0 +1,17 @@
+<section 
+    x-data="youtubePlayer()" 
+    x-init="init()" 
+    class="relative container mx-auto w-full overflow-hidden bg-black"
+>
+  <div class="aspect-video w-full">
+    <iframe 
+      id="yt-player"
+      class="w-full h-full"
+      src="https://www.youtube.com/embed/mdGk1mhH6Jo?enablejsapi=1&rel=0&mute=1&playsinline=1"
+      title="YouTube video player"
+      frameborder="0"
+      allow="autoplay; encrypted-media"
+      allowfullscreen
+    ></iframe>
+  </div>
+</section>

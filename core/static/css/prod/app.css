@@ -1209,6 +1209,10 @@ h1, h2, h3, h4, h5, h6, .text-heading {
   display: none;
 }
 
+.aspect-video {
+  aspect-ratio: 16 / 9;
+}
+
 .size-10 {
   width: 2.5rem;
   height: 2.5rem;
@@ -1391,6 +1395,10 @@ h1, h2, h3, h4, h5, h6, .text-heading {
 
 .min-h-96 {
   min-height: 24rem;
+}
+
+.min-h-\[500px\] {
+  min-height: 500px;
 }
 
 .min-h-\[50svh\] {
@@ -3489,6 +3497,10 @@ h1, h2, h3, h4, h5, h6, .text-heading {
 
   .md\:h-full {
     height: 100%;
+  }
+
+  .md\:min-h-\[500px\] {
+    min-height: 500px;
   }
 
   .md\:w-1\/2 {

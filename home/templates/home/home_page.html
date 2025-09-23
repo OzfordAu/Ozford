@@ -46,6 +46,7 @@
 {% include 'home/swiper.html' %}
 {% comment %} {% include 'home/student_agent_links.html' %} {% endcomment %}
 {% include 'home/search_courses.html' %}
+{% include 'home/video.html' %}
 {% include 'home/why_ozford.html' %}
 {% comment %} {% include 'home/testimonial_slider.html' %} {% endcomment %}
 {% include 'home/testimonials.html' %}
@@ -109,6 +110,39 @@
         },
      
       });
+</script>
+<script>
+  function youtubePlayer() {
+    return {
+      player: null,
+      init() {
+        // Load YouTube IFrame API if not already loaded
+        if (!window.YT) {
+          const tag = document.createElement('script');
+          tag.src = "https://www.youtube.com/iframe_api";
+          document.body.appendChild(tag);
+        }
+
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (this.player) {
+              if (entry.isIntersecting) {
+                this.player.playVideo();
+              } else {
+                this.player.pauseVideo();
+              }
+            }
+          });
+        }, { threshold: 0.5 });
+
+        observer.observe(this.$el);
+
+        window.onYouTubeIframeAPIReady = () => {
+          this.player = new YT.Player('yt-player');
+        };
+      }
+    }
+  }
 </script>
 
 
