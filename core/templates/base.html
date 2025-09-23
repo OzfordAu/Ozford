@@ -49,6 +49,20 @@
                 margin-right: calc(-50vw + 50%);
             }
         </style>
+        <style>
+        /* Scrolls from completely off the right edge to completely off the left edge,
+        then immediately restarts at the right edge */
+        @keyframes ticker {
+        0%   { transform: translateX(100%); }   /* start off-screen right */
+        100% { transform: translateX(-100%); }  /* finish off-screen left */
+        }
+        .animate-ticker {
+        animation: ticker 25s linear infinite;  /* adjust 15s for speed */
+        }
+        .animate-ticker:hover {
+        animation-play-state: paused;           /* optional: pause on hover */
+        }
+        </style>
 
         {% block extra_css %}
         {# Override this in templates to add extra stylesheets #}
@@ -57,6 +71,8 @@
 
     <body class="{% block body_class %}{% endblock %}">
         {% block header_html %}{% endblock header_html %}
+        {% include "scroll_message.html" %}
+        
         {% include "navbar/desktop.html" %}
         {% include "navbar/mobile.html" %}
 

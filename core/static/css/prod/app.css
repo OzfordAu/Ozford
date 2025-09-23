@@ -1260,6 +1260,10 @@ h1, h2, h3, h4, h5, h6, .text-heading {
   height: 2.5rem;
 }
 
+.h-12 {
+  height: 3rem;
+}
+
 .h-14 {
   height: 3.5rem;
 }
@@ -1395,10 +1399,6 @@ h1, h2, h3, h4, h5, h6, .text-heading {
 
 .min-h-96 {
   min-height: 24rem;
-}
-
-.min-h-\[500px\] {
-  min-height: 500px;
 }
 
 .min-h-\[50svh\] {
@@ -2898,6 +2898,10 @@ h1, h2, h3, h4, h5, h6, .text-heading {
   transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
 }
 
+.will-change-transform {
+  will-change: transform;
+}
+
 .clip-diagonal {
   clip-path: polygon(0 0, 60% 0, 50% 100%, 0 100%);
 }
@@ -3497,10 +3501,6 @@ h1, h2, h3, h4, h5, h6, .text-heading {
 
   .md\:h-full {
     height: 100%;
-  }
-
-  .md\:min-h-\[500px\] {
-    min-height: 500px;
   }
 
   .md\:w-1\/2 {
