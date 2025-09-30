@@ -71,7 +71,7 @@
 
     <body class="{% block body_class %}{% endblock %}">
         {% block header_html %}{% endblock header_html %}
-        {% include "scroll_message.html" %}
+        {% comment %} {% include "scroll_message.html" %} {% endcomment %}
         
         {% include "navbar/desktop.html" %}
         {% include "navbar/mobile.html" %}
