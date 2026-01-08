@@ -7,6 +7,7 @@ How to Run the Project
 2\. create .env file in the root directory
 
 .env example
+
 ######################################
 
 DJANGO_ENV=development
