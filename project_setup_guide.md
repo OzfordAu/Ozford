@@ -8,6 +8,7 @@ How to Run the Project
 
 .env example
 ######################################
+
 DJANGO_ENV=development
 
 DEBUG=on
