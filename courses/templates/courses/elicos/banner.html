@@ -1,3 +1,4 @@
+{% extends "base.html" %}
 {% load static wagtailcore_tags wagtailimages_tags %}
 
 {% block script_top %}
@@ -7,6 +8,7 @@
 <link rel="preload" as="image" href="{{ desktop_avif.url }}" type="image/avif" fetchpriority="high" media="(min-width: 1024px)">
 {% endblock script_top %}
 
+{% block content %}
 <section class="bg-primary-darker w-full relative lg:h-[450px]" aria-label="Course Banner">
   <!-- Mobile Banner Image -->
   <picture>
@@ -96,3 +98,4 @@
     </div>
   </div>
 </section>
+{% endblock content %}
