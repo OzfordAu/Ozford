@@ -1,66 +1,59 @@
 {% extends 'base.html' %}
 {% load static wagtailcore_tags wagtailimages_tags %}
+
 {% block script_top %}
 <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
 {% endblock %}
-{% block extra_css %}
 
+{% block extra_css %}
 {% endblock %}
+
 {% block content %}
 
   {% include 'breadcrumb.html' %}
+
   <div>
-    {% include "courses/elicos/banner.html" %}
- 
-  {% include "courses/elicos/key_facts.html" %}
+    <!-- 🔥 FIX: isolate banner stacking context -->
+    <div class="relative z-0">
+      {% include "courses/elicos/banner.html" %}
+    </div>
 
-<div class="bg-gray-100">
-    <div class="container py-2 lg:py-8">
+    {% include "courses/elicos/key_facts.html" %}
+
+    <div class="bg-gray-100">
+      <div class="container py-2 lg:py-8">
+
         <div class="p-6 lg:p-8 xl:p-12 bg-white scroll-m-8 cms-page" id="course_overview">
-            <h2 class="text-primary-dark font-semibold text-2xl mb-2">Course Overview</h2>
-            <div class="text-justify">
-                {{page.course_overview|richtext}}
-            </div>
+          <h2 class="text-primary-dark font-semibold text-2xl mb-2">Course Overview</h2>
+          <div class="text-justify">
+            {{ page.course_overview|richtext }}
+          </div>
         </div>
-        {% comment %} <div class="p-6 lg:p-8 xl:p-12 bg-gray-100 mt-4 lg:mt-8 xl:mt-12" id="course_requirements">
-            <h2 class="text-primary-dark font-semibold text-2xl mb-2">Course Requirements</h2>
-            {{page.course_requirement|richtext}}
-        </div> {% endcomment %}
-        
+
         <div class="p-6 lg:p-8 xl:p-12 bg-white mt-4 lg:mt-8 xl:mt-12 scroll-m-8 cms-page" id="career_outcomes">
-            <h2 class="text-primary-dark font-semibold text-base lg:text-xl mb-2">Learning Outcome</h2>
-            <div class="text-justify">
-                {{page.learning_outcome|richtext}}
-            </div>
+          <h2 class="text-primary-dark font-semibold text-base lg:text-xl mb-2">
+            Learning Outcome
+          </h2>
+          <div class="text-justify">
+            {{ page.learning_outcome|richtext }}
+          </div>
         </div>
-        
-       
-      
+
         <div class="p-6 lg:p-8 xl:p-12 bg-white mt-4 lg:mt-8 xl:mt-12 scroll-m-8 cms-page" id="assessment_methods">
-            <h2 class="text-primary-dark font-semibold text-2xl mb-2">Assessment</h2>
-            <div class="text-justify">
-                {{page.assessment|richtext}}
-            </div>
+          <h2 class="text-primary-dark font-semibold text-2xl mb-2">Assessment</h2>
+          <div class="text-justify">
+            {{ page.assessment|richtext }}
+          </div>
         </div>
-        {% include "courses/course_page_footer.html" %} 
-    </div>
-</div>
-   {% comment %} {% include "courses/study_at_ozford.html" %}  {% endcomment %}
-   {% comment %} {% include "courses/why_melbourne.html" %}  {% endcomment %}
 
-  {% comment %} <section class="container mx-auto max-w-7xl text-black pb-6 lg:pb-8 xl:pb-20 mt-4 lg:mt-8 xl:mt-12">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-10 xl:gap-16">
-      {% for item in degrees  %}
-        <div class="block space-y-4 bg-gray-100 p-4 lg:p-6 xl:p-10">
-          <h6>{{item.title}}</h6>
-          <p>{{item.page_description|richtext}}</p>
-        </div>
-      {% endfor %}
+        {% include "courses/course_page_footer.html" %}
+
+      </div>
     </div>
 
-  </section> {% endcomment %}
-</div>
+  </div>
+
 {% endblock %}
-{% block extra_js %}
 
+{% block extra_js %}
 {% endblock %}
