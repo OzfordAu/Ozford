@@ -34,8 +34,16 @@
         </svg>
       </button>
   
-      <!-- Panel -->
-      <div x-ref="panel" x-show="open" x-transition.origin.top.left x-on:click.outside="close($refs.button)" :id="$id('dropdown-button')" class="absolute right-0 z-50 mt-2 w-48 rounded-lg border border-gray-100 bg-white text-left text-sm shadow-lg">
+      <!-- Panel (changed from absolute z-50 to fixed + large z-index + top offset) -->
+      <div
+        x-ref="panel"
+        x-show="open"
+        x-transition.origin.top.left
+        x-on:click.outside="close($refs.button)"
+        :id="$id('dropdown-button')"
+        class="fixed right-4 top-20 w-48 mt-2 rounded-lg border border-gray-100 bg-white text-left text-sm shadow-lg"
+        style="z-index:100000;"
+      >
         <div class="p-1 tex-sm">
           <a target="_blank" href="https://mail.ozford.edu.au/owa/" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2"> Webmail </a>
           <a target="_blank" href="https://oihe.ozford.edu.au/login/index.php" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2" target="_blank"> OIHE (Moodle) </a>
