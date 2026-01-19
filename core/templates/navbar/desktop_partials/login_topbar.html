@@ -1,56 +1,86 @@
 <div class="flex">
+  <div
+    x-data="{
+      open: false,
+      portalActive: false,
+      toggle() {
+        if (this.open) return this.close()
+        this.$refs.button.focus()
+        this.open = true
+      },
+      close(focusAfter) {
+        if (!this.open) return
+        this.open = false
+        focusAfter && focusAfter.focus()
+      },
+      portal() {
+        // move panel to body and apply fixed positioning
+        const panel = this.$refs.panel
+        const btn = this.$refs.button
+        if (!panel || !btn) return
+        if (!this.portalActive) {
+          document.body.appendChild(panel)
+          this.portalActive = true
+        }
+        panel.style.position = 'fixed'
+        panel.style.zIndex = '100000'
+        // compute position (align right edge of panel to right edge of button)
+        const btnRect = btn.getBoundingClientRect()
+        // set top just under button
+        panel.style.top = (btnRect.bottom + 8) + 'px'
+        // compute right offset: prefer right aligned
+        const panelWidth = panel.offsetWidth || 200
+        const right = Math.max(8, window.innerWidth - btnRect.right)
+        panel.style.right = right + 'px'
+        // reset left (so right positioning works)
+        panel.style.left = 'auto'
+      }
+    }"
+    x-on:keydown.escape.prevent.stop="close($refs.button)"
+    x-on:focusin.window="! $refs.panel.contains($event.target) && close()"
+    x-id="['dropdown-button']"
+    x-init="
+      // keep panel positioned while open
+      $watch('open', value => {
+        if (value) {
+          portal()
+          // reposition while open on scroll/resize
+          window.addEventListener('resize', portal)
+          window.addEventListener('scroll', portal, { passive: true })
+        } else {
+          // cleanup listeners
+          window.removeEventListener('resize', portal)
+          window.removeEventListener('scroll', portal)
+        }
+      })
+    "
+    class="relative inline-block"
+  >
+    <!-- Button -->
+    <button x-ref="button" x-on:click="toggle()" :aria-expanded="open" :aria-controls="$id('dropdown-button')" type="button" class="inline-flex gap-2">
+      Login
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+      </svg>
+    </button>
+
+    <!-- Panel (kept in DOM but moved to body when opened) -->
     <div
-      x-data="{
-                  open: false,
-                  toggle() {
-                      if (this.open) {
-                          return this.close()
-                      }
-    
-                      this.$refs.button.focus()
-    
-                      this.open = true
-                  },
-                  close(focusAfter) {
-                      if (! this.open) return
-    
-                      this.open = false
-    
-                      focusAfter && focusAfter.focus()
-                  }
-              }"
-      x-on:keydown.escape.prevent.stop="close($refs.button)"
-      x-on:focusin.window="! $refs.panel.contains($event.target) && close()"
-      x-id="['dropdown-button']"
-      class="relative inline-block">
-      <!-- Button -->
-  
-      <button x-ref="button" x-on:click="toggle()" :aria-expanded="open" :aria-controls="$id('dropdown-button')" type="button" class="inline-flex gap-2">
-        Login
-  
-        <!-- Heroicon: chevron-down -->
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-        </svg>
-      </button>
-  
-      <!-- Panel (changed from absolute z-50 to fixed + large z-index + top offset) -->
-      <div
-        x-ref="panel"
-        x-show="open"
-        x-transition.origin.top.left
-        x-on:click.outside="close($refs.button)"
-        :id="$id('dropdown-button')"
-        class="fixed right-4 top-20 w-48 mt-2 rounded-lg border border-gray-100 bg-white text-left text-sm shadow-lg"
-        style="z-index:100000;"
-      >
-        <div class="p-1 tex-sm">
-          <a target="_blank" href="https://mail.ozford.edu.au/owa/" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2"> Webmail </a>
-          <a target="_blank" href="https://oihe.ozford.edu.au/login/index.php" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2" target="_blank"> OIHE (Moodle) </a>
-          <a target="_blank" href="https://ozford-vic.compass.education/login.aspx" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2" target="_blank"> HS | ELICOS (Compass) </a>
-          <a target="_blank" href="https://selfservice.ozford.edu.au:9251/authorization.do" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2" target="_blank"> Self Service (Staff Login) </a>
-          <a href="/agent-login/" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2"> Agent </a>
-        </div>
+      x-ref="panel"
+      x-show="open"
+      x-transition.origin.top.left
+      x-on:click.outside="close($refs.button)"
+      :id="$id('dropdown-button')"
+      class="absolute right-0 mt-2 w-48 rounded-lg border border-gray-100 bg-white text-left text-sm shadow-lg"
+      style="display:none;"
+    >
+      <div class="p-1 tex-sm">
+        <a target="_blank" href="https://mail.ozford.edu.au/owa/" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2"> Webmail </a>
+        <a target="_blank" href="https://oihe.ozford.edu.au/login/index.php" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2" target="_blank"> OIHE (Moodle) </a>
+        <a target="_blank" href="https://ozford-vic.compass.education/login.aspx" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2" target="_blank"> HS | ELICOS (Compass) </a>
+        <a target="_blank" href="https://selfservice.ozford.edu.au:9251/authorization.do" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2" target="_blank"> Self Service (Staff Login) </a>
+        <a href="/agent-login/" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2"> Agent </a>
       </div>
     </div>
   </div>
+</div>
