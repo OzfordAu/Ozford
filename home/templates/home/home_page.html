@@ -38,10 +38,41 @@
         stroke-dasharray: 125.6;
         transform: rotate(-90deg);
       }
+
+    /* Rolling Message Styles */
+    .rolling-message-container {
+        width: 100%;
+        overflow: hidden;
+        background: #005c90;
+        color: #fff;
+        padding: 12px 0;
+    }
+    
+    .marquee-animation {
+        display: inline-block;
+        white-space: nowrap;
+        animation: scroll 25s linear infinite;
+        padding-left: 100%;
+    }
+    
+    @keyframes scroll {
+        from { transform: translateX(0); }
+        to { transform: translateX(-100%); }
+    }
 </style>
 {% endblock extra_css %}
+
 {% block body_class %}home{% endblock %}
+
 {% block content %}
+
+<!-- Rolling Message Banner -->
+<div class="rolling-message-container">
+    <div class="marquee-animation">
+        <span>🎓 Admissions Open for 2026 | Apply Now for Upcoming Semester | Limited Seats Available | Contact Us Today! 🎓</span>
+    </div>
+</div>
+
 {% comment %} {% include 'home/carousel.html' %} {% endcomment %}
 {% include 'home/swiper.html' %}
 {% comment %} {% include 'home/student_agent_links.html' %} {% endcomment %}
@@ -53,7 +84,9 @@
 {% include 'home/ready_study_at_ozford.html' %}
 {% include 'home/news_events.html' %}
 {% comment %} {% include 'home/need_help.html' %} {% endcomment %}
+
 {% endblock content %}
+
 {% block extra_js %}
 <script>
     const progressCircle = document.querySelector(".autoplay-progress svg");
@@ -144,6 +177,5 @@
     }
   }
 </script>
-
 
 {% endblock extra_js %}
