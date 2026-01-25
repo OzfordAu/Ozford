@@ -87,6 +87,10 @@ class SiteSettings(Page):
     popup_end_date = models.DateField(null=True, blank=True, verbose_name='Popup End Date')
     popup_is_active = models.BooleanField(default=True, verbose_name='Popup is Active')
 
+    # Rolling Message Fields
+    rolling_message = models.CharField(max_length=500, null=True, blank=True, verbose_name='Rolling Message Text')
+    rolling_message_is_active = models.BooleanField(default=False, verbose_name='Show Rolling Message')
+
     address = RichTextField(null=True, blank=True)
     phone = models.CharField(max_length=255, null=True, blank=True)
     email = models.CharField(max_length=255, null=True, blank=True)
@@ -148,6 +152,12 @@ class SiteSettings(Page):
             FieldPanel('popup_is_active'),
         ], heading='Site Popup Message'),
 
+        # Rolling Message Banner
+        MultiFieldPanel([
+            FieldPanel('rolling_message'),
+            FieldPanel('rolling_message_is_active'),
+        ], heading='Rolling Message Banner'),
+
         # Contact Details
         MultiFieldPanel([
             FieldPanel('address'),
@@ -175,6 +185,3 @@ class SiteSettings(Page):
     class Meta:
         verbose_name = "Global Site Settings"
         app_label = 'site_settings'
-
-
-
