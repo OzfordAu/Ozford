@@ -39,25 +39,31 @@
         transform: rotate(-90deg);
       }
 
-    /* Rolling Message Styles */
     .rolling-message-container {
         width: 100%;
         overflow: hidden;
-        background: #005c90;
-        color: #fff;
-        padding: 12px 0;
+        background-color: #005c90;
+        color: #ffffff;
+        padding: 14px 0;
+        position: relative;
     }
     
     .marquee-animation {
         display: inline-block;
         white-space: nowrap;
-        animation: scroll 25s linear infinite;
+        animation: scroll 30s linear infinite;
         padding-left: 100%;
+        font-size: 16px;
+        font-weight: 500;
     }
     
     @keyframes scroll {
-        from { transform: translateX(0); }
-        to { transform: translateX(-100%); }
+        from { 
+            transform: translateX(0); 
+        }
+        to { 
+            transform: translateX(-100%); 
+        }
     }
 </style>
 {% endblock extra_css %}
@@ -66,10 +72,9 @@
 
 {% block content %}
 
-<!-- Rolling Message Banner -->
 <div class="rolling-message-container">
     <div class="marquee-animation">
-        <span>🎓 Admissions Open for 2026 | Apply Now for Upcoming Semester | Limited Seats Available | Contact Us Today! 🎓</span>
+        <span>Important Notice: Our office will be closed on Monday, 26 January 2026 due to the Australia Day public holiday. We will reopen on Tuesday, 27 January 2026. Thank you for your understanding.</span>
     </div>
 </div>
 
@@ -92,24 +97,16 @@
     const progressCircle = document.querySelector(".autoplay-progress svg");
     const progressContent = document.querySelector(".autoplay-progress span");
     const banner_slide = new Swiper('.banner-slide', {
-        // Optional parameters
-
         direction: 'horizontal',
         loop: true,
-
         autoplay: {
             delay: 4500,
             disableOnInteraction: false,
           },
-      
-     
-        // Navigation arrows
         navigation: {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
         },
-      
-        // And if we need scrollbar
         scrollbar: {
           el: '.swiper-scrollbar',
         },
@@ -123,33 +120,25 @@
 </script>
 
 <script>
-
     const swiper_testimonial = new Swiper('.testimonial-slide', {
-        // Optional parameters
-
         direction: 'horizontal',
         loop: true,
-
         autoplay: {
             delay: 4500,
             disableOnInteraction: false,
           },
-      
-      
-        // Navigation arrows
-       navigation: {
+        navigation: {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
         },
-     
       });
 </script>
+
 <script>
   function youtubePlayer() {
     return {
       player: null,
       init() {
-        // Load YouTube IFrame API if not already loaded
         if (!window.YT) {
           const tag = document.createElement('script');
           tag.src = "https://www.youtube.com/iframe_api";
