@@ -74,6 +74,15 @@
         {% block extra_css %}
         {# Override this in templates to add extra stylesheets #}
         {% endblock %}
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "EducationalOrganization",
+          "name": "Ozford Australia",
+          "url": "{{ page.get_full_url }}",
+          "logo": "https://ozford.edu.au{% static 'images/logo.png' %}"
+        }
+        </script>
     </head>
 
     <body class="{% block body_class %}{% endblock %}">
