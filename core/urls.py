@@ -1,6 +1,8 @@
 from django.conf import settings
 from django.urls import include, path
 from django.contrib import admin
+from django.http import HttpResponse
+from django.views.decorators.http import require_GET
 
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail import urls as wagtail_urls
@@ -9,6 +11,19 @@ from wagtail.documents import urls as wagtaildocs_urls
 from search import views as search_views
 # from blog.views import blog_index
 
+@require_GET
+def robots_txt(request):
+    lines = [
+        "User-agent: *",
+        "Allow: /",
+        "",
+        "Disallow: /admin/",
+        "Disallow: /django-admin/",
+        "",
+        "Sitemap: https://ozford.edu.au/sitemap.xml",
+    ]
+    return HttpResponse("\n".join(lines), content_type="text/plain")
+
 urlpatterns = [
     path("django-admin/", admin.site.urls),
     path("admin/", include(wagtailadmin_urls)),
@@ -16,6 +31,7 @@ urlpatterns = [
     path("search/", search_views.search, name="search"),
     path('tinymce/', include('tinymce.urls')),
     path('agents/', include('agents.urls')),
+    path("robots.txt", robots_txt),
     # path('news-and-events/<int:page_id>/', blog_index, name='blog_index'),
     
 ]
