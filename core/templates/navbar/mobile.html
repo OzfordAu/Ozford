@@ -1,0 +1,384 @@
+{% load static wagtailcore_tags wagtailimages_tags %}
+<div x-data="{ 
+    menuStack: [],
+    currentMenu: 'main',
+    menus: {
+        main: {
+            title: 'Main Menu',
+            items: [
+                { label: 'Home', type: 'link', href: '/' },
+                { label: 'Study', type: 'submenu', target: 'study' },
+                { label: 'Student Life', type: 'submenu', target: 'studentLife' },
+                { label: 'Admission &amp; Entry', type: 'submenu', target: 'admission' },
+                { label: 'About', type: 'submenu', target: 'about' },
+                { label: 'Login', type: 'submenu', target: 'login' },
+                {% comment %} { label: 'About', type: 'submenu', target: 'about' } {% endcomment %}
+            ]
+        },
+        study: {
+            title: 'Study',
+            items: [
+                { label: 'Postgraduate', type: 'submenu', target: 'postgraduate' },
+                { label: 'Undergraduate', type: 'submenu', target: 'undergraduate' },
+                { label: 'High School (Year 10-12)', type: 'submenu', target: 'highSchool' },
+                { label: 'English Language Center', type: 'submenu', target: 'elicos' }
+            ]
+        },
+        postgraduate: {
+            title: 'Postgraduate',
+            items: [
+                { label: 'Master of Information Technology (MIT)', type: 'link', href: '/study/postgraduate/master-of-information-technology/' },
+                { label: 'Master of Business Admistration', type: 'link', href: '/study/postgraduate/master-of-business-administration/' },
+                { label: 'Master of Professional Accounting (MPA)', type: 'link', href: '/study/postgraduate/master-of-professional-accounting/' },
+                { label: 'Graduate Diploma in Information Technology', type: 'link', href: '/study/postgraduate/graduate-diploma-in-information-technology/' },
+                { label: 'Graduate Diploma in Management', type: 'link', href: '/study/postgraduate/graduate-diploma-in-management/' },
+                { label: 'Graduate Certificate in Information Technology', type: 'link', href: '/study/postgraduate/graduate-certificate-in-information-technology/' },
+                { label: 'Graduate Certificate in Management', type: 'link', href: '/study/postgraduate/graduate-certificate-in-management/' }
+            ]
+        },
+        undergraduate: {
+            title: 'Undergraduate',
+            items: [
+                { label: 'Bachelor of Cyber Security', type: 'link', href: '/study/undergraduate/bachelor-of-cyber-security/' },
+                { label: 'Bachelor of Information Systems', type: 'link', href: '/study/undergraduate/bachelor-of-information-systems/' },
+                { label: 'Bachelor of Business (Accounting)', type: 'link', href: '/study/undergraduate/bachelor-of-business-accounting/' },
+                { label: 'Bachelor of Business', type: 'link', href: '/study/undergraduate/bachelor-of-business/' },
+                { label: 'Diploma of Business', type: 'link', href: '/study/undergraduate/diploma-of-business/' }
+            ]
+        },
+        highSchool: {
+            title: 'High School (Year 10-12)',
+            items: [
+                { label: 'Year 10 High School Program', type: 'link', href: '/study/high-school/year-10-high-school-program/' },
+                { label: 'Year 11 and 12', type: 'link', href: '/study/high-school/year-11-and-12-high-school-program/' },
+                { label: 'Victorian Certificate of Education (VCE)', type: 'link', href: '/study/high-school/victorian-certificate-of-education-vce/' },
+                { label: 'VCE and VCE VM', type: 'link', href: '/study/high-school/vc-and-vce-vm/' }
+            ]
+        },
+        elicos: {
+            title: 'English Language Center',
+            items: [
+                { label: 'General English Course', type: 'link', href: '/study/english-language-center/general-english-course/' },
+                { label: 'English for Academic Purposes (EAP)', type: 'link', href: '/study/english-language-center/english-for-academic-purposes/' },
+                { label: 'English for Secondary School Preparation (ESSP)', type: 'link', href: '/study/english-language-center/english-for-secondary-school-preparation/' }
+            ]
+        },
+        studentLife: {
+            title: 'Student Life',
+            items: [
+                { label: 'Current Student', type: 'submenu', target: 'studentLifeCurrentStudent' },
+                { label: 'Life at Ozford', type: 'submenu', target: 'studentLifeLifeAtOzford' },
+                { label: 'Key Dates', type: 'submenu', target: 'studentLifeKeyDates' },
+                { label: 'International Students', type: 'submenu', target: 'studentLifeInternationalStudents' },
+            ]
+        },
+        studentLifeCurrentStudent: {
+            title: 'Current Student - Student Life',
+            items: [
+                { label: 'Webmail', type: 'link', href: 'https://login.microsoftonline.com/' },
+                { label: 'OIHE (Mooodle)', type: 'link', href: 'https://oihe.ozford.edu.au/login/index.php' },
+                { label: 'HS | ELICOS (Compass)', type: 'link', href: 'https://ozford-vic.compass.education/login.aspx?sessionstate=disabled' },
+                { label: 'Policies &amp; Procedures', type: 'link', href: '/policies-and-procedures/' },
+                { label: 'Our People', type: 'link', href: '/about/our-people/' },
+            ]
+        },
+        studentLifeLifeAtOzford: {
+            title: 'Life at Ozford - Student Life',
+            items: [
+                { label: 'Student Services &amp; Support', type: 'link', href: '/about/student-services-and-support/' },
+                { label: 'Career Hub', type: 'link', href: '/about/career-hub/' },
+                { label: 'Endorsement', type: 'link', href: '/about/endorsement/' },
+                { label: 'Campus Safety &amp; Sexual Misconduct', type: 'link', href: '/about/campus-safety-and-sexual-misconduct/' },
+            ]
+        },
+        studentLifeKeyDates: {
+            title: 'Key Dates - Student Life',
+            items: [
+              { label: 'Intakes', type: 'link', href: '/admissions/intakes/' },  
+              { label: 'Fee Due Dates', type: 'link', href: '/admissions/fees/#payment_due_dates' },  
+              { label: 'Orientations', type: 'link', href: '/admissions/orientations/' },  
+              { label: 'Events', type: 'link', href: '/news-and-events/events/' },  
+            ]
+        },
+        studentLifeInternationalStudents: {
+            title: 'International Students - Student Life',
+            items: [
+              { label: 'Apply', type: 'link', href: '/admissions/how-to-apply/international-student/' }, 
+              { label: 'Authorised Agents', type: 'link', href: '/about/authorized-agents/' }, 
+              { label: 'Accommodation', type: 'link', href: '/admissions/accommodation/' }, 
+              { label: 'Study in Melbourne Australia', type: 'link', href: '/about/study-in-melbourne-australia/' }, 
+            ]
+        },
+        admission: {
+            title: 'Admission',
+            items: [
+                { label: 'Higher Education', type: 'submenu', target: 'admissionHigherEducation' },
+                { label: 'High School', type: 'submenu', target: 'admissionHighSchool' },
+                { label: 'English Language Center', type: 'submenu', target: 'admissionEnglish' },
+                { label: 'Information', type: 'submenu', target: 'admissionInformation' },
+            ]
+        },
+        admissionHigherEducation: {
+            title: 'Admission &amp; Entry - Higher Education',
+            items: [
+                { label: 'Why OIHE?', type: 'link', href: '/admissions/higher-education/why-ozford-institute-of-higher-education/' },
+                { label: 'Pathways', type: 'link', href: '/admissions/pathways/' },
+                {% comment %} { label: 'Course Guide', type: 'link', href: '/admissions/higher-education/course-guide/' }, {% endcomment %}
+                { label: 'Intakes &amp; Timester Dates', type: 'link', href: '/admissions/intakes-and-term-dates/higher-education/' },
+                { label: 'Orientation', type: 'link', href: '/admissions/orientations/higher-education/' },
+                { label: 'Entry Requirements', type: 'link', href: '/admissions/entry-requirements/higher-education/' },
+                { label: 'Pre-Enrolment', type: 'link', href: '/admissions/higher-education/pre-enrolment/' },
+                { label: 'How to Apply', type: 'link', href: '/admissions/how-to-apply/higher-education/' },
+                { label: 'Terms &amp; Conditions', type: 'link', href: '/about/terms-and-conditions/higher-education/' },
+                { label: 'OIHE Brochure', type: 'link', href: '/documents/207/OIHE-Brochure-A3-20250429.pdf' },
+                { label: 'Student Handbook', type: 'link', href: '/documents/221/OIHE_Student_Handbook_Feb_2025.pdf' },
+                { label: 'Policies &amp; Procedures', type: 'link', href: '/policies-and-procedures/higher-education/' },
+                { label: 'Statement of Tuition Assurance', type: 'link', href: '/statement-of-tuition-assurance/' },
+            ]
+        },
+        admissionHighSchool: {
+            title: 'Admission &amp; Entry - High School',
+            items: [
+                { label: 'Why Ozford College?', type: 'link', href: '/admissions/high-school/why-ozford-college/' },
+                {% comment %} { label: 'Year 10', type: 'link', href: '/study/high-school/year-10-high-school-program/' },
+                { label: 'Year 11 and 12', type: 'link', href: '/study/high-school/year-11-and-12-high-school-program/' },
+                { label: 'Victorian Certificate of Education (VCE)', type: 'link', href: '/study/high-school/victorian-certificate-of-education-vce/' },
+                { label: 'VCE and VCE VM', type: 'link', href: '/study/high-school/vc-and-vce-vm/' },{% endcomment %}
+                { label: 'High School Subjects', type: 'link', href: '/admissions/high-school/subjects/' }, 
+                { label: 'Pathways', type: 'link', href: '/admissions/pathways/' },
+                { label: 'Course Guide', type: 'link', href: '/documents/206/course_brochure_2025.pdf' },
+                { label: 'Entry Requirements', type: 'link', href: '/admissions/entry-requirements/high-school/' },
+                { label: 'Pay Fees', type: 'link', href: '/admissions/fees/#fees' },
+                { label: 'Policies &amp; Procedures', type: 'link', href: '/policies-and-procedures/high-school/' },
+                { label: 'HS Student Handbook', type: 'link', href: '/documents/224/High_School_Handbook_Sep_2025.pdf' },
+                { label: 'HS Pre-Enrolment Information', type: 'link', href: 'https://ozfordeduau-my.sharepoint.com/:b:/g/personal/ozfordit_ozford_edu_au/EY0hTWjTyxxJtagGf50n59MBheCj5V34nZOOioevi7gxVA?e=b91D13' },
+                { label: 'Terms &amp; Conditions', type: 'link', href: '/documents/208/SAA-HS-TC-v7_4kTP8ED.0-09.02.2021.pdf' },
+                { label: 'Intakes &amp; Term Dates', type: 'link', href: '/admissions/intakes-and-term-dates/high-school/' },
+                { label: 'Orientation', type: 'link', href: '/admissions/orientations/high-school-and-english-language-center/' },
+                { label: '2024 High School Annual Report', type: 'link', href: 'https://ozford.edu.au/documents/222/2024_Ozford_College_Annual_Report_to_the_School_Community.pdf' },
+            ]
+        },
+        admissionEnglish: {
+            title: 'Admission &amp; Entry - English Language Center',
+            items: [
+                { label: 'Why Ozford English Language', type: 'link', href: '/admissions/english-language-center/why-ozford-english-language/'},
+                {% comment %} { label: 'Courses', type: 'link', href: '/admissions/english-language-center/courses/'}, {% endcomment %}
+                { label: 'Pay Fees', type: 'link', href: '/admissions/fees/#fees'},
+                { label: 'Policies &amp; Procedures', type: 'link', href: '/policies-and-procedures/english-language-center/'},
+                { label: 'Student Handbook', type: 'link', href: '/documents/223/ELICOS_Student_Handbook_2025.pdf'},
+                { label: 'Pre-Enrolment Information', type: 'link', href: 'https://ozfordeduau-my.sharepoint.com/:b:/g/personal/ozfordit_ozford_edu_au/EcSCg7Uso7xPp0ZFVbneWjUBXaEgf9NBE7Wx3JQVuRn8LQ?e=0ODUaL'},
+                { label: 'Terms &amp; Conditions', type: 'link', href: '/documents/208/SAA-HS-TC-v7_4kTP8ED.0-09.02.2021.pdf'},
+                {% comment %} { label: 'Course Guide', type: 'link', href: '/admissions/english-language-center/course-guide/'}, {% endcomment %}
+                { label: 'Intakes', type: 'link', href: '/admissions/intakes-and-term-dates/english-language-center/'},
+                { label: 'Orientation', type: 'link', href: '/admissions/orientations/high-school-and-english-language-center/'},
+                {% comment %} { label: 'English &amp; Cultural Study Tour', type: 'link', href: '/admissions/english-language-center/english-and-cultural-study-tour/'}, {% endcomment %}
+            ]
+        },
+        admissionInformation: {
+            title: 'Admission &amp; Entry - Information',
+            items: [
+                { label: 'Apply Now', type: 'link', href: '/admissions/how-to-apply/'},
+                { label: 'Pay Fees', type: 'link', href: '/admissions/fees/'},
+                { label: 'Payment Methods', type: 'link', href: '/admissions/fees/#payment_methods'},
+                { label: 'Pathyways', type: 'link', href: '/admissions/pathways/'},
+                { label: 'Orientations', type: 'link', href: '/admissions/orientations/'},
+                { label: 'Authorised Agents', type: 'link', href: '/about/authorized-agents/'},
+            ]
+        },
+        about: {
+            title: 'About us',
+            items: [
+                { label: 'About OZFORD', type: 'submenu', target: 'aboutOzford' },
+                { label: 'Life at OZFORD', type: 'submenu', target: 'aboutLifeAtOzford' },
+                { label: 'Terms &amp; Policies', type: 'submenu', target: 'aboutTermsAndPolicies' },
+                { label: 'Engage', type: 'submenu', target: 'aboutEngage' },
+            ]
+        },
+
+        aboutOzford: {
+            title: 'About OZFORD',
+            items: [
+                { label: 'About OZFORD', type: 'link', href: '/about/' },
+                { label: 'Our Philosophy', type: 'link', href: '/about/our-philosophy/' },
+                { label: 'Our People', type: 'link', href: '/about/our-people/' },
+                { label: 'Gallery', type: 'link', href: '/about/gallery/' },
+                { label: 'Testimonials', type: 'link', href: '/about/testimonials/' },
+                { label: 'Our Stories', type: 'link', href: '/about/our-stories/' },
+                { label: 'Policies &amp; Procedures', type: 'link', href: '/about/policies-and-procedures/' },
+            ]
+        },
+        
+        aboutLifeAtOzford: {
+            title: 'Life at OZFORD',
+            items: [
+                { label: 'Student Services &amp; Support', type: 'link', href: '/about/student-services-and-support/' },
+                { label: 'Career Hub', type: 'link', href: '/about/career-hub/' },
+                { label: 'Endorsement', type: 'link', href: '/about/endorsement/' },
+                { label: 'Campus Safety &amp; Sexual Misconduct', type: 'link', href: '/about/campus-safety-and-sexual-misconduct/' },
+            ]
+        },
+        
+        aboutTermsAndPolicies: {
+            title: 'Terms &amp; Policies',
+            items: [
+                { label: 'Terms &amp; Conditions', type: 'link', href: '/about/terms-and-conditions/' },
+                { label: 'ESOS Act', type: 'link', href: 'https://www.legislation.gov.au/F2017L01182/latest/text' },
+                { label: 'Privacy Statement', type: 'link', href: '/about/privacy-statements/' },
+                { label: 'Disclaimer', type: 'link', href: '/about/disclaimer/' },
+                { label: 'Policies &amp; Procedures', type: 'link', target: '/policies-and-procedures/' },
+            ]
+        },   
+        aboutEngage: {
+            title: 'Engage',
+            items: [
+                { label: 'Blogs &amp; Events', type: 'link', href: '/news-and-events/' },
+                { label: 'Contact us', type: 'link', href: '/about/contact-us/' },
+                { label: 'Job Vacancy', type: 'link', href: '/about/careers/' },
+                { label: 'FAQ\'s', type: 'link', href: '/about/faq/' },
+            ]
+        },
+        login: {
+            title: 'Login',
+            items: [
+                { label: 'Webmail', type: 'link', href: 'https://mail.ozford.edu.au/owa/' },
+                { label: 'OIHE (Moodle)', type: 'link', href: 'https://oihe.ozford.edu.au/login/index.php' },
+                { label: 'HS | ELICOS (Compass)', type: 'link', href: 'https://ozford-vic.compass.education/login.aspx' },
+                { label: 'Self Service (Staff Login)', type: 'link', href: 'https://selfservice.ozford.edu.au:9251/authorization.do' },
+                { label: 'Agent', type: 'link', href: '/agent-login/' },
+            ]
+        } 
+    }
+}" 
+class="lg:hidden relative z-50">
+    <!-- Fixed Header - 90px height -->
+    <div class="fixed top-0 left-0 right-0 z-50 bg-white">
+        <!-- Top bar -->
+        <div class="w-full bg-primary-dark text-white text-xs py-2">
+            <div class="container">
+                <ul class="flex justify-end items-center space-x-3">
+                    {% comment %} <li><a href="https://selfservice.ozford.edu.au:9251/">Staffs</a></li> {% endcomment %}
+                    <li><a href="/news-and-events/">News &amp; Events</a></li>
+                    <li><a href="/about/contact-us/">Contact</a></li>
+                    {% comment %} <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                        </svg>
+                    </li> {% endcomment %}
+                </ul>
+            </div>
+        </div>
+
+        <!-- Header with logo and menu button -->
+        <div class="flex justify-between items-center container py-4 border-b border-gray-200">
+            <div>
+                <a href="/" class="flex items-center">
+                    {% image site_settings.header_logo original loading="lazy" class="w-36 h-auto" %}
+                </a>
+            </div>
+            <div>
+                <button @click="menuStack.length ? menuStack = [] : (menuStack = ['main'], currentMenu = 'main')" 
+                        aria-label="Toggle Menu"
+                        class="relative w-6 h-6">
+                    <!-- Hamburger Icon -->
+                    <svg x-show="!menuStack.length" 
+                         xmlns="http://www.w3.org/2000/svg" 
+                         fill="none" 
+                         viewBox="0 0 24 24" 
+                         stroke-width="1.5" 
+                         stroke="currentColor" 
+                         class="size-6"
+                         x-transition:enter="transition-opacity duration-200"
+                         x-transition:enter-start="opacity-0"
+                         x-transition:enter-end="opacity-100">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                    <!-- Close Icon -->
+                    <svg x-show="menuStack.length" 
+                         xmlns="http://www.w3.org/2000/svg" 
+                         fill="none" 
+                         viewBox="0 0 24 24" 
+                         stroke-width="1.5" 
+                         stroke="currentColor" 
+                         class="size-6"
+                         x-transition:enter="transition-opacity duration-200"
+                         x-transition:enter-start="opacity-0"
+                         x-transition:enter-end="opacity-100">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div x-show="menuStack.length > 0" 
+        class="fixed inset-0 z-40 mt-[90px] text-sm"
+        @keydown.escape.window="menuStack = []">
+        <div class="fixed inset-0 overflow-hidden">
+            <div class="absolute inset-0 overflow-hidden">
+                <div class="fixed inset-y-0 right-0 flex w-full top-[90px]">
+                    <div x-show="menuStack.length" 
+                        @click.away="menuStack = []"
+                        x-transition:enter="transform transition ease-in-out duration-500" 
+                        x-transition:enter-start="translate-x-full" 
+                        x-transition:enter-end="translate-x-0" 
+                        x-transition:leave="transform transition ease-in-out duration-500" 
+                        x-transition:leave-start="translate-x-0" 
+                        x-transition:leave-end="translate-x-full" 
+                        class="w-full">
+            
+            <!-- Menu Header -->
+            
+                <template x-if="menuStack.length > 1">
+                    <div class="flex items-center justify-between py-3 bg-gray-100">
+                        <div class="container">
+                    <button @click="menuStack.pop(); currentMenu = menuStack[menuStack.length - 1]" 
+                        class="flex items-center space-x-2 text-gray-800 font-semibold">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                          </svg>
+                          
+                        <span x-text="menus[currentMenu].title"></span>
+                    </button>
+                </div>
+            </div>
+                </template>
+            <!-- Menu Items with Slide Transitions -->
+            <div class="overflow-y-auto h-full bg-white">
+                <div class="relative"
+                     x-transition:enter="transform transition-transform duration-300 ease-out"
+                     x-transition:enter-start="translate-x-full"
+                     x-transition:enter-end="translate-x-0"
+                     x-transition:leave="transform transition-transform duration-300 ease-out"
+                     x-transition:leave-start="translate-x-0"
+                     x-transition:leave-end="-translate-x-full">
+                    <template x-for="item in menus[currentMenu].items" :key="item.label">
+                        <div class="border-b border-gray-100">
+                            <template x-if="item.type === 'link'">
+                                <div class="container">
+                                <a :href="item.href" 
+                                    class="block py-3 hover:bg-gray-50"
+                                    x-text="item.label"></a>
+                                </div>
+                            </template>
+                            <template x-if="item.type === 'submenu'">
+                                <div class="container">
+                                <button @click="menuStack.push(item.target); currentMenu = item.target"
+                                    class="flex items-center justify-between w-full py-3 hover:bg-gray-50">
+                                    <span x-text="item.label"></span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                                    </svg>
+                                </button>
+                            </div>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Spacer to push content below fixed header -->
+    <div class="h-[90px]"></div>
+</div>

@@ -1,0 +1,55 @@
+<script>
+  document.addEventListener("alpine:init", () => {
+    Alpine.store("studentType", {
+      type: null,
+      setType(value) {
+        this.type = value;
+      },
+    });
+
+    Alpine.data("studentTypeManager", () => ({
+      showGlobalStudentTypeModal: false,
+      studentType: null,
+
+      init() {
+        // Check if student type is set in cookies
+        console.log("Checking for student type in cookies...");
+        const studentType = this.getCookie("student_type");
+        const isStudentTypeSet = this.getCookie("is_student_type_set");
+
+        if (!isStudentTypeSet || !studentType) {
+          this.showGlobalStudentTypeModal = true;
+        } else {
+          this.studentType = studentType;
+          Alpine.store("studentType").setType(studentType);
+        }
+      },
+
+      setStudentType(type) {
+        // Set cookies (expire in 30 days)
+        console.log("Setting student type:", type);
+        const expiryDate = new Date();
+        expiryDate.setDate(expiryDate.getDate() + 30);
+
+        document.cookie = `student_type=${type};expires=${expiryDate.toUTCString()};path=/`;
+        document.cookie = `is_student_type_set=true;expires=${expiryDate.toUTCString()};path=/`;
+
+        // Update local state and global store
+        this.studentType = type;
+        Alpine.store("studentType").setType(type);
+
+        // Close modal
+        this.showGlobalStudentTypeModal = false;
+      },
+
+      getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) {
+          return parts.pop().split(";").shift();
+        }
+        return null;
+      },
+    }));
+  });
+</script>

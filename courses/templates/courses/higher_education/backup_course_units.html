@@ -1,0 +1,144 @@
+{% comment %} {% load wagtailcore_tags %}
+<div class="scroll-m-8" id="course_units">
+    <h2 class="text-xl lg:text-2xl xl:text-3xl mb-2 lg:mb-3 xl:mb-4 font-medium text-primary">Course Units</h2>
+    {% if page.core_units %}
+        {% if page.ellective_units or page.management_specialisation_units or page.marketing_specialisation_units or accounting_specialisation_units %}
+            <div x-data="{ selectedTab: 'core_units' }" class="w-full text-sm 2xl:text-base">
+                <div @keydown.right.prevent="$focus.wrap().next()" @keydown.left.prevent="$focus.wrap().previous()" class="flex gap-2 overflow-x-auto" role="tablist" aria-label="tab options">
+                    <button @click="selectedTab = 'core_units'" :aria-selected="selectedTab === 'core_units'" :tabindex="selectedTab === 'core_units' ? '0' : '-1'" :class="selectedTab === 'core_units' ? 'font-medium text-primary bg-gray-100 rounded-lg' : 'text-primary-dark font-medium hover:bg-gray-100 hover:rounded-lg hover:text-primary'" class="h-min px-4 py-2" type="button" role="tab" aria-controls="tabpanelCoreUnits" >Core Units </button>
+                    {% if page.management_specialisation_units %}
+                        <button @click="selectedTab = 'management_specialisation_units'" :aria-selected="selectedTab === 'management_specialisation_units'" :tabindex="selectedTab === 'management_specialisation_units' ? '0' : '-1'" :class="selectedTab === 'management_specialisation_units' ? 'font-medium text-primary bg-gray-100 rounded-lg' : 'text-primary-dark font-medium hover:bg-gray-100 hover:rounded-lg hover:text-primary'" class="h-min px-4 py-2" type="button" role="tab" aria-controls="tabpanelManagementUnits" >Management Specialisation Units</button>
+                    {% endif %}
+                    {% if page.marketing_specialisation_units %}
+                        <button @click="selectedTab = 'marketing_specialisation_units'" :aria-selected="selectedTab === 'marketing_specialisation_units'" :tabindex="selectedTab === 'marketing_specialisation_units' ? '0' : '-1'" :class="selectedTab === 'marketing_specialisation_units' ? 'font-medium text-primary bg-gray-100 rounded-lg' : 'text-primary-dark font-medium hover:bg-gray-100 hover:rounded-lg hover:text-primary'" class="h-min px-4 py-2" type="button" role="tab" aria-controls="tabpanelMarketingUnits" >Marketing Specialisation Units</button>
+                    {% endif %}
+                    {% if page.accounting_specialisation_units %}
+                        <button @click="selectedTab = 'accounting_specialisation_units'" :aria-selected="selectedTab === 'accounting_specialisation_units'" :tabindex="selectedTab === 'accounting_specialisation_units' ? '0' : '-1'" :class="selectedTab === 'accounting_specialisation_units' ? 'font-medium text-primary bg-gray-100 rounded-lg' : 'text-primary-dark font-medium hover:bg-gray-100 hover:rounded-lg hover:text-primary'" class="h-min px-4 py-2" type="button" role="tab" aria-controls="tabpanelAccountingUnits" >Accounting Specialisation Units</button>
+                    {% endif %}
+                    {% if page.ellective_units %}
+                        <button @click="selectedTab = 'ellective_units'" :aria-selected="selectedTab === 'ellective_units'" :tabindex="selectedTab === 'ellective_units' ? '0' : '-1'" :class="selectedTab === 'ellective_units' ? 'font-medium text-primary bg-gray-100 rounded-lg' : 'text-primary-dark font-medium hover:bg-gray-100 hover:rounded-lg hover:text-primary'" class="h-min px-4 py-2" type="button" role="tab" aria-controls="tabpanelEllectiveUnits" >Elective Units</button>
+                    {% endif %}
+                </div>
+                <div class="px-2 py-4 text-base">
+                    <div x-show="selectedTab === 'core_units'" id="tabpanelCoreUnits" role="tabpanel" aria-label="core_units">
+                        {% if page.core_units_title %}<p class="font-medium text-primary py-2">{{page.core_units_title}}</p>{% endif %}
+                        {% include "courses/course_units.html" with course_units=page.core_units %}
+                    </div>
+                    <div x-show="selectedTab === 'ellective_units'" id="tabpaneEllectiveUnits" role="tabpanel" aria-label="ellective_units">
+                        {% if page.ellective_units_title %}<p class="font-medium text-primary py-2">{{page.ellective_units_title}}</p>{% endif %}
+                        {% include "courses/course_units.html" with course_units=page.ellective_units %}
+                    </div>
+                    <div x-show="selectedTab === 'management_specialisation_units'" id="tabpanelManagementUnits" role="tabpanel" aria-label="management_specialisation_units">
+                        {% if page.management_specialisation_units_title %}<p class="font-medium text-primary py-2">{{page.management_specialisation_units_title}}</p>{% endif %}
+                        {% include "courses/course_units.html" with course_units=page.management_specialisation_units %}
+                    </div>
+                    <div x-show="selectedTab === 'marketing_specialisation_units'" id="tabpanelMarketingUnits" role="tabpanel" aria-label="marketing_specialisation_units">
+                        {% if page.marketing_specialisation_units_title %}<p class="font-medium text-primary py-2">{{page.marketing_specialisation_units_title}}</p>{% endif %}
+                        {% include "courses/course_units.html" with course_units=page.marketing_specialisation_units %}
+                    </div>
+                    <div x-show="selectedTab === 'accounting_specialisation_units'" id="tabpanelAccountingUnits" role="tabpanel" aria-label="accounting_specialisation_units">
+                        {% if page.accounting_specialisation_units_title %}<p class="font-medium text-primary py-2">{{page.accounting_specialisation_units_title}}</p>{% endif %}
+                        {% include "courses/course_units.html" with course_units=page.accounting_specialisation_units %}
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            {% include "courses/course_units.html" with course_units=page.core_units %}
+        {% endif %}
+    {% endif %}
+    {% if page.core_units_block %}
+        {{page.core_units_block|richtext}}
+    {% endif %} 
+</div> {% endcomment %}
+{% load wagtailcore_tags %}
+
+{# Parent container with tab logic #}
+<div class="scroll-m-8" id="course_units">
+    <h2 class="text-xl lg:text-2xl mb-2 lg:mb-3 xl:mb-4 font-medium text-primary">Course Units</h2>
+    <div x-data="{
+        tabSelected: 1,
+        tabId: $id('tabs'),
+        tabButtonClicked(tabButton){
+            this.tabSelected = tabButton.id.replace(this.tabId + '-', '');
+            this.tabRepositionMarker(tabButton);
+        },
+        tabRepositionMarker(tabButton){
+            this.$refs.tabMarker.style.width = tabButton.offsetWidth + 'px';
+            this.$refs.tabMarker.style.height = tabButton.offsetHeight + 'px';
+            this.$refs.tabMarker.style.left = tabButton.offsetLeft + 'px';
+        },
+        tabContentActive(tabContent){
+            return this.tabSelected == tabContent.id.replace(this.tabId + '-content-', '');
+        },
+        tabButtonActive(tabContent){
+            const tabId = tabContent.id.split('-').slice(-1);
+            return this.tabSelected == tabId;
+        }
+    }" x-init="tabRepositionMarker($refs.tabButtons.firstElementChild);" class="relative">
+    {% comment %} <div class="relative flex w-full max-w-xs flex-col gap-1 text-neutral-600">
+        <select x-ref="tabButton" id="course_units" name="course_units" class="w-full appearance-none rounded-md border border-neutral-300 bg-neutral-50 px-4 py-2 text-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black disabled:cursor-not-allowed disabled:opacity-75">
+            {% for block in page.course_units  %}
+             <option :value="$id(tabId)">{{ block.value.title }}</option>
+            {% endfor %}
+        </select>
+    </div> {% endcomment %}
+
+        {# Tab Buttons #}
+        <div x-ref="tabButtons" class="relative inline-grid items-center justify-center w-full h-full py-1 text-gray-500 bg-white border border-gray-100 rounded-lg select-none" style="grid-template-columns: repeat({{ page.course_units|length }}, 1fr);">
+            {% for block in page.course_units %}
+                <button 
+                    :id="$id(tabId)" 
+                    @click="tabButtonClicked($el);" 
+                    type="button" 
+                    :class="{ 'bg-gray-100 text-gray-700' : tabButtonActive($el) }" 
+                    class="relative z-20 hidden xl:inline-flex items-center justify-center w-full h-full py-3 text-sm font-semibold text-primary transition-all rounded-md cursor-pointer 2xl:whitespace-nowrap"
+                >
+                    {{ block.value.title }}
+                </button>
+            {% endfor %}
+            <div x-ref="tabMarker" class="absolute left-0 z-10 w-1/2 h-full duration-300 ease-out" x-cloak>
+                <div class="w-full h-full bg-gray-100 rounded-md shadow-sm"></div>
+            </div>
+        </div>
+
+        {# Tab Content with Accordions #}
+        <div class="mt-6">
+            {% for block in page.course_units %}
+                <div :id="$id(tabId + '-content')" x-show="tabContentActive($el)" class="relative space-y-2" x-cloak>
+                    {# Accordion Container #}
+                    <div x-data="{ 
+                            activeAccordion: '', 
+                            setActiveAccordion(id) { 
+                                this.activeAccordion = (this.activeAccordion == id) ? '' : id 
+                            } 
+                        }" class="relative w-full mx-auto text-sm">
+                        {% for unit in block.value.units %}
+                            <div 
+                                x-data="{ id: $id('accordion') }" 
+                                :class="{ 'border-neutral-200/60 text-neutral-800' : activeAccordion==id, 'border-transparent text-neutral-600 hover:text-neutral-800' : activeAccordion!=id }" 
+                                class="duration-200 ease-out bg-white border rounded-md cursor-pointer group" 
+                                x-cloak
+                            >
+                                <button 
+                                    @click="setActiveAccordion(id)" 
+                                    class="flex items-center justify-between w-full px-5 py-4 font-semibold text-left select-none"
+                                >
+                                    <span>{{ unit.unit_title }}</span>
+                                    <div :class="{ 'rotate-90': activeAccordion==id }" class="relative flex items-center justify-center w-2.5 h-2.5 duration-300 ease-out">
+                                        <div class="absolute w-0.5 h-full bg-neutral-500 group-hover:bg-neutral-800 rounded-full"></div>
+                                        <div :class="{ 'rotate-90': activeAccordion==id }" class="absolute w-full h-0.5 ease duration-500 bg-neutral-500 group-hover:bg-neutral-800 rounded-full"></div>
+                                    </div>
+                                </button>
+                                <div x-show="activeAccordion==id" x-collapse x-cloak>
+                                    <div class="p-5 pt-0 opacity-70">
+                                        {{ unit.unit_description|richtext }}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

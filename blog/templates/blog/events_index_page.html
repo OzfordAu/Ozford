@@ -1,0 +1,17 @@
+{% extends 'page-fullwidth.html' %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+{% block body_class %}blog{% endblock %}
+
+{% block main_content %}
+<div class="w-full container mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex flex-col lg:flex-row lg:gap-6">
+  <div class="w-full lg:w-10/12">
+    {% include 'blog/partials/posts/events.html' with page_type='events'  %}
+    {% include 'blog/partials/posts/pagination.html' %}
+  </div>
+  {% comment %} <div class="block lg:w-2/12">
+    {% include 'blog/partials/posts/sidebar.html' with page_type='events' %}
+  </div> {% endcomment %}
+</div>
+</div>
+{% endblock %}

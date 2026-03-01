@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+{% block extra_css %}
+
+{% endblock %}
+{% block body_class %}
+  blog
+{% endblock %}
+{% block content %}
+
+  {% include 'breadcrumb.html' %}
+  <section>
+    <div class="container mx-auto py-10 lg:py-20 xl:py-32">
+      <div class="grid grid-cols-2 items-start">
+        <div>
+          <h2 class="text-3xl xl:text-5xl font-semibold lg:mb-8 xl:mb-10 text-primary">{{page.page_title}}</h2>
+          <ul class="space-y-3">
+            {% for item in degrees  %}
+                <li class="block">
+                  <a class="text-primary hover:text-link-hover tracking-wide text-xl inline-flex gap-2 items-center group" href="{{item.url}}">
+                    <span class="border-b-2 border-transparent group-hover:border-link-hover transition-all">{{ item.title }}</span>
+                    <span>
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 transition-all group-hover:ml-2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
+                      </svg>                  
+                    </span>
+                  </a>
+                </li>
+            {% endfor %}
+        </ul>
+        </div>
+       <div>
+        {% comment %} {% image page.banner_image original class="inline-block h-full w-full max-h-[500px] object-contain" %} {% endcomment %}
+        {% include "courses/search_courses.html" %}
+       </div>
+    </div>
+    </div>
+  </section>
+  {% comment %} <section class="container mx-auto max-w-7xl text-black pb-6 lg:pb-8 xl:pb-20 mt-4 lg:mt-8 xl:mt-12">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-10 xl:gap-16">
+      {% for item in degrees  %}
+        <div class="block space-y-4 bg-gray-100 p-4 lg:p-6 xl:p-10">
+          <h6>{{item.title}}</h6>
+          <p>{{item.page_description|richtext}}</p>
+        </div>
+      {% endfor %}
+    </div>
+
+  </section> {% endcomment %}
+{% endblock %}
+{% block extra_js %}
+
+{% endblock %}

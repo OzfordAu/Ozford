@@ -1,0 +1,19 @@
+<!-- Parent container for all nav items -->
+<div x-data="{ 
+    activeDropdown: null,
+    setActiveDropdown(dropdown) {
+        this.activeDropdown = dropdown;
+    }
+}" class="flex">
+  {% include 'navbar/desktop_partials/study.html' %}
+  {% include 'navbar/desktop_partials/student_life.html' %}
+  {% include 'navbar/desktop_partials/admissions.html' %}
+  {% comment %} {% include 'navbar/desktop_partials/life_at_ozford.html' %} {% endcomment %}
+  {% include 'navbar/desktop_partials/about.html' %}
+
+  <!-- Services -->
+
+  <!-- Admissions -->
+
+  <!-- About us -->
+</div>

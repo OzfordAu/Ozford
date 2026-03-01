@@ -1,0 +1,49 @@
+{% load static wagtailcore_tags %}
+<div x-data="{ 
+    activeAccordion: '', 
+    setActiveAccordion(id) { 
+        this.activeAccordion = (this.activeAccordion == id) ? '' : id 
+    } 
+}" class="relative w-full">
+
+{% for item in page.fee_help  %}
+<div x-data="{ id: $id('accordion') }" :class="{ 'border-primary text-neutral-800' : activeAccordion==id, 'text-neutral-600 hover:text-neutral-800' : activeAccordion!=id }" class="duration-200 ease-out bg-white border rounded-md cursor-pointer group mb-4" x-cloak>
+    <button @click="setActiveAccordion(id)" class="flex items-center justify-between w-full px-5 py-4 font-semibold text-left select-none">
+        <div class="">
+            {{item.value.title}}
+        </div>
+        <div :class="{ 'rotate-90': activeAccordion==id }" class="relative flex items-center justify-center w-2.5 h-2.5 duration-300 ease-out">
+            <div class="absolute w-0.5 h-full bg-neutral-500 group-hover:bg-neutral-800 rounded-full"></div>
+            <div :class="{ 'rotate-90': activeAccordion==id }" class="absolute w-full h-0.5 ease duration-500 bg-neutral-500 group-hover:bg-neutral-800 rounded-full"></div>
+        </div>
+    </button>
+    <div x-show="activeAccordion==id" x-collapse x-cloak>
+        <div class="p-5 pt-0 text-sm cms-page">
+            {{item.value.body|richtext}}
+        </div>
+    </div>
+</div> 
+{% endfor %}
+{% comment %} <div x-data="{ id: $id('accordion') }" :class="{ 'border-primary text-neutral-800' : activeAccordion==id, 'text-neutral-600 hover:text-neutral-800' : activeAccordion!=id }" class="duration-200 ease-out bg-white border rounded-md cursor-pointer group mb-4" x-cloak>
+    <button @click="setActiveAccordion(id)" class="flex items-center justify-between w-full px-5 py-4 font-semibold text-left select-none">
+        <div class="flex gap-1 text-primary">
+            <span>Higher Education Fee<span>
+                <template x-if="studentType==='domestic'">
+                    <span class="text-gray-800">( Domestic Students )</span>
+                </template>
+                <template x-if="studentType==='international'">
+                    <span class="text-gray-800">( Internationl Students )</span>
+                </template>
+        </div>
+        <div :class="{ 'rotate-90': activeAccordion==id }" class="relative flex items-center justify-center w-2.5 h-2.5 duration-300 ease-out">
+            <div class="absolute w-0.5 h-full bg-neutral-500 group-hover:bg-neutral-800 rounded-full"></div>
+            <div :class="{ 'rotate-90': activeAccordion==id }" class="absolute w-full h-0.5 ease duration-500 bg-neutral-500 group-hover:bg-neutral-800 rounded-full"></div>
+        </div>
+    </button>
+    <div x-show="activeAccordion==id" x-collapse x-cloak>
+        <div class="p-5 pt-0">
+            {% include "admissions/partials/higher_education_fees_tab.html" %}
+        </div>
+    </div>
+</div> {% endcomment %}
+</div>

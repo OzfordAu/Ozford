@@ -1,0 +1,235 @@
+{% load static wagtailcore_tags wagtailimages_tags %}
+<footer class="bg-[#101f3c] text-gray-300">
+{% if page.content_type.model != 'edorsementpage'%}
+  <section class="bg-gray-100 hidden lg:block">
+    <div class="container mx-auto px-4 py-6 lg:py-8">
+      {% include 'affiliations.html' %}
+      {% comment %} <img src="{% static 'images/affiliation-logo.png' %}" loading="lazy"  alt="affiliation" width="1504" height="80" class="w-full max-h-[72px] object-contain" /> {% endcomment %}
+    </div>
+  </section>
+  <section class="bg-gray-100 lg:hidden">
+    <div class="container mx-auto px-4 py-6 lg:py-8">
+      <div class="flex flex-wrap gap-4 justify-center items-center">
+        {% for item in site_settings.affiliations  %}
+              {% if item.value.is_active %}
+              <div>
+                      {% image item.value.image original class="w-full h-14 object-contain" %}
+                    </div>
+              {% endif %}
+              {% endfor %}
+          </div>
+
+      {% comment %} <img src="{% static 'images/affiliation-logo.png' %}" loading="lazy"  alt="affiliation" width="1504" height="80" class="w-full max-h-[72px] object-contain" /> {% endcomment %}
+    </div>
+  </section>
+{% endif %}
+
+{% comment %} <section class="bg-[#011724] text-[#a7b8c2]"> {% endcomment %}
+{% comment %} <section class="bg-[#011724]">
+  <div class="container mx-auto px-4 py-6 lg:py-8 xl:py-20">
+  <div class="flex flex-col lg:flex-row lg:items-center">
+    <div class="w-full lg:w-3/12">
+      <p class="text-3xl xl:text-5xl font-bold mb-4 lg:mb-0 text-heading text-gray-400">Need Help?</p>
+    </div>
+    <div class="w-full lg:w-9/12">
+      <div class="flex flex-col lg:flex-row gap-4 lg:gap-10 xl:space-x-20">
+        <div class="block">
+          <p class="text-xl font-medium mb-2">Contact us</p>
+          <div class="flex items-center gap-4 mb-1">
+            <span>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
+              </svg>
+            </span>
+          <span>+61 3 86637188</span>
+        </div>
+          <div class="flex items-center gap-4">
+            <span>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+              </svg>
+            </span>
+            <span>info@ozford.edu.au</span>
+          </div>
+        </div>
+        <div class="block">
+          <h3 class="text-xl font-medium mb-2">Connect with us</h3>
+          <div class="flex gap-3 mt-2">
+            {% for social_media_block in site_settings.footer_social_media  %}
+              {% for item in social_media_block.value.social_media  %}
+                <a href="{{item.url}}" {% if item.open_in_new_tab %}target="_blank"{% endif %}>
+                  {{item.icon_svg|safe}}
+                </a> 
+              {% endfor %}
+            {% endfor %}
+          </div>
+          
+        </div>
+        <div class="block">
+          <p class="text-xl font-medium mb-2">Enquire</p>
+          <div class="flex items-center gap-4mb-1">
+            <span>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
+              </svg>
+            </span>
+            <span>+61 3 86637188</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <span>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+              </svg>
+            </span>
+            <span>info@ozford.edu.au</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+</section> {% endcomment %}
+<section class="bg-[#101f3c] text-sm font-light py-6 lg:py-8 xl:py-20">
+    <div class="container mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 xl:gap-10">
+        <div class="flex flex-col">
+          <div>
+            {% image site_settings.footer_logo original class="w-32 lg:w-48 xl:w-52 2xl:w-56 h-auto" %}
+          </div>
+          <div class="mt-3 lg:mt-6">
+            <div class="mb-2">{{ site_settings.address|richtext}}</div>
+            <div class="mb-2">{{ site_settings.office_hour}}</div>
+            {% comment %} <p>333, Queens Street</p>
+            <p class="mb-2">Melbourne, VIC 3000</p>
+            <p class="mb-2">Australia 8:30 AM – 5:00 PM (AEST)</p> {% endcomment %}
+            <div class="flex items-center gap-2 mb-1">
+              <span>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
+                </svg>
+              </span>
+              <span>{{ site_settings.phone|richtext}}</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                </svg>
+              </span>
+              <span>
+                <a class="hover:underline hover:underline-offset-4 hover:text-[#aed1e7] transition-all" href="mailto:{{ site_settings.email|safe}}">{{ site_settings.email|safe}}</a>
+                
+              </span>
+            </div>
+            
+          </div>
+        </div>
+        {% for links in site_settings.footer_primary_links  %}
+          <div>
+            <p class="text-lg mb-2 font-medium">{{links.value.title}}</p>
+            <ul class="space-y-2">
+              {% for item in links.value.links  %}
+                <li><a href="{{item.url}}" {% if item.open_in_new_tab %}target="_blank"{% endif %} class="hover:underline hover:underline-offset-4 hover:text-[#aed1e7] transition-all">{{item.title}}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endfor %}
+        {% comment %} <div>
+          <p class="text-lg mb-2">Study</p>
+          <ul class="space-y-2">
+            <li><a href="/study/postgraduate/" class="hover:border-b hover:text-white hover:border-white transition-all">Postgraduate</a></li>
+            <li><a href="/study/undergraduate/" class="hover:border-b hover:text-white hover:border-white transition-all">Undergraduate</a></li>
+            <li><a href="/study/high-school/" class="hover:border-b hover:text-white hover:border-white transition-all">High School (Year 10-12)</a></li>
+            <li><a href="/study/english-language-center/" class="hover:border-b hover:text-white hover:border-white transition-all">English Language Center</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="text-lg mb-2">Information For</p>
+          <ul class="space-y-2">
+            <li><a href="#" class="hover:underline hover:underline-offset-4 hover:text-[#aed1e7] transition-all">How to Apply</a></li>
+            <li><a href="#" class="hover:underline hover:underline-offset-4 hover:text-[#aed1e7] transition-all">Scholarships</a></li>
+            <li><a href="#" class="hover:underline hover:underline-offset-4 hover:text-[#aed1e7] transition-all">Entry Requirements</a></li>
+            <li><a href="#" class="hover:underline hover:underline-offset-4 hover:text-[#aed1e7] transition-all">Fees</a></li>
+            <li><a href="#" class="hover:underline hover:underline-offset-4 hover:text-[#aed1e7] transition-all">Key Dates</a></li>
+            <li><a href="#" class="hover:underline hover:underline-offset-4 hover:text-[#aed1e7] transition-all">Agents</a></li>
+            <li><a href="#" class="hover:underline hover:underline-offset-4 hover:text-[#aed1e7] transition-all">Domestic Students</a></li>
+            <li><a href="#" class="hover:underline hover:underline-offset-4 hover:text-[#aed1e7] transition-all">International Students</a></li>
+            <li><a href="#" class="hover:underline hover:underline-offset-4 hover:text-[#aed1e7] transition-all">Current Students</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="text-lg mb-2">Engage</p>
+          <ul class="space-y-2">
+            <li><a href="#" class="hover:border-b hover:text-white hover:border-white transition-all">Contact</a></li>
+            <li><a href="/news-and-events/" class="hover:border-b hover:text-white hover:border-white transition-all">News &amp; Events</a></li>
+            <li><a href="#" class="hover:border-b hover:text-white hover:border-white transition-all">Locations</a></li>
+          </ul>
+        </div> {% endcomment %}
+        <div class="block">
+          <h3 class="text-xl font-medium mb-2">Connect with us</h3>
+          <div class="flex gap-3 mt-2">
+            {% for social_media_block in site_settings.footer_social_media  %}
+              {% for item in social_media_block.value.social_media  %}
+                <a href="{{item.url}}" {% if item.open_in_new_tab %}target="_blank"{% endif %}>
+                  {{item.icon_svg|safe}}
+                </a> 
+              {% endfor %}
+            {% endfor %}
+          </div>
+          
+        </div>
+      </div>
+      <div class="w-full bg-[#3f505b] h-[1px] my-4 lg:my-6 xl:my-8"></div>
+      <div class="w-full flex flex-col lg:flex-row lg:gap-10 items-center">
+        <div class="w-full lg:w-7/12">
+          <ul class="flex flex-col lg:flex-row lg:space-x-4 space-y-2 lg:space-y-0">
+            {% for item in site_settings.footer_secondary_links  %}
+              <li><a href="{{item.value.url}}" {% if item.value.open_in_new_tab %}target="_blank"{% endif %} class="hover:underline hover:underline-offset-4 hover:text-[#aed1e7] transition-all">{{item.value.title}}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="w-full lg:w-5/12">
+          <p class="font-medium mb-2 text-lg">{{site_settings.acknowledgement_of_country_title|safe}}</p>
+          <p class="">{{site_settings.acknowledgement_of_country_content|richtext}}</p>
+        </div>
+      </div>
+      <div class="w-full bg-[#3f505b] h-[1px] mt-4 lg:mt-6 xl:mt-8"></div>
+      <div class="w-full mt-4 lg:mt-6 xl:mt-8 text-xs/5">
+        <p>{{site_settings.copyright_content|safe}}</p>
+      </div>
+    </div>
+  </section>
+  {% if show_popup and site_settings.site_popup_image %}
+    <div 
+        x-data="{ show: true }" 
+        x-show="show" 
+        x-transition 
+        class="fixed bottom-0 right-5 z-40 bg-white p-4 {{ site_settings.popup_class|default:'' }}"
+        style="width: {{ site_settings.popup_width|default:'300px' }}; height: {{ site_settings.popup_height|default:'500px' }}"
+    >
+    <button 
+                @click="show = false" 
+                class="absolute top-1 right-10 md:-top-2 md:-right-2 bg-black/90 w-10 h-10 rounded-full text-gray-white hover:text-red-500 text-3xl z-50"
+                aria-label="Close popup"
+            >
+               &times;
+
+            </button>
+    
+        <div class="relative bg-white overflow-hidden">
+          
+            
+            {% image site_settings.site_popup_image width-400 as tmp_photo %}
+            <img 
+            src="{{ tmp_photo.url }}" 
+            width="{{site_settings.popup_width}}"
+            height="{{site_settings.popup_height}}"
+            alt="Popup Image" 
+            class="w-full h-full object-cover {{site_settings.popup_class|default:''}}"
+        />
+            {% comment %} {% image site_settings.site_popup_image loading='lazy' class='w-full h-full object-cover' %} {% endcomment %}
+        </div>
+    </div>
+    {% endif %}
+</footer>

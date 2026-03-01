@@ -1,0 +1,396 @@
+<div @mouseleave="activeDropdown = null">
+    <button
+    @mouseover="setActiveDropdown('admissions')"
+    class="text-gray-800 font-medium h-20 px-4 border-b-4"
+   :class="activeDropdown === 'admissions' ? 'border-primary text-primary bg-gray-100' : 'border-transparent'">
+      Admission &amp; Entry
+      <svg
+        class="-mr-0.5 h-4 w-4 inline-block transition-transform duration-200"
+        :class="{'rotate-180 text-primary': activeDropdown === 'admissions'}"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="3"
+          d="M19 9l-7 7-7-7"
+        />
+      </svg>
+    </button>
+
+    <!-- Admissions Mega Menu Panel -->
+    <div
+      x-cloak
+      x-show="activeDropdown === 'admissions'"
+      x-transition:enter="transition ease-out duration-150"
+      x-transition:enter-start="opacity-100 scale-100"
+      x-transition:enter-end="opacity-100 scale-100"
+      x-transition:leave="transition ease-in duration-90"
+      x-transition:leave-start="opacity-100 scale-100"
+      x-transition:leave-end="opacity-0 scale-100"
+      class="absolute left-0 right-0 container z-50 min-h-96"
+      @mouseover="activeDropdown = 'admissions'"
+      style="display: none"
+    >
+    <div class="w-full min-h-96 bg-gray-100">
+        <div class="p-8 max-w-6xl mx-auto grid grid-cols-4 gap-8 text-sm">
+          <div>
+            <p class="text-base font-medium mb-2">Higher Education</p> 
+            <ul class="space-y-3">
+              <li>
+                <a
+                  href="/admissions/higher-education/why-ozford-institute-of-higher-education/"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >Why OIHE?</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/admissions/pathways/"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >Pathways</a
+                >
+              </li>
+              {% comment %} <li>
+                <a
+                  href="/admissions/higher-education/course-guide/"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >Course Guide</a
+                >
+              </li> {% endcomment %}
+              <li>
+                <a
+                  href="/admissions/intakes-and-term-dates/higher-education/"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >Intakes &amp; Trimester Dates</a
+                >
+              </li>
+              
+              <li>
+                <a
+                  href="/admissions/orientations/higher-education/"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >Orientation</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/admissions/entry-requirements/higher-education/"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >Entry Requirements</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/admissions/higher-education/pre-enrolment/"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >Pre-Enrolment</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/admissions/how-to-apply/higher-education/"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >How to Apply</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/about/terms-and-conditions/higher-education/"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >Terms &amp; Conditions</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/documents/207/OIHE-Brochure-A3-20250429.pdf"
+                  target="_blank"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >OIHE Brochure</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/documents/221/OIHE_Student_Handbook_Feb_2025.pdf"
+                  target="_blank"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >Student Handbook</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/policies-and-procedures/higher-education/"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >Policies &amp; Procedures</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/statement-of-tuition-assurance/"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >Statement of Tuition Assurance</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-base font-medium mb-2">High School</p> 
+            <ul class="space-y-3">
+                <li>
+                    <a
+                      href="/admissions/high-school/why-ozford-college/"
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >Why Ozford College?</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="/study/high-school/year-10-high-school-program/"
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >Year 10</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="/study/high-school/victorian-certificate-of-education-vce/"
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >Victorian Certificate of Education (VCE)</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="/admissions/high-school/subjects/"
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >High School Subjects</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="/admissions/pathways/"
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >Pathways</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="/documents/206/course_brochure_2025.pdf"
+                      target="_blank"
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >Course Guide</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="/admissions/entry-requirements/high-school/"
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >Entry Requirements</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="/admissions/fees/#fees"
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >Pay Fees</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="/policies-and-procedures/high-school/"
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >Policies &amp; Procedures</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="/documents/224/High_School_Handbook_Sep_2025.pdf"
+                      target="_blank"
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >HS Student Handbook</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="https://ozfordeduau-my.sharepoint.com/:b:/g/personal/ozfordit_ozford_edu_au/EY0hTWjTyxxJtagGf50n59MBheCj5V34nZOOioevi7gxVA?e=b91D13"
+                      target="_blank"
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >HS Pre-Enrolment Information</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="/documents/208/SAA-HS-TC-v7_4kTP8ED.0-09.02.2021.pdf"
+                      target="_blank"
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >Terms &amp; Conditions</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="/admissions/intakes-and-term-dates/high-school/"
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >Intakes &amp; Term Dates</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="/admissions/orientations/high-school-and-english-language-center/"
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >Orientation</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="https://ozford.edu.au/documents/222/2024_Ozford_College_Annual_Report_to_the_School_Community.pdf" target="_blank"
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >2024 High School Annual Report</a
+                    >
+                  </li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-base font-medium mb-2">English Language Center</p> 
+            <ul class="space-y-3">
+              <li>
+                <a
+                  href="/admissions/english-language-center/why-ozford-english-language/"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >Why Ozford English Language</a
+                >
+              </li>
+              {% comment %} <li>
+                <a
+                  href="/admissions/english-language-center/courses/"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >Courses</a
+                >
+              </li> {% endcomment %}
+              <li>
+                <a
+                  href="/admissions/fees/#fees"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >Pay Fees</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/policies-and-procedures/english-language-center/"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >Policies &amp; Procedures</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/documents/223/ELICOS_Student_Handbook_2025.pdf"
+                  target="_blank"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >Student Handbook</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://ozfordeduau-my.sharepoint.com/:b:/g/personal/ozfordit_ozford_edu_au/EcSCg7Uso7xPp0ZFVbneWjUBXaEgf9NBE7Wx3JQVuRn8LQ?e=0ODUaL"
+                  target="_blank"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >Pre-Enrolment Information</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/documents/208/SAA-HS-TC-v7_4kTP8ED.0-09.02.2021.pdf"
+                  target="_blank"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >Terms &amp; Conditions</a
+                >
+              </li>  
+              {% comment %} <li>
+                <a
+                  href="/admissions/english-language-center/course-guide/"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >Course Guide</a
+                >
+              </li>  {% endcomment %}
+              <li>
+                <a
+                  href="/admissions/intakes-and-term-dates/english-language-center/"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >Intakes</a
+                >
+              </li>  
+              <li>
+                <a
+                  href="/admissions/orientations/high-school-and-english-language-center/"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >Orientation</a
+                >
+              </li>   
+              {% comment %} <li>
+                <a
+                  href="/admissions/english-language-center/english-and-cultural-study-tour/"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >English &amp; Cultural Study Tour</a
+                >
+              </li>          {% endcomment %}
+            </ul>
+          </div>
+          <div>
+            <p class="text-base font-medium mb-2">Information</p> 
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="/admissions/how-to-apply/"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >Apply Now</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/admissions/fees/"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >Pay Fees</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/admissions/fees/#payment_methods"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >Payment Methods</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/admissions/fees/#fee_help"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >Fee Help</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/admissions/pathways/"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >Pathways</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/admissions/orientations/"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >Orientations</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/about/authorized-agents/"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >Authorised Agents</a
+                >
+              </li>
+            </ul>
+          </div> 
+        </div>
+        <!-- Admissions dropdown content -->
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,65 @@
+
+{% if posts.paginator.num_pages > 1 %}
+<div class="flex justify-center font-medium">
+    <nav aria-label="Pagination">
+      <ul class="inline-flex items-center -space-x-px text-sm">
+        {% if posts.has_previous %}
+            <li>
+            <a href="?page={{ posts.previous_page_number }}" class="inline-flex items-center space-x-3 p-2 rounded-full bg-primary font-medium text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                  </svg>
+            </a>
+            </li>
+        {% endif %}
+        {% with total_pages=posts.paginator.num_pages current_page=posts.number %}
+                {% if total_pages > 5 %}
+                    {% if current_page > 3 %}
+                        <li><a href="?page=1" class="inline-flex items-center justify-center px-2">1</a></li>
+                        {% if current_page > 4 %}
+                            <li>...</li>
+                        {% endif %}
+                    {% endif %}
+
+                    {% for page_num in posts.paginator.page_range %}
+                        {% if page_num >= current_page|add:-2 and page_num <= current_page|add:2 %}
+                            <li>
+                                <a href="?page={{ page_num }}" class="inline-flex items-center justify-center px-2 {% if page_num == current_page %}underline underline-offset-2 font-semibold text-primary{% endif %}">
+                                    {{ page_num }}
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if current_page < total_pages|add:-2 %}
+                        {% if current_page < total_pages|add:-3 %}
+                            <li>...</li>
+                        {% endif %}
+                        <li><a href="?page={{ total_pages }}" class="inline-flex items-center justify-center px-2">{{ total_pages }}</a></li>
+                    {% endif %}
+                {% else %}
+                    {% for page_num in posts.paginator.page_range %}
+                        <li>
+                            <a href="?page={{ page_num }}" class="inline-flex items-center justify-center h-8 w-8 {% if page_num == current_page %}underline underline-offset-2 font-semibold text-primary{% endif %}">
+                                {{ page_num }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        {% if posts.has_next %}
+        <li>
+          <a href="?page={{ posts.next_page_number }}" class="inline-flex items-center space-x-3 p-2 rounded-full bg-primary font-medium text-white">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+              </svg>
+              
+          </a>
+        </li>
+        {% endif %}
+      </ul>
+    </nav>
+  </div>
+  {% endif %}
+  

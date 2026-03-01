@@ -1,0 +1,28 @@
+{% extends 'page-sidebar-right.html' %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+{% block main_content %}
+<div>{{ page.intro|richtext }}</div>
+  <div class="flex flex-col w-full mt-4">
+    {% for block in page.policies_and_procedures %}
+      <div>
+        {% if block.value.title %}<h2 class="font-semibold text-lg md:text-xl mb-1 text-gray-700">{{ block.value.title }}</h2>{% endif %}
+        <div>
+          {% for item in block.value.policy_and_procedure %}
+            <div class="mb-2">
+              <div class="flex justify-start items-center gap-4">
+                {% if item.display_doc_type == 'doc' %}
+                    <a href="{{ item.document.url }}" class="text-primary hover:underline transition-all" {% if item.open_in_new_tab %} target="_blank"{% endif %}>{{item.title}}</a>
+                {% else %}
+                    <a href="{{ item.url }}" class="text-primary hover:underline transition-all" {% if item.open_in_new_tab %} target="_blank"{% endif %}>{{item.title}}</a>
+                {% endif %}
+                
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      <hr class="my-2 md:my-4">
+    {% endfor %}
+  </div>
+{% endblock %}
+

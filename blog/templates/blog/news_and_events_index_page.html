@@ -1,0 +1,37 @@
+{% extends "page-fullwidth.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+{% block main_content %}
+<div class="w-full container mx-auto mb-10 lg:my-20">
+    <div class="mt-4 lg:mt-6 xl:mt-8">
+        <div class="mt-3">{{ page.page_description|richtext }}</div>
+    </div>
+    <div class="mt-4 lg:mt-6 xl:mt-10">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-8 xl:gap-12">
+            {% for item in page.get_children.live %}
+            <a href="{% pageurl item %}" class="relative group flex flex-col bg-white text-primary w-full items-center justify-center overflow-hidden rounded-lg shadow-lg transition-transform hover:scale-105">
+                
+                <!-- Image Section -->
+                <div class="relative w-full">
+                    {% picture item.specific.featured_image format-{avif,webp,jpeg} width-400 class="w-full transition-transform duration-500 group-hover:scale-110" %}
+                </div>
+        
+                <!-- Initial Title (Always Visible at Bottom) -->
+                <div class="absolute bottom-0 left-0 w-full bg-primary text-white text-xl lg:text-2xl py-4 text-center z-10 transition-all duration-500 group-hover:translate-y-full">
+                    {{ item.title }}
+                </div>
+        
+                <!-- Sliding Title on Hover -->
+                <div class="absolute bottom-[-100%] left-0 w-full h-full bg-primary bg-opacity-80 flex items-center justify-center text-white text-3xl font-semibold text-center p-6 transition-all duration-500 group-hover:bottom-0">
+                    {{ item.title }}
+                </div>
+        
+            </a>
+            {% endfor %}
+        </div>
+     
+    </div>
+</div>
+{% endblock main_content %}
+{% block extra_js %}
+
+{% endblock extra_js %}

@@ -1,0 +1,80 @@
+  <!-- Products Mega Menu -->
+  <div x-data="{ openStudy: false }" @mouseleave="openStudy = false">
+    <button @mouseover="openStudy = true" 
+            class="text-gray-700 px-3 py-4 border-b-2"
+            :class="openStudy ? 'border-primary text-primary' : 'border-transparent'">
+        Student Services
+        <svg class="ml-2 -mr-0.5 h-4 w-4 inline-block transition-transform duration-200" 
+             :class="{'rotate-180 text-primary': openStudy}"
+             xmlns="http://www.w3.org/2000/svg" 
+             fill="none" 
+             viewBox="0 0 24 24" 
+             stroke="currentColor">
+            <path stroke-linecap="round" 
+                  stroke-linejoin="round" 
+                  stroke-width="2" 
+                  d="M19 9l-7 7-7-7" />
+        </svg>
+    </button>
+      {% comment %} <div x-show="open" 
+            @mouseover="open = true"
+            class="absolute w-full h-2 bottom-0 translate-y-full">
+      </div> {% endcomment %}
+
+    <!-- Mega Menu Panel -->
+    <div x-cloak x-show="openStudy"
+    x-transition:enter="transition ease-out duration-150"
+    x-transition:enter-start="opacity-0 scale-90"
+    x-transition:enter-end="opacity-100 scale-100"
+    x-transition:leave="transition ease-in duration-100"
+    x-transition:leave-start="opacity-100 scale-100"
+    x-transition:leave-end="opacity-0 scale-90"
+         class="absolute left-0 w-full pt-2 bg-gray-100 shadow-lg z-50 min-h-96"
+         style="display: none;">
+        <div class="grid grid-cols-4 gap-8 py-6 container px-8 mx-auto">
+            <!-- Category 1 -->
+            <div>
+                <h3 class="text-sm font-semibold text-gray-900 uppercase tracking-wide">Electronics</h3>
+                <ul class="mt-4 space-y-3">
+                    <li><a href="#" class="text-gray-600 hover:text-gray-900">Smartphones</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-gray-900">Laptops</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-gray-900">Tablets</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-gray-900">Accessories</a></li>
+                </ul>
+            </div>
+
+            <!-- Category 2 -->
+            <div>
+                <h3 class="text-sm font-semibold text-gray-900 uppercase tracking-wide">Fashion</h3>
+                <ul class="mt-4 space-y-3">
+                    <li><a href="#" class="text-gray-600 hover:text-gray-900">Men's Wear</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-gray-900">Women's Wear</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-gray-900">Kids</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-gray-900">Accessories</a></li>
+                </ul>
+            </div>
+
+            <!-- Category 3 -->
+            <div>
+                <h3 class="text-sm font-semibold text-gray-900 uppercase tracking-wide">Home</h3>
+                <ul class="mt-4 space-y-3">
+                    <li><a href="#" class="text-gray-600 hover:text-gray-900">Furniture</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-gray-900">Decor</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-gray-900">Kitchen</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-gray-900">Bath</a></li>
+                </ul>
+            </div>
+
+            <!-- Featured Section -->
+            <div class="bg-gray-50 p-6 rounded-lg">
+                <h3 class="text-sm font-semibold text-gray-900">Featured</h3>
+                <div class="mt-4">
+                    <p class="text-sm text-gray-500">Check out our latest products and special offers!</p>
+                    <a href="#" class="mt-4 block text-sm font-medium text-blue-600 hover:text-blue-500">
+                        Learn more →
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

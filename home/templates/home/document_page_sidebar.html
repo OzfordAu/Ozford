@@ -1,0 +1,31 @@
+{% extends "page-sidebar-right.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+{% block main_content %}
+    <div>{{ page.page_intro|richtext }}</div>
+    <div class="mt-4">
+        <ul class="flex flex-col space-y-3 list-none">
+          {% for item in page.document_block %}
+            <li class="font-medium">
+                {% if item.value.display_doc_type == 'doc' %}
+                    <a href="{{ item.value.document.url }}" class="text-primary hover:underline transition-all" 
+                        {% if item.value.open_in_new_tab %} 
+                            target="_blank"
+                        {% endif %}>
+                        {{item.value.title}}
+                    </a>
+                {% else %}
+                    <a href="{{ item.value.link }}" class="text-primary hover:underline transition-all" 
+                        {% if item.value.open_in_new_tab %} 
+                            target="_blank"
+                        {% endif %}>
+                        {{item.value.title}}
+                    </a>
+                {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+{% endblock main_content %}
+{% block extra_js %}
+
+{% endblock extra_js %}

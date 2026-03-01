@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+{% block extra_css %}
+{% endblock extra_css %}
+{% block body_class %}blog{% endblock %}
+{% block header_html %}
+{% include 'student_type_modal/student_type_modal.html' %}
+{% endblock %}
+{% block content %}
+{% include 'breadcrumb.html' %}
+{% include 'global_components/page_banner.html' %}
+<div class="flex flex-col lg:flex-row lg:justify-between lg:gap-8 container mb-4 lg:mb-8">
+    <div class="hidden lg:block sticky lg:top-4 w-full lg:w-2/12 lg:h-full bg-white font-medium text-sm mt-8">
+    {% include "admissions/partials/fees_sidebar.html" %}
+    </div>
+    <div class="w-full lg:w-10/12 flex flex-col">
+    <div class="mt-4 lg:mt-6 xl:mt-10 w-full">
+        <div class="mb-6 lg:mb-10">
+            {% include "student_type_modal/student_type.html" %}
+        </div>
+        {% if page.page_intro %}
+            <div class="mt-4 lg:mt-6 xl:mt-8">
+                <h1 class="text-xl lg:text-2xl xl:text-4xl font-medium text-primary">{{ page.page_title }}</h1>
+            </div>
+        {% endif %}
+        <div class="scroll-m-8" id="payment_methods">
+            <h2 class="text-xl lg:text-2xl mb-2 lg:mb-3 xl:mb-4 font-medium text-primary">Payment Methods</h2>
+            {% include "admissions/partials/payment_methods.html" %}
+        </div>
+        <hr class="my-4 mt-6 lg:my-8 lg:mt-10">
+        <div class="scroll-m-8" id="fees">
+            <h2 class="text-xl lg:text-2xl mb-2 lg:mb-3 xl:mb-4 font-medium text-primary">Fees</h2>
+            {% include "admissions/partials/fees_accordion.html" %}
+        </div>        
+        <hr class="my-4 mt-6 lg:my-8 lg:mt-10">
+        <div class="scroll-m-8" id="payment_due_dates">
+            <h2 class="text-xl lg:text-2xl mb-2 lg:mb-3 xl:mb-4 font-medium text-primary">Payment Due Dates</h2>
+            {% include "admissions/partials/payment_due_dates.html" %}
+        </div>
+        <template x-if="studentType==='domestic'">
+            <div>
+                <hr class="my-4 mt-6 lg:my-8 lg:mt-10">
+                <div class="scroll-m-8" id="fee_help">
+                    <h2 class="text-xl lg:text-2xl mb-2 lg:mb-3 xl:mb-4 font-medium text-primary">Fee Help</h2>
+                    {% include "admissions/partials/fee_help.html" %}
+                </div>
+            </div>
+        </template>
+    </div>
+</div>
+</div>
+{% endblock content %}
+{% block extra_js %}
+{% comment %} {% include 'student_type_modal/student_type_cookie_script.html' %} {% endcomment %}
+{% endblock %}

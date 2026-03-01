@@ -1,0 +1,269 @@
+{% load static wagtailcore_tags wagtailimages_tags %}
+<div class="w-full hidden lg:block shadow-sm">
+    <div class="w-full bg-primary-dark py-3 text-sm text-white font-light">
+      <div class="container">
+        <ul class="w-full justify-end flex gap-4 items-center">
+          <li><a href="" class="border-b border-transparent hover:border-white transition-all">Agent Resources</a></li>
+          <li><a href="" class="border-b border-transparent hover:border-white transition-all">Current Students</a></li>
+          <li><a href="" class="border-b border-transparent hover:border-white transition-all">Alumuni</a></li>
+          <li><a href="" class="border-b border-transparent hover:border-white transition-all">Staffs</a></li>
+          <li><a href="/news-and-events/" class="border-b border-transparent hover:border-white transition-all">News &amp; Events</a></li>
+          <li><a href="" class="border-b border-transparent hover:border-white transition-all">Contact</a></li>
+          <li>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+              </svg>
+              
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="container">
+
+        <nav>
+
+              <div class="flex justify-between items-center h-16">
+                  <!-- Logo -->
+                  <div>
+                    <a href="/" aria-label="homepage">
+                      {% image site_settings.header_logo original loading="lazy" class="w-48 h-auto"  %}
+                    </a>
+                  </div>
+  
+                  <!-- Desktop Menu -->
+                  <div class="hidden md:flex">
+                      <div class="ml-10 flex items-center space-x-4">
+                          <!-- Simple Link -->
+                          <a href="#" class="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md">Home</a>
+  
+                          <!-- Products Mega Menu -->
+                          <div x-data="{ open: false }" @mouseleave="open = false">
+                              <button @mouseover="open = true" 
+                                      class="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md">
+                                  Products
+                                  <svg class="ml-2 -mr-0.5 h-4 w-4 inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                  </svg>
+                              </button>
+  
+                              <!-- Mega Menu Panel -->
+                              <div x-cloak x-show="open"
+                                   x-transition:enter="transition ease-out duration-200"
+                                   x-transition:enter-start="opacity-0 transform -translate-y-2"
+                                   x-transition:enter-end="opacity-100 transform translate-y-0"
+                                   x-transition:leave="transition ease-in duration-150"
+                                   x-transition:leave-start="opacity-100 transform translate-y-0"
+                                   x-transition:leave-end="opacity-0 transform -translate-y-2"
+                                   class="absolute left-0 w-full pt-2 bg-white shadow-lg z-50"
+                                   style="display: none;">
+                                  <div class="grid grid-cols-4 gap-8 px-4 py-6 max-w-7xl mx-auto">
+                                      <!-- Category 1 -->
+                                      <div>
+                                          <h3 class="text-sm font-semibold text-gray-900 uppercase tracking-wide">Electronics</h3>
+                                          <ul class="mt-4 space-y-3">
+                                              <li><a href="#" class="text-gray-600 hover:text-gray-900">Smartphones</a></li>
+                                              <li><a href="#" class="text-gray-600 hover:text-gray-900">Laptops</a></li>
+                                              <li><a href="#" class="text-gray-600 hover:text-gray-900">Tablets</a></li>
+                                              <li><a href="#" class="text-gray-600 hover:text-gray-900">Accessories</a></li>
+                                          </ul>
+                                      </div>
+  
+                                      <!-- Category 2 -->
+                                      <div>
+                                          <h3 class="text-sm font-semibold text-gray-900 uppercase tracking-wide">Fashion</h3>
+                                          <ul class="mt-4 space-y-3">
+                                              <li><a href="#" class="text-gray-600 hover:text-gray-900">Men's Wear</a></li>
+                                              <li><a href="#" class="text-gray-600 hover:text-gray-900">Women's Wear</a></li>
+                                              <li><a href="#" class="text-gray-600 hover:text-gray-900">Kids</a></li>
+                                              <li><a href="#" class="text-gray-600 hover:text-gray-900">Accessories</a></li>
+                                          </ul>
+                                      </div>
+  
+                                      <!-- Category 3 -->
+                                      <div>
+                                          <h3 class="text-sm font-semibold text-gray-900 uppercase tracking-wide">Home</h3>
+                                          <ul class="mt-4 space-y-3">
+                                              <li><a href="#" class="text-gray-600 hover:text-gray-900">Furniture</a></li>
+                                              <li><a href="#" class="text-gray-600 hover:text-gray-900">Decor</a></li>
+                                              <li><a href="#" class="text-gray-600 hover:text-gray-900">Kitchen</a></li>
+                                              <li><a href="#" class="text-gray-600 hover:text-gray-900">Bath</a></li>
+                                          </ul>
+                                      </div>
+  
+                                      <!-- Featured Section -->
+                                      <div class="bg-gray-50 p-6 rounded-lg">
+                                          <h3 class="text-sm font-semibold text-gray-900">Featured</h3>
+                                          <div class="mt-4">
+                                              <p class="text-sm text-gray-500">Check out our latest products and special offers!</p>
+                                              <a href="#" class="mt-4 block text-sm font-medium text-blue-600 hover:text-blue-500">
+                                                  Learn more →
+                                              </a>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+  
+                          <!-- About Link -->
+                          <a href="#" class="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md">About</a>
+  
+                          <!-- Contact Link -->
+                          <a href="#" class="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md">Contact</a>
+                      </div>
+                  </div>
+  
+                  <!-- Mobile Menu Button -->
+                  <div class="md:hidden" x-data="{ mobileOpen: false }">
+                      <button @click="mobileOpen = !mobileOpen" class="text-gray-700 hover:text-gray-900">
+                          <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                          </svg>
+                      </button>
+  
+                      <!-- Mobile Menu -->
+                      <div x-show="mobileOpen" 
+                           class="absolute top-16 left-0 w-full bg-white shadow-lg"
+                           style="display: none;">
+                          <div class="px-2 pt-2 pb-3 space-y-1">
+                              <a href="#" class="block px-3 py-2 text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md">Home</a>
+                              <a href="#" class="block px-3 py-2 text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md">Products</a>
+                              <a href="#" class="block px-3 py-2 text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md">About</a>
+                              <a href="#" class="block px-3 py-2 text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md">Contact</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+      </nav>
+        {% comment %} <a href="/" class="flex items-center" aria-label="homepage">
+            {% image site_settings.header_logo original loading="lazy" class="w-48 h-auto"  %}
+        </a>
+        <nav class="py-2 shadow-sm">
+          <ul class="flex gap-8 justify-end items-center font-medium">
+            <li><a href="/">Home</a></li>
+            <li class="group">
+              <button class="flex items-center py-6" aria-haspopup="true" aria-expanded="false">
+                <span>Study with us</span>
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                      </svg>
+                      
+                </span>
+              </button>
+              <div class="absolute text-sm left-0 right-0 bg-gray-100 shadow-lg rounded-b-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                <div class="container mx-auto p-8 grid grid-cols-4 gap-8">
+                  <div>
+                    <h3 class="text-base font-medium mb-2">Postgraduate</h3>
+                    <ul class="space-y-2">
+                      <li><a href="/study/postgraduate/master-of-information-technology/" class="hover:text-primary hover:border-b hover:border-primary transition-all">Master of Information Technology (MIT)</a></li>
+                      <li><a href="/study/postgraduate/master-of-business-administration/" class="hover:text-primary hover:border-b hover:border-primary transition-all">Master of Business Admistration (MBA)</a></li>
+                      <li><a href="/study/postgraduate/master-of-professional-accounting/" class="hover:text-primary hover:border-b hover:border-primary transition-all">Master of Professional Accounting (MPA)</a></li>
+                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">Graduate Diploma in Information Technolgy</a></li>
+                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">Graduate Diploma in Management</a></li>
+                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">Graduate Certificate in Information Technolgy</a></li>
+                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">Graduate Certificate in Management</a></li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 class="text-base font-medium mb-2">Undergraduate</h3>
+                    <ul class="space-y-2">
+                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">Bachelor of Cyber Security</a></li>
+                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">Bachelor of Information System</a></li>
+                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">Bachelor of Business (Accounting)</a></li>
+                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">Bachelor of Business</a></li>
+                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">Diploma of Business</a></li>
+                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">Block Delivery Model</a></li>
+                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">Accelaration</a></li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 class="text-base font-medium mb-2">High School (Year 10-12)</h3>
+                    <ul class="space-y-2">
+                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">Year 10 High School Program</a></li>
+                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">Victorian Certificate of Education (VCE)</a></li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 class="text-base font-medium mb-2">English Language Center</h3>
+                    <ul class="space-y-2">
+                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">General English</a></li>
+                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">English for Academic Purposes (EAP)</a></li>
+                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">English for Secondary School Preparation(ESSP)</a></li>
+                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">Industry Inspire</a></li>
+                    </ul>
+                  </div>
+                 
+                </div>
+              </div>
+            </li>
+           
+            <li class="group">
+              <button class="flex items-center py-6" aria-haspopup="true" aria-expanded="false">
+                <span>Student Life &amp; Services</span>
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                      </svg>
+                      
+                </span>
+              </button>
+              <div class="absolute text-sm left-0 right-0 bg-gray-100 shadow-lg rounded-b-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                <div class="container mx-auto p-8 grid grid-cols-4 gap-8">
+                  <div>
+                    <h3 class="text-base font-medium mb-2">Postgraduate</h3>
+                    <ul class="space-y-2">
+                      <li><a href="/study/postgraduate/master-of-information-technology/" class="hover:text-primary hover:border-b hover:border-primary transition-all">Master of Information Technology (MIT)</a></li>
+                      <li><a href="/study/postgraduate/master-of-business-administration/" class="hover:text-primary hover:border-b hover:border-primary transition-all">Master of Business Admistration (MBA)</a></li>
+                      <li><a href="/study/postgraduate/master-of-professional-accounting/" class="hover:text-primary hover:border-b hover:border-primary transition-all">Master of Professional Accounting (MPA)</a></li>
+                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">Graduate Diploma in Information Technolgy</a></li>
+                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">Graduate Diploma in Management</a></li>
+                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">Graduate Certificate in Information Technolgy</a></li>
+                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">Graduate Certificate in Management</a></li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 class="text-base font-medium mb-2">Undergraduate</h3>
+                    <ul class="space-y-2">
+                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">Bachelor of Cyber Security</a></li>
+                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">Bachelor of Information System</a></li>
+                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">Bachelor of Business (Accounting)</a></li>
+                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">Bachelor of Business</a></li>
+                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">Diploma of Business</a></li>
+                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">Block Delivery Model</a></li>
+                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">Accelaration</a></li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 class="text-base font-medium mb-2">High School (Year 10-12)</h3>
+                    <ul class="space-y-2">
+                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">Year 10 High School Program</a></li>
+                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">Victorian Certificate of Education (VCE)</a></li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 class="text-base font-medium mb-2">English Language Center</h3>
+                    <ul class="space-y-2">
+                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">General English</a></li>
+                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">English for Academic Purposes (EAP)</a></li>
+                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">English for Secondary School Preparation(ESSP)</a></li>
+                      <li><a href="" class="hover:text-primary hover:border-b hover:border-primary transition-all">Industry Inspire</a></li>
+                    </ul>
+                  </div>
+                 
+                </div>
+              </div>
+            </li>
+            <li>
+              Admission
+            </li>
+            <li>
+              About OZFORD
+            </li>
+            <li>
+              <button class="px-3 py-2 bg-primary hover:bg-primary-dark text-white text-lg">Apply Now</button>
+            </li>
+          </ul>
+        </nav> {% endcomment %}
+
+    </div>
+  </div>

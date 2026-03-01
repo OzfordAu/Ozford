@@ -1,0 +1,75 @@
+{% if posts.paginator.num_pages > 1 %}
+<div class="my-12">
+  <nav aria-label="Pagination" class="flex justify-center">
+    <ul class="inline-flex items-center gap-2">
+      {% if posts.has_previous %}
+      <li>
+        <a href="?page={{ posts.previous_page_number }}" 
+           class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white border border-gray-200 text-gray-600 hover:bg-primary hover:text-white hover:border-primary transition-colors duration-200"
+           aria-label="Previous page">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+          </svg>
+        </a>
+      </li>
+      {% endif %}
+
+      {% with total_pages=posts.paginator.num_pages current_page=posts.number %}
+        {% if total_pages > 5 %}
+          {% if current_page > 3 %}
+            <li>
+              <a href="?page=1" class="inline-flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-50 text-gray-600 hover:text-primary transition-colors duration-200">1</a>
+            </li>
+            {% if current_page > 4 %}
+              <li class="text-gray-400">...</li>
+            {% endif %}
+          {% endif %}
+
+          {% for page_num in posts.paginator.page_range %}
+            {% if page_num >= current_page|add:-2 and page_num <= current_page|add:2 %}
+              <li>
+                <a href="?page={{ page_num }}" 
+                   class="inline-flex items-center justify-center w-10 h-10 rounded-full {% if page_num == current_page %}bg-primary text-white{% else %}text-gray-600 hover:bg-gray-50 hover:text-primary{% endif %} transition-colors duration-200">
+                  {{ page_num }}
+                </a>
+              </li>
+            {% endif %}
+          {% endfor %}
+
+          {% if current_page < total_pages|add:-2 %}
+            {% if current_page < total_pages|add:-3 %}
+              <li class="text-gray-400">...</li>
+            {% endif %}
+            <li>
+              <a href="?page={{ total_pages }}" class="inline-flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-50 text-gray-600 hover:text-primary transition-colors duration-200">
+                {{ total_pages }}
+              </a>
+            </li>
+          {% endif %}
+        {% else %}
+          {% for page_num in posts.paginator.page_range %}
+            <li>
+              <a href="?page={{ page_num }}" 
+                 class="inline-flex items-center justify-center w-10 h-10 rounded-full {% if page_num == current_page %}bg-primary text-white{% else %}text-gray-600 hover:bg-gray-50 hover:text-primary{% endif %} transition-colors duration-200">
+                {{ page_num }}
+              </a>
+            </li>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      {% if posts.has_next %}
+      <li>
+        <a href="?page={{ posts.next_page_number }}" 
+           class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white border border-gray-200 text-gray-600 hover:bg-primary hover:text-white hover:border-primary transition-colors duration-200"
+           aria-label="Next page">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+          </svg>
+        </a>
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
+</div>
+{% endif %}

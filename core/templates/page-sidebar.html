@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+{% block content %}
+{% block breadcrumb %}
+    {% include 'breadcrumb.html' %}
+{% endblock breadcrumb %}
+{% block banner %}
+    {% include 'components/banner.html' %}
+{% endblock banner %}
+<div class="flex flex-col lg:flex-row lg:justify-between lg:gap-8 container mb-4 lg:mb-8">
+    <div class="hidden lg:block sticky lg:top-4 w-full lg:w-2/12 lg:h-full bg-white font-medium text-sm mt-8">
+        {% block sidebar %}{% endblock sidebar %}
+    </div>
+    <div class="w-full lg:w-10/12 flex flex-col">
+        {% block main_content %}{% endblock main_content %}
+    </div>
+</div>
+{% endblock content %}
+

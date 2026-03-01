@@ -1,0 +1,117 @@
+{% extends "page-fullwidth.html" %}
+{% load static %}
+{% block script_top %}
+<script src="{% static 'js/htmx.js' %}"></script>
+{% endblock script_top %}
+{% block main_content %}
+<div class="">
+    <div class="text-gray-600 mb-8">{{ page.intro }}</div>
+
+    <!-- Filter Form with Alpine.js -->
+    <form method="get" class="mb-8"
+    x-data="{ 
+        selectedCountry: '{{ request.GET.country|default:'' }}', 
+        selectedCity: '{{ request.GET.city|default:'' }}',
+        cities: []
+    }"
+    x-init="if (selectedCountry) { fetchCities(selectedCountry) }">
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Country Dropdown -->
+            <div>
+                <label for="country" class="block text-gray-700 font-semibold mb-2">Select Country:</label>
+                <select name="country" id="country"
+                    class="w-full p-3 border border-gray-300 rounded-md focus:ring focus:ring-blue-200"
+                    x-model="selectedCountry"
+                    @change="fetchCities(selectedCountry)">
+                <option value="">All Countries</option>
+                {% for country in countries %}
+                <option value="{{ country.id }}" :selected="selectedCountry == '{{ country.id }}'">
+                    {{ country.name }}
+                </option>
+                {% endfor %}
+            </select>
+            </div>
+
+            <!-- City Dropdown -->
+            <div x-show="selectedCountry">
+                <label for="city" class="block text-gray-700 font-semibold mb-2">Select City:</label>
+                <select name="city" id="city"
+                    class="w-full p-3 border border-gray-300 rounded-md focus:ring focus:ring-blue-200"
+                    x-model="selectedCity">
+                {% comment %} <option value="">All Cities</option> {% endcomment %}
+            </select>
+            </div>
+        </div>
+
+        <!-- Loading Indicator (HTMX) -->
+        <div class="loading-spinner hidden mt-2 text-blue-600">Loading...</div>
+        <div class="flex gap-4 mt-4 items-center">
+        <!-- Filter Button -->
+            <div>
+                <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-blue-700">
+                    Filter Agents
+                </button>
+            </div>
+            {% if request.GET.country or request.GET.city %}
+
+                    <a href="/about/authorized-agents/"
+                    class="bg-blue-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-blue-700">
+                        Reset Filters
+                    </a>
+            {% endif %}
+        </div>
+    </form>
+
+    <!-- Agents List -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for agent in agents %}
+        <div class="">
+            <h3 class="text-xl font-semibold text-gray-800">{{ agent.name }}</h3>
+            <p class="text-gray-600"><span class="font-medium">Contact:</span> {{ agent.contact_person }}</p>
+            <p class="text-gray-600"><span class="font-medium">Address:</span> {{ agent.address }}</p>
+            <p class="text-gray-600"><span class="font-medium">City:</span> {{ agent.city.name }}, {{ agent.country.name }}</p>
+            <p class="text-gray-600"><span class="font-medium">Phone:</span> {{ agent.phone }}</p>
+            <p class="text-gray-600">
+                <span class="font-medium">Email:</span> 
+                <a href="mailto:{{ agent.email }}" class="text-blue-600 hover:underline">{{ agent.email }}</a>
+            </p>
+            {% if agent.website %}
+            <p class="text-gray-600">
+                <span class="font-medium">Website:</span> 
+                <a href="{{ agent.website }}" target="_blank" class="text-blue-600 hover:underline">{{ agent.website }}</a>
+            </p>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+{% block extra_js %}
+<script>
+    function fetchCities(countryId) {
+        if (!countryId) return;
+        
+        fetch(`/agents/api/get-cities/?country=${countryId}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json(); // Ensure response is JSON
+            })
+            .then(data => {
+                console.log("Cities received:", data); // Debugging output
+                document.querySelector('#city').innerHTML = 
+                    '<option value="">All Cities</option>' + 
+                    data.map(city => `<option value="${city.id}" ${city.id == '{{ request.GET.city|default:'' }}' ? 'selected' : ''}>${city.name}</option>`).join('');
+            })
+            .catch(error => {
+                console.error("Error fetching cities:", error);
+            });
+    }
+</script>
+
+{% endblock extra_js %}
+
+
+

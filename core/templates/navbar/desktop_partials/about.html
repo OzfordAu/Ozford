@@ -1,0 +1,246 @@
+<div @mouseleave="activeDropdown = null">
+    <button
+    @mouseover="setActiveDropdown('about')"
+    class="text-gray-800 font-medium h-20 px-4 border-b-4"
+   :class="activeDropdown === 'about' ? 'border-primary text-primary bg-gray-100' : 'border-transparent'">
+      About us
+      <svg
+        class="-mr-0.5 h-4 w-4 inline-block transition-transform duration-200"
+        :class="{'rotate-180 text-primary': activeDropdown === 'about'}"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="3"
+          d="M19 9l-7 7-7-7"
+        />
+      </svg>
+    </button>
+
+    <!-- Admissions Mega Menu Panel -->
+    <div
+      x-cloak
+      x-show="activeDropdown === 'about'"
+      x-transition:enter="transition ease-out duration-150"
+      x-transition:enter-start="opacity-100 scale-100"
+      x-transition:enter-end="opacity-100 scale-100"
+      x-transition:leave="transition ease-in duration-90"
+      x-transition:leave-start="opacity-100 scale-100"
+      x-transition:leave-end="opacity-0 scale-100"
+      class="absolute left-0 right-0 container z-50 min-h-96"
+      @mouseover="activeDropdown = 'about'"
+      style="display: none"
+    >
+    <div class="w-full min-h-96 bg-gray-100">
+        <div class="p-8 max-w-6xl mx-auto grid grid-cols-4 gap-8 text-sm">
+          <div>
+            <p class="text-base font-medium mb-2">About OZFORD</p>
+            <ul class="space-y-3">
+             
+              <li>
+                <a
+                  href="/about/"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >About us</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/about/our-philosophy/"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >Our Philosophy</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/about/our-people/"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >Our People</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/about/gallery/"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >Gallery</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/about/testimonials/"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >Testimonials</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/about/our-stories/"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >Our Stories</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/about/policies-and-procedures/"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >Policies &amp; Procedures</a
+                >
+              </li>
+              {% comment %} <li>
+                <a
+                  href="/about/endorsement/"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >Endorsement</a
+                >
+              </li> {% endcomment %}
+              {% comment %} <li>
+                <a
+                  href="/about/scholarships/"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >Scholarships</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/about/reviews/"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >Reviews</a
+                >
+              </li> {% endcomment %}
+            </ul>
+          </div>
+          <div>
+            <p class="text-base font-medium mb-2">Life at Ozford</p>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="/about/student-services-and-support/"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >Student Services &amp; Support</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/about/career-hub/"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >Career Hub</a
+                >
+              </li>
+                  <li>
+                    <a
+                      href="/about/endorsement/"
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >Endorsement</a
+                    >
+                  </li>
+                  {% comment %} <li>
+                    <a
+                      href="/about/airport-pickup/"
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >Accommodation</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="/about/airport-pickup/"
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >Study in Australia - Melbourne</a
+                    >
+                  </li> {% endcomment %}
+                  <li>
+                    <a
+                      href="/about/campus-safety-and-sexual-misconduct/"
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >Campus Safety &amp; Sexual Misconduct
+                      </a
+                    >
+                  </li>
+              
+              
+            </ul>
+          </div>
+          <div>
+            <p class="text-base font-medium mb-2">Terms &amp; Policies</p>
+            <ul class="space-y-3">
+                <li>
+                    <a
+                      href="/about/terms-and-conditions/"
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >Terms &amp; Conditions</a
+                    >
+                  </li>
+                <li>
+                <li>
+                    <a
+                      href="https://www.legislation.gov.au/F2017L01182/latest/text" target="_blank"
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >ESOS Act</a
+                    >
+                  </li>
+                <li>
+                    <a
+                      href="/about/privacy-statements/"
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >Privacy Statement</a
+                    >
+                  </li>
+              <li>
+                <a
+                  href="/about/disclaimer/"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >Disclaimer</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/policies-and-procedures/"
+                  class="text-primary border-b border-transparent hover:border-primary transition-all"
+                  >Policies &amp; Procedures</a
+                >
+              </li>
+              
+            </ul>
+          </div>
+          <div>
+            <p class="text-base font-medium mb-2">Engage</p>
+            <ul class="space-y-3">
+                <li>
+                    <a
+                      href="/news-and-events/"
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >Blogs &amp; Events</a
+                    >
+                  </li>
+                <li>
+                    <a
+                      href="/about/contact-us/"
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >Contact us</a
+                    >
+                  </li>
+                <li>
+                    <a
+                      href="/about/careers/"
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >Job Vacancy</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="/about/faq/"
+                      class="text-primary border-b border-transparent hover:border-primary transition-all"
+                      >FAQ's</a
+                    >
+                  </li>
+            </ul>
+          </div>
+         
+        </div>
+        <!-- Admissions dropdown content -->
+    </div>
+    </div>
+  </div>

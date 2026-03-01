@@ -1,0 +1,121 @@
+<div @mouseleave="activeDropdown = null">
+  <button
+    @mouseover="setActiveDropdown('courses')"
+     class="text-gray-800 font-medium h-20 px-4 border-b-4"
+    :class="activeDropdown === 'courses' ? 'border-primary text-primary bg-gray-100' : 'border-transparent'"
+  >
+    Study
+    <svg
+      class="-mr-0.5 h-4 w-4 inline-block transition-transform duration-200"
+      :class="{'rotate-180 text-primary': activeDropdown === 'courses'}"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="3"
+        d="M19 9l-7 7-7-7"
+      />
+    </svg>
+  </button>
+
+  <!-- Student Mega Menu Panel -->
+  <div
+    x-cloak
+    x-show="activeDropdown === 'courses'"
+    x-transition:enter="transition ease-out duration-150"
+    x-transition:enter-start="opacity-100 scale-100"
+    x-transition:enter-end="opacity-100 scale-100"
+    x-transition:leave="transition ease-in duration-90"
+    x-transition:leave-start="opacity-100 scale-100"
+    x-transition:leave-end="opacity-0 scale-100"
+    class="absolute left-0 right-0 container z-50 min-h-96"
+    @mouseover="activeDropdown = 'courses'"
+    style="display: none"
+  >
+    <div class="w-full min-h-96 bg-gray-100">
+      <div class="p-8 grid grid-cols-4 gap-8 text-sm">
+        <div>
+          <a href="/study/postgraduate/" class="border-b border-transparent hover:border-primary transition-all text-base font-medium mb-4">Postgraduate</a>
+          <ul class="space-y-3 mt-2">
+            {% for item in global_pg_courses  %}
+              <li>
+                <a 
+                href="{{ item.url }}"
+                class="text-primary border-b border-transparent hover:border-primary transition-all"
+                >
+                {{ item.title }}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div>
+          <a href="/study/undergraduate/" class="border-b border-transparent hover:border-primary transition-all text-base font-medium mb-4">Undergraduate</a>
+          <ul class="space-y-3 mt-2">
+            {% for item in global_ug_courses  %}
+              <li>
+                <a 
+                href="{{ item.url }}"
+                class="text-primary border-b border-transparent hover:border-primary transition-all"
+                >
+                {{ item.title }}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div>
+          <a href="/study/high-school/" class="border-b border-transparent hover:border-primary transition-all text-base font-medium mb-4">High School (Year 10-12)</a>
+          <ul class="space-y-3 mt-2">
+            {% for item in global_high_school_courses  %}
+              <li>
+                <a 
+                href="{{ item.url }}"
+                class="text-primary border-b border-transparent hover:border-primary transition-all"
+                >
+                {{ item.title }}
+                </a>
+              </li>
+              {% comment %} <li>
+                <a 
+                href="/about/high-school-council/"
+                class="text-primary border-b border-transparent hover:border-primary transition-all"
+                >
+                School Council
+                </a>
+              </li> {% endcomment %}
+            {% endfor %}
+            {% comment %} <li>
+                <a 
+                href="/about/high-school-council/"
+                class="text-primary border-b border-transparent hover:border-primary transition-all"
+                >
+                School Council
+                </a>
+              </li> {% endcomment %}
+          </ul>
+        </div>
+        <div>
+          <a href="/study/english-language-center/" class="border-b border-transparent hover:border-primary transition-all text-base font-medium mb-4">English Language Center</a>
+          <ul class="space-y-3 mt-2">
+            {% for item in global_elicos_school_courses  %}
+              <li>
+                <a 
+                href="{{ item.url }}"
+                class="text-primary border-b border-transparent hover:border-primary transition-all"
+                >
+                {{ item.title }}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      <!-- Admissions dropdown content -->
+    </div>
+  </div>
+</div>
