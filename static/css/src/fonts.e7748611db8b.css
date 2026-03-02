@@ -1,0 +1,36 @@
+@font-face {
+    font-family: 'Nohemi';
+    src: url("../fonts/nohemi/Nohemi-Regular.3d3c5f729a12.woff") format('woff'),
+         url("../fonts/nohemi/Nohemi-Regular.29ddb4605533.ttf") format('truetype'),
+         url("../fonts/nohemi/Nohemi-Regular.93ecaf9bd9a9.otf") format('opentype');
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Nohemi';
+    src: url("../fonts/nohemi/Nohemi-Medium.8121d2fbe555.woff") format('woff'),
+         url("../fonts/nohemi/Nohemi-Medium.340730b16e1f.ttf") format('truetype'),
+         url("../fonts/nohemi/Nohemi-Medium.88862c66bd6d.otf") format('opentype');
+    font-weight: 500;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Nohemi';
+    src: url("../fonts/nohemi/Nohemi-SemiBold.82b1417f94ca.woff") format('woff'),
+         url("../fonts/nohemi/Nohemi-SemiBold.2acd1ac6664b.ttf") format('truetype'),
+         url("../fonts/nohemi/Nohemi-SemiBold.9d0a83cc9454.otf") format('opentype');
+    font-weight: 600;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Nohemi';
+    src: url("../fonts/nohemi/Nohemi-Bold.432137c55f42.woff") format('woff'),
+         url("../fonts/nohemi/Nohemi-Bold.e4ebed8581ef.ttf") format('truetype'),
+         url("../fonts/nohemi/Nohemi-Bold.5ed3daa0e4aa.otf") format('opentype');
+    font-weight: 700;
+    font-style: normal;
+  }
+  
