@@ -1,0 +1,41 @@
+{% load wagtailimages_tags wagtailcore_tags %}
+
+<div class="container mx-auto bg-gray-100 text-black px-4 py-6 lg:py-8 xl:py-14 xl:px-20">
+  <div class="flex flex-col xl:flex-row xl:justify-center xl:gap-10">
+
+    <div class="w-full xl:w-1/2">
+
+      <h2 class="text-3xl xl:text-5xl font-bold mb-6">
+        Why Study English at Ozford?
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center font-semibold text-gray-700 mb-6">
+
+        <div>
+          <p class="text-xl">Experienced Teachers</p>
+        </div>
+
+        <div>
+          <p class="text-xl">Modern Learning Environment</p>
+        </div>
+
+        <div>
+          <p class="text-xl">Pathway to Higher Education</p>
+        </div>
+
+      </div>
+
+      <div class="cms-page">
+        {{ page.about_content|richtext }}
+      </div>
+
+    </div>
+
+    <div class="w-full xl:w-1/2">
+      {% if page.about_image %}
+        {% image page.about_image original class="w-full h-auto rounded-lg shadow" %}
+      {% endif %}
+    </div>
+
+  </div>
+</div>

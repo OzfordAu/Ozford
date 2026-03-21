@@ -1,0 +1,32 @@
+{% load wagtailcore_tags %}
+
+<div class="w-full">
+  <div class="container mx-auto px-4 py-10 xl:py-20 bg-primary-dark text-white">
+
+    <div class="max-w-5xl mx-auto">
+
+      <h2 class="text-3xl lg:text-5xl font-bold mb-6">
+        {{ page.ready_title }}
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xl">
+
+        {% for item in page.ready_links %}
+          <div class="flex items-center gap-4">
+
+            <a href="{{ item.value.url }}"
+               class="text-white border-b border-transparent hover:border-white transition-all">
+
+               {{ item.value.title }}
+
+            </a>
+
+          </div>
+        {% endfor %}
+
+      </div>
+
+    </div>
+
+  </div>
+</div>

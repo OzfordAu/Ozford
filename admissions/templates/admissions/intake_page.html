@@ -68,65 +68,6 @@
         </div> {% endcomment %}
   
       </div>
-      <div :class="{ '!block': activeTab === 1 }" x-show.transition.in.opacity.duration.600="activeTab === 1" class="hidden">
-        <div class="mb-10">
-          <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
-            <tbody class="divide-y divide-gray-100 border-gray-100">
-              {% for item in page.high_school_intakes  %}
-              <tr>
-              {% for title in item.value.title  %}
-             
-                <td class="px-6 py-4 {% if title.is_title %}font-semibold text-gray-900 border-b bg-indigo-50{% endif %}">{{title.description}}</td>
-             
-              {% endfor %}
-            </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
-        {% comment %} <div class="">
-            <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
-              <thead class="bg-gray-50">
-                <tr>
-                  <th scope="col" class="px-6 py-4 font-semibold text-gray-900">HIGH SCHOOL</th>
-                  <th scope="col" class="px-6 py-4 font-semibold text-gray-900">2025 INTAKES</th>
-                  <th scope="col" class="px-6 py-4 font-semibold text-gray-900">2026 INTAKES</th>
-                  <th scope="col" class="px-6 py-4 font-semibold text-gray-900">YEAR 10</th>
-                  <th scope="col" class="px-6 py-4 font-semibold text-gray-900">VCE YEAR 11</th>
-                  <th scope="col" class="px-6 py-4 font-semibold text-gray-900">VCE YEAR 12</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-gray-100 border-t border-gray-100">
-                {% for item in page.high_school_intake_block %}
-                    <tr>
-                        <th class="px-6 py-4 font-medium text-gray-900">{{item.value.program}}</th>
-                        <td class="px-6 py-4">{{item.value.current_intake}}</td>
-                        <td class="px-6 py-4">{{item.value.next_intake}}</td>
-                        <td class="px-6 py-4">{% if item.value.year_10 %}
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-3">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                              </svg>
-                              
-                            {% endif %}</td>
-                            <td class="px-6 py-4">{% if item.value.vce_year_11 %}
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-3">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                                  </svg>
-                                  
-                                {% endif %}</td>
-                                <td class="px-6 py-4">{% if item.value.vce_year_12 %}
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-3">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                                      </svg>
-                                      
-                                    {% endif %}</td>
-                    </tr>
-                {% endfor %}
-               
-              </tbody>
-            </table>
-        </div> {% endcomment %}
-      </div>
         <div :class="{ '!block': activeTab === 2 }" x-show.transition.in.opacity.duration.600="activeTab === 2" class="hidden">
           <div class="mb-10">
             <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
