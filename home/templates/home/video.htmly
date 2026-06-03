@@ -1,0 +1,16 @@
+<section class="container mx-auto px-4 py-10 xl:py-20">
+  <div class="relative mx-auto w-full rounded-md overflow-hidden" style="max-width: 1100px;">
+    <img
+      src="https://ozford.edu.au/media/images/Untitled_design_4.original.png"
+      alt="Early Childhood Education – Ozford Institute"
+      class="w-full h-auto block"
+      loading="lazy"
+    />
+    <a href="https://ozford.meshedhe.com.au/Publics/PublicsPages/StudentApply/pp_Application_Step0.aspx"
+       target="_blank"
+       class="absolute bottom-[7%] right-[3%] flex items-center gap-2 bg-[#F5C200] text-[#0B2044] font-extrabold uppercase text-sm px-6 py-3 rounded-full shadow-lg hover:bg-yellow-400 hover:scale-105 transition-all whitespace-nowrap tracking-wide">
+      <span class="bg-[#0B2044] text-[#F5C200] rounded-full w-7 h-7 flex items-center justify-center">→</span>
+      Enrol Now
+    </a>
+  </div>
+</section>

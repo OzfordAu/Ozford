@@ -221,6 +221,7 @@ class IntakePage(Page):
     parent_page_types = ['admissions.AdmissionIndex']
     subpage_types = []
     max_count = 1
+    template = "admissions/intakes_term_dates_higher_education.html"  # ← add here
     page_title = models.CharField(max_length=255, blank=False, null=True)
     page_intro = HTMLField(null=True, blank=True)
     banner_image = models.ForeignKey(
@@ -296,5 +297,3 @@ class IntakePage(Page):
     class Meta:
         verbose_name = "Intake Page"
 
-
-    

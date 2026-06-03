@@ -1,0 +1,236 @@
+{% load wagtailimages_tags %}
+
+{% if page.course_tabs %}
+<section class="oz-courses-section">
+  <div class="oz-courses-inner">
+
+    {# ── Heading ── #}
+    <h2 class="oz-courses-heading">
+      {% if page.courses_section_highlight and page.courses_section_highlight in page.courses_section_title %}
+        {% with t=page.courses_section_title h=page.courses_section_highlight %}
+          {% with before=t|slice:":"|add:"" %}
+            {{ t|slice:":"|truncatechars:0 }}
+          {% endwith %}
+        {% endwith %}
+        {# Simple split: render title, JS will highlight — OR use the safe approach below #}
+        <span data-highlight="{{ page.courses_section_highlight }}">{{ page.courses_section_title }}</span>
+      {% else %}
+        {{ page.courses_section_title }}
+      {% endif %}
+    </h2>
+
+    {% if page.courses_section_subtitle %}
+      <p class="oz-courses-subtext">{{ page.courses_section_subtitle }}</p>
+    {% endif %}
+
+    {# ── Tabs ── #}
+    <div class="oz-tabs" role="tablist">
+      {% for block in page.course_tabs %}
+        <button
+          class="oz-tab{% if forloop.first %} active{% endif %}"
+          role="tab"
+          onclick="ozSwitchTab('oz-panel-{{ forloop.counter }}', this)"
+        >{{ block.value.tab_label }}</button>
+      {% endfor %}
+    </div>
+
+    {# ── Tab Panels ── #}
+    {% for block in page.course_tabs %}
+      <div
+        class="oz-tab-panel{% if forloop.first %} active{% endif %}"
+        id="oz-panel-{{ forloop.counter }}"
+        role="tabpanel"
+      >
+        <div class="oz-grid">
+          {% for card in block.value.cards %}
+            {% with card_id="ozc-"|add:forloop.parentloop.counter|stringformat:"s"|add:"-"|add:forloop.counter|stringformat:"s" %}
+            <a class="oz-card"
+               href="#"
+               onclick="ozOpenModal('{{ card_id }}'); return false;"
+               aria-label="{{ card.title }}">
+
+              {# Card background image — use Wagtail image tag #}
+              {% image card.image fill-800x480 as card_img %}
+              <div class="oz-card-photo"
+                   style="background-image:url('{{ card_img.url }}')"></div>
+
+              {# White label box #}
+              <div class="oz-card-label">
+                <div class="oz-card-label-text">{{ card.title }}</div>
+              </div>
+
+              {# Modal data payload — read by JS, never shown to user #}
+              <script type="application/json" id="data-{{ card_id }}">
+              {
+                "label":       "{{ card.modal_label|escapejs }}",
+                "title":       "{{ card.title|escapejs }}",
+                "tag":         "{{ card.modal_tag|escapejs }}",
+                "description": "{{ card.description|escapejs }}",
+                "duration":    "{{ card.duration|escapejs }}",
+                "intake":      "{{ card.intake|escapejs }}",
+                "url":         "{{ card.url|escapejs }}"
+              }
+              </script>
+
+            </a>
+            {% endwith %}
+          {% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+
+    {# ── View All ── #}
+    <div class="oz-cta-wrap">
+      <a class="oz-view-all" href="{{ page.courses_view_all_url }}">
+        View All
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14M13 6l6 6-6 6"/>
+        </svg>
+      </a>
+    </div>
+
+  </div>{# /.oz-courses-inner #}
+</section>
+
+{# ── Modal ── #}
+<div class="oz-ov" id="ozOv" onclick="ozBgClose(event)" role="dialog" aria-modal="true" aria-labelledby="ozTitle">
+  <div class="oz-modal">
+    <div class="oz-hdr">
+      <button class="oz-close" onclick="ozClose()" aria-label="Close">&#x2715;</button>
+      <div class="oz-lbl"   id="ozLbl"></div>
+      <div class="oz-title" id="ozTitle"></div>
+    </div>
+    <div class="oz-body">
+      <div class="oz-cols one" id="ozCols"></div>
+    </div>
+  </div>
+</div>
+
+{# ── Styles ── #}
+<style>
+.oz-courses-section { background: #fff; padding: 72px 56px 80px; }
+.oz-courses-inner   { max-width: 1100px; margin: 0 auto; }
+
+/* Heading */
+.oz-courses-heading     { font-family: 'Montserrat', sans-serif; font-size: 38px; font-weight: 900; color: #0a1e3d; margin-bottom: 14px; line-height: 1.1; }
+.oz-courses-heading em  { color: #f5c518; font-style: normal; }
+.oz-courses-subtext     { font-size: 15px; color: #555; line-height: 1.75; max-width: 620px; margin-bottom: 40px; }
+
+/* Tabs */
+.oz-tabs              { display: flex; border-bottom: 2px solid #e0e4ee; margin-bottom: 36px; }
+.oz-tab               { font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 700; color: #888; padding: 12px 28px 14px; cursor: pointer; border: none; background: none; border-bottom: 3px solid transparent; margin-bottom: -2px; transition: color .15s, border-color .15s; letter-spacing: .2px; }
+.oz-tab:hover         { color: #0a1e3d; }
+.oz-tab.active        { color: #0a1e3d; border-bottom-color: #f5c518; }
+
+/* Panels */
+.oz-tab-panel         { display: none; }
+.oz-tab-panel.active  { display: block; }
+
+/* Grid */
+.oz-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 48px; }
+
+/* Card */
+.oz-card              { border-radius: 10px; overflow: hidden; position: relative; height: 240px; display: block; text-decoration: none; cursor: pointer; background: #0a1e3d; transition: transform .2s, box-shadow .2s; }
+.oz-card:hover        { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(10,30,61,.18); }
+.oz-card-photo        { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: .55; transition: opacity .2s; }
+.oz-card:hover .oz-card-photo { opacity: .45; }
+.oz-card-label        { position: absolute; bottom: 16px; left: 16px; background: #fff; border-radius: 6px; padding: 12px 16px 12px 20px; max-width: 72%; }
+.oz-card-label::before{ content: ''; position: absolute; left: 0; top: 8px; bottom: 8px; width: 3px; background: #f5c518; border-radius: 2px; }
+.oz-card-label-text   { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 800; color: #0a1e3d; line-height: 1.35; }
+
+/* View All */
+.oz-cta-wrap  { text-align: center; }
+.oz-view-all  { display: inline-flex; align-items: center; gap: 10px; font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 800; color: #fff; background: #0a1e3d; padding: 14px 36px; border-radius: 6px; text-decoration: none; letter-spacing: .3px; transition: background .18s; }
+.oz-view-all:hover { background: #f5c518; color: #0a1e3d; }
+.oz-view-all svg   { width: 18px; height: 18px; }
+
+/* Modal */
+.oz-ov        { display: none; position: fixed; inset: 0; background: rgba(5,10,25,.65); z-index: 9999; align-items: center; justify-content: center; padding: 24px; }
+.oz-ov.open   { display: flex; }
+.oz-modal     { background: #fff; border-radius: 12px; width: 100%; max-width: 900px; max-height: 90vh; overflow-y: auto; position: relative; box-shadow: 0 24px 72px rgba(0,0,0,.3); }
+.oz-hdr       { background: #0a1e3d; padding: 32px 40px 28px; border-radius: 12px 12px 0 0; position: relative; }
+.oz-close     { position: absolute; top: 16px; right: 20px; background: none; border: none; color: #fff; font-size: 28px; cursor: pointer; opacity: .7; line-height: 1; }
+.oz-close:hover { opacity: 1; }
+.oz-lbl       { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 700; color: #f5c518; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.oz-title     { font-family: 'Montserrat', sans-serif; font-size: 26px; font-weight: 900; color: #fff; line-height: 1.2; }
+.oz-body      { padding: 32px 40px 40px; }
+.oz-cols.one  { display: block; }
+.oz-cname     { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 800; color: #0a1e3d; margin-bottom: 6px; }
+.oz-ctag      { display: inline-block; background: #f5c518; color: #0a1e3d; font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 20px; margin-bottom: 16px; }
+.oz-cdesc     { font-size: 15px; color: #444; line-height: 1.7; margin-bottom: 24px; }
+.oz-meta      { display: flex; gap: 32px; margin-bottom: 28px; }
+.oz-mk        { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; color: #999; text-transform: uppercase; letter-spacing: .8px; margin-bottom: 4px; }
+.oz-mv        { font-size: 15px; font-weight: 600; color: #0a1e3d; }
+.oz-rm        { display: inline-flex; align-items: center; gap: 8px; background: #0a1e3d; color: #fff; font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700; padding: 12px 28px; border-radius: 6px; text-decoration: none; transition: background .18s; }
+.oz-rm:hover  { background: #f5c518; color: #0a1e3d; }
+
+/* Responsive */
+@media (max-width: 900px) { .oz-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 580px) {
+  .oz-courses-section { padding: 48px 20px 56px; }
+  .oz-grid            { grid-template-columns: 1fr; }
+  .oz-tab             { padding: 10px 14px 12px; font-size: 13px; }
+  .oz-courses-heading { font-size: 26px; }
+  .oz-hdr             { padding: 24px 24px 20px; }
+  .oz-body            { padding: 24px 24px 32px; }
+  .oz-meta            { flex-direction: column; gap: 16px; }
+}
+</style>
+
+{# ── Script ── #}
+<script>
+// Highlight the chosen word in the heading
+(function () {
+  const el = document.querySelector('.oz-courses-heading [data-highlight]');
+  if (!el) return;
+  const word = el.dataset.highlight;
+  if (!word) return;
+  el.outerHTML = el.outerHTML.replace(
+    el.outerHTML,
+    el.textContent.replace(
+      word,
+      '<em>' + word + '</em>'
+    )
+  );
+  // simpler inline replacement
+  const h = document.querySelector('.oz-courses-heading');
+  if (h) h.innerHTML = h.innerHTML.replace(
+    new RegExp('(<span[^>]*>)([\\s\\S]*?)(</span>)'),
+    function(_, open, text, close) {
+      return text.replace(word, '<em>' + word + '</em>');
+    }
+  );
+})();
+
+function ozSwitchTab(panelId, btn) {
+  document.querySelectorAll('.oz-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.oz-tab-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(panelId).classList.add('active');
+}
+
+function ozOpenModal(cardId) {
+  const raw = document.getElementById('data-' + cardId);
+  if (!raw) return;
+  const d = JSON.parse(raw.textContent);
+  document.getElementById('ozLbl').textContent   = d.label;
+  document.getElementById('ozTitle').textContent = d.title;
+  document.getElementById('ozCols').innerHTML = `
+    <div>
+      <div class="oz-cname">${d.title}</div>
+      <div class="oz-ctag">${d.tag}</div>
+      <div class="oz-cdesc">${d.description}</div>
+      <div class="oz-meta">
+        <div><div class="oz-mk">Duration</div><div class="oz-mv">${d.duration}</div></div>
+        <div><div class="oz-mk">Intake</div><div class="oz-mv">${d.intake}</div></div>
+      </div>
+      <a class="oz-rm" href="${d.url}">Read More</a>
+    </div>`;
+  document.getElementById('ozOv').classList.add('open');
+}
+
+function ozClose()       { document.getElementById('ozOv').classList.remove('open'); }
+function ozBgClose(e)    { if (e.target === document.getElementById('ozOv')) ozClose(); }
+document.addEventListener('keydown', e => { if (e.key === 'Escape') ozClose(); });
+</script>
+{% endif %}

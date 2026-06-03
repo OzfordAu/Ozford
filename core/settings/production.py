@@ -1,6 +1,6 @@
 from .base import *
 
-DEBUG = False
+DEBUG = True
 SECRET_KEY = "0uemuf+r%o#3p&$5uk(=l%)wwxs#g*k2q+2s*vf+r85v)aj4^u"
 HTML_MINIFY = True
 

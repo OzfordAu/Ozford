@@ -1,28 +1,383 @@
 {% load static wagtailcore_tags wagtailimages_tags %}
-<section class="container mx-auto max-w-6xl px-4 py-6 lg:py-8 xl:py-20 xl:px-20">
-    <div class="grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
-    <!-- Image -->
-    {% image page.testimonial_image original class="inline-block h-full w-full max-w-sm object-cover" %}
-    <!-- Content -->
-    <div class="sm:max-w-sm md:max-w-md lg:max-w-lg">
-      <h2 class="text-3xl lg:text-5xl font-bold mb-3 lg:mb-6 xl:mb-8">
-          {{ page.testimonial_title }}
-      </h2>
-      <div class="cms-page">
-        {{ page.testimonial_content|richtext }}
-      </div>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+<style>
+.oz-ss *, .oz-ss *::before, .oz-ss *::after {
+  box-sizing: border-box; margin: 0; padding: 0;
+}
+.oz-ss {
+  --sun:      #F5C200;
+  --sun-d:    #b8900a;
+  --navy:     #0B2044;
+  --off:      #F4F6FA;
+  --border:   #E2E6EF;
+  --text:     #1A2540;
+  --muted:    #6B7A99;
+  font-family: 'Open Sans', sans-serif;
+  background: #fff;
+  padding: 52px 20px 56px;
+  position: relative;
+  overflow: hidden;
+}
+.oz-ss__inner { max-width: 1540px; margin: 0 auto; }
+
+/* ── HEADER ──────────────────────────────────────────────── */
+.oz-ss__hd {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+.oz-ss__eyebrow {
+  display: flex; align-items: center; gap: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--sun-d); margin-bottom: 8px;
+}
+.oz-ss__eyebrow::before {
+  content: ''; display: block;
+  width: 22px; height: 2px;
+  background: var(--sun); border-radius: 2px; flex-shrink: 0;
+}
+.oz-ss__title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(20px, 3.2vw, 30px);
+  font-weight: 800; color: var(--navy); line-height: 1.18;
+}
+.oz-ss__title em { font-style: normal; color: var(--sun-d); }
+.oz-ss__sub {
+  margin-top: 8px; font-size: 14px;
+  line-height: 1.7; color: var(--muted); max-width: 400px;
+}
+.oz-ss__link {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--navy); text-decoration: none;
+  border: 2px solid var(--navy);
+  padding: 9px 18px; border-radius: 3px;
+  transition: background .2s, color .2s, border-color .2s;
+  white-space: nowrap; flex-shrink: 0;
+}
+.oz-ss__link:hover { background: var(--sun); border-color: var(--sun); color: var(--navy); }
+.oz-ss__link svg { transition: transform .2s; }
+.oz-ss__link:hover svg { transform: translateX(3px); }
+
+/* ── CAROUSEL ────────────────────────────────────────────── */
+.oz-car { position: relative; }
+.oz-car__wrap {
+  overflow: hidden; border-radius: 5px;
+  box-shadow: 0 4px 28px rgba(11,32,68,0.10);
+}
+.oz-car__track {
+  display: flex;
+  transition: transform 0.42s cubic-bezier(0.25,0.46,0.45,0.94);
+  will-change: transform;
+}
+
+/* ── CARD ────────────────────────────────────────────────── */
+.oz-card {
+  min-width: 100%;
+  display: grid;
+  grid-template-columns: 380px 1fr;   /* ← was 300px */
+  background: #fff;
+  overflow: hidden;
+  align-items: start;                 /* ← prevents stretching */
+}
+/* image column */
+.oz-card__img {
+  position: relative; overflow: hidden;
+  background: var(--navy);
+  min-height: unset;                  /* ← removes forced height */
+  height: 100%;                       /* ← fills only what card needs */
+}
+.oz-card__img img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: top center;
+  display: block; opacity: 0.9;
+  transition: transform 0.5s ease;
+}
+.oz-card:hover .oz-card__img img { transform: scale(1.04); }
+.oz-card__img::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(170deg, rgba(11,32,68,0.45) 0%, transparent 50%);
+  pointer-events: none;
+}
+.oz-card__badge {
+  position: absolute; bottom: 16px; left: 16px; z-index: 2;
+  background: var(--sun); color: var(--navy);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 5px 11px; border-radius: 2px;
+  max-width: calc(100% - 32px); line-height: 1.4;
+}
+/* content column */
+.oz-card__body {
+  padding: 36px 36px 30px;
+  display: flex; flex-direction: column; justify-content: flex-start;  /* ← was center */
+  background: var(--off);
+  border-left: 3px solid var(--sun);
+}
+.oz-card__profile {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 20px;
+}
+.oz-card__avatar {
+  width: 50px; height: 50px; border-radius: 50%;
+  object-fit: cover; object-position: top center;
+  border: 2px solid var(--sun); flex-shrink: 0;
+}
+.oz-card__name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px; font-weight: 700; color: var(--navy);
+}
+.oz-card__course {
+  font-size: 12px; font-weight: 600;
+  color: var(--sun-d); margin-top: 2px;
+}
+.oz-card__country { font-size: 11px; color: var(--muted); margin-top: 1px; }
+.oz-card__qmark {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 60px; font-weight: 800;
+  color: var(--sun); line-height: 0.65;
+  margin-bottom: 14px; display: block;
+}
+.oz-card__quote {
+  font-size: 14px; line-height: 1.85;
+  color: var(--text); font-style: italic; flex: 1;
+}
+.oz-quote__full { display: none; }
+.oz-quote__btn {
+  display: inline-block;
+  margin-top: 8px;
+  background: none;
+  border: none;
+  color: var(--sun-d);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  cursor: pointer; padding: 0;
+  text-decoration: underline;
+}
+.oz-quote__btn:hover { color: var(--navy); }
+.oz-card__divider {
+  width: 36px; height: 2px; background: var(--sun);
+  border-radius: 2px; margin: 20px 0 0; flex-shrink: 0;
+}
+
+/* ── CONTROLS ────────────────────────────────────────────── */
+.oz-car__ctrl {
+  display: flex; align-items: center;
+  justify-content: space-between;
+  margin-top: 18px; flex-wrap: wrap; gap: 12px;
+}
+.oz-dots { display: flex; gap: 7px; }
+.oz-dot {
+  width: 9px; height: 9px; border-radius: 50%;
+  background: var(--border); border: none;
+  cursor: pointer; padding: 0;
+  transition: background .2s, transform .2s;
+}
+.oz-dot.on { background: var(--sun); transform: scale(1.35); }
+.oz-count {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px; font-weight: 600; color: var(--muted);
+}
+.oz-count strong { color: var(--navy); }
+.oz-arrows { display: flex; gap: 8px; }
+.oz-arr {
+  width: 38px; height: 38px; border-radius: 50%;
+  border: 2px solid var(--navy);
+  background: transparent; color: var(--navy);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .2s, border-color .2s; flex-shrink: 0;
+}
+.oz-arr:hover { background: var(--sun); border-color: var(--sun); }
+.oz-arr:disabled { opacity: 0.22; cursor: not-allowed; }
+
+/* ── TABLET ≤ 768px ──────────────────────────────────────── */
+@media (max-width: 768px) {
+  .oz-ss          { padding: 40px 16px 44px; }
+  .oz-ss__hd      { flex-direction: column; align-items: flex-start; margin-bottom: 24px; gap: 14px; }
+  .oz-ss__title   { font-size: clamp(18px, 5vw, 24px); }
+  .oz-ss__sub     { font-size: 13px; max-width: 100%; }
+
+  .oz-card        { grid-template-columns: 1fr; }
+  .oz-card__img   { min-height: 0; height: 220px; }
+  .oz-card__body  { padding: 24px 20px 22px; border-left: none; border-top: 3px solid var(--sun); }
+  .oz-card__qmark { font-size: 48px; margin-bottom: 10px; }
+  .oz-card__quote { font-size: 13px; line-height: 1.8; }
+  .oz-card__badge { font-size: 9px; padding: 4px 9px; }
+  .oz-car__ctrl   { margin-top: 14px; }
+  .oz-count       { display: none; }
+  .oz-arr         { width: 40px; height: 40px; }
+}
+
+/* ── SMALL MOBILE ≤ 400px ────────────────────────────────── */
+@media (max-width: 400px) {
+  .oz-ss          { padding: 36px 14px 40px; }
+  .oz-card__img   { height: 190px; }
+  .oz-card__body  { padding: 20px 16px 18px; }
+  .oz-card__quote { font-size: 13px; }
+  .oz-card__avatar{ width: 42px; height: 42px; }
+}
+</style>
+
+<section class="oz-ss" aria-label="Success Stories">
+  <div class="oz-ss__inner">
+
+    {# ── HEADER ───────────────────────────────────────────── #}
+    <div class="oz-ss__hd">
       <div>
-        <a href="/about/testimonials/" class="inline-flex items-center gap-2 px-4 py-2 rounded-none leading-loose tracking-wider text-lg text-white bg-link-primary hover:bg-link-primary-hover transition-all">
-            <span>Read more success stories</span>
-            <span>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
-                  </svg>
-                  
-            </span>
-          </a>
+        <p class="oz-ss__eyebrow">Student Voices</p>
+        <h2 class="oz-ss__title">
+          {% if page.testimonial_title %}
+            {{ page.testimonial_title }}
+          {% else %}
+            Our <em>Success</em> Stories
+          {% endif %}
+        </h2>
+        <p class="oz-ss__sub">Real journeys from real Ozford students — shaping futures from Melbourne to the world.</p>
       </div>
+      <a href="/about/testimonials/" class="oz-ss__link">
+        Read more stories
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
     </div>
+
+    {# ── CAROUSEL ─────────────────────────────────────────── #}
+    <div class="oz-car" id="ozCar">
+      <div class="oz-car__wrap">
+        <div class="oz-car__track" id="ozTrack">
+
+          {% for block in page.testimonials %}
+          {% with t=block.value %}
+          <div class="oz-card">
+            <div class="oz-card__img">
+              {% image t.photo fill-380x500 as card_img %}
+              <img src="{{ card_img.url }}" alt="{{ t.name }}" loading="lazy">
+              <span class="oz-card__badge">{{ t.badge }}</span>
+            </div>
+            <div class="oz-card__body">
+              <div class="oz-card__profile">
+                {% image t.photo fill-50x50 as avatar_img %}
+                <img class="oz-card__avatar" src="{{ avatar_img.url }}" alt="{{ t.name }}" loading="lazy">
+                <div>
+                  <p class="oz-card__name">{{ t.name }}</p>
+                  <p class="oz-card__course">{{ t.course }}</p>
+                  <p class="oz-card__country">{{ t.country }}</p>
+                </div>
+              </div>
+              <span class="oz-card__qmark">&ldquo;</span>
+              <p class="oz-card__quote">
+                <span class="oz-quote__short">{{ t.quote|truncatewords:60 }}</span>
+                <span class="oz-quote__full">{{ t.quote }}</span>
+                {% if t.quote|wordcount > 60 %}
+                <button class="oz-quote__btn" onclick="ozToggleQuote(this)">Read more</button>
+                {% endif %}
+              </p>
+              <div class="oz-card__divider"></div>
+            </div>
+          </div>
+          {% endwith %}
+          {% endfor %}
+
+        </div>{# /track #}
+      </div>{# /wrap #}
+
+      {# ── CONTROLS ─────────────────────────────────────────── #}
+      <div class="oz-car__ctrl">
+        <div class="oz-dots" id="ozDots" role="tablist" aria-label="Testimonial navigation"></div>
+        <p class="oz-count"><strong id="ozCur">1</strong> / <span id="ozTot"></span></p>
+        <div class="oz-arrows">
+          <button class="oz-arr" id="ozPrev" aria-label="Previous">
+            <svg width="16" height="16" viewBox="0 0 18 18" fill="none">
+              <path d="M11 4L6 9l5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <button class="oz-arr" id="ozNext" aria-label="Next">
+            <svg width="16" height="16" viewBox="0 0 18 18" fill="none">
+              <path d="M7 4l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+    </div>{# /carousel #}
   </div>
-  </section>
-</template>
+</section>
+
+<script>
+(function () {
+  var track = document.getElementById('ozTrack');
+  var dots  = document.getElementById('ozDots');
+  var prev  = document.getElementById('ozPrev');
+  var next  = document.getElementById('ozNext');
+  var cur   = document.getElementById('ozCur');
+  var tot   = document.getElementById('ozTot');
+  if (!track) return;
+
+  var slides = track.querySelectorAll('.oz-card');
+  var total  = slides.length;
+  var idx    = 0;
+  var timer;
+
+  tot.textContent = total;
+
+  /* build dots */
+  for (var i = 0; i < total; i++) {
+    (function(n) {
+      var b = document.createElement('button');
+      b.className = 'oz-dot' + (n === 0 ? ' on' : '');
+      b.setAttribute('aria-label', 'Story ' + (n + 1));
+      b.addEventListener('click', function () { goTo(n); });
+      dots.appendChild(b);
+    })(i);
+  }
+
+  function goTo(n) {
+    idx = ((n % total) + total) % total;
+    track.style.transform = 'translateX(-' + (idx * 100) + '%)';
+    dots.querySelectorAll('.oz-dot').forEach(function (d, i) {
+      d.classList.toggle('on', i === idx);
+    });
+    cur.textContent = idx + 1;
+    clearInterval(timer);
+    timer = setInterval(function () { goTo(idx + 1); }, 5500);
+  }
+
+  prev.addEventListener('click', function () { goTo(idx - 1); });
+  next.addEventListener('click', function () { goTo(idx + 1); });
+
+  /* swipe support */
+  var sx = 0;
+  track.addEventListener('touchstart', function (e) { sx = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend',   function (e) {
+    var dx = sx - e.changedTouches[0].clientX;
+    if (Math.abs(dx) > 40) goTo(dx > 0 ? idx + 1 : idx - 1);
+  });
+
+  /* auto-play */
+  timer = setInterval(function () { goTo(idx + 1); }, 5500);
+})();
+
+/* read more / read less toggle */
+window.ozToggleQuote = function(btn) {
+  var p     = btn.closest('.oz-card__quote');
+  var short = p.querySelector('.oz-quote__short');
+  var full  = p.querySelector('.oz-quote__full');
+  var isExpanded = full.style.display === 'inline';
+  short.style.display = isExpanded ? 'inline' : 'none';
+  full.style.display  = isExpanded ? 'none'   : 'inline';
+  btn.textContent     = isExpanded ? 'Read more' : 'Read less';
+};
+</script>

@@ -37,7 +37,7 @@
     style="display: none"
   >
     <div class="w-full min-h-96 bg-gray-100">
-      <div class="p-8 grid grid-cols-3 gap-8 text-sm">
+      <div class="p-8 grid grid-cols-2 gap-8 text-sm">
         <div>
           <a href="/study/postgraduate/" class="border-b border-transparent hover:border-primary transition-all text-base font-medium mb-4">Postgraduate</a>
           <ul class="space-y-3 mt-2">
@@ -57,21 +57,6 @@
           <a href="/study/undergraduate/" class="border-b border-transparent hover:border-primary transition-all text-base font-medium mb-4">Undergraduate</a>
           <ul class="space-y-3 mt-2">
             {% for item in global_ug_courses  %}
-              <li>
-                <a 
-                href="{{ item.url }}"
-                class="text-primary border-b border-transparent hover:border-primary transition-all"
-                >
-                {{ item.title }}
-                </a>
-              </li>
-            {% endfor %}
-          </ul>
-        </div>
-        <div>
-          <a href="/study/english-language-center/" class="border-b border-transparent hover:border-primary transition-all text-base font-medium mb-4">English Language Centre</a>
-          <ul class="space-y-3 mt-2">
-            {% for item in global_elicos_school_courses  %}
               <li>
                 <a 
                 href="{{ item.url }}"

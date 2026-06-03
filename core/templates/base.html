@@ -4,6 +4,13 @@
 <html lang="en" class="scroll-smooth" x-data="studentTypeManager">
     <head>
         <meta charset="utf-8" />
+
+        {% if page.search_description %}
+        <meta name="description" content="{{ page.search_description }}" />
+        {% endif %}
+
+        <meta name="google-site-verification" content="Gv8t1Jz62YqX10DEel62l24huvTXCXfkjl_RRmEYyzg" />
+
         <title>
             {% block title %}
             {% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}
@@ -100,6 +107,9 @@
         {% block extra_js %}
         {# Override this in templates to add extra javascript #}
         {% endblock %}
-
+        
+        {# Ozford Chatbot Widget #}
+        <script src="https://abhij9920.github.io/Ozford-Chatbot/embed.js"></script>
+ 
     </body>
 </html>

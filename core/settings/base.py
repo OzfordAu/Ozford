@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sitemaps",
 ]
 
 MIDDLEWARE = [
@@ -205,6 +206,8 @@ TINYMCE_DEFAULT_CONFIG = {
     "fullscreen  preview save print | insertfile image media pageembed template link anchor codesample | "
     "a11ycheck ltr rtl | showcomments addcomment code",
     "custom_undo_redo_levels": 10,
-    'paste_strip_class_attributes' : True,
-    "extended_valid_elements": "svg[*]",
+    'paste_strip_class_attributes': True,
+    "extended_valid_elements": "svg[*],style,script",
+    "valid_children": "+body[style|script]",
+    "valid_elements": "*[*]",   # ← add this
 }

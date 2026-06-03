@@ -1,75 +1,229 @@
-{% load static wagtailcore_tags %}
-<div class="w-full">
-  <div class="container mx-auto px-4 py-10 xl:py-20">
-    <div class="flex flex-col lg:flex-row justify-between gap-4 lg:gap-20">
-      <div class="w-full lg:w-5/12">
-        <h2 class="text-3xl lg:text-5xl font-bold mb-2 lg:mb-3">
-          Find Courses
-        </h2>
-        <p class="font-light text-xl text-gray-800"></p>
-        {% comment %} <ul class="mt-2 xl:mt-3 space-y-2">
-          <li><a href="/study/postgraduate/" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">Postgraduate</a></li>
-          <li><a href="/study/undergraduate/" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">Undergraduate</a></li>
-          <li><a href="/study/english-language-center/" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">English Language Centre</a></li>
-        </ul> {% endcomment %}
-      </div>
-      <div class="w-full lg:w-7/12">
-          <div class="max-w-xl">
-            <form action="{% url 'search' %}" method="get" class="relative z-0 flex">
-              <input 
-                type="text" 
-                name="query" 
-                id="course-search" 
-                class="block p-4 w-full rounded-full rounded-r-none border border-link-primary" 
-                placeholder="Search Courses" 
-              />
-              <button 
-                type="submit"
-                class="rounded-full rounded-l-none -ml-2 border border-l-0 border-link-primary px-6 bg-link-primary text-white hover:bg-link-primary-hover hover:border-link-primary-hover transition-all"
-              >
-                Search
-              </button>
-            </form>
-          </div>
-          <div class="mt-3 xl:mt-6 max-w-md">
-            {% comment %} <h3 class="font-medium text-2xl">Popular Courses</h3> {% endcomment %}
-            <div class="grid grid-cols-1 md:grid-cols-2 mt-2 md:space-x-4 md:ml-4 lg:ml-8">
-              <ul class="space-y-1">
-                <li><a href="/study/postgraduate/" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">Postgraduate</a></li>
-               <li><a href="/study/undergraduate/" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">Undergraduate</a></li>
-                {% comment %} {% for course in pg_popular_courses  %}
-                  <li>
-                    <a href="{% pageurl course %}" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">{{course.course_title}}</a>
-                  </li>
-                {% endfor %} {% endcomment %}
-                {% comment %} <li><a href="/study/postgraduate/master-of-information-technology/" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">Master of Information Technology (MIT)</a></li>
-                <li><a href="/study/postgraduate/master-of-business-administration/" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">Master of Business Admistration (MBA)</a></li>
-                <li><a href="/study/postgraduate/master-of-professional-accounting/" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">Master of Professional Accounting (MPA)</a></li>
-                <li><a href="" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">Graduate Diploma in Information Technolgy</a></li>
-                <li><a href="" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">Graduate Diploma in Management</a></li>
-                <li><a href="" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">Graduate Certificate in Information Technolgy</a></li>
-                <li><a href="" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">Graduate Certificate in Management</a></li> {% endcomment %}
-              </ul>
-              <ul class="space-y-1">
-          <li><a href="/study/english-language-center/" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">English Language Centre</a></li>
-                {% comment %} {% for course in ug_popular_courses  %}
-                  <li>
-                    <a href="{% pageurl course %}" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">{{course.course_title}}</a>
-                  </li>
-                {% endfor %} {% endcomment %}
-                {% comment %} <li><a href="" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">Bachelor of Cyber Security</a></li>
-                <li><a href="" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">Bachelor of Information System</a></li>
-                <li><a href="" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">Bachelor of Business (Accounting)</a></li>
-                <li><a href="" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">Bachelor of Business</a></li>
-                <li><a href="" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">Diploma of Business</a></li>
-                <li><a href="" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">Year 10 High School Program</a></li>
-                <li><a href="" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">Victorian Certificate of Education (VCE)</a></li>
-                <li><a href="" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">General English</a></li>
-                <li><a href="" class="text-link-primary hover:text-link-primary-hover hover:border-b hover:border-link-primary-hover transition-all">English for Academic Purposes (EAP)</a></li> {% endcomment %}
-              </ul>
+{# ============================================================
+   OZFORD — Find Courses Section
+   ============================================================ #}
+
+{% load wagtailimages_tags %}
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;500;600&display=swap');
+
+/* ── SECTION ── */
+.oz-courses-section {
+  background: #fff;
+  padding: 72px 56px 80px;
+  max-width: 1560px;
+  margin: 0 auto;
+}
+
+/* ── HEADING ── */
+.oz-courses-heading {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 38px;
+  font-weight: 900;
+  color: #0a1e3d;
+  margin-bottom: 14px;
+  line-height: 1.1;
+  text-align: center;
+}
+.oz-courses-heading em {
+  color: #f5c518;
+  font-style: normal;
+}
+.oz-courses-subtext {
+  font-size: 15px;
+  color: #555;
+  line-height: 1.75;
+  max-width: 900px;
+  margin-bottom: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+/* ── TABS ── */
+.oz-courses-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid #e0e4ee;
+  margin-bottom: 36px;
+  justify-content: center;
+}
+.oz-courses-tab {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #888;
+  padding: 12px 28px 14px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: color 0.15s, border-color 0.15s;
+  letter-spacing: 0.2px;
+}
+.oz-courses-tab:hover { color: #0a1e3d; }
+.oz-courses-tab.active {
+  color: #0a1e3d;
+  border-bottom-color: #f5c518;
+}
+
+/* ── CARD GRID ── */
+.oz-courses-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 353px);
+  justify-content: start;
+  gap: 20px;
+  margin-bottom: 48px;
+}
+
+/* ── CARD ── */
+.oz-course-card {
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  height: 240px;
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+  background: #0a1e3d;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.oz-course-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 36px rgba(10, 30, 61, 0.18);
+}
+.oz-card-photo {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.9;
+  transition: opacity 0.2s;
+}
+.oz-course-card:hover .oz-card-photo { opacity: 0.75; }
+
+.oz-card-label {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  background: #fff;
+  border-radius: 6px;
+  padding: 12px 16px 12px 12px;
+  max-width: 72%;
+}
+.oz-card-label::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 3px;
+  background: #f5c518;
+  border-radius: 2px;
+}
+.oz-card-label-text {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  color: #0a1e3d;
+  line-height: 1.35;
+}
+
+/* ── TAB PANELS ── */
+.oz-tab-panel { display: none; }
+.oz-tab-panel.active { display: block; }
+
+/* ── VIEW ALL BUTTON ── */
+.oz-cta-wrap { text-align: center; }
+.oz-view-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  color: #fff;
+  background: #0a1e3d;
+  padding: 14px 36px;
+  border-radius: 6px;
+  text-decoration: none;
+  letter-spacing: 0.3px;
+  transition: background 0.18s;
+  border: none;
+  cursor: pointer;
+}
+.oz-view-all:hover { background: #f5c518; color: #0a1e3d; }
+.oz-view-all svg { width: 18px; height: 18px; fill: currentColor; }
+
+@media (max-width: 1100px) {
+  .oz-courses-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 740px) {
+  .oz-courses-grid { grid-template-columns: 1fr 1fr; }
+  .oz-courses-section { padding: 48px 20px 56px; }
+  .oz-courses-heading { font-size: 28px; }
+}
+@media (max-width: 480px) {
+  .oz-courses-grid { grid-template-columns: 1fr; }
+  .oz-courses-tabs { overflow-x: auto; }
+}
+</style>
+
+<div class="oz-courses-section">
+
+  <h2 class="oz-courses-heading">Popular courses at <em>OIHE</em></h2>
+  <p class="oz-courses-subtext">Explore our range of Australian Higher Education qualifications across Information Technology, Business, Accounting and more.</p>
+
+  {# ── TABS ── #}
+  <div class="oz-courses-tabs">
+    {% for tab in course_tabs %}
+      <button
+        class="oz-courses-tab{% if forloop.first %} active{% endif %}"
+        onclick="ozSwitchTab('{{ tab.value.tab_slug }}', this)"
+      >{{ tab.value.tab_label }}</button>
+    {% endfor %}
+  </div>
+
+  {# ── PANELS ── #}
+  {% for tab in course_tabs %}
+    <div class="oz-tab-panel{% if forloop.first %} active{% endif %}" id="oz-panel-{{ tab.value.tab_slug }}">
+      <div class="oz-courses-grid">
+        {% for course in tab.value.courses %}
+          <a class="oz-course-card" href="{{ course.value.url }}">
+            {% if course.value.background_image %}
+              {% image course.value.background_image width-800 as card_img %}
+              <div class="oz-card-photo" style="background-image:url('{{ card_img.url }}')"></div>
+            {% else %}
+              <div class="oz-card-photo" style="background:#0a1e3d"></div>
+            {% endif %}
+            <div class="oz-card-label">
+              <div class="oz-card-label-text">{{ course.value.title }}</div>
             </div>
-          </div>
+          </a>
+        {% endfor %}
       </div>
     </div>
+  {% endfor %}
+
+  {# ── VIEW ALL ── #}
+  <div class="oz-cta-wrap">
+    <a class="oz-view-all" href="/study/">
+      View All
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14M13 6l6 6-6 6"/>
+      </svg>
+    </a>
   </div>
+
 </div>
+
+<script>
+function ozSwitchTab(slug, btn) {
+  document.querySelectorAll('.oz-courses-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.oz-tab-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  var panel = document.getElementById('oz-panel-' + slug);
+  if (panel) panel.classList.add('active');
+}
+</script>

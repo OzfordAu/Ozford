@@ -1,0 +1,427 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{# ============================================================
+   FILE:    admissions/templates/admissions/intakes_term_dates_higher_education.html
+   PAGE:    /admissions/intakes-and-term-dates/higher-education/
+
+   Only the middle content is here.
+   Banner, navbar, footer come from base.html automatically.
+
+   HOW TO FILL IN DATES:
+   Find the panel by its id — pattern: panel-{term}-{year}
+   Terms: t1 | mid1 | t2 | mid2 | t3
+   Years: 2026 | 2027 | 2028
+   Type the date into the empty .date-value div for that row.
+   ============================================================ #}
+
+
+{% block body_class %}blog{% endblock %}
+
+{% block extra_css %}
+<style>
+  /* ── BRAND TOKENS ──────────────────────────────────────────── */
+  :root {
+    --oz-crimson:        #9b1c2e;
+    --oz-crimson-hover:  #c0283e;
+    --oz-crimson-light:  #fdf0f2;
+    --oz-crimson-border: #f5c2c9;
+    --oz-navy:           #1c2b3a;
+    --oz-border:         #c8cdd4;
+    --oz-border-light:   #dde1e6;
+    --oz-row-a-label:    #f2f4f6;
+    --oz-row-a-value:    #f8f9fa;
+    --oz-row-b-label:    #e8ebee;
+    --oz-row-b-value:    #f2f4f6;
+  }
+
+  /* ── SECTION LABEL ─────────────────────────────────────────── */
+  .iz-section-label {
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--oz-crimson);
+    margin-bottom: 6px;
+  }
+  .iz-section-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--oz-navy);
+    margin-bottom: 24px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid var(--oz-border-light);
+  }
+
+  /* ── FILTER ROW ────────────────────────────────────────────── */
+  .iz-filter-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .iz-tab-group {
+    display: flex;
+    border: 1.5px solid var(--oz-border);
+    background: #fff;
+  }
+  .iz-tab-btn {
+    background: #fff;
+    border: none;
+    border-right: 1.5px solid var(--oz-border);
+    padding: 9px 18px;
+    font-family: inherit;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #5a6472;
+    cursor: pointer;
+    transition: background 0.13s, color 0.13s;
+    white-space: nowrap;
+    letter-spacing: 0.1px;
+    line-height: 1;
+  }
+  .iz-tab-btn:last-child { border-right: none; }
+  .iz-tab-btn:hover { background: #f0f3f6; color: var(--oz-navy); }
+
+  /* Term tabs active = navy */
+  .iz-term-group .iz-tab-btn.iz-active { background: var(--oz-navy); color: #fff; }
+
+  /* Mid Intake tabs — crimson accent */
+  .iz-term-group .iz-tab-btn.iz-mid-tab { color: var(--oz-crimson); }
+  .iz-term-group .iz-tab-btn.iz-mid-tab:hover { background: var(--oz-crimson-light); color: var(--oz-crimson-hover); }
+  .iz-term-group .iz-tab-btn.iz-mid-tab.iz-active { background: var(--oz-crimson); color: #fff; }
+
+  /* Year tabs active = crimson */
+  .iz-year-group .iz-tab-btn.iz-active { background: var(--oz-crimson); color: #fff; }
+
+  /* ── PANEL ─────────────────────────────────────────────────── */
+  .iz-panel { display: none; border: 1.5px solid var(--oz-border); }
+  .iz-panel.iz-active { display: block; }
+
+  .iz-panel-header {
+    background: var(--oz-navy);
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1.5px solid var(--oz-border);
+  }
+  .iz-panel-header .iz-accent-dot {
+    width: 6px; height: 6px;
+    background: var(--oz-crimson-hover);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .iz-panel-header span {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+  }
+  .iz-panel-header strong {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #fff;
+  }
+
+  /* ── DATE ROWS ─────────────────────────────────────────────── */
+  .iz-date-row {
+    display: grid;
+    grid-template-columns: 248px 1fr;
+    border-bottom: 1px solid var(--oz-border-light);
+  }
+  .iz-date-row:last-child { border-bottom: none; }
+  .iz-date-row:nth-child(odd)  .iz-date-label { background: var(--oz-row-a-label); }
+  .iz-date-row:nth-child(odd)  .iz-date-value { background: var(--oz-row-a-value); }
+  .iz-date-row:nth-child(even) .iz-date-label { background: var(--oz-row-b-label); }
+  .iz-date-row:nth-child(even) .iz-date-value { background: var(--oz-row-b-value); }
+
+  .iz-date-label {
+    border-right: 1.5px solid var(--oz-border);
+    padding: 14px 20px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--oz-navy);
+    display: flex;
+    align-items: center;
+    line-height: 1.4;
+  }
+  .iz-date-value {
+    padding: 14px 22px;
+    font-size: 13px;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+    line-height: 1.5;
+    min-height: 46px;
+  }
+
+  /* ── MID SECTION DIVIDER ───────────────────────────────────── */
+  .iz-mid-divider {
+    background: var(--oz-crimson-light);
+    border-bottom: 1px solid var(--oz-border);
+    border-top: 1px solid var(--oz-border);
+    padding: 7px 20px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--oz-crimson);
+  }
+
+  /* ── INFO NOTE ─────────────────────────────────────────────── */
+  .iz-info {
+    margin-top: 28px;
+    padding: 18px 22px;
+    background: #f4f6f8;
+    border-left: 3px solid var(--oz-crimson);
+    font-size: 12.5px;
+    color: #4a5562;
+    line-height: 1.8;
+  }
+  .iz-info p + p { margin-top: 7px; }
+  .iz-info a { color: var(--oz-navy); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+  .iz-info a:hover { color: var(--oz-crimson); }
+
+  /* ── RESPONSIVE ────────────────────────────────────────────── */
+  @media (max-width: 680px) {
+    .iz-filter-row { flex-direction: column; align-items: flex-start; }
+    .iz-date-row { grid-template-columns: 1fr; }
+    .iz-date-label { border-right: none; border-bottom: 1px solid var(--oz-border-light); }
+  }
+</style>
+{% endblock extra_css %}
+
+
+{% block content %}
+
+{% include 'breadcrumb.html' %}
+{% include 'global_components/page_banner.html' %}
+
+<div class="container mx-auto mb-10 w-full">
+  <div class="mt-4 lg:mt-6 xl:mt-10">
+
+    <div class="iz-section-label">Academic Calendar</div>
+    <div class="iz-section-title">Intake &amp; Orientation Dates</div>
+
+    {# ── FILTER ROW ─────────────────────────────────────────── #}
+    <div class="iz-filter-row">
+
+      {# Term tabs — order matches the academic calendar flow #}
+      <div class="iz-tab-group iz-term-group">
+        <button class="iz-tab-btn iz-active"  onclick="izSwitchTerm('t1',   this)">Trimester 1</button>
+        <button class="iz-tab-btn iz-mid-tab" onclick="izSwitchTerm('mid1', this)">Mid Intake</button>
+        <button class="iz-tab-btn"            onclick="izSwitchTerm('t2',   this)">Trimester 2</button>
+        <button class="iz-tab-btn iz-mid-tab" onclick="izSwitchTerm('mid2', this)">Mid Intake</button>
+        <button class="iz-tab-btn"            onclick="izSwitchTerm('t3',   this)">Trimester 3</button>
+      </div>
+
+      {# Year tabs #}
+      <div class="iz-tab-group iz-year-group">
+        <button class="iz-tab-btn iz-active" onclick="izSwitchYear('2026', this)">2026</button>
+        <button class="iz-tab-btn"           onclick="izSwitchYear('2027', this)">2027</button>
+        <button class="iz-tab-btn"           onclick="izSwitchYear('2028', this)">2028</button>
+      </div>
+
+    </div>{# /iz-filter-row #}
+
+    {# ═══════════════════════════════════════════════════════════
+       PANELS
+       id pattern: panel-{term}-{year}
+       Terms:  t1 | mid1 | t2 | mid2 | t3
+       Fill the empty .iz-date-value divs with the actual dates
+       ═══════════════════════════════════════════════════════════ #}
+
+    {# ── TRIMESTER 1 ────────────────────────────────────────── #}
+
+    <div class="iz-panel iz-active" id="panel-t1-2026">
+      <div class="iz-panel-header"><div class="iz-accent-dot"></div><span>Trimester</span><strong>1 &mdash; 2026</strong></div>
+      <div class="iz-date-row"><div class="iz-date-label">Orientation</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Commencing Date</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Census Date</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Last Date of Teaching</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Term Break</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Exam Period</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Results Released</div><div class="iz-date-value"></div></div>
+    </div>
+
+    <div class="iz-panel" id="panel-t1-2027">
+      <div class="iz-panel-header"><div class="iz-accent-dot"></div><span>Trimester</span><strong>1 &mdash; 2027</strong></div>
+      <div class="iz-date-row"><div class="iz-date-label">Orientation</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Commencing Date</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Census Date</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Last Date of Teaching</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Term Break</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Exam Period</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Results Released</div><div class="iz-date-value"></div></div>
+    </div>
+
+    <div class="iz-panel" id="panel-t1-2028">
+      <div class="iz-panel-header"><div class="iz-accent-dot"></div><span>Trimester</span><strong>1 &mdash; 2028</strong></div>
+      <div class="iz-date-row"><div class="iz-date-label">Orientation</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Commencing Date</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Census Date</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Last Date of Teaching</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Term Break</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Exam Period</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Results Released</div><div class="iz-date-value"></div></div>
+    </div>
+
+    {# ── MID INTAKE 1 (between T1 and T2) ───────────────────── #}
+
+    <div class="iz-panel" id="panel-mid1-2026">
+      <div class="iz-panel-header"><div class="iz-accent-dot"></div><span>Mid Intake</span><strong>T1 &mdash; 2026</strong></div>
+      <div class="iz-date-row"><div class="iz-date-label">Orientation</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Commencing Date</div><div class="iz-date-value"></div></div>
+    </div>
+
+    <div class="iz-panel" id="panel-mid1-2027">
+      <div class="iz-panel-header"><div class="iz-accent-dot"></div><span>Mid Intake</span><strong>T1 &mdash; 2027</strong></div>
+      <div class="iz-date-row"><div class="iz-date-label">Orientation</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Commencing Date</div><div class="iz-date-value"></div></div>
+    </div>
+
+    <div class="iz-panel" id="panel-mid1-2028">
+      <div class="iz-panel-header"><div class="iz-accent-dot"></div><span>Mid Intake</span><strong>T1 &mdash; 2028</strong></div>
+      <div class="iz-date-row"><div class="iz-date-label">Orientation</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Commencing Date</div><div class="iz-date-value"></div></div>
+    </div>
+
+    {# ── TRIMESTER 2 ────────────────────────────────────────── #}
+
+    <div class="iz-panel" id="panel-t2-2026">
+      <div class="iz-panel-header"><div class="iz-accent-dot"></div><span>Trimester</span><strong>2 &mdash; 2026</strong></div>
+      <div class="iz-date-row"><div class="iz-date-label">Orientation</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Commencing Date</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Census Date</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Last Date of Teaching</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Term Break</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Exam Period</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Results Released</div><div class="iz-date-value"></div></div>
+    </div>
+
+    <div class="iz-panel" id="panel-t2-2027">
+      <div class="iz-panel-header"><div class="iz-accent-dot"></div><span>Trimester</span><strong>2 &mdash; 2027</strong></div>
+      <div class="iz-date-row"><div class="iz-date-label">Orientation</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Commencing Date</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Census Date</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Last Date of Teaching</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Term Break</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Exam Period</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Results Released</div><div class="iz-date-value"></div></div>
+    </div>
+
+    <div class="iz-panel" id="panel-t2-2028">
+      <div class="iz-panel-header"><div class="iz-accent-dot"></div><span>Trimester</span><strong>2 &mdash; 2028</strong></div>
+      <div class="iz-date-row"><div class="iz-date-label">Orientation</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Commencing Date</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Census Date</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Last Date of Teaching</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Term Break</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Exam Period</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Results Released</div><div class="iz-date-value"></div></div>
+    </div>
+
+    {# ── MID INTAKE 2 (between T2 and T3) ───────────────────── #}
+
+    <div class="iz-panel" id="panel-mid2-2026">
+      <div class="iz-panel-header"><div class="iz-accent-dot"></div><span>Mid Intake</span><strong>T2 &mdash; 2026</strong></div>
+      <div class="iz-date-row"><div class="iz-date-label">Orientation</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Commencing Date</div><div class="iz-date-value"></div></div>
+    </div>
+
+    <div class="iz-panel" id="panel-mid2-2027">
+      <div class="iz-panel-header"><div class="iz-accent-dot"></div><span>Mid Intake</span><strong>T2 &mdash; 2027</strong></div>
+      <div class="iz-date-row"><div class="iz-date-label">Orientation</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Commencing Date</div><div class="iz-date-value"></div></div>
+    </div>
+
+    <div class="iz-panel" id="panel-mid2-2028">
+      <div class="iz-panel-header"><div class="iz-accent-dot"></div><span>Mid Intake</span><strong>T2 &mdash; 2028</strong></div>
+      <div class="iz-date-row"><div class="iz-date-label">Orientation</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Commencing Date</div><div class="iz-date-value"></div></div>
+    </div>
+
+    {# ── TRIMESTER 3 ────────────────────────────────────────── #}
+
+    <div class="iz-panel" id="panel-t3-2026">
+      <div class="iz-panel-header"><div class="iz-accent-dot"></div><span>Trimester</span><strong>3 &mdash; 2026</strong></div>
+      <div class="iz-date-row"><div class="iz-date-label">Orientation</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Commencing Date</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Census Date</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Last Date of Teaching</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Exam Period</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Results Released</div><div class="iz-date-value"></div></div>
+    </div>
+
+    <div class="iz-panel" id="panel-t3-2027">
+      <div class="iz-panel-header"><div class="iz-accent-dot"></div><span>Trimester</span><strong>3 &mdash; 2027</strong></div>
+      <div class="iz-date-row"><div class="iz-date-label">Orientation</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Commencing Date</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Census Date</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Last Date of Teaching</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Exam Period</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Results Released</div><div class="iz-date-value"></div></div>
+    </div>
+
+    <div class="iz-panel" id="panel-t3-2028">
+      <div class="iz-panel-header"><div class="iz-accent-dot"></div><span>Trimester</span><strong>3 &mdash; 2028</strong></div>
+      <div class="iz-date-row"><div class="iz-date-label">Orientation</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Commencing Date</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Census Date</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Last Date of Teaching</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Exam Period</div><div class="iz-date-value"></div></div>
+      <div class="iz-date-row"><div class="iz-date-label">Results Released</div><div class="iz-date-value"></div></div>
+    </div>
+
+    {# ── INFO NOTE ───────────────────────────────────────────── #}
+    <div class="iz-info">
+      <p>For more information regarding Orientation please <a href="/admissions/orientations/higher-education/">click here</a>.</p>
+      <p>Ozford Institute of Higher Education divides the academic year into three trimesters. Trimester 1 usually goes from March to July, Trimester 2 from July to November and Trimester 3 from November to February the following year. Most students usually undertake two trimesters each year*. *Exceptions apply to students who commenced from Trimester 3 or mid trimester intake.</p>
+    </div>
+
+  </div>
+</div>
+
+{% endblock content %}
+
+
+{% block extra_js %}
+<script>
+  // Prefixed "iz" to avoid conflicts with Alpine.js
+  var izActiveTerm = 't1';
+  var izActiveYear = '2026';
+
+  function izShow() {
+    document.querySelectorAll('.iz-panel').forEach(function(p) {
+      p.classList.remove('iz-active');
+    });
+    var el = document.getElementById('panel-' + izActiveTerm + '-' + izActiveYear);
+    if (el) el.classList.add('iz-active');
+  }
+
+  function izSwitchTerm(term, btn) {
+    izActiveTerm = term;
+    document.querySelectorAll('.iz-term-group .iz-tab-btn').forEach(function(b) {
+      b.classList.remove('iz-active');
+    });
+    btn.classList.add('iz-active');
+    izShow();
+  }
+
+  function izSwitchYear(year, btn) {
+    izActiveYear = year;
+    document.querySelectorAll('.iz-year-group .iz-tab-btn').forEach(function(b) {
+      b.classList.remove('iz-active');
+    });
+    btn.classList.add('iz-active');
+    izShow();
+  }
+</script>
+{% endblock extra_js %}

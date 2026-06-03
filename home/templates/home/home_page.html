@@ -38,32 +38,16 @@
         stroke-dasharray: 125.6;
         transform: rotate(-90deg);
       }
-
-    .rolling-message-container {
-        width: 100%;
+    
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
         overflow: hidden;
-        background-color: #005c90;
-        color: #ffffff;
-        padding: 14px 0;
-        position: relative;
-    }
-    
-    .marquee-animation {
-        display: inline-block;
-        white-space: nowrap;
-        animation: scroll 30s linear infinite;
-        padding-left: 100%;
-        font-size: 16px;
-        font-weight: 500;
-    }
-    
-    @keyframes scroll {
-        from { 
-            transform: translateX(0); 
-        }
-        to { 
-            transform: translateX(-100%); 
-        }
+        clip: rect(0,0,0,0);
+        border: 0;
     }
 </style>
 {% endblock extra_css %}
@@ -72,13 +56,11 @@
 
 {% block content %}
 
-<div class="rolling-message-container">
-    <div class="marquee-animation">
-        <span>Important Notice: Our office will be closed on Monday, 26 January 2026 due to the Australia Day public holiday. We will reopen on Tuesday, 27 January 2026. Thank you for your understanding.</span>
-    </div>
-</div>
-
+{% include "home/announcement_bar.html" %}
 {% comment %} {% include 'home/carousel.html' %} {% endcomment %}
+<h1 class="sr-only">
+  Ozford Institute of Higher Education in Melbourne
+</h1>
 {% include 'home/swiper.html' %}
 {% comment %} {% include 'home/student_agent_links.html' %} {% endcomment %}
 {% include 'home/search_courses.html' %}

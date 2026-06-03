@@ -34,8 +34,14 @@ class CoursesIndexPage(Page):
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
         context['degrees'] = DegreeIndexPage.objects.child_of(self).live()
-        return context
 
+        from home.models import HomePage
+        home_page = HomePage.objects.live().first()
+        if home_page:
+            context['course_tabs'] = home_page.course_tabs
+
+        return context
+  
     class Meta:
         verbose_name = 'Courses Index Page'
 
@@ -51,7 +57,7 @@ class DegreeIndexPage(Page):
 
     parent_page_types = ['courses.CoursesIndexPage']
     subpage_types = [
-        'courses.HigherEducationCoursePage',
+        'courses.higherEducationCoursePage',
         'courses.HighSchoolCoursePage',
         'courses.ElicosCoursePage'
     ]
@@ -311,6 +317,16 @@ class HigherEducationCoursePage(Page):
             FieldPanel('course_duration'),
             FieldPanel('course_location'),
         ], heading='Key Facts'),
+
+        # ✅ FIXED: restored missing section
+        MultiFieldPanel([
+            FieldPanel('course_overview'),
+            FieldPanel('course_units'),
+            FieldPanel('career_outcomes'),
+            FieldPanel('student_workload'),
+            FieldPanel('pathways'),
+            FieldPanel('assessment_methods'),
+        ], heading='Course Details'),
     ]
 
     class Meta:
