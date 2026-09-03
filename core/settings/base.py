@@ -15,6 +15,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 INSTALLED_APPS = [
     "home",
     "blog",
+    "payments",
     "courses",
     "about",
     "admissions",
@@ -211,3 +212,7 @@ TINYMCE_DEFAULT_CONFIG = {
     "valid_children": "+body[style|script]",
     "valid_elements": "*[*]",   # ← add this
 }
+CYBERSOURCE_SANDBOX       = env.bool("CYBERSOURCE_SANDBOX", default=True)
+CYBERSOURCE_MERCHANT_ID   = env("CYBERSOURCE_MERCHANT_ID")
+CYBERSOURCE_KEY_ID        = env("CYBERSOURCE_KEY_ID")
+CYBERSOURCE_SHARED_SECRET = env("CYBERSOURCE_SHARED_SECRET")

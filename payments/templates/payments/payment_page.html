@@ -1,0 +1,340 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Pay Fees — Ozford Institute of Higher Education{% endblock %}
+
+{% block extra_css %}
+<style>
+  .payment-label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #1a305b;
+    margin-bottom: 0.375rem;
+  }
+  .payment-input {
+    width: 100%;
+    border: 1.5px solid #d1d5db;
+    border-radius: 0.5rem;
+    padding: 0.625rem 0.875rem;
+    font-size: 0.9375rem;
+    color: #111827;
+    outline: none;
+    transition: border-color 0.15s;
+    background: #fff;
+    font-family: "Manrope", sans-serif;
+  }
+  .payment-input:focus {
+    border-color: #1a305b;
+    box-shadow: 0 0 0 3px rgba(26,48,91,0.1);
+  }
+  .payment-input::placeholder { color: #9ca3af; }
+  .microform-container {
+    width: 100%;
+    border: 1.5px solid #d1d5db;
+    border-radius: 0.5rem;
+    padding: 0.625rem 0.875rem;
+    background: #fff;
+    min-height: 42px;
+    transition: border-color 0.15s;
+  }
+  .microform-container.focused {
+    border-color: #1a305b;
+    box-shadow: 0 0 0 3px rgba(26,48,91,0.1);
+  }
+  .microform-container iframe { width: 100%; border: none; }
+  .pay-btn {
+    width: 100%;
+    background: #1a305b;
+    color: #fff;
+    font-family: "Manrope", sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.875rem 1.5rem;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .pay-btn:hover { background: #294886; }
+  .pay-btn:disabled { background: #9ca3af; cursor: not-allowed; }
+  .secure-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: center;
+    color: #6b7280;
+    font-size: 0.8rem;
+    margin-top: 1rem;
+  }
+  .card-icons { display: flex; gap: 0.5rem; align-items: center; }
+  .card-icon {
+    background: #f3f4f6;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    padding: 3px 8px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #374151;
+  }
+  .divider { border: none; border-top: 1px solid #e5e7eb; margin: 1.25rem 0; }
+  .amount-prefix {
+    position: absolute;
+    left: 0.875rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6b7280;
+    font-weight: 600;
+    pointer-events: none;
+  }
+  .amount-wrapper { position: relative; }
+  .amount-wrapper .payment-input { padding-left: 2rem; }
+  .expiry-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+  .error-box {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    color: #b91c1c;
+    font-size: 0.85rem;
+    display: none;
+  }
+  .error-box.visible { display: block; }
+  .loading-text { display: none; }
+  .pay-btn.loading .default-text { display: none; }
+  .pay-btn.loading .loading-text { display: inline; }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="bg-gray-50 min-h-screen py-12 px-4">
+  <div class="max-w-lg mx-auto">
+
+    <div class="text-center mb-8">
+      <p class="text-sm font-semibold text-primary uppercase tracking-widest mb-1">Ozford Institute of Higher Education</p>
+      <h1 class="text-3xl font-primary font-bold text-primary mb-2">Pay Fees</h1>
+      <p class="text-gray-500 text-sm">Secure online fee payment powered by NAB Gateway</p>
+    </div>
+
+    {% if not capture_context %}
+    <div class="error-box visible" style="margin-bottom:1.5rem;">
+      Payment system is temporarily unavailable. Please try again in a few minutes or contact us at info@ozford.edu.au.
+    </div>
+    {% endif %}
+
+    <div style="background:#fff; border-radius:1rem; box-shadow:0 2px 24px rgba(26,48,91,0.08); padding:2rem;">
+
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+        <span style="font-size:0.85rem; color:#6b7280;">Accepted cards</span>
+        <div class="card-icons">
+          <span class="card-icon">VISA</span>
+          <span class="card-icon">MC</span>
+          <span class="card-icon">AMEX</span>
+          <span class="card-icon">JCB</span>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <form id="payment-form" method="post" action="{% url 'payment_page' %}">
+        {% csrf_token %}
+        <input type="hidden" id="transient_token" name="transient_token">
+
+        <div style="display:flex; flex-direction:column; gap:1.125rem;">
+
+          <div>
+            <label class="payment-label" for="student_id">Student ID <span style="color:#e53e3e">*</span></label>
+            <input class="payment-input" type="text" id="student_id" name="student_id"
+              placeholder="e.g. OZ12345" autocomplete="off" required>
+          </div>
+
+          <div>
+            <label class="payment-label" for="full_name">Full Name <span style="color:#e53e3e">*</span></label>
+            <input class="payment-input" type="text" id="full_name" name="full_name"
+              placeholder="As per enrolment records" autocomplete="name" required>
+          </div>
+
+          <div>
+            <label class="payment-label" for="email">Email Address <span style="color:#e53e3e">*</span></label>
+            <input class="payment-input" type="email" id="email" name="email"
+              placeholder="your@email.com" autocomplete="email" required>
+          </div>
+
+          <div>
+            <label class="payment-label" for="amount">Amount (AUD) <span style="color:#e53e3e">*</span></label>
+            <div class="amount-wrapper">
+              <span class="amount-prefix">$</span>
+              <input class="payment-input" type="number" id="amount" name="amount"
+                placeholder="0.00" min="1" step="0.01" required>
+            </div>
+          </div>
+
+          <hr class="divider">
+
+          <div>
+            <label class="payment-label">Card Number <span style="color:#e53e3e">*</span></label>
+            <div class="microform-container" id="card-number-container"></div>
+          </div>
+
+          <div class="expiry-row">
+            <div>
+              <label class="payment-label" for="exp_month">Expiry Month <span style="color:#e53e3e">*</span></label>
+              <select class="payment-input" id="exp_month" name="exp_month" required>
+                <option value="">MM</option>
+                <option value="01">01</option>
+                <option value="02">02</option>
+                <option value="03">03</option>
+                <option value="04">04</option>
+                <option value="05">05</option>
+                <option value="06">06</option>
+                <option value="07">07</option>
+                <option value="08">08</option>
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+              </select>
+            </div>
+            <div>
+              <label class="payment-label" for="exp_year">Expiry Year <span style="color:#e53e3e">*</span></label>
+              <select class="payment-input" id="exp_year" name="exp_year" required>
+                <option value="">YYYY</option>
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
+                <option value="2027">2027</option>
+                <option value="2028">2028</option>
+                <option value="2029">2029</option>
+                <option value="2030">2030</option>
+                <option value="2031">2031</option>
+                <option value="2032">2032</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="payment-label">CVN / Security Code <span style="color:#e53e3e">*</span></label>
+            <div class="microform-container" id="cvn-container"></div>
+          </div>
+
+          <div class="error-box" id="error-box"></div>
+
+          <button type="button" id="pay-btn" class="pay-btn" {% if not capture_context %}disabled{% endif %}>
+            <span class="default-text">Pay Now</span>
+            <span class="loading-text">Processing…</span>
+          </button>
+
+          <div class="secure-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            Secured by NAB Gateway &amp; 256-bit SSL encryption
+          </div>
+
+        </div>
+      </form>
+    </div>
+
+    <p style="text-align:center; color:#9ca3af; font-size:0.8rem; margin-top:1.25rem;">
+      Need help? Contact us at
+      <a href="mailto:info@ozford.edu.au" style="color:#1a305b; font-weight:600;">info@ozford.edu.au</a>
+      or call <a href="tel:+61386637188" style="color:#1a305b; font-weight:600;">+61 3 8663 7188</a>
+    </p>
+
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+{% if capture_context %}
+<script>
+const CAPTURE_CONTEXT = "{{ capture_context|escapejs }}";
+
+function showError(msg) {
+  const box = document.getElementById("error-box");
+  box.textContent = msg;
+  box.classList.add("visible");
+  const btn = document.getElementById("pay-btn");
+  btn.classList.remove("loading");
+  btn.disabled = false;
+}
+
+function loadScript(url, callback) {
+  const s = document.createElement("script");
+  s.src = url;
+  s.onload = callback;
+  s.onerror = () => showError("Failed to load payment library. Please refresh and try again.");
+  document.head.appendChild(s);
+}
+
+function initFlex() {
+  try {
+    const parts = CAPTURE_CONTEXT.split(".");
+    const payload = JSON.parse(atob(parts[1].replace(/-/g, "+").replace(/_/g, "/")));
+    const clientLibraryUrl = payload.ctx[0].data.clientLibrary;
+
+    loadScript(clientLibraryUrl, function () {
+      const flex = new Flex(CAPTURE_CONTEXT);
+      const myForm = flex.microform();
+
+      const fieldStyles = {
+        input: {
+          "font-family": "Manrope, sans-serif",
+          "font-size": "15px",
+          "color": "#111827",
+        },
+        ":focus": { "color": "#1a305b" },
+        "::placeholder": { "color": "#9ca3af" },
+      };
+
+      const cardNumber   = myForm.createField("number", { placeholder: "1234 5678 9012 3456", styles: fieldStyles });
+      const securityCode = myForm.createField("securityCode", { placeholder: "•••", styles: fieldStyles });
+
+      cardNumber.load("#card-number-container");
+      securityCode.load("#cvn-container");
+
+      cardNumber.on("focus",   () => document.getElementById("card-number-container").classList.add("focused"));
+      cardNumber.on("blur",    () => document.getElementById("card-number-container").classList.remove("focused"));
+      securityCode.on("focus", () => document.getElementById("cvn-container").classList.add("focused"));
+      securityCode.on("blur",  () => document.getElementById("cvn-container").classList.remove("focused"));
+
+      document.getElementById("pay-btn").addEventListener("click", function () {
+        const btn = document.getElementById("pay-btn");
+        document.getElementById("error-box").classList.remove("visible");
+
+        const required = ["student_id", "full_name", "email", "amount", "exp_month", "exp_year"];
+        for (const id of required) {
+          if (!document.getElementById(id).value.trim()) {
+            showError("Please fill in all required fields.");
+            return;
+          }
+        }
+
+        btn.disabled = true;
+        btn.classList.add("loading");
+
+        myForm.createToken({
+          expirationMonth: document.getElementById("exp_month").value,
+          expirationYear:  document.getElementById("exp_year").value,
+        }, function (err, token) {
+          if (err) {
+            const msg = (err.details && err.details[0] && err.details[0].message) || err.message || "Card validation failed. Please check your card details.";
+            showError(msg);
+            return;
+          }
+          document.getElementById("transient_token").value = token;
+          document.getElementById("payment-form").submit();
+        });
+      });
+    });
+
+  } catch (e) {
+    showError("Payment system error. Please refresh and try again.");
+    console.error("Flex init error:", e);
+  }
+}
+
+initFlex();
+</script>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,153 @@
+<div class="flex items-center gap-4">
+
+  {# ===== Search ===== #}
+  <div x-data="{ searchOpen: false }" class="flex items-center">
+    <button
+      x-show="!searchOpen"
+      @click="searchOpen = true; $nextTick(() => $refs.searchInput.focus())"
+      class="opacity-70 hover:opacity-100 transition-opacity shrink-0"
+      aria-label="Search site"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+      </svg>
+    </button>
+
+    <div
+      class="overflow-hidden transition-all duration-200 ease-out"
+      :style="searchOpen ? 'max-width: 220px;' : 'max-width: 0px;'"
+    >
+      <form
+        action="{% url 'search' %}"
+        method="get"
+        class="flex items-center"
+        @keydown.escape.window="searchOpen = false"
+        @click.outside="searchOpen = false"
+      >
+        <input
+          x-ref="searchInput"
+          type="text"
+          name="query"
+          placeholder="Search..."
+          class="w-48 bg-white/10 border border-white/30 rounded-md text-white text-sm placeholder-white/50 px-3 py-1.5 outline-none focus:bg-white/20 focus:border-white/60 transition-all"
+        >
+        <button type="submit" class="ml-2 opacity-70 hover:opacity-100 transition-opacity shrink-0" aria-label="Submit search">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </button>
+      </form>
+    </div>
+  </div>
+  {# ===== End Search ===== #}
+
+  {# ===== Translate ===== #}
+  <div class="relative shrink-0">
+    <div class="flex items-center gap-1.5 rounded-full border border-white/30 hover:border-white/60 hover:bg-white/10 transition-all pl-3 pr-2 py-1.5">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 opacity-80 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <circle cx="12" cy="12" r="10"/>
+        <line x1="2" y1="12" x2="22" y2="12"/>
+        <path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/>
+      </svg>
+      <select
+        id="ozf-lang-select"
+        onchange="ozfTranslate(this.value)"
+        aria-label="Select language"
+        class="bg-transparent text-white text-sm outline-none cursor-pointer pr-1"
+        style="-webkit-appearance:none; -moz-appearance:none; appearance:none; border:none;"
+      >
+        <option value="" style="background:#1a2f4e; color:white;">English</option>
+        <option value="hi" style="background:#1a2f4e; color:white;">हिन्दी (Hindi)</option>
+        <option value="zh-CN" style="background:#1a2f4e; color:white;">中文 (Chinese)</option>
+        <option value="vi" style="background:#1a2f4e; color:white;">Tiếng Việt</option>
+        <option value="ne" style="background:#1a2f4e; color:white;">नेपाली (Nepali)</option>
+        <option value="ar" style="background:#1a2f4e; color:white;">العربية (Arabic)</option>
+        <option value="ko" style="background:#1a2f4e; color:white;">한국어 (Korean)</option>
+        <option value="ja" style="background:#1a2f4e; color:white;">日本語 (Japanese)</option>
+        <option value="es" style="background:#1a2f4e; color:white;">Español</option>
+        <option value="fr" style="background:#1a2f4e; color:white;">Français</option>
+        <option value="pt" style="background:#1a2f4e; color:white;">Português</option>
+      </select>
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 opacity-60 shrink-0 -ml-1 pointer-events-none" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+      </svg>
+    </div>
+  </div>
+  {# ===== End Translate ===== #}
+
+  {# ===== Login dropdown ===== #}
+  <div
+    x-data="{
+      open: false,
+      portalActive: false,
+      toggle() {
+        if (this.open) return this.close()
+        this.$refs.button.focus()
+        this.open = true
+      },
+      close(focusAfter) {
+        if (!this.open) return
+        this.open = false
+        focusAfter && focusAfter.focus()
+      },
+      portal() {
+        const panel = this.$refs.panel
+        const btn = this.$refs.button
+        if (!panel || !btn) return
+        if (!this.portalActive) {
+          document.body.appendChild(panel)
+          this.portalActive = true
+        }
+        panel.style.position = 'fixed'
+        panel.style.zIndex = '100000'
+        const btnRect = btn.getBoundingClientRect()
+        panel.style.top = (btnRect.bottom + 8) + 'px'
+        const panelWidth = panel.offsetWidth || 200
+        const right = Math.max(8, window.innerWidth - btnRect.right)
+        panel.style.right = right + 'px'
+        panel.style.left = 'auto'
+      }
+    }"
+    x-on:keydown.escape.prevent.stop="close($refs.button)"
+    x-on:focusin.window="! $refs.panel.contains($event.target) && close()"
+    x-id="['dropdown-button']"
+    x-init="
+      $watch('open', value => {
+        if (value) {
+          portal()
+          window.addEventListener('resize', portal)
+          window.addEventListener('scroll', portal, { passive: true })
+        } else {
+          window.removeEventListener('resize', portal)
+          window.removeEventListener('scroll', portal)
+        }
+      })
+    "
+    class="relative inline-block shrink-0"
+  >
+    <button x-ref="button" x-on:click="toggle()" :aria-expanded="open" :aria-controls="$id('dropdown-button')" type="button" class="inline-flex gap-2">
+      Login
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+      </svg>
+    </button>
+    <div
+      x-ref="panel"
+      x-show="open"
+      x-transition.origin.top.left
+      x-on:click.outside="close($refs.button)"
+      :id="$id('dropdown-button')"
+      class="absolute right-0 mt-2 w-48 rounded-lg border border-gray-100 bg-white text-left text-sm shadow-lg"
+      style="display:none;"
+    >
+      <div class="p-1 text-sm">
+        <a target="_blank" href="https://mail.ozford.edu.au/owa/" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2">Webmail</a>
+        <a target="_blank" href="https://oihe.ozford.edu.au/login/index.php" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2">OIHE (Moodle)</a>
+        <a target="_blank" href="https://selfservice.ozford.edu.au:9251/authorization.do" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2">Self Service (Staff Login)</a>
+        <a href="/agent-login/" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2">Agent</a>
+      </div>
+    </div>
+  </div>
+  {# ===== End Login ===== #}
+
+</div>

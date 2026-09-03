@@ -62,6 +62,15 @@
                 margin-left: calc(-50vw + 50%);
                 margin-right: calc(-50vw + 50%);
             }
+
+            /* Hide Google Translate injected bar - aggressive */
+            .goog-te-banner-frame,
+            .goog-te-banner-frame.skiptranslate { display: none !important; }
+            .goog-te-gadget { display: none !important; }
+            .goog-tooltip { display: none !important; }
+            .goog-text-highlight { background: none !important; box-shadow: none !important; }
+            body { top: 0 !important; position: static !important; }
+
         </style>
         <style>
         /* Scrolls from completely off the right edge to completely off the left edge,
@@ -108,8 +117,60 @@
         {# Override this in templates to add extra javascript #}
         {% endblock %}
         
-        {# Ozford Chatbot Widget #}
-        <script src="https://abhij9920.github.io/Ozford-Chatbot/embed.js"></script>
- 
+        {# GHL Chat Widget #}
+        <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a33b9e9fca726332c0ed2ed"></script>
+
+        {# ===== Google Translate ===== #}
+        <div id="google_translate_element" style="display:none;" aria-hidden="true"></div>
+        <script>
+          function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+              pageLanguage: 'en',
+              autoDisplay: false
+            }, 'google_translate_element');
+          }
+
+          function ozfTranslate(lang) {
+            var combo = document.querySelector('.goog-te-combo');
+            if (!combo) {
+              setTimeout(function() { ozfTranslate(lang); }, 500);
+              return;
+            }
+            if (lang === '') {
+              document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+              document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + location.hostname + ';';
+              location.reload();
+              return;
+            }
+            combo.value = lang;
+            combo.dispatchEvent(new Event('change'));
+          }
+          
+          // ===== Force hide Google bar after it injects =====
+          function hideGoogleBar() {
+            // Hide the iframe bar
+            var bar = document.querySelector('.goog-te-banner-frame');
+            if (bar) bar.style.setProperty('display', 'none', 'important');
+
+            // Force body back to top
+            document.body.style.setProperty('top', '0', 'important');
+            document.body.style.setProperty('position', 'static', 'important');
+          }
+
+          // Run once on load
+          window.addEventListener('load', hideGoogleBar);
+
+          // Watch for Google dynamically injecting it
+          var observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function() {
+              hideGoogleBar();
+            });
+          });
+          observer.observe(document.body, { childList: true, subtree: true });
+          // ===== End =====
+        </script>
+        <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async defer></script>
+        {# ===== End Google Translate ===== #}
+
     </body>
 </html>

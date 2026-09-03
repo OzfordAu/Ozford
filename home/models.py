@@ -13,13 +13,12 @@ from sidebars.models import Sidebar
 
 class BannerCarouselBlock(blocks.StructBlock):
     active = blocks.BooleanBlock(default=True, required=False)
-    heading = blocks.CharBlock(blank=True, null=True)
-    heading_text_color = blocks.CharBlock(max_length=50, null=True, blank=True, default="#FFFFFF", verbose_name="Text Color")
-    description = blocks.CharBlock(blank=True, null=True)
-    description_text_color = blocks.CharBlock(max_length=50, null=True, blank=True, default="#FFFFFF", verbose_name="Text Color")
+    heading = blocks.CharBlock(required=False)
+    heading_text_color = blocks.CharBlock(max_length=50, required=False, default="#FFFFFF", verbose_name="Text Color")
+    description = blocks.CharBlock(required=False)
+    description_text_color = blocks.CharBlock(max_length=50, required=False, default="#FFFFFF", verbose_name="Text Color")
     background_image = ImageChooserBlock(
-        null=True,
-        blank=True,
+        required=True,
         on_delete=models.SET_NULL,
         related_name='+',
         verbose_name='Background Image',
@@ -29,10 +28,10 @@ class BannerCarouselBlock(blocks.StructBlock):
         ('fit', 'Fit'),
     ], default='full')
 
-    bg_color = blocks.CharBlock(max_length=50, null=True, blank=True, default="#FFFFFF", verbose_name="Background Color")
-    btn_title = blocks.CharBlock(blank=True, null=True)
-    btn_link = blocks.CharBlock(blank=True, null=True)
-    btn_class = blocks.CharBlock(max_length=50, null=True, blank=True, default="btn-primary", verbose_name='Button Class', help_text="Button class for learn more button. available classes are [btn-parimary (blue), btn-danger (red), btn-success (green), btn-warning (yellow), btn-info (light blue), btn-default (grey)]")
+    bg_color = blocks.CharBlock(max_length=50, required=False, default="#FFFFFF", verbose_name="Background Color")
+    btn_title = blocks.CharBlock(required=False)
+    btn_link = blocks.CharBlock(required=False)
+    btn_class = blocks.CharBlock(max_length=50, required=False, default="btn-primary", verbose_name='Button Class', help_text="Button class for learn more button. available classes are [btn-parimary (blue), btn-danger (red), btn-success (green), btn-warning (yellow), btn-info (light blue), btn-default (grey)]")
 
     class Meta:
         icon = 'circle-plus'

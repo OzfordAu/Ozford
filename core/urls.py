@@ -3,15 +3,14 @@ from django.urls import include, path
 from django.contrib import admin
 from django.http import HttpResponse
 from django.views.decorators.http import require_GET
-
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
-
 from search import views as search_views
-# from blog.views import blog_index
 from django.contrib.sitemaps.views import sitemap
 from core.sitemap import WagtailSitemap
+import os
+# from blog.views import blog_index
 
 @require_GET
 def robots_txt(request):
@@ -26,8 +25,15 @@ def robots_txt(request):
     ]
     return HttpResponse("\n".join(lines), content_type="text/plain")
 
+@require_GET
+def llms_txt(request):
+    file_path = os.path.join(settings.BASE_DIR, 'llms.txt')
+    with open(file_path, 'r') as f:
+        content = f.read()
+    return HttpResponse(content, content_type="text/plain; charset=utf-8")
+
 sitemaps = {
-     'pages': WagtailSitemap,
+    'pages': WagtailSitemap,
 }
 
 urlpatterns = [
@@ -37,9 +43,12 @@ urlpatterns = [
     path("search/", search_views.search, name="search"),
     path('tinymce/', include('tinymce.urls')),
     path('agents/', include('agents.urls')),
+    path('', include('payments.urls')),
     path("robots.txt", robots_txt),
-    # path('news-and-events/<int:page_id>/', blog_index, name='blog_index'),
+    path("llms.txt", llms_txt),
     path("sitemap.xml", sitemap, {"sitemaps": sitemaps}, name="django.contrib.sitemaps.views.sitemap"),
+    # path('news-and-events/<int:page_id>/', blog_index, name='blog_index'),
+    
 ]
 
 

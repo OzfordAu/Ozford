@@ -24,72 +24,6 @@
   </section>
 {% endif %}
 
-{% comment %} <section class="bg-[#011724] text-[#a7b8c2]"> {% endcomment %}
-{% comment %} <section class="bg-[#011724]">
-  <div class="container mx-auto px-4 py-6 lg:py-8 xl:py-20">
-  <div class="flex flex-col lg:flex-row lg:items-center">
-    <div class="w-full lg:w-3/12">
-      <p class="text-3xl xl:text-5xl font-bold mb-4 lg:mb-0 text-heading text-gray-400">Need Help?</p>
-    </div>
-    <div class="w-full lg:w-9/12">
-      <div class="flex flex-col lg:flex-row gap-4 lg:gap-10 xl:space-x-20">
-        <div class="block">
-          <p class="text-xl font-medium mb-2">Contact us</p>
-          <div class="flex items-center gap-4 mb-1">
-            <span>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
-              </svg>
-            </span>
-          <span>+61 3 86637188</span>
-        </div>
-          <div class="flex items-center gap-4">
-            <span>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
-              </svg>
-            </span>
-            <span>info@ozford.edu.au</span>
-          </div>
-        </div>
-        <div class="block">
-          <h3 class="text-xl font-medium mb-2">Connect with us</h3>
-          <div class="flex gap-3 mt-2">
-            {% for social_media_block in site_settings.footer_social_media  %}
-              {% for item in social_media_block.value.social_media  %}
-                <a href="{{item.url}}" {% if item.open_in_new_tab %}target="_blank"{% endif %}>
-                  {{item.icon_svg|safe}}
-                </a> 
-              {% endfor %}
-            {% endfor %}
-          </div>
-          
-        </div>
-        <div class="block">
-          <p class="text-xl font-medium mb-2">Enquire</p>
-          <div class="flex items-center gap-4mb-1">
-            <span>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
-              </svg>
-            </span>
-            <span>+61 3 86637188</span>
-          </div>
-          <div class="flex items-center gap-4">
-            <span>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
-              </svg>
-            </span>
-            <span>info@ozford.edu.au</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</div>
-</section> {% endcomment %}
 <section class="bg-[#101f3c] text-sm font-light py-6 lg:py-8 xl:py-20">
     <div class="container mx-auto">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 xl:gap-10">
@@ -100,9 +34,6 @@
           <div class="mt-3 lg:mt-6">
             <div class="mb-2">{{ site_settings.address|richtext}}</div>
             <div class="mb-2">{{ site_settings.office_hour}}</div>
-            {% comment %} <p>333, Queens Street</p>
-            <p class="mb-2">Melbourne, VIC 3000</p>
-            <p class="mb-2">Australia 8:30 AM – 5:00 PM (AEST)</p> {% endcomment %}
             <div class="flex items-center gap-2 mb-1">
               <span>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
@@ -119,10 +50,8 @@
               </span>
               <span>
                 <a class="hover:underline hover:underline-offset-4 hover:text-[#aed1e7] transition-all" href="mailto:{{ site_settings.email|safe}}">{{ site_settings.email|safe}}</a>
-                
               </span>
             </div>
-            
           </div>
         </div>
         {% for links in site_settings.footer_primary_links  %}
@@ -135,37 +64,6 @@
             </ul>
           </div>
         {% endfor %}
-        {% comment %} <div>
-          <p class="text-lg mb-2">Study</p>
-          <ul class="space-y-2">
-            <li><a href="/study/postgraduate/" class="hover:border-b hover:text-white hover:border-white transition-all">Postgraduate</a></li>
-            <li><a href="/study/undergraduate/" class="hover:border-b hover:text-white hover:border-white transition-all">Undergraduate</a></li>
-            <li><a href="/study/high-school/" class="hover:border-b hover:text-white hover:border-white transition-all">High School (Year 10-12)</a></li>
-            <li><a href="/study/english-language-center/" class="hover:border-b hover:text-white hover:border-white transition-all">English Language Center</a></li>
-          </ul>
-        </div>
-        <div>
-          <p class="text-lg mb-2">Information For</p>
-          <ul class="space-y-2">
-            <li><a href="#" class="hover:underline hover:underline-offset-4 hover:text-[#aed1e7] transition-all">How to Apply</a></li>
-            <li><a href="#" class="hover:underline hover:underline-offset-4 hover:text-[#aed1e7] transition-all">Scholarships</a></li>
-            <li><a href="#" class="hover:underline hover:underline-offset-4 hover:text-[#aed1e7] transition-all">Entry Requirements</a></li>
-            <li><a href="#" class="hover:underline hover:underline-offset-4 hover:text-[#aed1e7] transition-all">Fees</a></li>
-            <li><a href="#" class="hover:underline hover:underline-offset-4 hover:text-[#aed1e7] transition-all">Key Dates</a></li>
-            <li><a href="#" class="hover:underline hover:underline-offset-4 hover:text-[#aed1e7] transition-all">Agents</a></li>
-            <li><a href="#" class="hover:underline hover:underline-offset-4 hover:text-[#aed1e7] transition-all">Domestic Students</a></li>
-            <li><a href="#" class="hover:underline hover:underline-offset-4 hover:text-[#aed1e7] transition-all">International Students</a></li>
-            <li><a href="#" class="hover:underline hover:underline-offset-4 hover:text-[#aed1e7] transition-all">Current Students</a></li>
-          </ul>
-        </div>
-        <div>
-          <p class="text-lg mb-2">Engage</p>
-          <ul class="space-y-2">
-            <li><a href="#" class="hover:border-b hover:text-white hover:border-white transition-all">Contact</a></li>
-            <li><a href="/news-and-events/" class="hover:border-b hover:text-white hover:border-white transition-all">News &amp; Events</a></li>
-            <li><a href="#" class="hover:border-b hover:text-white hover:border-white transition-all">Locations</a></li>
-          </ul>
-        </div> {% endcomment %}
         <div class="block">
           <h3 class="text-xl font-medium mb-2">Connect with us</h3>
           <div class="flex gap-3 mt-2">
@@ -177,7 +75,6 @@
               {% endfor %}
             {% endfor %}
           </div>
-          
         </div>
       </div>
       <div class="w-full bg-[#3f505b] h-[1px] my-4 lg:my-6 xl:my-8"></div>
@@ -198,6 +95,65 @@
       <div class="w-full mt-4 lg:mt-6 xl:mt-8 text-xs/5">
         <p>{{site_settings.copyright_content|safe}}</p>
       </div>
+
+      <!-- Acknowledgement & Inclusion Section -->
+      <div class="w-full mt-6 lg:mt-8 pt-6 lg:pt-8 border-t border-[#3f505b]">
+        <div class="flex flex-col sm:flex-row gap-6 lg:gap-10">
+
+          <!-- Aboriginal & Torres Strait Islander Acknowledgement -->
+          <div class="flex items-start gap-4">
+            <div class="flex gap-2 shrink-0">
+
+              <!-- Aboriginal Flag -->
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 6" class="h-8 w-auto">
+                <rect width="10" height="6" fill="#c00"/>
+                <rect width="10" height="3"/>
+                <circle cx="5" cy="3" r="1.5" fill="#ff0"/>
+              </svg>
+
+              <!-- Torres Strait Islander Flag -->
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 673.23 496.06" class="h-8 w-auto">
+                <rect style="fill-rule:evenodd;fill:#00ca00" height="496.06" width="673.23" y="0" x="0"/>
+                <rect style="fill-rule:evenodd;fill:#000100" height="283.46" width="673.23" y="106.3" x="0"/>
+                <rect style="fill-rule:evenodd;fill:#0001fd" height="248.03" width="673.23" y="124.02" x="0"/>
+                <path style="fill-rule:evenodd;fill:#ffffff" d="m233.86 347.24l35.43-38.97s-24.8-35.44-24.8-81.5 35.43-81.49 77.95-81.49l17.72 28.34 17.71-28.34c35.44 0 77.96 28.34 77.96 77.95 0 49.6-24.81 85.04-24.81 85.04l38.98 42.52-74.41-17.72v-113.38c0-7.09-14.17-21.26-35.43-21.26-17.72 0-31.89 14.17-31.89 21.26v109.84l-74.41 17.71z"/>
+                <path style="fill-rule:evenodd;fill:#ffffff" transform="translate(-.21977 1.2426)" d="m325.98 263.62l5.09-16.27-13.49-10.43 17.05-0.19 5.75-16.05 5.45 16.15 17.04 0.51-13.68 10.17 4.79 16.37-13.91-9.87-14.09 9.61z"/>
+              </svg>
+
+            </div>
+            <p class="text-xs/5 text-gray-400">
+              Ozford honours the Aboriginal and Torres Strait Islander peoples as the Traditional Custodians of the lands on which we learn and work. We recognise their deep and enduring ties to Country — to land, sea, culture and community — and extend our respect to all Elders, past, present and emerging.
+            </p>
+          </div>
+
+          <!-- Inclusion Statement -->
+          <div class="flex items-start gap-4">
+            <div class="shrink-0">
+
+              <!-- Progress Pride Flag -->
+              <svg viewBox="0 0 6000 3810" class="h-8 w-auto" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#750787" d="M0 0h6000v3810H0z"/>
+                <path fill="#004dff" d="M0 0h6000v3175H0z"/>
+                <path fill="#008026" d="M0 0h6000v2540H0z"/>
+                <path fill="#ffed00" d="M0 0h6000v1905H0z"/>
+                <path fill="#ff8c00" d="M0 0h6000v1270H0z"/>
+                <path fill="#e40303" d="M0 0h6000v635H0z"/>
+                <path d="M0-960.5 2864 1905 0 4770.5z"/>
+                <path fill="#613915" d="M0-480 2384 1905 0 4290z"/>
+                <path fill="#74d7ee" d="M0 3810 0 0 1912 1905z"/>
+                <path fill="#ffafc8" d="M0 3330 0 480 1420 1905z"/>
+                <path fill="#fff" d="M0 960l951 945L0 2850z"/>
+              </svg>
+
+            </div>
+            <p class="text-xs/5 text-gray-400">
+              Ozford is proud to be an inclusive community that embraces every individual — regardless of background, gender identity, sexuality, ability or culture. Everyone belongs here.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
     </div>
   </section>
   {% if show_popup and site_settings.site_popup_image %}
@@ -214,12 +170,8 @@
                 aria-label="Close popup"
             >
                &times;
-
             </button>
-    
         <div class="relative bg-white overflow-hidden">
-          
-            
             {% image site_settings.site_popup_image width-400 as tmp_photo %}
             <img 
             src="{{ tmp_photo.url }}" 
@@ -228,7 +180,6 @@
             alt="Popup Image" 
             class="w-full h-full object-cover {{site_settings.popup_class|default:''}}"
         />
-            {% comment %} {% image site_settings.site_popup_image loading='lazy' class='w-full h-full object-cover' %} {% endcomment %}
         </div>
     </div>
     {% endif %}

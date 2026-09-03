@@ -1,4 +1,94 @@
-<div class="flex">
+<div class="flex items-center gap-8">
+
+  {# ===== Translate — matches Login style ===== #}
+  <div
+    x-data="{
+      open: false,
+      portalActive: false,
+      selectedLabel: 'English',
+      selectLang(label, value) {
+        this.selectedLabel = label
+        ozfTranslate(value)
+        this.close(this.$refs.button)
+      },
+      toggle() {
+        if (this.open) return this.close()
+        this.$refs.button.focus()
+        this.open = true
+      },
+      close(focusAfter) {
+        if (!this.open) return
+        this.open = false
+        focusAfter && focusAfter.focus()
+      },
+      portal() {
+        const panel = this.$refs.panel
+        const btn = this.$refs.button
+        if (!panel || !btn) return
+        if (!this.portalActive) {
+          document.body.appendChild(panel)
+          this.portalActive = true
+        }
+        panel.style.position = 'fixed'
+        panel.style.zIndex = '100000'
+        const btnRect = btn.getBoundingClientRect()
+        panel.style.top = (btnRect.bottom + 8) + 'px'
+        const panelWidth = panel.offsetWidth || 200
+        const right = Math.max(8, window.innerWidth - btnRect.right)
+        panel.style.right = right + 'px'
+        panel.style.left = 'auto'
+      }
+    }"
+    x-on:keydown.escape.prevent.stop="close($refs.button)"
+    x-on:focusin.window="! $refs.panel.contains($event.target) && close()"
+    x-id="['translate-dropdown']"
+    x-init="
+      $watch('open', value => {
+        if (value) {
+          portal()
+          window.addEventListener('resize', portal)
+          window.addEventListener('scroll', portal, { passive: true })
+        } else {
+          window.removeEventListener('resize', portal)
+          window.removeEventListener('scroll', portal)
+        }
+      })
+    "
+    class="relative inline-block"
+  >
+    <button x-ref="button" x-on:click="toggle()" :aria-expanded="open" :aria-controls="$id('translate-dropdown')" type="button" class="inline-flex gap-2 items-center" aria-label="Select language">
+      <span x-text="selectedLabel"></span>
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 opacity-70" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+      </svg>
+    </button>
+    <div
+      x-ref="panel"
+      x-show="open"
+      x-transition.origin.top.left
+      x-on:click.outside="close($refs.button)"
+      :id="$id('translate-dropdown')"
+      class="absolute right-0 mt-2 w-48 rounded-lg border border-gray-100 bg-white text-left text-sm shadow-lg"
+      style="display:none;"
+    >
+      <div class="p-1 text-sm">
+        <a href="#" @click.prevent="selectLang('English', '')" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2">English</a>
+        <a href="#" @click.prevent="selectLang('हिन्दी (Hindi)', 'hi')" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2">हिन्दी (Hindi)</a>
+        <a href="#" @click.prevent="selectLang('中文 (Chinese)', 'zh-CN')" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2">中文 (Chinese)</a>
+        <a href="#" @click.prevent="selectLang('Tiếng Việt', 'vi')" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2">Tiếng Việt</a>
+        <a href="#" @click.prevent="selectLang('नेपाली (Nepali)', 'ne')" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2">नेपाली (Nepali)</a>
+        <a href="#" @click.prevent="selectLang('العربية (Arabic)', 'ar')" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2">العربية (Arabic)</a>
+        <a href="#" @click.prevent="selectLang('한국어 (Korean)', 'ko')" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2">한국어 (Korean)</a>
+        <a href="#" @click.prevent="selectLang('日本語 (Japanese)', 'ja')" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2">日本語 (Japanese)</a>
+        <a href="#" @click.prevent="selectLang('Español', 'es')" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2">Español</a>
+        <a href="#" @click.prevent="selectLang('Français', 'fr')" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2">Français</a>
+        <a href="#" @click.prevent="selectLang('Português', 'pt')" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2">Português</a>
+      </div>
+    </div>
+  </div>
+  {# ===== End Translate ===== #}
+
+  {# ===== Login ===== #}
   <div
     x-data="{
       open: false,
@@ -14,7 +104,6 @@
         focusAfter && focusAfter.focus()
       },
       portal() {
-        // move panel to body and apply fixed positioning
         const panel = this.$refs.panel
         const btn = this.$refs.button
         if (!panel || !btn) return
@@ -24,31 +113,24 @@
         }
         panel.style.position = 'fixed'
         panel.style.zIndex = '100000'
-        // compute position (align right edge of panel to right edge of button)
         const btnRect = btn.getBoundingClientRect()
-        // set top just under button
         panel.style.top = (btnRect.bottom + 8) + 'px'
-        // compute right offset: prefer right aligned
         const panelWidth = panel.offsetWidth || 200
         const right = Math.max(8, window.innerWidth - btnRect.right)
         panel.style.right = right + 'px'
-        // reset left (so right positioning works)
         panel.style.left = 'auto'
       }
     }"
     x-on:keydown.escape.prevent.stop="close($refs.button)"
     x-on:focusin.window="! $refs.panel.contains($event.target) && close()"
-    x-id="['dropdown-button']"
+    x-id="['login-dropdown']"
     x-init="
-      // keep panel positioned while open
       $watch('open', value => {
         if (value) {
           portal()
-          // reposition while open on scroll/resize
           window.addEventListener('resize', portal)
           window.addEventListener('scroll', portal, { passive: true })
         } else {
-          // cleanup listeners
           window.removeEventListener('resize', portal)
           window.removeEventListener('scroll', portal)
         }
@@ -56,30 +138,140 @@
     "
     class="relative inline-block"
   >
-    <!-- Button -->
-    <button x-ref="button" x-on:click="toggle()" :aria-expanded="open" :aria-controls="$id('dropdown-button')" type="button" class="inline-flex gap-2">
+    <button x-ref="button" x-on:click="toggle()" :aria-expanded="open" :aria-controls="$id('login-dropdown')" type="button" class="inline-flex gap-2 items-center">
       Login
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 opacity-70" viewBox="0 0 20 20" fill="currentColor">
         <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
       </svg>
     </button>
-
-    <!-- Panel (kept in DOM but moved to body when opened) -->
     <div
       x-ref="panel"
       x-show="open"
       x-transition.origin.top.left
       x-on:click.outside="close($refs.button)"
-      :id="$id('dropdown-button')"
+      :id="$id('login-dropdown')"
       class="absolute right-0 mt-2 w-48 rounded-lg border border-gray-100 bg-white text-left text-sm shadow-lg"
       style="display:none;"
     >
-      <div class="p-1 tex-sm">
-        <a target="_blank" href="https://mail.ozford.edu.au/owa/" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2"> Webmail </a>
-        <a target="_blank" href="https://oihe.ozford.edu.au/login/index.php" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2" target="_blank"> OIHE (Moodle) </a>
-        <a target="_blank" href="https://selfservice.ozford.edu.au:9251/authorization.do" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2" target="_blank"> Self Service (Staff Login) </a>
-        <a href="/agent-login/" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2"> Agent </a>
+      <div class="p-1 text-sm">
+        <a target="_blank" href="https://mail.ozford.edu.au/owa/" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2">Webmail</a>
+        <a target="_blank" href="https://oihe.ozford.edu.au/login/index.php" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2">OIHE (Moodle)</a>
+        <a target="_blank" href="https://selfservice.ozford.edu.au:9251/authorization.do" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2">Self Service (Staff Login)</a>
+        <a href="/agent-login/" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2">Agent</a>
       </div>
     </div>
   </div>
+  {# ===== End Login ===== #}
+
+  {# ===== Apply Now ===== #}
+  <a target="_blank" href="https://ozford.meshedhe.com.au/Publics/PublicsPages/StudentApply/pp_Application_Step0.aspx" class="inline-flex items-center rounded-md px-4 py-1.5 text-sm font-semibold transition-colors" style="background-color:#FFC512; border:2px solid #FFC512; color:#1a2e52;" onmouseover="this.style.backgroundColor='#e6b100'; this.style.borderColor='#e6b100';" onmouseout="this.style.backgroundColor='#FFC512'; this.style.borderColor='#FFC512';">Apply Now</a>
+  {# ===== End Apply Now ===== #}
+
+  {# ===== Contact ===== #}
+  <a href="/about/contact-us/" class="border-b border-transparent hover:border-white transition-all">Contact</a>
+  {# ===== End Contact ===== #}
+
+  {# ===== Search — full-width popup like RMIT, always-visible larger button ===== #}
+  <div
+    x-data="{
+      searchOpen: false,
+      portalActive: false,
+      toggle() {
+        if (this.searchOpen) return this.close()
+        this.searchOpen = true
+        this.$nextTick(() => {
+          this.portal()
+          this.$refs.mainSearchInput && this.$refs.mainSearchInput.focus()
+        })
+      },
+      close() {
+        this.searchOpen = false
+      },
+      portal() {
+        const panel = this.$refs.searchPanel
+        if (!panel) return
+        if (!this.portalActive) {
+          document.body.appendChild(panel)
+          this.portalActive = true
+        }
+        const bar = this.$el.closest('.bg-primary-dark') || document.body
+        const rect = bar.getBoundingClientRect()
+        panel.style.position = 'fixed'
+        panel.style.top = rect.bottom + 'px'
+        panel.style.left = '0'
+        panel.style.right = '0'
+        panel.style.width = '100%'
+        panel.style.zIndex = '90'
+      }
+    }"
+    x-on:keydown.escape.window="close()"
+    x-init="
+      $watch('searchOpen', value => {
+        if (value) {
+          portal()
+          window.addEventListener('resize', portal)
+          window.addEventListener('scroll', portal, { passive: true })
+        } else {
+          window.removeEventListener('resize', portal)
+          window.removeEventListener('scroll', portal)
+        }
+      })
+    "
+    class="relative flex items-center"
+  >
+    <button
+      @click="toggle()"
+      class="flex items-center justify-center rounded-full transition-colors"
+      style="background-color:#FFC512; color:#1a2e52; height:34px; width:34px;"
+      onmouseover="this.style.backgroundColor='#e6b100'"
+      onmouseout="this.style.backgroundColor='#FFC512'"
+      aria-label="Search site"
+      :aria-expanded="searchOpen"
+    >
+      <svg x-show="!searchOpen" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+      </svg>
+      <svg x-show="searchOpen" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    <div
+      x-ref="searchPanel"
+      x-show="searchOpen"
+      x-cloak
+      x-transition:enter="transition ease-out duration-200"
+      x-transition:enter-start="opacity-0 -translate-y-2"
+      x-transition:enter-end="opacity-100 translate-y-0"
+      x-transition:leave="transition ease-in duration-150"
+      x-transition:leave-start="opacity-100 translate-y-0"
+      x-transition:leave-end="opacity-0 -translate-y-2"
+      @click.outside="close()"
+      class="bg-white border-b border-gray-200 shadow-lg py-5"
+      style="display:none;"
+    >
+      <div class="container">
+        <form action="{% url 'search' %}" method="get" class="flex items-center gap-3">
+          <input
+            x-ref="mainSearchInput"
+            type="text"
+            name="query"
+            placeholder="Search programs, pages..."
+            class="flex-1 text-gray-900 border border-gray-300 rounded-full px-5 py-3 outline-none focus:border-primary transition-all placeholder-gray-400"
+          >
+          <button
+            type="submit"
+            class="bg-primary-dark hover:bg-primary text-white rounded-full px-6 py-3 font-semibold inline-flex items-center gap-2 transition-colors flex-shrink-0"
+          >
+            Search
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  {# ===== End Search ===== #}
+
 </div>

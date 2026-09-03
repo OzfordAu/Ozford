@@ -1,0 +1,186 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Confirm Payment — Ozford Institute of Higher Education{% endblock %}
+
+{% block extra_css %}
+<style>
+  .payment-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 13px 0;
+    border-bottom: 1px solid #f3f4f6;
+    font-size: 14px;
+  }
+  .summary-row:last-child { border-bottom: none; }
+  .summary-label { color: #6b7280; font-weight: 600; font-size: 13px; }
+  .summary-value { color: #1a1a2e; font-weight: 600; text-align: right; }
+  .amount-highlight {
+    background: #f0f4fa;
+    border-radius: 12px;
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+  .amount-highlight .label { font-size: 13px; font-weight: 600; color: #6b7280; }
+  .amount-highlight .amount { font-size: 26px; font-weight: 700; color: #1a305b; }
+  .warning-note {
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: #92400e;
+    margin: 20px 0;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    line-height: 1.5;
+  }
+  .error-box {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    color: #b91c1c;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+  }
+  .btn-back {
+    padding: 11px 22px;
+    border-radius: 10px;
+    border: 1.5px solid #e2e5ea;
+    background: #fff;
+    font-family: "Manrope", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #6b7280;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+  }
+  .btn-back:hover { background: #f4f5f7; }
+  .btn-confirm {
+    flex: 1;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    background: #1a305b;
+    color: #fff;
+    font-family: "Manrope", sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s;
+    width: 100%;
+  }
+  .btn-confirm:hover { background: #294886; }
+  .btn-confirm:disabled { background: #9ca3af; cursor: not-allowed; }
+  .actions { display: flex; gap: 12px; margin-top: 24px; }
+  .security {
+    padding: 14px 0 0;
+    border-top: 1px solid #eef0f4;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12px;
+    color: #9ca3af;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="bg-gray-50 min-h-screen py-12 px-4">
+  <div class="max-w-lg mx-auto">
+
+    <div class="text-center mb-8">
+      <p class="text-sm font-semibold text-primary uppercase tracking-widest mb-1">Ozford Institute of Higher Education</p>
+      <h1 class="text-3xl font-primary font-bold text-primary mb-2">Confirm Payment</h1>
+      <p class="text-gray-500 text-sm">Please review your details before confirming</p>
+    </div>
+
+    <div style="background:#fff; border-radius:1rem; box-shadow:0 2px 24px rgba(26,48,91,0.08); padding:2rem;">
+
+      <!-- Amount highlight -->
+      <div class="amount-highlight">
+        <span class="label">Total Amount</span>
+        <span class="amount">${{ data.payment_amount }} AUD</span>
+      </div>
+
+      <!-- Summary rows -->
+      <div class="summary-row">
+        <span class="summary-label">Student ID</span>
+        <span class="summary-value">{{ data.student_number }}</span>
+      </div>
+      <div class="summary-row">
+        <span class="summary-label">Cardholder Name</span>
+        <span class="summary-value">{{ data.cardholder_name }}</span>
+      </div>
+      <div class="summary-row">
+        <span class="summary-label">Card</span>
+        <span class="summary-value">•••• •••• •••• {{ data.card_last4 }}</span>
+      </div>
+      {% if data.email %}
+      <div class="summary-row">
+        <span class="summary-label">Receipt Email</span>
+        <span class="summary-value">{{ data.email }}</span>
+      </div>
+      {% endif %}
+
+      <!-- Warning -->
+      <div class="warning-note">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:1px;">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" x2="12" y1="8" y2="12"/>
+          <line x1="12" x2="12.01" y1="16" y2="16"/>
+        </svg>
+        By clicking Confirm, you authorise Ozford Institute of Higher Education to debit your card for the amount shown above. This action cannot be undone.
+      </div>
+
+      <!-- Error -->
+      {% if error %}
+      <div class="error-box">{{ error }}</div>
+      {% endif %}
+
+      <!-- Actions -->
+      <div class="actions">
+        <a href="{% url 'payment_page' %}" class="btn-back">Back</a>
+        <form method="post" style="flex:1;">
+          {% csrf_token %}
+          <button type="submit" class="btn-confirm">Confirm &amp; Pay</button>
+        </form>
+      </div>
+
+      <!-- Security -->
+      <div class="security">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1a305b"
+          stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+        Your payment is secured by NAB Gateway. Ozford does not store your card details.
+      </div>
+
+    </div>
+
+    <p style="text-align:center; color:#9ca3af; font-size:0.8rem; margin-top:1.25rem;">
+      Need help? Contact us at
+      <a href="mailto:info@ozford.edu.au" style="color:#1a305b; font-weight:600;">info@ozford.edu.au</a>
+      or call <a href="tel:+61386637188" style="color:#1a305b; font-weight:600;">+61 3 8663 7188</a>
+    </p>
+
+  </div>
+</section>
+{% endblock %}

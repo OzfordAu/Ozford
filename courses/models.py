@@ -41,7 +41,7 @@ class CoursesIndexPage(Page):
             context['course_tabs'] = home_page.course_tabs
 
         return context
-  
+
     class Meta:
         verbose_name = 'Courses Index Page'
 
@@ -57,7 +57,7 @@ class DegreeIndexPage(Page):
 
     parent_page_types = ['courses.CoursesIndexPage']
     subpage_types = [
-        'courses.higherEducationCoursePage',
+        'courses.HigherEducationCoursePage',
         'courses.HighSchoolCoursePage',
         'courses.ElicosCoursePage'
     ]
@@ -318,7 +318,23 @@ class HigherEducationCoursePage(Page):
             FieldPanel('course_location'),
         ], heading='Key Facts'),
 
-        # ✅ FIXED: restored missing section
+        MultiFieldPanel([
+            FieldPanel('course_requirement_domestic'),
+            FieldPanel('course_requirement_international'),
+            FieldPanel('academic_requirement_domestic'),
+            FieldPanel('academic_requirement_international'),
+            FieldPanel('english_requirement_domestic'),
+            FieldPanel('english_requirement_international'),
+            FieldPanel('age_requirement_domestic'),
+            FieldPanel('age_requirement_international'),
+        ], heading='Entry Requirements'),
+
+        MultiFieldPanel([
+            FieldPanel('core_units_title'),
+            FieldPanel('core_units'),
+            FieldPanel('core_units_block'),
+        ], heading='Core Units'),
+
         MultiFieldPanel([
             FieldPanel('course_overview'),
             FieldPanel('course_units'),

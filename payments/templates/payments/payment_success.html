@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Payment Successful — Ozford Institute of Higher Education{% endblock %}
+
+{% block content %}
+<section class="bg-gray-50 min-h-screen py-12 px-4">
+  <div class="max-w-lg mx-auto">
+    <div style="background:#fff; border-radius:1rem; box-shadow:0 2px 24px rgba(26,48,91,0.08); padding:2.5rem; text-align:center;">
+
+      <div style="width:64px; height:64px; background:#d1fae5; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 1.5rem;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+          fill="none" stroke="#059669" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 6 9 17l-5-5"/>
+        </svg>
+      </div>
+
+      <h1 style="font-size:1.75rem; font-weight:700; color:#1a305b; margin-bottom:0.5rem;">Payment Successful</h1>
+      <p style="color:#6b7280; font-size:0.9rem; margin-bottom:1.5rem;">
+        Your fee payment has been processed successfully.
+      </p>
+
+      {% if transaction_id %}
+      <div style="background:#f0f4fa; border-radius:0.75rem; padding:1rem 1.25rem; margin-bottom:1.5rem; text-align:left;">
+        <p style="font-size:0.78rem; color:#6b7280; margin:0 0 0.25rem; font-weight:600; text-transform:uppercase; letter-spacing:0.05em;">Transaction Reference</p>
+        <p style="font-size:0.95rem; color:#1a305b; font-weight:700; font-family:monospace; margin:0; word-break:break-all;">{{ transaction_id }}</p>
+      </div>
+      {% endif %}
+
+      <p style="color:#6b7280; font-size:0.85rem; margin-bottom:1.5rem;">
+        A confirmation email has been sent to your registered email address.<br>
+        Please keep your transaction reference for your records.
+      </p>
+
+      <a href="https://ozford.edu.au"
+        style="display:inline-block; background:#1a305b; color:#fff; font-weight:600; font-size:0.9rem;
+               padding:0.75rem 2rem; border-radius:0.5rem; text-decoration:none;">
+        Return to Ozford
+      </a>
+
+      <div style="margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid #f3f4f6;">
+        <p style="font-size:0.78rem; color:#9ca3af; margin:0;">
+          Questions? Contact us at
+          <a href="mailto:info@ozford.edu.au" style="color:#1a305b; font-weight:600;">info@ozford.edu.au</a>
+          or <a href="tel:+61386637188" style="color:#1a305b; font-weight:600;">+61 3 8663 7188</a>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+{% endblock %}
