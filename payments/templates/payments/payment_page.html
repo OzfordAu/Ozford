@@ -42,7 +42,7 @@
     border-color: #1a305b;
     box-shadow: 0 0 0 3px rgba(26,48,91,0.1);
   }
-  .microform-container iframe { width: 100%; border: none; }
+  .microform-container iframe { width: 100% !important; height: 22px !important; border: none !important; display: block !important; }
   .pay-btn {
     width: 100%;
     background: #1a305b;
@@ -199,14 +199,9 @@
               <label class="payment-label" for="exp_year">Expiry Year <span style="color:#e53e3e">*</span></label>
               <select class="payment-input" id="exp_year" name="exp_year" required>
                 <option value="">YYYY</option>
-                <option value="2025">2025</option>
-                <option value="2026">2026</option>
-                <option value="2027">2027</option>
-                <option value="2028">2028</option>
-                <option value="2029">2029</option>
-                <option value="2030">2030</option>
-                <option value="2031">2031</option>
-                <option value="2032">2032</option>
+                {% for year in expiry_years %}
+                <option value="{{ year }}">{{ year }}</option>
+                {% endfor %}
               </select>
             </div>
           </div>

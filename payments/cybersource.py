@@ -1,3 +1,4 @@
+import logging
 import base64
 import hashlib
 import hmac
@@ -7,6 +8,8 @@ from datetime import datetime, timezone
 
 import requests
 from django.conf import settings
+
+logger = logging.getLogger(__name__)
 
 SANDBOX_HOST = "nabgateway-api-test.nab.com.au"
 PROD_HOST    = "api.cybersource.com"
@@ -29,14 +32,14 @@ def _build_signature_headers(method, path, body_str=""):
     ).decode()
 
     if method in ("post", "put", "patch"):
-        header_names = ["host", "date", "(request-target)", "digest", "v-c-merchant-id"]
+        header_names = ["host", "v-c-date", "request-target", "digest", "v-c-merchant-id"]
     else:
-        header_names = ["host", "date", "(request-target)", "v-c-merchant-id"]
+        header_names = ["host", "v-c-date", "request-target", "v-c-merchant-id"]
 
     value_map = {
         "host":             host,
-        "date":             gmt_date,
-        "(request-target)": f"{method} {path}",
+        "v-c-date":         gmt_date,
+        "request-target": f"{method} {path}",
         "digest":           digest,
         "v-c-merchant-id":  merchant_id,
     }
@@ -48,7 +51,7 @@ def _build_signature_headers(method, path, body_str=""):
     ).decode()
 
     sig_header = (
-        f'keyId="{key_id}", '
+        f'keyid="{key_id}", '
         f'algorithm="HmacSHA256", '
         f'headers="{" ".join(header_names)}", '
         f'signature="{signature}"'
@@ -56,7 +59,7 @@ def _build_signature_headers(method, path, body_str=""):
 
     headers = {
         "Host":            host,
-        "Date":            gmt_date,
+        "v-c-date":        gmt_date,
         "Signature":       sig_header,
         "v-c-merchant-id": merchant_id,
         "Content-Type":    "application/json",
@@ -75,7 +78,7 @@ def get_capture_context(origin):
         "clientVersion": "v2",
         "targetOrigins": [origin],
         "allowedCardNetworks": ["VISA", "MASTERCARD", "AMEX", "JCB"],
-        "allowedPaymentTypes": ["PANENTRY"],
+        "allowedPaymentTypes": ["CARD"],
     }
     body_str = json.dumps(body, separators=(",", ":"))
     headers  = _build_signature_headers("POST", path, body_str)
@@ -119,9 +122,7 @@ def process_payment(transient_token, amount, student_number, email, cardholder_n
             "code": f"OZFORD-{student_number}-{uuid.uuid4().hex[:8].upper()}"
         },
         "processingInformation": {"capture": True},
-        "paymentInformation": {
-            "tokenizedCard": {"transientToken": transient_token}
-        },
+        "tokenInformation": {"transientTokenJwt": transient_token},
         "orderInformation": {
             "amountDetails": {
                 "totalAmount": str(amount),
@@ -145,14 +146,44 @@ def process_payment(transient_token, amount, student_number, email, cardholder_n
 
     body_str = json.dumps(body, separators=(",", ":"))
     headers  = _build_signature_headers("POST", path, body_str)
-    resp     = requests.post(
-        f"https://{host}{path}",
-        headers=headers,
-        data=body_str,
-        timeout=30,
-    )
-    result   = resp.json()
-    success  = result.get("status") in {"AUTHORIZED", "PENDING", "AUTHORIZED_PENDING_REVIEW"}
+
+    try:
+        resp = requests.post(
+            f"https://{host}{path}",
+            headers=headers,
+            data=body_str,
+            timeout=30,
+        )
+    except requests.exceptions.RequestException as e:
+        logger.error("Payment request failed (network error): %s", e)
+        return {
+            "success":        False,
+            "status":         None,
+            "transaction_id": None,
+            "error":          "Could not reach the payment gateway. Please try again shortly.",
+        }
+
+    try:
+        result = resp.json()
+    except ValueError:
+        logger.error(
+            "Payment gateway returned non-JSON response. Status: %s, Body: %s",
+            resp.status_code, resp.text[:500],
+        )
+        return {
+            "success":        False,
+            "status":         None,
+            "transaction_id": None,
+            "error":          "Payment gateway returned an unexpected response. Please try again shortly.",
+        }
+
+    success = result.get("status") in {"AUTHORIZED", "PENDING", "AUTHORIZED_PENDING_REVIEW"}
+
+    if not success:
+        logger.error(
+            "Payment not authorized. Status: %s, Response: %s",
+            resp.status_code, result,
+        )
 
     return {
         "success":        success,

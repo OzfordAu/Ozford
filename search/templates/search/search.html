@@ -12,7 +12,7 @@
                 name="query" 
                 value="{{ search_query }}"
                 class="block p-4 w-full rounded-full rounded-r-none border border-link-primary" 
-                placeholder="Search Courses" 
+                placeholder="Search programs, pages..." 
             />
             <button 
                 type="submit"
@@ -28,13 +28,13 @@
             {% for result in search_results %}
                 <div class="border-b mb-2 pb-4">
                     <h2 class="text-xl font-semibold">
-                        <a href="{% pageurl result %}" class="text-link-primary hover:text-link-primary-hover">
-                            {{ result.course_title }}
+                        <a href="{{ result.url }}" class="text-link-primary hover:text-link-primary-hover">
+                            {{ result.title }}
                         </a>
                     </h2>
-                    {% if result.course_header_description %}
+                    {% if result.description %}
                         <div class="mt-2 text-gray-600">
-                            {{ result.course_header_description|richtext }}
+                            {{ result.description|richtext }}
                         </div>
                     {% endif %}
                 </div>

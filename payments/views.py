@@ -1,4 +1,5 @@
 import logging
+from datetime import datetime
 
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_http_methods
@@ -29,8 +30,10 @@ def payment_page(request):
         logger.error("Failed to get Cybersource capture context: %s", e)
         capture_context = None
 
+    current_year = datetime.now().year
     return render(request, "payments/payment_page.html", {
         "capture_context": capture_context,
+        "expiry_years":    range(current_year, current_year + 16),
     })
 
 

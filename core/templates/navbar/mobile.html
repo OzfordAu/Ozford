@@ -3,6 +3,8 @@
     menuStack: [],
     currentMenu: 'main',
     searchOpen: false,
+    translateOpen: false,
+    selectedLabel: 'English',
     menus: {
         main: {
             title: 'Main Menu',
@@ -240,74 +242,68 @@ class="lg:hidden relative z-50">
         <!-- ===== Top bar ===== -->
         <div class="w-full bg-primary-dark text-white text-xs py-2">
             <div class="container">
-                <ul class="flex justify-end items-center space-x-3">
-                    <li><a href="/news-and-events/">News &amp; Events</a></li>
+                <ul class="flex justify-end items-center space-x-4">
                     <li><a href="/about/contact-us/">Contact</a></li>
 
                     {# ===== Translate ===== #}
-                    <li class="flex items-center">
-                        <select
-                            id="ozf-lang-select-mobile"
-                            onchange="ozfTranslate(this.value)"
+                    <li class="relative" x-on:focusin.window="! $el.contains($event.target) && (translateOpen = false)">
+                        <button
+                            @click="translateOpen = !translateOpen"
+                            type="button"
+                            class="inline-flex gap-1 items-center text-white text-xs"
                             aria-label="Select language"
-                            style="color:white; background:transparent; border:none; outline:none; -webkit-appearance:none; -moz-appearance:none; appearance:none; font-size:0.75rem; cursor:pointer; padding:0;"
                         >
-                            <option value="" style="background:#1a2f4e; color:white;">English</option>
-                            <option value="hi" style="background:#1a2f4e; color:white;">हिन्दी</option>
-                            <option value="zh-CN" style="background:#1a2f4e; color:white;">中文</option>
-                            <option value="vi" style="background:#1a2f4e; color:white;">Tiếng Việt</option>
-                            <option value="ne" style="background:#1a2f4e; color:white;">नेपाली</option>
-                            <option value="ar" style="background:#1a2f4e; color:white;">العربية</option>
-                            <option value="ko" style="background:#1a2f4e; color:white;">한국어</option>
-                            <option value="ja" style="background:#1a2f4e; color:white;">日本語</option>
-                            <option value="es" style="background:#1a2f4e; color:white;">Español</option>
-                            <option value="fr" style="background:#1a2f4e; color:white;">Français</option>
-                            <option value="pt" style="background:#1a2f4e; color:white;">Português</option>
-                        </select>
+                            <span x-text="selectedLabel"></span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 opacity-70" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                        <div
+                            x-show="translateOpen"
+                            x-cloak
+                            @click.outside="translateOpen = false"
+                            class="absolute right-0 mt-2 w-44 rounded-lg border border-gray-100 bg-white text-left text-xs shadow-lg"
+                            style="display:none; z-index:99999;"
+                        >
+                            <div class="p-1">
+                                <a href="#" @click.prevent="selectedLabel='English'; ozfTranslate(''); translateOpen=false" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2">English</a>
+                                <a href="#" @click.prevent="selectedLabel='हिन्दी'; ozfTranslate('hi'); translateOpen=false" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2">हिन्दी (Hindi)</a>
+                                <a href="#" @click.prevent="selectedLabel='中文'; ozfTranslate('zh-CN'); translateOpen=false" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2">中文 (Chinese)</a>
+                                <a href="#" @click.prevent="selectedLabel='Tiếng Việt'; ozfTranslate('vi'); translateOpen=false" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2">Tiếng Việt</a>
+                                <a href="#" @click.prevent="selectedLabel='नेपाली'; ozfTranslate('ne'); translateOpen=false" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2">नेपाली (Nepali)</a>
+                                <a href="#" @click.prevent="selectedLabel='العربية'; ozfTranslate('ar'); translateOpen=false" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2">العربية (Arabic)</a>
+                                <a href="#" @click.prevent="selectedLabel='한국어'; ozfTranslate('ko'); translateOpen=false" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2">한국어 (Korean)</a>
+                                <a href="#" @click.prevent="selectedLabel='日本語'; ozfTranslate('ja'); translateOpen=false" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2">日本語 (Japanese)</a>
+                                <a href="#" @click.prevent="selectedLabel='Español'; ozfTranslate('es'); translateOpen=false" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2">Español</a>
+                                <a href="#" @click.prevent="selectedLabel='Français'; ozfTranslate('fr'); translateOpen=false" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2">Français</a>
+                                <a href="#" @click.prevent="selectedLabel='Português'; ozfTranslate('pt'); translateOpen=false" class="flex w-full text-primary-dark hover:bg-primary hover:text-white items-center rounded-md px-3 py-2">Português</a>
+                            </div>
+                        </div>
                     </li>
                     {# ===== End Translate ===== #}
 
                     {# ===== Search ===== #}
-                    <li class="relative">
+                    <li>
                         <button
-                            @click="searchOpen = !searchOpen"
+                            @click="
+                                searchOpen = !searchOpen;
+                                if (searchOpen) {
+                                    $nextTick(() => $refs.mobileSearchInput && $refs.mobileSearchInput.focus())
+                                }
+                            "
                             @keydown.escape.window="searchOpen = false"
-                            class="opacity-70 hover:opacity-100 transition-opacity flex items-center"
                             aria-label="Search site"
+                            style="background-color:#FFC512; color:#1a2e52; height:22px; width:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; border:none; padding:0; flex-shrink:0;"
+                            onmouseover="this.style.backgroundColor='#e6b100'"
+                            onmouseout="this.style.backgroundColor='#FFC512'"
                         >
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <svg x-show="!searchOpen" xmlns="http://www.w3.org/2000/svg" style="height:12px; width:12px; flex-shrink:0;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                             </svg>
+                            <svg x-show="searchOpen" xmlns="http://www.w3.org/2000/svg" style="height:12px; width:12px; flex-shrink:0;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
                         </button>
-                        <div
-                            x-show="searchOpen"
-                            x-cloak
-                            x-transition:enter="transition ease-out duration-200"
-                            x-transition:enter-start="opacity-0 -translate-y-2"
-                            x-transition:enter-end="opacity-100 translate-y-0"
-                            x-transition:leave="transition ease-in duration-150"
-                            x-transition:leave-start="opacity-100 translate-y-0"
-                            x-transition:leave-end="opacity-0 -translate-y-2"
-                            @click.outside="searchOpen = false"
-                            class="absolute right-0 top-7 z-50 w-72 bg-white rounded-lg shadow-xl border border-gray-100 p-3"
-                        >
-                            <form action="{% url 'search' %}" method="get" class="flex items-center gap-2">
-                                <input
-                                    type="text"
-                                    name="query"
-                                    placeholder="Search programs, pages..."
-                                    class="flex-1 text-gray-900 bg-gray-50 border border-gray-200 rounded-md text-sm px-3 py-2 outline-none focus:border-primary focus:bg-white transition-all placeholder-gray-400"
-                                >
-                                <button
-                                    type="submit"
-                                    class="bg-primary-dark text-white rounded-md px-3 py-2 hover:bg-primary transition-colors flex-shrink-0"
-                                >
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                                    </svg>
-                                </button>
-                            </form>
-                        </div>
                     </li>
                     {# ===== End Search ===== #}
 
@@ -325,7 +321,7 @@ class="lg:hidden relative z-50">
             </div>
             <div class="flex items-center gap-3">
                 {# ===== Apply Now ===== #}
-                <a target="_blank" href="https://ozford.meshedhe.com.au/Publics/PublicsPages/StudentApply/pp_Application_Step0.aspx" class="inline-flex items-center rounded-md px-3 py-2 text-xs font-semibold transition-colors" style="background-color:#FFC512; border:3px solid #FFC512; color:#ffffff;" onmouseover="this.style.backgroundColor='#e6b100'; this.style.borderColor='#e6b100';" onmouseout="this.style.backgroundColor='#FFC512'; this.style.borderColor='#FFC512';">Apply Now</a>
+                <a target="_blank" href="https://ozford.meshedhe.com.au/Publics/PublicsPages/StudentApply/pp_Application_Step0.aspx" class="inline-flex items-center rounded-md px-3 py-2 text-xs font-semibold transition-colors" style="background-color:#FFC512; border:3px solid #FFC512; color:#1a2e52;" onmouseover="this.style.backgroundColor='#e6b100'; this.style.borderColor='#e6b100';" onmouseout="this.style.backgroundColor='#FFC512'; this.style.borderColor='#FFC512';">Apply Now</a>
                 {# ===== End Apply Now ===== #}
                 <button @click="menuStack.length ? menuStack = [] : (menuStack = ['main'], currentMenu = 'main')" 
                         aria-label="Toggle Menu"
@@ -357,6 +353,43 @@ class="lg:hidden relative z-50">
                 </button>
             </div>
         </div>
+
+        {# ===== Full-width Search Panel ===== #}
+        <div
+            x-show="searchOpen"
+            x-cloak
+            x-transition:enter="transition ease-out duration-200"
+            x-transition:enter-start="opacity-0 -translate-y-2"
+            x-transition:enter-end="opacity-100 translate-y-0"
+            x-transition:leave="transition ease-in duration-150"
+            x-transition:leave-start="opacity-100 translate-y-0"
+            x-transition:leave-end="opacity-0 -translate-y-2"
+            @click.outside="searchOpen = false"
+            class="w-full bg-white border-b border-gray-200 shadow-lg py-4"
+        >
+            <div class="container">
+                <form action="{% url 'search' %}" method="get" class="flex items-center gap-3">
+                    <input
+                        x-ref="mobileSearchInput"
+                        type="text"
+                        name="query"
+                        placeholder="Search programs, pages..."
+                        class="flex-1 text-gray-900 border border-gray-300 rounded-full px-5 py-2.5 outline-none focus:border-primary transition-all placeholder-gray-400 text-sm"
+                    >
+                    <button
+                        type="submit"
+                        class="bg-primary-dark hover:bg-primary text-white rounded-full px-5 py-2.5 font-semibold inline-flex items-center gap-2 transition-colors flex-shrink-0 text-sm"
+                    >
+                        Search
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+        {# ===== End Full-width Search Panel ===== #}
+
     </div>
 
     <div x-show="menuStack.length > 0" 
