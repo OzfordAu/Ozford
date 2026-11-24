@@ -204,7 +204,14 @@ class HigherEducationCoursePage(Page):
 
     is_popular = models.BooleanField(default=False)
 
-    course_type = models.CharField(max_length=100, null=True, blank=True)
+    COURSE_TYPE_CHOICES = [
+    ('PG', 'Postgraduate'),
+    ('UG', 'Undergraduate'),
+    ('DIP', 'Diploma'),
+    ]
+
+    course_type = models.CharField(max_length=10, choices=COURSE_TYPE_CHOICES)
+    course_type_label = models.CharField(max_length=100, blank=True)
 
     course_title = models.CharField(max_length=255, null=True, blank=True)
 
