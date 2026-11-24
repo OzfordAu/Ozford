@@ -1,4 +1,3 @@
-<!-- team_page.html -->
 {% extends "page-sidebar.html" %}
 {% load static wagtailcore_tags wagtailimages_tags %}
 
@@ -25,6 +24,23 @@
                 <div>
                     <!-- Higher Education Team -->
                     {% include 'about/components/team.html' with team_title="Ozford Institute of Higher Education" team=page.higher_education_team team_id="he" %}
+                </div>
+
+                <!-- Governance and Organisation Charts -->
+                <div class="flex flex-col border mt-8">
+                    <h2 class="font-semibold text-2xl mb-4 w-full bg-primary p-4 lg:px-8 text-white">Governance and Organisation Charts</h2>
+                    <div class="flex flex-col p-4 lg:px-8 lg:pb-8 scroll-m-8" id="governance-chart">
+                        <h2 class="text-xl lg:text-2xl mb-2 lg:mb-3 xl:mb-4 font-medium text-primary">Governance Chart</h2>
+                        <a href="https://ozford.edu.au/media/images/Gov_Chart_1.original.jpg" target="_blank" rel="noopener">
+                            <img src="https://ozford.edu.au/media/images/Gov_Chart_1.original.jpg" class="w-full" alt="Governance chart with the Governing Board at the top, supported by Secretariat Support. Beneath it are the Academic Board, the Management Team and the Audit and Risk Committee. The Education Committee and the Student Discipline and Appeals Committee sit under the Academic Board.">
+                        </a>
+                    </div>
+                    <div class="flex flex-col p-4 lg:px-8 lg:pb-8 scroll-m-8" id="organisation-chart">
+                        <h2 class="text-xl lg:text-2xl mb-2 lg:mb-3 xl:mb-4 font-medium text-primary">Organisation Chart</h2>
+                        <a href="https://ozford.edu.au/media/images/Org_Chart_2.original.jpg" target="_blank" rel="noopener">
+                            <img src="https://ozford.edu.au/media/images/Org_Chart_2.original.jpg" class="w-full" alt="Organisation chart with the CEO at the top, supported by the Secretariat and Compliance Team. Reporting to the CEO are the Academic Dean, Academic Coordinator, Director of Operations Brisbane Office, Director of Marketing and Student Recruitment, Administration and Operations Coordinator, Accounts Manager and ITS Services Manager, each with their teams.">
+                        </a>
+                    </div>
                 </div>
 
                 <!-- Modal -->
@@ -109,5 +125,12 @@
             </div>
         </div>
     </div>
+
+    {% if page.last_reviewed %}
+    <div class="w-full mt-6 mb-2">
+        <p class="text-sm text-gray-500">Last reviewed: {{ page.last_reviewed|date:"F Y" }}</p>
+    </div>
+    {% endif %}
+
 </div>
 {% endblock main_content %}

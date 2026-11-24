@@ -47,8 +47,8 @@
               </p>
             </div>
           </div>
-        <div>
-            {% image page.featured_image original class="inline-block h-full w-full max-h-[400px] object-cover" %}
+        <div style="width:100%; height:420px; overflow:hidden; border-radius:8px; background:#f4f6fa;">
+            {% image page.featured_image width-1200 style="width:100%; height:420px; object-fit:cover; object-position:top; display:block;" %}
         </div>
         <div class="mt-4 lg:mt-6 xl:mt-10 cms-page">
             {{ page.body|richtext }}
@@ -60,4 +60,3 @@
   </div>
 </div>
 {% endblock content %}
-

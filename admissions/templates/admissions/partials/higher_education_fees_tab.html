@@ -1,7 +1,15 @@
 {% load static wagtailcore_tags %}
 
+{# Year switcher: show/hide fee blocks marked fee-year-2026 / fee-year-2027 inside the rich text. #}
+{# Content that is not wrapped in a fee-year-* block stays visible for both years. #}
+<style>
+    .show-year-2026 .fee-year-2027 { display: none; }
+    .show-year-2027 .fee-year-2026 { display: none; }
+</style>
+
     <div
         x-data="{
+            selectedYear: 2026,
             tabSelected: 1,
             tabId: $id('tabs'),
             tabButtonClicked(tabButton){
@@ -23,13 +31,21 @@
         }"
         
         x-init="tabRepositionMarker($refs.tabButtons.firstElementChild);" class="relative w-full">
+
+        <div class="flex items-center gap-3 mb-3">
+            <span class="text-sm font-semibold text-gray-800">Select Year:</span>
+            <div class="inline-flex gap-2" role="group" aria-label="Select fee year">
+                <button type="button" @click="selectedYear = 2026" :aria-pressed="selectedYear === 2026" :class="selectedYear === 2026 ? 'bg-primary text-white border-primary' : 'bg-white text-primary border-gray-200 hover:border-primary'" class="px-5 h-9 text-sm font-semibold border rounded-md cursor-pointer transition-all">2026</button>
+                <button type="button" @click="selectedYear = 2027" :aria-pressed="selectedYear === 2027" :class="selectedYear === 2027 ? 'bg-primary text-white border-primary' : 'bg-white text-primary border-gray-200 hover:border-primary'" class="px-5 h-9 text-sm font-semibold border rounded-md cursor-pointer transition-all">2027</button>
+            </div>
+        </div>
         
         <div x-ref="tabButtons" class="relative inline-grid items-center justify-center w-full h-10 grid-cols-3 p-1 text-primary font-semibold bg-white border border-gray-100 rounded-lg select-none">
             <button :id="$id(tabId)" @click="tabButtonClicked($el);" type="button" :class="{ 'bg-primary text-white' : tabButtonActive($el) }" class="relative z-20 inline-flex items-center justify-center w-full h-8 px-3 text-sm font-medium transition-all rounded-md cursor-pointer whitespace-nowrap">Tuition Fee</button>
             <button :id="$id(tabId)" @click="tabButtonClicked($el);" type="button" :class="{ 'bg-primary text-white' : tabButtonActive($el) }" class="relative z-20 inline-flex items-center justify-center w-full h-8 px-3 text-sm font-medium transition-all rounded-md cursor-pointer whitespace-nowrap">Other Non Tuition Fee</button> 
             <div x-ref="tabMarker" class="absolute left-0 z-10 w-1/2 h-full duration-300 ease-out" x-cloak><div class="w-full h-full bg-gray-100 rounded-md shadow-sm"></div></div>
         </div>
-        <div class="relative flex w-full p-5 mt-2 text-sm text-gray-400 border rounded-md border-gray-200/70">
+        <div :class="'show-year-' + selectedYear" class="relative flex w-full p-5 mt-2 text-sm text-gray-400 border rounded-md border-gray-200/70">
             
             <div :id="$id(tabId + '-content')" x-show="tabContentActive($el)" class="relative w-full" x-cloak>
                 <div class="text-gray-800">

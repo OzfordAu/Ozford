@@ -204,11 +204,7 @@ class HigherEducationCoursePage(Page):
 
     is_popular = models.BooleanField(default=False)
 
-    course_type = models.CharField(
-        max_length=3,
-        choices=HE_DEGREE_TYPE_CHOICES,
-        default='UG'
-    )
+    course_type = models.CharField(max_length=100, null=True, blank=True)
 
     course_title = models.CharField(max_length=255, null=True, blank=True)
 

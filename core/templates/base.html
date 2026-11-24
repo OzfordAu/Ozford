@@ -24,6 +24,12 @@
         <meta name="description" content="{{ page.search_description }}" />
         {% endif %}
         <link rel="canonical" href="{{ page.get_full_url }}" />
+        <link rel="icon" type="image/x-icon" href="{% static 'favicons/favicon.ico' %}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicons/favicon-16x16.png' %}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicons/favicon-32x32.png' %}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicons/apple-touch-icon.png' %}">
+        <link rel="manifest" href="{% static 'favicons/site.webmanifest' %}">
+        <meta name="theme-color" content="#1D315A">
         <meta property="og:title" content="{% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="{{ page.get_full_url }}" />

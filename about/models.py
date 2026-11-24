@@ -168,12 +168,18 @@ class TeamPage(Page):
         blank=True,
         use_json_field=True,
     )
-
+    last_reviewed = models.DateField(
+        null=True,
+        blank=True,
+        verbose_name='Last Reviewed',
+        help_text='Date this page was last reviewed. Displayed on the page.'
+    )
     content_panels = Page.content_panels + [
         FieldPanel('page_title'),
         FieldPanel('banner_image'),
         FieldPanel('higher_education_team'),
         FieldPanel('high_school_team'),
+        FieldPanel('last_reviewed'),
     ]
 
 # Define reusable blocks for Photo and Video
